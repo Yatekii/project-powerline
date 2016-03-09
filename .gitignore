@@ -9,7 +9,7 @@
 *.pch
 
 # Libraries
-#*.lib
+#*.lib (KiCad has .lib files)
 *.a
 *.la
 *.lo
@@ -30,3 +30,6 @@
 
 # Debug files
 *.dSYM/
+
+# KiCad specific
+*.bak

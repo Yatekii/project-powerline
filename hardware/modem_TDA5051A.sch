@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:sensor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -34,9 +35,9 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 2 3
+Sheet 3 3
 Title ""
-Date ""
+Date "10 mar 2016"
 Rev ""
 Comp ""
 Comment1 ""

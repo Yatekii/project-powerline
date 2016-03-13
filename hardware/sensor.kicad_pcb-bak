@@ -300,7 +300,7 @@
   )
 
   (module Capacitors_SMD:C_0603 (layer F.Cu) (tedit 5415D631) (tstamp 56E5B86A)
-    (at 182.8 69.95 270)
+    (at 132.25 134.65 270)
     (descr "Capacitor SMD 0603, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 0603")
     (path /56DE088F)
@@ -387,7 +387,7 @@
   )
 
   (module Capacitors_SMD:C_0603 (layer F.Cu) (tedit 5415D631) (tstamp 56E5B87C)
-    (at 190.15 72.4 180)
+    (at 139.6 137.1 180)
     (descr "Capacitor SMD 0603, reflow soldering, AVX (see smccp.pdf)")
     (tags "capacitor 0603")
     (path /56DE1352)
@@ -1004,7 +1004,7 @@
   )
 
   (module Resistors_SMD:R_0603 (layer F.Cu) (tedit 5415CC62) (tstamp 56E5B8F1)
-    (at 194.15 68.1 90)
+    (at 143.6 132.8 90)
     (descr "Resistor SMD 0603, reflow soldering, Vishay (see dcrcw.pdf)")
     (tags "resistor 0603")
     (path /56DE14BB)
@@ -1091,7 +1091,7 @@
   )
 
   (module Resistors_SMD:R_0603 (layer F.Cu) (tedit 5415CC62) (tstamp 56E5B903)
-    (at 192.5 68.1 90)
+    (at 141.95 132.8 90)
     (descr "Resistor SMD 0603, reflow soldering, Vishay (see dcrcw.pdf)")
     (tags "resistor 0603")
     (path /56DE15BE)
@@ -1178,7 +1178,7 @@
   )
 
   (module Resistors_SMD:R_0603 (layer F.Cu) (tedit 5415CC62) (tstamp 56E5B915)
-    (at 193 70.75)
+    (at 142.45 135.45)
     (descr "Resistor SMD 0603, reflow soldering, Vishay (see dcrcw.pdf)")
     (tags "resistor 0603")
     (path /56DE1418)
@@ -1265,7 +1265,7 @@
   )
 
   (module Resistors_SMD:R_0603 (layer F.Cu) (tedit 5415CC62) (tstamp 56E5B927)
-    (at 182.8 67 270)
+    (at 132.25 131.7 270)
     (descr "Resistor SMD 0603, reflow soldering, Vishay (see dcrcw.pdf)")
     (tags "resistor 0603")
     (path /56DE1837)
@@ -1544,7 +1544,7 @@
   )
 
   (module pro4:EVM-1USX30B14 (layer F.Cu) (tedit 56E565DB) (tstamp 56E5B967)
-    (at 193.85 64.43)
+    (at 143.3 129.13)
     (path /56E59981)
     (fp_text reference RV2 (at -2.25 -1.25 90) (layer F.SilkS)
       (effects (font (size 1 1) (thickness 0.15)))
@@ -1858,7 +1858,7 @@
   )
 
   (module Housings_SSOP:TSSOP-16_4.4x5mm_Pitch0.65mm (layer F.Cu) (tedit 54130A77) (tstamp 56E5B9E4)
-    (at 187.71 68.65)
+    (at 137.16 133.35)
     (descr "16-Lead Plastic Thin Shrink Small Outline (ST)-4.4 mm Body [TSSOP] (see Microchip Packaging Specification 00000049BS.pdf)")
     (tags "SSOP 0.65")
     (path /56DDA564)

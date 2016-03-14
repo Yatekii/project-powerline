@@ -545,7 +545,7 @@ U 1 1 56E1D11A
 P 6500 2850
 F 0 "P1" H 6500 3150 50  0000 C CNN
 F 1 "CONN_01X05" V 6600 2850 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Angled_1x05" H 6500 2850 50  0001 C CNN
+F 2 "Connectors_Molex:Connector_Molex_PicoBlade_53261-0571" H 6500 2850 50  0001 C CNN
 F 3 "" H 6500 2850 50  0000 C CNN
 	1    6500 2850
 	-1   0    0    1   

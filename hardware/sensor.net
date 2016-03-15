@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source /home/yatekii/Projects/project-powerline/hardware/sensor.sch)
-    (date "Tue 15 Mar 2016 10:42:03 AM CET")
+    (date "Tue 15 Mar 2016 03:40:20 PM CET")
     (tool "Eeschema 4.0.1-2.fc23-product")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -249,7 +249,7 @@
       (tstamp 56E393B2))
     (comp (ref T1)
       (value BUK9Y22)
-      (footprint TO_SOT_Packages_SMD:SOT-669_LFPAK_ThermalVias-1)
+      (footprint TO_SOT_Packages_SMD:SOT-669_LFPAK)
       (datasheet http://www.nxp.com/documents/data_sheet/BUK9Y22-100E.pdf)
       (libsource (lib pro4) (part BUK9Y22))
       (sheetpath (names /) (tstamps /))

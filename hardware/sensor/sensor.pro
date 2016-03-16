@@ -1,4 +1,4 @@
-update=3/10/2016 7:24:09 PM
+update=3/16/2016 8:26:41 PM
 version=1
 last_client=kicad
 [pcbnew]
@@ -27,7 +27,7 @@ NetIExt=net
 version=1
 [eeschema]
 version=1
-LibDir=libs/symbols
+LibDir=../libs/symbols
 [eeschema/libraries]
 LibName1=sensor-rescue
 LibName2=power

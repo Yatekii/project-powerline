@@ -33,3 +33,8 @@
 
 # KiCad specific
 *.bak
+*.kicad_pcb-bak
+*-save.pro
+*-cache.lib
+*-rescue.lib
+*-save.kicad_pcb

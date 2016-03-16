@@ -1,0 +1,8 @@
+EESchema-DOCLIB  Version 2.0
+#
+$CMP SIM900
+D GSM/GPRS module
+F http://simcom.ee/documents/?dir=SIM900
+$ENDCMP
+#
+#End Doc Library

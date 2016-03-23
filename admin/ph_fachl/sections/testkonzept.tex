@@ -1,5 +1,136 @@
-\subsection{Gesamtsystem: Funktionsweise/Use Cases}
+Um reibungslose Funktionalit\"at zu gew\"ahrleisten sind intensive Tests notwendig.
 
-\subsection{Teilsysteme}
+% ---------------------------------------------------------------------------- %
+%\subsection{Gesamtsystem: Funktionsweise/Use Cases}
+% ---------------------------------------------------------------------------- %
 
-\subsection{\"Uberpr\"ufung der Spezifikationen}
+% ---------------------------------------------------------------------------- %
+%\subsection{Teilsysteme}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+%\subsection{\"Uberpr\"ufung der Spezifikationen}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\subsection{Test-Setup}
+% ---------------------------------------------------------------------------- %
+
+Um  die   Hardware  automatisiert  zu  testen   werden  Agilent  Netzger\"ate,
+Funktionsgeneratoren  und Oszis  verwendet, welche  \"uber das  Netzwerk Daten
+liefern k\"onnen  und somit  zur \"Uberwachung des  24 Stunden  Tests geeignet
+sind. Nat\"urlich geh\"ort hier ein Computer  mit einer UART dazu, welcher den
+Herzschlag des Mikrokontrollers \"uberpr\"uft.
+
+% ---------------------------------------------------------------------------- %
+\subsection{Hardware}
+% ---------------------------------------------------------------------------- %
+
+F\"ur die  Hardware werden  das Master-Ger\"at  und die  Sensorplatine jeweils
+einzeln getestet.
+% TODO: Gesamtsystem?
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Sensorplatine}
+% ---------------------------------------------------------------------------- %
+
+Zu Debugzwecken hat die Sensorplatine 2 LEDs, 2 Buttons und eine zus\"atzliche
+UART  sowie  auch eine  SWD  Schnittstelle. Mit  diesen Schnittstellen  sollte
+es   auch  f\"ur   die  Softwareentwickler   m\"oglich  sein   akkurate  Tests
+durchzuf\"uhren.
+
+\textbf{Spannungsversorgung}: Eine     stabile    Spannungsversorgung     wird
+sichergestellt. Hier  ist  nicht  der  genaue Wert  entscheidend  sondern  die
+Stabilit\"at  dessen. Falls  die Methode  mit  dem  Kurzschliessen der  Panels
+gew\"ahlt  wird, so  muss  sichergestellt sein,  dass die  Spannungsversorgung
+nicht einknickt!
+
+\textbf{Mikrokontroller}: Um  nicht Zeit  beim  Suchen eines  Softwarefehlers,
+welchen  es gar  nicht gibt  zu  verschwenden, wird  die Funktionalit\"at  des
+Mikrokontrollers  durch  ein  Programm,  welches die  zwei  LEDs  alternierend
+blinken l\"asst, geschrieben und geflasht. Ist diese H\"urde einmal geschafft,
+kann die Software ohne Weiteres entwickelt und getestet warden.
+
+\textbf{Kommunikation}: Erst wird die Funktionalit\"at der UART getestet, ohne
+das Modem zu  verwenden. Ist die Funktionalt\"at der UART  gesichert, wird das
+Modem gepr\"uft. Im Falle  der PLL wird schrittweise gepr\"uft,  ob das Signal
+an den einzelnen Stationen korrekt anliegt.
+
+\textbf{Energieverbrauch}: Es   wird   gemessen   wieviel   Energie   effektiv
+verbraucht wird um das Einhalten der Vorgaben zu pr\"ufen.
+
+\textbf{Sicherheit}: Wird der  Ansatz mit der  Leistungsmodullierung verwedet,
+muss gepr\"uft  werden, dass das  FET welches  die Spannung einreist  nicht zu
+heiss wird.
+
+\textbf{Dauertest}: Um  sicherzustellen, dass  der Betrieb  auch \"uber  lange
+Zeit gew\"ahrleistet  ist, wird ein  Testsetup errichtet, welches  den Betrieb
+w\"ahrend 24 Stunden \"uberwacht.
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Master-Ger\"at}
+% ---------------------------------------------------------------------------- %
+
+Beim  Master wird  analog zur  Sensorplatine vorgegangen. Hier  muss noch  die
+Funktionalit\"at des GSM Modems sowie der Strommessung sichergestellt werden.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Software}
+% ---------------------------------------------------------------------------- %
+
+Auch auf  der Software-Seite gilt  es, sowohl  die Sensorplatine wie  auch das
+Masterger\"at separat und dann im Verbund zu testen.
+% TODO: korrekt?
+
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Sensorplatine}
+% ---------------------------------------------------------------------------- %
+
+Wie   erw\"ahnt   hat   die   Sensorplatine   zu   Testzwecken   zus\"atzliche
+Schnittstellen. Zuerst   wird  dann   ein  Programm   getestet,  welches   die
+Funktionalit\"at des  Mikrokontrollers garantiert. Dies geht Hand  in Hand mit
+dem Testen der Hardware.
+
+\textbf{Messung}: Es   wird  durch   Vergleiche  mit   externen  Messger\"aten
+sichergestellt, dass die Sensorik korrekt misst und die Mittelwerte \"uber die
+letzte Zeitperiode korrekt berechnet.
+
+\textbf{Kommunikation}: Nachdem  die  UART   Daten  korrekt  verschickt,  wird
+sichergestellt,  dass Kollisionen  von Daten  korrekt erkannt  und abgehandelt
+werden.
+
+\textbf{Deep-Sleep}: Um den  Stromverbrauch niedrig  zu halten, wird  der Chip
+f\"ur  die Zeitperioden  in  welchen  er inaktiv  ist,  in den  Low-Power-Mode
+versetzt. Es muss  getestet werden, dass er  dies korrekt tut und  diesen auch
+korrekt wieder verl\"asst.
+
+\textbf{Verl\"asslichkeit}: In  einem 24  St\"undigen Dauertest  wird getestet
+dass, sich die Software nicht irgendwann aufh\"angt.
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Master-Ger\"at}
+% ---------------------------------------------------------------------------- %
+
+Beim Master  wird analog  zur Sensorplatine  vorgegangen. Hier muss  noch die.
+Funktionalit\"at des GSM Modems  sowie der Strommessung sichergestellt warden.
+Der Master braucht eine um Einiges kompliziertere Logik.
+
+\textbf{Blinky  LED}: Ein  einfaches  Programm   wird  verfasst,  welches  die
+korrekte Ansteuerung von GPIO Pins durch alternierendes Blinken sicherstellt.
+
+\textbf{UART}: Auch hier ist die korrekte Funktionsweise der UART vital. Diese
+muss fr\"uhzeitig gepr\"uft werden.
+
+\textbf{GSM}: Das  GSM  Modul  wird  gepr\"uft, in  dem  eine  einfache  erste
+Botschaft verfasst wird und an ein Telefon geschickt wird.
+
+\textbf{Sensorik}: Nat\"urlich  muss  auch  hier  die  Sensorik  mit  externen
+Messger\"aten verifiziert werden.
+
+\textbf{Alarmlogik}: F\"ur  die  Alarmlogik werden  fr\"uhzeitig  verschiedene
+Testszenarios verfasst. Die  Alarmlogik muss diese dann  korrekt abhandeln, um
+zu gew\"ahrleisten dass keine falschen Alarme losgehen.

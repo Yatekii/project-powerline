@@ -1,0 +1,232 @@
+\begin{center}
+\captionof{table}{Risikoanalyse. \textbf{p}: Eintrittswahrscheinlichkeit, \textbf{S}: Schadensausmass bei Eintreten, \textbf{R}: Risiko. $R = p \cdot S$}
+\label{tab:risikoanalyse}
+%\begin{table}[h!]
+\begin{longtable}{
+    p{0.5cm} % <something> TODO
+    p{4.75cm} % Schadensereignis
+    p{3cm} % Konsequenz
+    p{0.4cm} % Eintrittswahrscheinlichkeit
+    p{0.4cm} % Schadensausmass
+    p{0.4cm} % Riskio
+    p{4.75cm} % Massnahmen
+    p{3cm}   % Auswirkung
+    p{0.4cm}   % p
+    p{0.4cm}   % S
+    p{0.4cm}   % R
+}
+\toprule
+
+% 1
+& % 2
+& % 3
+& \multicolumn{3}{c}{ohne Massnahmen} % 4,5,6
+& % 7
+& % 8
+& \multicolumn{3}{c}{mit Massnahmen} \\ %9,10,11
+
+% 1
+& \textsc{Schadensereignis}
+& \textsc{Konsequenz}
+& $p$
+& $S$
+& $R$
+& \textsc{Vorbeugende Massnahmen}
+& \textsc{Auswirkung}
+& $p$
+& $S$
+& $R$ \\
+
+%\large{\textsc{Aufgabe}}
+%& \large{\textsc{Zweck}}
+%& \large{\textsc{Empf\"anger}}
+%& \large{\textsc{Mittel}}
+%& \large{\textsc{H\"aufigkeit}}
+%& \large{\textsc{Verantwortlicher}} \\
+
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+
+%\rowcolor[gray]{0.9}
+
+\multirow{6}{*}{\rotatebox[origin=c]{90}{Organisatorische Risiken}}
+& Meinungsverschiedenheiten im Team
+& Verz\"ogerung des Projektplans
+& $3$
+& $3$
+& $9$
+& Kompromissbereitschaft \& Probleme ansprechen
+& Vermeidung von Konflikten
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+& Nicht gen\"ugend Fachwissen
+& Aufgaben werden falsch erledigt
+& $4$
+& $3$
+& $12$
+& Fachwissen aneignen \& externe Hilfe einholen
+& Minimierung von Wissensl\"ucken
+& $3$
+& $3$
+& $9$ \\
+[2mm]
+
+& Termine nicht eingehalten
+& Nichterf\"ullen der Projektziele
+& $3$
+& $5$
+& $15$
+& genaue Zeitplanung
+& Bessere Termin\"ubersicht
+& $2$
+& $5$
+& $10$ \\
+[2mm]
+
+& Projektmitglied bricht Studium ab
+& Mehraufwand f\"ur das restliche Team
+& $2$
+& $3$
+& $6$
+& keine
+& keine
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+& Datenverlust
+& Doppelte Arbeit
+& $2$
+& $4$
+& $8$
+& Gen\"ugend Backups erstellen
+& Minimierung der Verluste
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+& Krankheit eines Teammitglieds
+& Mehraufwand f\"ur das restliche Team
+& $4$
+& $3$
+& $12$
+& Ausf\"uhrliche Protokolle
+& Stand der Dinge nachvollziehbar
+& $4$
+& $2$
+& $8$ \\
+
+\midrule
+
+\multirow{6}{*}{\rotatebox[origin=c]{90}{Technische Risiken}}
+& Meinungsverschiedenheiten im Team
+& Verz\"ogerung des Projektplans
+& $3$
+& $3$
+& $9$
+& Kompromissbereitschaft \& Probleme ansprechen
+& Vermeidung von Konflikten
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+& Softwarefehler
+& Programmabsturz
+& $3$
+& $2$
+& $6$
+& Verifizierung durch mehrere Teammitglieder
+& Fehlerquote reduzieren
+& $2$
+& $2$
+& $4$ \\
+[2mm]
+
+& Hardwarefehler
+& Tests nicht erfolgreich
+& $3$
+& $3$
+& $9$
+& Genaue Planungsarbeiten
+& Fehlerquote reduzieren
+& $2$
+& $4$
+& $6$ \\
+[2mm]
+
+& Hardware fehlerhaft geliefert
+& Komponenten sind nicht rechtzeitig bereit
+& $3$
+& $4$
+& $12$
+& Lieferzeiten doppelt einplanen
+& Fr\"uhzeitig die Hardwarekomponenten bestimmen
+& $3$
+& $3$
+& $9$ \\
+[2mm]
+
+& Hardware zu sp\"at geliefert
+& Komponenten sind nicht rechtzeitig bereit
+& $3$
+& $4$
+& $12$
+& Lieferzeiten doppelt einplanen
+& Fr\"uhzeitig die Hardwarekomponenten bestimmen
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+& Signal\"ubertragung funktioniert nicht korrekt
+& Daten werden fehlerhaft oder nicht \"ubertragen
+& $4$
+& $5$
+& $20$
+& Tests \"uber grosse Distanzen durchf\"uhren
+& Ausgrenzen einniger Signal\"ubertragungsverfahren
+& $2$
+& $5$
+& $10$ \\
+[2mm]
+
+& Baugr\"osse nicht realisierbar
+& Komponenten passen nicht in den vorgesehenen Anschlusskasten
+& $3$
+& $5$
+& $15$
+& Maximale Baugr\"osse definieren
+& Eingrenzen der Komponentenauswahl
+& $2$
+& $5$
+& $10$ \\
+[2mm]
+
+\end{longtable}
+
+\thetable
+\setcounter{table}{3}
+\captionof{table}{Legende zu Tabelle \ref{tab:risikoanalyse}}
+\label{tab:risikoanalyseLegende}
+\begin{tabular}{cll}
+    \toprule
+    \textsc{Gewichtung} & Eintrittswahrscheinlichkeit & Schadensausmass \\
+    \midrule
+    1 & so gut wie ausgeschlossen & vernachl\"assigbar \\
+    2 & unwahrscheinlich          & gering             \\
+    3 & m\"oglich                 & mittel             \\
+    4 & wahrscheinlich            & hoch               \\
+    5 & so gut wie sicher         & gravierend         \\
+    \bottomrule
+\end{tabular}
+\end{center}

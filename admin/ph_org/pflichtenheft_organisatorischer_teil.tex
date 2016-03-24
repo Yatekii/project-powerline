@@ -3,9 +3,6 @@
 \input{preamble/packages.tex}
 \input{preamble/hyperref.tex}
 \input{preamble/title.tex}
-\input{preamble/colfigure.tex}
-
-
 
 
 \begin{document}
@@ -13,31 +10,33 @@
 \input{titlepage/titlepage.tex}
 
 \tableofcontents
-\vspace{100mm}
+\vspace{130mm}
 \subsection*{Versionsgeschichte}
 \begin{itemize}
     \item[]
-        \emph{10.03.2015:} \texttt{Version 0.1}
+        \emph{24.03.2016:} \texttt{Version 1.0}
 \end{itemize}
 \clearpage
 
 % **************************************************************************** %
-\begin{landscape}
+%\begin{landscape}
 \section{Organisationsstruktur}
 \label{sec:organisatsionsstruktur}
 % **************************************************************************** %
 \input{sections/organisationsstruktur.tex}
-\end{landscape}
+%\end{landscape}
 
 % **************************************************************************** %
 \clearpage
+\begin{landscape}
 \section{Projektplanung}
 \label{sec:projektplanung}
 % **************************************************************************** %
 \input{sections/projektplanung.tex}
+\end{landscape}
 
 % **************************************************************************** %
-%\clearpage
+\clearpage
 \section{Projektbudget}
 \label{sec:Projektbudget}
 % **************************************************************************** %
@@ -67,19 +66,25 @@
 %\clearpage
 
 
-%\clearpage
+\clearpage
 % **************************************************************************** %
-%\appendix
 %\addcontentsline{toc}{section}{Appendix}
-% **************************************************************************** %
-%\input{sections/appendix.tex}
+\begin{appendices}
+    %\appendixpage
+    %\addappheadtotoc
+    %\appendix
+    %\section{Anhang}
+    \label{sec:appendix}
+    % ************************************************************************ %
+    \input{sections/appendix.tex}
+\end{appendices}
 
 % **************************************************************************** %
-\clearpage
-\section*{Projektvereinbarung}
-\label{sec:projektvereinbarung}
+%\clearpage
+%\section*{Projektvereinbarung}
+%\label{sec:projektvereinbarung}
 % **************************************************************************** %
-\input{sections/projektvereinbarung.tex}
+%\input{sections/projektvereinbarung.tex}
 
 
 % **************************************************************************** %

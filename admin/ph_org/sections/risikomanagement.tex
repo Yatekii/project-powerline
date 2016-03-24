@@ -1,32 +1,39 @@
+Die    Risikoanalyse   ist    aufgeteilt   nach    organisatorischen   Risiken
+(Tabelle   \ref{tab:risikoanalyse:org})  und   technischen  Risiken   (Tabelle
+\ref{tab:risikoanalyse:tech}, Seite \pageref{tab:risikoanalyse:tech}). Tabelle
+\ref{tab:risikoanalyseLegende}   enth\"alt  eine   Legende  zu   den  Tabellen
+\ref{tab:risikoanalyse:org} und \ref{tab:risikoanalyse:tech} mit Erkl\"arungen
+zu den einzelnen Risikostufen.
+
 \begin{center}
-\captionof{table}{Risikoanalyse. \textbf{p}: Eintrittswahrscheinlichkeit, \textbf{S}: Schadensausmass bei Eintreten, \textbf{R}: Risiko. $R = p \cdot S$}
-\label{tab:risikoanalyse}
+\setcounter{table}{2}
+\captionof{table}{Risikoanalyse, organisatorische Risiken. \\ \textbf{p}: Eintrittswahrscheinlichkeit, \textbf{S}: Schadensausmass bei Eintreten, \textbf{R}: Risiko. $R = p \cdot S$}
+\label{tab:risikoanalyse:org}
 %\begin{table}[h!]
+{%
+    \small
 \begin{longtable}{
-    p{0.5cm} % <something> TODO
-    p{4.75cm} % Schadensereignis
-    p{3cm} % Konsequenz
-    p{0.4cm} % Eintrittswahrscheinlichkeit
-    p{0.4cm} % Schadensausmass
-    p{0.4cm} % Riskio
-    p{4.75cm} % Massnahmen
-    p{3cm}   % Auswirkung
-    p{0.4cm}   % p
-    p{0.4cm}   % S
-    p{0.4cm}   % R
+        >{\raggedright}p{47.5mm} % Schadensereignis
+        >{\raggedright}p{30mm} % Konsequenz
+        >{\raggedright}r % Eintrittswahrscheinlichkeit
+        >{\raggedright}r % Schadensausmass
+        >{\raggedright}r % Riskio
+        >{\raggedright}p{50mm} % Massnahmen
+        >{\raggedright}p{30mm}   % Auswirkung
+        >{\raggedright}r   % p
+        >{\raggedright}r   % S
+        >{\raggedright\arraybackslash}r   % R
 }
 \toprule
 
 % 1
 & % 2
-& % 3
-& \multicolumn{3}{c}{ohne Massnahmen} % 4,5,6
+& \multicolumn{3}{p{18mm}}{ohne Massnahmen} % 4,5,6
+& % 6
 & % 7
-& % 8
-& \multicolumn{3}{c}{mit Massnahmen} \\ %9,10,11
+& \multicolumn{3}{p{18mm}}{mit Massnahmen} \\ %9,10,11
 
-% 1
-& \textsc{Schadensereignis}
+\textsc{Schadensereignis}
 & \textsc{Konsequenz}
 & $p$
 & $S$
@@ -53,8 +60,7 @@
 
 %\rowcolor[gray]{0.9}
 
-\multirow{6}{*}{\rotatebox[origin=c]{90}{Organisatorische Risiken}}
-& Meinungsverschiedenheiten im Team
+Meinungsverschiedenheiten im Team
 & Verz\"ogerung des Projektplans
 & $3$
 & $3$
@@ -66,7 +72,8 @@
 & $6$ \\
 [2mm]
 
-& Nicht gen\"ugend Fachwissen
+\rowcolor{black!10}
+Nicht gen\"ugend Fachwissen
 & Aufgaben werden falsch erledigt
 & $4$
 & $3$
@@ -78,7 +85,7 @@
 & $9$ \\
 [2mm]
 
-& Termine nicht eingehalten
+Termine nicht eingehalten
 & Nichterf\"ullen der Projektziele
 & $3$
 & $5$
@@ -90,7 +97,8 @@
 & $10$ \\
 [2mm]
 
-& Projektmitglied bricht Studium ab
+\rowcolor{black!10}
+Projektmitglied bricht Studium ab
 & Mehraufwand f\"ur das restliche Team
 & $2$
 & $3$
@@ -102,7 +110,7 @@
 & $6$ \\
 [2mm]
 
-& Datenverlust
+Datenverlust
 & Doppelte Arbeit
 & $2$
 & $4$
@@ -114,7 +122,8 @@
 & $6$ \\
 [2mm]
 
-& Krankheit eines Teammitglieds
+\rowcolor{black!10}
+Krankheit eines Teammitglieds
 & Mehraufwand f\"ur das restliche Team
 & $4$
 & $3$
@@ -124,99 +133,11 @@
 & $4$
 & $2$
 & $8$ \\
-
-\midrule
-
-\multirow{6}{*}{\rotatebox[origin=c]{90}{Technische Risiken}}
-& Meinungsverschiedenheiten im Team
-& Verz\"ogerung des Projektplans
-& $3$
-& $3$
-& $9$
-& Kompromissbereitschaft \& Probleme ansprechen
-& Vermeidung von Konflikten
-& $2$
-& $3$
-& $6$ \\
-[2mm]
-
-& Softwarefehler
-& Programmabsturz
-& $3$
-& $2$
-& $6$
-& Verifizierung durch mehrere Teammitglieder
-& Fehlerquote reduzieren
-& $2$
-& $2$
-& $4$ \\
-[2mm]
-
-& Hardwarefehler
-& Tests nicht erfolgreich
-& $3$
-& $3$
-& $9$
-& Genaue Planungsarbeiten
-& Fehlerquote reduzieren
-& $2$
-& $4$
-& $6$ \\
-[2mm]
-
-& Hardware fehlerhaft geliefert
-& Komponenten sind nicht rechtzeitig bereit
-& $3$
-& $4$
-& $12$
-& Lieferzeiten doppelt einplanen
-& Fr\"uhzeitig die Hardwarekomponenten bestimmen
-& $3$
-& $3$
-& $9$ \\
-[2mm]
-
-& Hardware zu sp\"at geliefert
-& Komponenten sind nicht rechtzeitig bereit
-& $3$
-& $4$
-& $12$
-& Lieferzeiten doppelt einplanen
-& Fr\"uhzeitig die Hardwarekomponenten bestimmen
-& $2$
-& $3$
-& $6$ \\
-[2mm]
-
-& Signal\"ubertragung funktioniert nicht korrekt
-& Daten werden fehlerhaft oder nicht \"ubertragen
-& $4$
-& $5$
-& $20$
-& Tests \"uber grosse Distanzen durchf\"uhren
-& Ausgrenzen einniger Signal\"ubertragungsverfahren
-& $2$
-& $5$
-& $10$ \\
-[2mm]
-
-& Baugr\"osse nicht realisierbar
-& Komponenten passen nicht in den vorgesehenen Anschlusskasten
-& $3$
-& $5$
-& $15$
-& Maximale Baugr\"osse definieren
-& Eingrenzen der Komponentenauswahl
-& $2$
-& $5$
-& $10$ \\
-[2mm]
-
 \end{longtable}
+}
 
-\thetable
 \setcounter{table}{3}
-\captionof{table}{Legende zu Tabelle \ref{tab:risikoanalyse}}
+\captionof{table}{Legende zu Tabelle \ref{tab:risikoanalyse:org} und \ref{tab:risikoanalyse:tech}}
 \label{tab:risikoanalyseLegende}
 \begin{tabular}{cll}
     \toprule
@@ -229,4 +150,146 @@
     5 & so gut wie sicher         & gravierend         \\
     \bottomrule
 \end{tabular}
+
+\clearpage
+\setcounter{table}{4}
+\captionof{table}{Risikoanalyse, technische Risiken. \\ \textbf{p}: Eintrittswahrscheinlichkeit, \textbf{S}: Schadensausmass bei Eintreten, \textbf{R}: Risiko. $R = p \cdot S$}
+\label{tab:risikoanalyse:tech}
+{%
+    \small
+\begin{longtable}{
+        >{\raggedright}p{47.5mm} % Schadensereignis
+        >{\raggedright}p{30mm} % Konsequenz
+        >{\raggedright}r % Eintrittswahrscheinlichkeit
+        >{\raggedright}r % Schadensausmass
+        >{\raggedright}r % Riskio
+        >{\raggedright}p{50mm} % Massnahmen
+        >{\raggedright}p{30mm}   % Auswirkung
+        >{\raggedright}r   % p
+        >{\raggedright}r   % S
+        >{\raggedright\arraybackslash}r   % R
+}
+\toprule
+% 1
+& % 2
+& \multicolumn{3}{p{18mm}}{ohne Massnahmen} %3,4,5
+& % 6
+& % 7
+& \multicolumn{3}{p{18mm}}{mit Massnahmen} \\ %9,10,11
+
+% 1
+\textsc{Schadensereignis}
+& \textsc{Konsequenz}
+& $p$
+& $S$
+& $R$
+& \textsc{Vorbeugende Massnahmen}
+& \textsc{Auswirkung}
+& $p$
+& $S$
+& $R$ \\
+
+%\large{\textsc{Aufgabe}}
+%& \large{\textsc{Zweck}}
+%& \large{\textsc{Empf\"anger}}
+%& \large{\textsc{Mittel}}
+%& \large{\textsc{H\"aufigkeit}}
+%& \large{\textsc{Verantwortlicher}} \\
+
+\midrule
+\endhead
+\midrule
+\endfoot
+\bottomrule
+\endlastfoot
+Meinungsverschiedenheiten im Team
+& Verz\"ogerung des Projektplans
+& $3$
+& $3$
+& $9$
+& Kompromissbereitschaft \& Probleme ansprechen
+& Vermeidung von Konflikten
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+\rowcolor{black!10}
+Softwarefehler
+& Programmabsturz
+& $3$
+& $2$
+& $6$
+& Verifizierung durch mehrere Teammitglieder
+& Fehlerquote reduzieren
+& $2$
+& $2$
+& $4$ \\
+[2mm]
+
+Hardwarefehler
+& Tests nicht erfolgreich
+& $3$
+& $3$
+& $9$
+& Genaue Planungsarbeiten
+& Fehlerquote reduzieren
+& $2$
+& $4$
+& $6$ \\
+[2mm]
+
+\rowcolor{black!10}
+Hardware fehlerhaft geliefert
+& Komponenten sind nicht rechtzeitig bereit
+& $3$
+& $4$
+& $12$
+& Lieferzeiten doppelt einplanen
+& Fr\"uhzeitig die Hardwarekomponenten bestimmen
+& $3$
+& $3$
+& $9$ \\
+[2mm]
+
+Hardware zu sp\"at geliefert
+& Komponenten sind nicht rechtzeitig bereit
+& $3$
+& $4$
+& $12$
+& Lieferzeiten doppelt einplanen
+& Fr\"uhzeitig die Hardwarekomponenten bestimmen
+& $2$
+& $3$
+& $6$ \\
+[2mm]
+
+\rowcolor{black!10}
+Signal\"ubertragung funktioniert nicht korrekt
+& Daten werden fehlerhaft oder nicht \"ubertragen
+& $4$
+& $5$
+& $20$
+& Tests \"uber grosse Distanzen durchf\"uhren
+& Ausgrenzen einniger Signal\"ubertragungsverfahren
+& $2$
+& $5$
+& $10$ \\
+[2mm]
+
+Baugr\"osse nicht realisierbar
+& Komponenten passen nicht in den vorgesehenen Anschlusskasten
+& $3$
+& $5$
+& $15$
+& Maximale Baugr\"osse definieren
+& Eingrenzen der Komponentenauswahl
+& $2$
+& $5$
+& $10$ \\
+\end{longtable}
+}
+
+%\thetable
+%\setcounter{table}{3}
 \end{center}

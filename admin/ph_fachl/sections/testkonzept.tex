@@ -1,26 +1,17 @@
-Um reibungslose Funktionalit\"at zu gew\"ahrleisten sind intensive Tests notwendig.
+Um  reibungslose  Funktionalit\"at  zu gew\"ahrleisten  sind  intensive  Tests
+notwendig.
+
 
 % ---------------------------------------------------------------------------- %
-%\subsection{Gesamtsystem: Funktionsweise/Use Cases}
+\subsection{Gesamtsystem}
 % ---------------------------------------------------------------------------- %
 
-% ---------------------------------------------------------------------------- %
-%\subsection{Teilsysteme}
-% ---------------------------------------------------------------------------- %
-
-% ---------------------------------------------------------------------------- %
-%\subsection{\"Uberpr\"ufung der Spezifikationen}
-% ---------------------------------------------------------------------------- %
-
-% ---------------------------------------------------------------------------- %
-\subsection{Test-Setup}
-% ---------------------------------------------------------------------------- %
-
-Um  die   Hardware  automatisiert  zu  testen   werden  Agilent  Netzger\"ate,
-Funktionsgeneratoren  und Oszis  verwendet, welche  \"uber das  Netzwerk Daten
-liefern k\"onnen  und somit  zur \"Uberwachung des  24 Stunden  Tests geeignet
-sind. Nat\"urlich geh\"ort hier ein Computer  mit einer UART dazu, welcher den
-Herzschlag des Mikrokontrollers \"uberpr\"uft.
+Um   das  System   automatisiert  zu   testen,  werden   Agilent-Netzger\"ate,
+Funktionsgeneratoren und  Oszilloskope verwendet,  welche \"uber  das Netzwerk
+Daten  liefern   k\"onnen  und   somit  zur   \"Uberwachung  des   24  Stunden
+Tests  geeignet  sind. Nat\"urlich  geh\"ort   hier  ein  Computer  mit  einer
+UART-Schnittstelle   dazu,  welcher   den   Herzschlag  des   Mikrokontrollers
+\"uberpr\"uft.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Hardware}
@@ -46,10 +37,10 @@ gew\"ahlt  wird, so  muss  sichergestellt sein,  dass die  Spannungsversorgung
 nicht einknickt!
 
 \textbf{Mikrokontroller}: Um  nicht Zeit  beim  Suchen eines  Softwarefehlers,
-welchen  es gar  nicht gibt  zu  verschwenden, wird  die Funktionalit\"at  des
+welchen  es gar nicht, gibt  zu  verschwenden, wird  die Funktionalit\"at  des
 Mikrokontrollers  durch  ein  Programm,  welches die  zwei  LEDs  alternierend
 blinken l\"asst, geschrieben und geflasht. Ist diese H\"urde einmal geschafft,
-kann die Software ohne Weiteres entwickelt und getestet warden.
+kann die Software ohne Weiteres entwickelt und getestet werden.
 
 \textbf{Kommunikation}: Erst wird die Funktionalit\"at der UART getestet, ohne
 das Modem zu  verwenden. Ist die Funktionalt\"at der UART  gesichert, wird das
@@ -60,8 +51,8 @@ an den einzelnen Stationen korrekt anliegt.
 verbraucht wird um das Einhalten der Vorgaben zu pr\"ufen.
 
 \textbf{Sicherheit}: Wird der  Ansatz mit der  Leistungsmodullierung verwedet,
-muss gepr\"uft  werden, dass das  FET welches  die Spannung einreist  nicht zu
-heiss wird.
+muss gepr\"uft werden, dass der  FET, welcher die Spannung herunterzieht nicht
+zu heiss wird.
 
 \textbf{Dauertest}: Um  sicherzustellen, dass  der Betrieb  auch \"uber  lange
 Zeit gew\"ahrleistet  ist, wird ein  Testsetup errichtet, welches  den Betrieb
@@ -69,7 +60,7 @@ w\"ahrend 24 Stunden \"uberwacht.
 
 
 % ---------------------------------------------------------------------------- %
-\subsubsection{Master-Ger\"at}
+\subsubsection{Master}
 % ---------------------------------------------------------------------------- %
 
 Beim  Master wird  analog zur  Sensorplatine vorgegangen. Hier  muss noch  die
@@ -112,12 +103,12 @@ korrekt wieder verl\"asst.
 dass, sich die Software nicht irgendwann aufh\"angt.
 
 % ---------------------------------------------------------------------------- %
-\subsubsection{Master-Ger\"at}
+\subsubsection{Master}
 % ---------------------------------------------------------------------------- %
 
 Beim Master  wird analog  zur Sensorplatine  vorgegangen. Hier muss  noch die.
-Funktionalit\"at des GSM Modems  sowie der Strommessung sichergestellt warden.
-Der Master braucht eine um Einiges kompliziertere Logik.
+Funktionalit\"at des GSM Modems  sowie der Strommessung sichergestellt werden.
+Der Master braucht eine bedeutend kompliziertere Logik.
 
 \textbf{Blinky  LED}: Ein  einfaches  Programm   wird  verfasst,  welches  die
 korrekte Ansteuerung von GPIO Pins durch alternierendes Blinken sicherstellt.

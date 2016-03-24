@@ -6,12 +6,13 @@ Das System besteht  aus zwei Teilen. Aus Sensoren, welche sich  direkt bei den
 einzelnen Solarmodulen  befinden und einer Zentrale,  welche die Informationen
 der Sensoren auswertet.
 
-\begin{figure}[h!]
-    \centering
-    \includegraphics[width=.9\textwidth]{images/blockdiag.png}
-    \caption{Blockdiagramm Hardwareaufbau}
-    \label{fig:blockdiag:hardware}
-\end{figure}
+\textsc{TODO}: Blockdiagramm Hardware
+%\begin{figure}[h!]
+%    \centering
+%    \includegraphics[width=.9\textwidth]{images/blockdiag.png}
+%    \caption{Blockdiagramm Hardwareaufbau}
+%    \label{fig:blockdiag:hardware}
+%\end{figure}
 
 
 % TODO
@@ -28,8 +29,8 @@ Der Sensor besteht  aus einer m\"oglichst kleinen  Leiterplatte, welche direkt
 bei den  einzelnen Modulen installiert  werden kann. Die Gr\"osse  des Sensors
 sollte maximal 5cm auf 5cm betragen.
 
-Der Energiebedarf des  Sensor wird maximal 200mW betragen  wobei eine Leistung
-von unter 100 mW angestrebt wird
+Der  Energiebedarf des  Sensors wird  maximal \SI{200}{\milli\watt}  betragen,
+wobei eine Leistung von unter 100 mW angestrebt wird.
 
 Jeder  Sensor  \"uberwacht  dabei  die   Spannung  der  jeweiligen  Zelle  und
 \"ubermittelt diese  in regelm\"assigen  Zeitabst\"anden an  die Zentrale. Die
@@ -43,16 +44,46 @@ folgende zwei M\"oglichkeiten evaluiert:
 
 \begin{itemize}
     \item
-        Kapazitiv eingekoppelte Frequenzumtastung (FSK)
+        kapazitiv eingekoppelte Frequenzumtastung (FSK)
     \item
-        Serielle \"Ubertragung durch kurzzeitiges Kurzschliessen der Zelle.
+        serielle \"Ubertragung durch kurzzeitiges Kurzschliessen der Zelle
 \end{itemize}
 
-Die Reichweite des Bussystems sollte minimal 100 Meter Betragen.
+Die Reichweite des Bussystems sollte minimal 100 Meter betragen.
 
 
 % ---------------------------------------------------------------------------- %
-\subsubsection{Master-Ger\"at}
+\subsubsection{Master}
 % ---------------------------------------------------------------------------- %
 
-\textbf{TODO}
+\textbf{Supervisor}:
+Die  Aufgabe   des  Supervisors  besteht   im  Empfangen  der   Messwerte  der
+Panel-Sensoren  sowie der  Messung  des Stromes  der einzelnen  Strings. Diese
+Informationen sollen gespeichert und verarbeitet werden um bei Bedarf Anwender
+\"uber ein Display oder SMS zu  informieren und elektrische Signale via Relais
+auszugeben.
+
+\textbf{Hardware}:
+Die  Grundlage  dieses   Ger\"ats  bildet  ein  Rechner   welcher  \"uber  die
+ben\"otigten Schnittstellen  und Rechenleistung verf\"ugt. Aufgrund  der guten
+Verf\"ugbarkeit,  g\"unstigen  Preises  und grosser  Auswahl  and  kompatibler
+Peripherie wird hierf\"ur ein Raspberry Pi Modell B+ oder neuer eingesetzt. Es
+kann  direkt mit  einem  Anzeigemodul verbunden  werden, hat  USB-Anschl\"usse
+f\"ur ein USB-GSM Modem und ist  klein genug um in einem DIN-Schienengeh\"ause
+untergebracht zu werden.
+
+Funktionen,   welche   nicht   Bestandteil  des   komperziell   erh\"altlichen
+Computermoduls  enthalten  sind  werden  auf einer  im  Verlauf  des  Projekts
+entwickelten Tochterplatine realisiert. Dies sind inbesondere die Strommessung
+der  Strings bis  10A,  der Empfang  von Nachrichten  der  Sensoren sowie  die
+Ausgabe von Signalen via Relais.
+
+Die  Stromversorgung  des  Ger\"ats   wird  von  einem  eingekauften  5V-Modul
+\"ubernommen.
+
+\textbf{Software}:
+F\"ur  das Raspberry  Pi  sind angepasste  Versionen diverser  Betriebssysteme
+verf\"ugbar. Das  am  besten  unterst\"utzte  ist eine  Variante  von  Debian,
+genannt Raspbian. Diese bietet neben  grundlegenden Systemfunktionen auch eine
+Vielzahl von  Programmbibliotheken, welche zur Entwicklung  von Auswertung und
+Benutzerinterface von grossem Nutzen sind.

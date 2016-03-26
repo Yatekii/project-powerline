@@ -389,43 +389,21 @@ F 3 "" H 2100 5900 50  0000 C CNN
 	1    2100 5900
 	1    0    0    -1  
 $EndComp
-$Comp
-L CONN_01X04 P4
-U 1 1 56F40D0B
-P 6800 1050
-F 0 "P4" H 6800 1300 50  0000 C CNN
-F 1 "TO STRINGS" V 6900 1050 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04" H 6800 1050 50  0001 C CNN
-F 3 "" H 6800 1050 50  0000 C CNN
-	1    6800 1050
-	-1   0    0    1   
-$EndComp
-$Comp
-L CONN_01X04 P5
-U 1 1 56F40E50
-P 8700 1050
-F 0 "P5" H 8700 1300 50  0000 C CNN
-F 1 "TO GAK" V 8800 1050 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x04" H 8700 1050 50  0001 C CNN
-F 3 "" H 8700 1050 50  0000 C CNN
-	1    8700 1050
-	1    0    0    -1  
-$EndComp
-Text GLabel 8300 900  0    60   Input ~ 0
+Text GLabel 7200 700  0    60   Input ~ 0
 string_out0
-Text GLabel 8300 1000 0    60   Input ~ 0
+Text GLabel 7200 900  0    60   Input ~ 0
 string_out1
-Text GLabel 8300 1100 0    60   Input ~ 0
+Text GLabel 7200 1100 0    60   Input ~ 0
 string_out2
-Text GLabel 8300 1200 0    60   Input ~ 0
+Text GLabel 7200 1300 0    60   Input ~ 0
 string_out3
-Text GLabel 7200 900  2    60   Input ~ 0
+Text GLabel 7900 700  2    60   Input ~ 0
 string_in0
-Text GLabel 7200 1000 2    60   Input ~ 0
+Text GLabel 7900 900  2    60   Input ~ 0
 string_in1
-Text GLabel 7200 1100 2    60   Input ~ 0
+Text GLabel 7900 1100 2    60   Input ~ 0
 string_in2
-Text GLabel 7200 1200 2    60   Input ~ 0
+Text GLabel 7900 1300 2    60   Input ~ 0
 string_in3
 $Comp
 L ACS723 IC4
@@ -591,22 +569,6 @@ Wire Wire Line
 	1200 1300 1200 1250
 Wire Wire Line
 	1200 2100 1200 2050
-Wire Wire Line
-	7000 900  7200 900 
-Wire Wire Line
-	7200 1000 7000 1000
-Wire Wire Line
-	7000 1100 7200 1100
-Wire Wire Line
-	7200 1200 7000 1200
-Wire Wire Line
-	8300 900  8500 900 
-Wire Wire Line
-	8500 1000 8300 1000
-Wire Wire Line
-	8300 1100 8500 1100
-Wire Wire Line
-	8500 1200 8300 1200
 Wire Wire Line
 	6900 1550 7050 1550
 Wire Wire Line
@@ -1833,4 +1795,64 @@ F 3 "" H 9700 7200 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	9700 7200 9650 7200
+$Comp
+L CONN_02X01 P4
+U 1 1 56F5E028
+P 7550 700
+F 0 "P4" H 7550 800 50  0000 C CNN
+F 1 "string0" H 7550 600 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 -500 50  0001 C CNN
+F 3 "" H 7550 -500 50  0000 C CNN
+	1    7550 700 
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_02X01 P5
+U 1 1 56F5E0FA
+P 7550 900
+F 0 "P5" H 7550 1000 50  0000 C CNN
+F 1 "string1" H 7550 800 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 -300 50  0001 C CNN
+F 3 "" H 7550 -300 50  0000 C CNN
+	1    7550 900 
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_02X01 P6
+U 1 1 56F5E18C
+P 7550 1100
+F 0 "P6" H 7550 1200 50  0000 C CNN
+F 1 "string2" H 7550 1000 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 -100 50  0001 C CNN
+F 3 "" H 7550 -100 50  0000 C CNN
+	1    7550 1100
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_02X01 P7
+U 1 1 56F5E221
+P 7550 1300
+F 0 "P7" H 7550 1400 50  0000 C CNN
+F 1 "string3" H 7550 1200 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 100 50  0001 C CNN
+F 3 "" H 7550 100 50  0000 C CNN
+	1    7550 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7200 1300 7300 1300
+Wire Wire Line
+	7200 1100 7300 1100
+Wire Wire Line
+	7200 900  7300 900 
+Wire Wire Line
+	7200 700  7300 700 
+Wire Wire Line
+	7800 700  7900 700 
+Wire Wire Line
+	7800 900  7900 900 
+Wire Wire Line
+	7800 1100 7900 1100
+Wire Wire Line
+	7800 1300 7900 1300
 $EndSCHEMATC

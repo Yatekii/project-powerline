@@ -28,11 +28,11 @@ BINDIR 	= bin
 
 all: $(TARGET).bin
 
-$(TARGET).bin: $(TARGET)
+$(TARGET).bin: $(TARGET) | $(BINDIR)
 	$(TOOLCHAIN)objcopy -O binary $(BINDIR)/$< $(BINDIR)/$@
 	rm $(BINDIR)/$<
 
-$(TARGET): $(OBJS)
+$(TARGET): $(OBJS) | $(BINDIR)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -o $(BINDIR)/$@ $^
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
@@ -42,6 +42,9 @@ $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 
 $(OBJDIR):
 	mkdir $(OBJDIR)
+
+$(BINDIR):
+	mkdir $(BINDIR)
 
 # flashing
 

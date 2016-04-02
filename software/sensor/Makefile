@@ -29,10 +29,11 @@ BINDIR 	= bin
 all: $(TARGET).bin
 
 $(TARGET).bin: $(TARGET)
-	$(TOOLCHAIN)objcopy -O binary $< $@
+	$(TOOLCHAIN)objcopy -O binary $(BINDIR)/$< $(BINDIR)/$@
+	rm $(BINDIR)/$<
 
 $(TARGET): $(OBJS)
-	$(TOOLCHAIN)$(CC) $(CFLAGS) -o $@ $^
+	$(TOOLCHAIN)$(CC) $(CFLAGS) -o $(BINDIR)/$@ $^
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@

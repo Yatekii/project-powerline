@@ -34,7 +34,7 @@ $(TARGET): $(OBJS)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -o $@ $^
 
 $(OBJDIR)/%.o: $(SRCDIR)/%.c | $(OBJDIR)
-	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $<
+	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
 
 # helpers
 

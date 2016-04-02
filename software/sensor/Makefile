@@ -12,10 +12,11 @@
 TARGET  	= firmware-sensor
 ARCH		= armv6-m
 MCU     	= cortex-m0plus
+SPECS 		= nosys.specs
 STD 		= c11
 TOOLCHAIN 	= arm-none-eabi-
 CC			= gcc
-CFLAGS		= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD)
+CFLAGS		= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD) -specs=$(SPECS)
 
 OBJS 		= $(addprefix $(OBJDIR)/,main.o)
 INCDIR 	= include

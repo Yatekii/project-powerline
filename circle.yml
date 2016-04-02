@@ -4,5 +4,3 @@ dependencies:
 test:
   override:
     - make software/sensor/
-  pre:
-    - make

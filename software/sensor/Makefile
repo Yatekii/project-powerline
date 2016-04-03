@@ -13,14 +13,15 @@ TARGET  		= firmware-sensor
 ARCH			= armv6-m
 MCU     		= cortex-m0plus
 CHIP			= SAMD09D14A
-SPECS 			= nosys.specs
+SPECS 			= nano.specs
 STD 			= c11
 TOOLCHAIN 		= arm-none-eabi-
 CC				= gcc
 OPTIMIZATION	= -O2
-CFLAGS			= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD) -specs=$(SPECS) $(OPTIMIZATION)
+CFLAGS			= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD) $(OPTIMIZATION)
 CFLAGS			+=\
 					-D __$(CHIP)__\
+					-D BOARD=USER_BOARD\
 					-D ARM_MATH_CM0PLUS=true\
 					-D SPI_CALLBACK_MODE=true
 
@@ -83,10 +84,11 @@ CSRCS_EXTERN 	= \
 LIBS 			= \
 					arm_cortexM0l_math
 
-LINKER_SCRIPT 	= 
-#sam0/utils/linker_scripts/samd09/gcc/samd09d14a_flash.ld
+LINKER_SCRIPT 	= \
+					sam0/utils/linker_scripts/samd09/gcc/samd09d14a_flash.ld
 
 # Generated names, please do not change!
+# DO NOT CHANGE CODE BELOW THIS LINE #
 
 # Source files required with full prefixed path
 SRCS 			+= $(addprefix $(SRCDIR)/,$(CSRCS))
@@ -99,27 +101,45 @@ OBJS 			+= $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS_EXTERN))))
 # Flags for compiler and linker
 CFLAGS			+= -I$(INCDIR)
 CFLAGS			+= $(foreach INC, $(INCDIR_EXTERN),-I$(INC))
+LDFLAGS			+= -Wl,-Map="$(TAREGT).map"
+LDFLAGS			+= -specs=$(SPECS)
+LDFLAGS			+= -Wl,--start-group
+LDFLAGS         += $(foreach LIB,$(LIBS),-l$(LIB))
+LDFLAGS			+= -lm
+LDFLAGS			+= -Wl,--end-group
 LDFLAGS 		+= $(foreach LIB,$(LIBDIR_EXTERN),-L$(LIB))
-LDFLAGS			+= -Wl,-T $(LINKER_SCRIPT)
-#LIBFLAGS        += $(foreach LIB,$(LIBS),-l$(LIB))
+LDFLAGS			+= -Wl,--gc-sections
+LDFLAGS			+= -mcpu=$(MCU)
+LDFLAGS			+= -Wl,--entry=Reset_Handler
+LDFLAGS			+= -T $(LINKER_SCRIPT)
 
 # main rules
 
 all: $(TARGET).bin
 
 $(TARGET).bin: $(TARGET)
-	mkdir $(BINDIR)
-	$(TOOLCHAIN)objcopy -O binary $(BINDIR)/$< $(BINDIR)/$@
-	rm $(BINDIR)/$<
+	mkdir -p $(BINDIR)
+	$(TOOLCHAIN)objcopy -O binary $(BINDIR)/$<.elf $(BINDIR)/$@
+	#rm $(BINDIR)/$<
 
 $(TARGET): $(OBJS)
-	$(TOOLCHAIN)$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFLAGS) -o $(BINDIR)/$@ $^
+	mkdir -p $(BINDIR)
+	$(TOOLCHAIN)$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFLAGS) -o $(BINDIR)/$@.elf $^
+
+obj/main.o: src/main.c
+	mkdir -p $(dir $@)
+	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
 
-# flashing
+# size report
+
+size: $(TARGET)
+	$(TOOLCHAIN)size $(BINDIR)/$<.elf
+	
+# flashing (TODO: adjust for stlink v2 and binary)
 
 flash: $(TARGET).hex
 	avrdude -c USBasp -p atmega48 -U flash:w:$(TARGET).hex -v

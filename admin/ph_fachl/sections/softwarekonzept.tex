@@ -1,0 +1,140 @@
+Das Softwarekonzept  h\"alt die grundlegende Struktur  des Programms fest. Das
+Design der  grafischen Benutzeroberfl\"ache  (GUI) wird in  einem Erstentwurf
+dargestellt  und wird  zu   einem  sp\"ateren   Zeitpunkt  mit   dem  Kunden
+weiterentwickelt.
+
+
+\subsection{GUI und Beschreibung des Programmablaufs}
+
+%\begin{center}
+%    \begin{figure}[h! width=\pagewidth]
+%		%\hspace{-1in}
+%		\includegraphics[width=0.95\textwidth]{images/GUI_Entwurf_2_150304.pdf}
+%		\caption{Entwurf des GUI Hauptbildschirms}
+%    \end{figure}
+%\end{center}
+
+
+\subsubsection*{Start}
+Die  Software wird  beim  Start im  Default-Modus geladen. Alle  Eingabefelder
+sind  mit Nullwerten  versehen. Die Oberfl\"ache  (Abblidung 1)  gliedert sich
+in  eine  linke,  numerische  und  eine  rechte,  grafische  Bedienseite. Die
+linke  Seite  zeigt   Eingabe  der  Basis-Parameter  sowie   zur  Ausgabe  der
+Reglerwerte. Die   Rechte   beinhaltet   die   Plots   der   Schrittantworten,
+der    PTn-Strecke\footnotemark[1],   des    Amplituden-\footnotemark[1]   und
+Phasengangs\footnotemark[1]. Sofern   die   Berechnungszeit  gen\"ugend   kurz
+gehalten werden kann,  wird zus\"atzlich noch die  M\"oglichkeit zur manuellen
+Anpassung der Reglerwerte\footnotemark[2]  hinzugef\"ugt (grafisches Feedback
+muss sofort erfolgen).
+
+
+\subsubsection*{Dateneingabe}
+Im  Panel ``Schrittantwort  vermessen''  werden  die gemessenen,  numerischen
+Daten eingegeben. Alle Felder m\"ussen zur Berechnung ausgef\"ullt sein.
+
+Beim  Klick  in ein  Textfeld  wird  der Text  markiert. Ung\"ultige  Eingaben
+werden nicht  akzeptiert.  \"Uber den  Button „Berechnen“ wird  die Berechnung
+gestartet sowie die  Plots gezeichnet.  \"Uber die  Schaltfl\"achen PI, PID-T1
+im  entsprechenden Panel   kann  zwischen den  zwei Regler-Typen  umgeschaltet
+werden. Ein  Umschalten  l\"ost  automatisch   eine  Neuberechnung  sowie  ein
+Neuzeichnen aus. Als  zus\"atzliches Wunschziel wird das  Ein- und Ausblenden
+des rechten (Plot-)Bereichs\footnotemark[1] definiert.
+
+
+\subsubsection*{Ausgabe}
+Das Panel "Reglerwerte" gibt die  Werte f\"ur die Phasengang-Methode sowie f\"ur
+eine Auswahl  an Faustformeln aus. Bei  der Phasengang-Methode sind  die Werte
+f\"ur wenig, mittel oder  starkes \"Uberschwingen angegeben. Ist der Reglertyp
+``PID-T1''  gew\"ahlt, so  ist  der Wert  f\"ur  $T_P$ verstellbar  (Standard:
+$\frac{1}{10} \cdot T_v$ ).
+
+Im    oberen    rechten    Bereich     kann    zwischen    den    Plots    der
+PTn-Strecke,    des    Amplituden-    und Phasengangs (alles Wunschziele
+sowie   der    M\"oglichkeit   die   Reglerwerte
+anzupassen\footnotemark[2] mittels Tabs umgeschaltet werden.
+
+Im Panel  ``Schrittantworten'' erfolgt die grafische  Ausgabe der berechneten
+Werte. Die verschiedenen Methoden  (Phasengang-Methode, Faustformeln) k\"onnen
+einzeln \"uber Check-Boxen dazu- oder weggeschaltet werden. Das Zoomen mittels
+Maus im Plot ist ein Wunschziel.
+
+
+\footnotetext[1]{Wunschziel}
+\footnotetext[2]{Wird nur bei gen\"ugend schneller Programmgeschwindigkeit umgesetzt.}
+
+
+{\em{\"Anderungen am GUI  sind noch m\"oglich und werden  in Zusammenarbeit mit dem Kunden erarbeitet.}}
+
+
+\subsection{Softwarestruktur}
+Die  Software  baut  auf  dem  Prinzip  des  MVC-Pattern  (Model-View-Control)
+auf. Dies  gew\"ahrleistet gr\"osstm\"ogliche  Flexibilit\"at  in der  Wartung
+sowie der Wiederverwendbarkeit der Packages.
+
+
+\subsubsection*{Klassendiagramm}
+Das  Klassendiagramm (siehe  Abbildung \ref{fig:klassendiagramm})  zeigt einen
+Grobentwurf  des Aufbaus  sowie  die Abh\"angigkeiten  zwischen den  einzelnen
+Klassen.
+
+%\begin{center}
+%\begin{figure}[h!, width=\pagewidth]
+%        \includegraphics[angle=90,width=\textwidth]{images/klassendiagramm.pdf}
+%        \caption{Klassendiagramm mit MVC-Pattern sowie m\"oglichen Klassen}
+%        \label{fig:klassendiagramm}
+%\end{figure}
+%\end{center}
+
+
+\subsubsection*{Model}
+Das  Model \"ubernimmt  die gesamten  Berechnungen der  Applikation. So werden
+in   den  dazugeh\"origen   Klassen  die   Resultate  der   Reglerwerte  sowie
+die  Daten  f\"ur  die  Plots  berechnet  und  zwischengespeichert. Model  ist
+observable: \"Anderungen der Werte k\"onnen somit  von anderen Klassen aus der
+View \"uberwacht werden.
+
+
+\subsubsection*{View}
+Die View baut  aus den Daten des  Models das gesamte GUI  auf. \"Uber die View
+findet  die  Daten-Eingabe sowie  -Ausgabe  statt. Der  genaue Aufbau  ist  im
+Kapitel  „GUI-Beschreibung“ zu  finden. Die View  implementiert das  Interface
+\code{Observer} sowie die Methode  \code{update()}. Die View und die Subpanels
+delegieren \code{update()}  an die darunterliegenden  Panels. Folgende Klassen
+sind voraussichtlich Bestandteil der View:
+
+\paragraph{\code{View}}: Hauptpanel, das  alle darunterliegenden  Panels aufnimmt, f\"ullt
+den gesamten Frame aus.
+
+\begin{itemize}
+    \item{\code{ViewLeftPanel}}:
+        Stellt Panel des linken Bereichs dar.
+        \begin{itemize}
+            \item{\code{ViewInputPanel}}:
+                Die   Werte   der   vermessenen  Impulsantwort   werden   hier
+                eingegeben. Der Button  zum Start der Berechung  befindet sich
+                ebenfalls hier.
+            \item{\code{ViewRegulatorChooserPanel}}:
+                Wahl zwischen PI- und PID-T1-Regler, erfolgt mittels Buttons.
+            \item{\code{ViewRegulatorPanel}}:
+                Beinhaltet   die  Reglerwerte   der  Faustformeln   sowie  der
+                Phasengang-Methode.
+            \item{\code{ViewRulesOfThumb}}:
+                Gibt die Reglerwerte der Faustformeln an.
+            \item{\code{ViewPhaseResponseMethod}}:
+                Gibt die Reglerwerte der Phasengang-Methode aus.
+        \end{itemize}
+    \item{\code{ViewRightPanel}}:
+        Stellt Panel des rechten Bereichs dar.
+        \begin{itemize}
+            \item{\code{ViewStepResponsePanel}}:
+                Stellt  die   Schrittantworten  der  Faustformeln   sowie  der
+                Phasengang-Methode dar.
+        \end{itemize}
+\end{itemize}
+
+
+\subsubsection*{Controller}
+Der  Controller ist  die Schnittstelle  zwischen der  View und  dem Model. Die
+Eingabe-Werte der View werden gepr\"uft,  dann an das Model weitergeleitet
+oder als  fehlerhaft zur\"uckgewiesen. Er  steuert somit das Model in
+ Abh\"angigkeit der Eingaben \"uber das GUI.

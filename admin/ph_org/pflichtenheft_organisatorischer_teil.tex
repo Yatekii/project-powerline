@@ -1,0 +1,105 @@
+\documentclass{fhnwreport/fhnwreport}
+
+\input{preamble/packages.tex}
+\input{preamble/hyperref.tex}
+\input{preamble/title.tex}
+
+
+\begin{document}
+
+\input{titlepage/titlepage.tex}
+
+\tableofcontents
+\vspace{130mm}
+\subsection*{Versionsgeschichte}
+\begin{itemize}
+    \item[]
+        \emph{24.03.2016:} \texttt{Version 1.0}
+\end{itemize}
+\clearpage
+
+% **************************************************************************** %
+%\begin{landscape}
+\section{Organisationsstruktur}
+\label{sec:organisatsionsstruktur}
+% **************************************************************************** %
+\input{sections/organisationsstruktur.tex}
+%\end{landscape}
+
+% **************************************************************************** %
+\clearpage
+\begin{landscape}
+\section{Projektplanung}
+\label{sec:projektplanung}
+% **************************************************************************** %
+\input{sections/projektplanung.tex}
+\end{landscape}
+
+% **************************************************************************** %
+\clearpage
+\section{Projektbudget}
+\label{sec:Projektbudget}
+% **************************************************************************** %
+\input{sections/projektbudget.tex}
+
+% **************************************************************************** %
+\clearpage
+\begin{landscape}
+\section{Kommunikationskonzept}
+\label{sec:kommunikationskonzept}
+% **************************************************************************** %
+\input{sections/kommunikationskonzept.tex}
+\end{landscape}
+
+%\clearpage
+%\pdfpagewidth=\pdfpageheight
+%\pdfpageheight=1.414\pdfpageheight
+%\textwidth=1.414\textwidth
+% ************************************************************************ %
+\clearpage
+\begin{landscape}
+\section{Risikomanagement}
+\label{sec:risikomanagement}
+% ************************************************************************ %
+\input{sections/risikomanagement.tex}
+\end{landscape}
+%\clearpage
+
+
+\clearpage
+% **************************************************************************** %
+%\addcontentsline{toc}{section}{Appendix}
+\begin{appendices}
+    %\appendixpage
+    %\addappheadtotoc
+    %\appendix
+    %\section{Anhang}
+    \label{sec:appendix}
+    % ************************************************************************ %
+    \input{sections/appendix.tex}
+\end{appendices}
+
+% **************************************************************************** %
+%\clearpage
+%\section*{Projektvereinbarung}
+%\label{sec:projektvereinbarung}
+% **************************************************************************** %
+%\input{sections/projektvereinbarung.tex}
+
+
+% **************************************************************************** %
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{section}{\listfigurename}
+%\listoffigures
+% **************************************************************************** %
+
+% **************************************************************************** %
+%\cleardoublepage
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{\bibname}
+%\bibliography{bibliography/pro1--eit--team-1--pflichtenheft-fachlicher-teil}{\bibliographystyle{bibliography/deIEEEtran.bst}}
+% **************************************************************************** %
+
+\end{document}

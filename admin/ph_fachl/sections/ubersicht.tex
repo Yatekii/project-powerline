@@ -1,0 +1,148 @@
+% ---------------------------------------------------------------------------- %
+\subsection{Ausgangslage}
+% ---------------------------------------------------------------------------- %
+
+Bei  den heutzutage  verwendeten  Photovoltaik-Anlagen werden  \"ublicherweise
+mehrere einzelne PV-Module zu einem String zusammengefasst, indem diese Module
+in Serie geschalten werden. Dabei  kann ein abgeschattetes, verschmutztes oder
+gar  defektes  Modul den  Strom  dieser  Serienschaltung  und somit  auch  die
+Leistung des gesamten Strings und der Anlage stark beeintr\"achtigen.
+
+Um  diese Einbussen  zu vermeiden,  braucht es  ein Modul\"uberwachungssystem,
+welches ein  solches fehlerhaftes  Modul erkennen und  melden kann,  damit die
+notwendigen Massnahmen getroffen werden  k\"onnen. Doch die bisher vorhandenen
+Systeme  f\"ur  diese \"Uberwachung  werden  meist  aus Kostengr\"unden  nicht
+verwendet.
+
+Im Projekt  soll nun ein Modul\"uberwachungssystem  entwickelt werden, welches
+genug  kosteng\"unstig  ist, um   den  Einbau  dieses  Systems  wirtschaftlich
+attraktiv zu gestalten. Dies wird realisiert,  indem bei den einzelnen Modulen
+jeweils nur eine  sehr g\"unstige Sensorplatine angebracht wird  und die Daten
+dieser Platinen  zentral in einem Meldeger\"at  ausgewertet werden. Somit kann
+durch den Einbau der Sensoren  in die bereits vorhandenen Klemmengeh\"ause und
+durch  das Verzichten  auf zus\"atzliche  Kabel der  finanzielle Aufwand  sehr
+gering gehalten werden.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Projektziele}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Sollziele}
+% ---------------------------------------------------------------------------- %
+
+\textbf{Sensorplatine}:
+\begin{enumerate}
+    \item
+        Die Sensorplatine  soll klein  genug sein, um im  Klemmengeh\"ause des
+        PV-Moduls Platz zu haben.
+    \item
+        Die Spannungsversorgung erfolgt direkt vom Modul.
+    \item
+        Die Platine nimmt durchschnittlich nicht mehr Leistung als 200mW auf.
+    \item
+        Die Versorgungsspannung kommt ohne Pufferung aus.
+    \item
+        Die Bauteile die zur Einkopplung der Signale gebraucht werden m\"ussen
+        f\"ur einen Strom von bis zu 10 Ampere ausgelegt sein.
+    \item
+        Die Modulspannung  wird in einem Bereich  von 12 bis 60  Volt gemessen
+        mit einer Genauigkeit von mindestens 0.1 Ampere.
+    \item
+        Die  Kommunikation zwischen  Sensoren  und Master  erfolgt \"uber  die
+        Powerleitung.
+    \item
+        Es muss eine Identifizierung der einzelnen Module erfolgen k\"onnen.
+    \item
+        Die Produktionskosten f\"ur eine Sensorplatine sollen nicht mehr als 5
+        Franken betragen.
+    \item
+        Die  Reichweite  des  Bus-Systems sollte  mindestems  \SI{100}{\meter}
+        betragen.
+\end{enumerate}
+
+\textbf{Masterger\"at}
+\begin{enumerate}
+    \item
+        Das Ger\"at soll in einen Schaltschrank eingebaut werden k\"onnen.
+    \item
+        Die Platzierung ist beim Generatoranschlusskasten vorgesehen.
+    \item
+        Die Versorgung erfolgt durch die Netzspannung.
+    \item
+        Enth\"alt ein Display um defekte Module anzuzeigen.
+    \item
+        Auch ein fehlender Messwert wird als Fehler erkannt.
+    \item
+        Besitzt einen Relaiskontakt um Fehlermeldung weiterzugeben.
+    \item
+        Simple Art der Konfiguration.
+    \item
+        Es k\"onnen bis zu 255  Sensoren mit demselben Masterger\"at betrieben
+        werden.
+\end{enumerate}
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Wunschziele}
+% ---------------------------------------------------------------------------- %
+
+\begin{enumerate}
+    \item
+        Status-LEDs auf den Sensorplatinen f\"ur eine einfachere Fehlersuche.
+    \item
+        Strommessung beim Masterger\"at.
+    \item
+        Fehler- und Statusmeldungen via SMS.
+\end{enumerate}
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Nichtziele}
+% ---------------------------------------------------------------------------- %
+
+\begin{enumerate}
+    \item
+        Verwenden zus\"atzlicher Kabel f\"ur die Kommunikation.
+    \item
+        Einsatz von Funkmodulen f\"ur die Kommunikation.
+    \item
+        Separates Geh\"ause f\"ur die Sensorplatine.
+\end{enumerate}
+
+% ---------------------------------------------------------------------------- %
+\subsection{Lieferobjekte}
+% ---------------------------------------------------------------------------- %
+
+Tabelle \ref{tab:lieferobj}  listet die  vom Modul  vorgegebenen Lieferobjekte
+und Termine auf.
+
+\begin{table}[h!]
+    \centering
+    \caption{Terminplan f\"ur Lieferobjekte}
+    \label{tab:lieferobj}
+    \begin{tabular}{rp{80mm}r}
+        \toprule
+        \textsc{Datum} & \textsc{Lieferobjekt} & \textsc{Form} \\
+        \midrule
+        \texttt{24.03.2016} & Pflichtenheft, organisatorischer Teil         & E-Mail, pdf \\
+        \texttt{24.03.2016} & Pflichtenheft, fachlicher Teil, provisorisch  & E-Mail, pdf \\
+        \texttt{14.04.2016} & Pflichtenheft, fachlicher Teil, definitiv     & E-Mail, pdf \\
+        \texttt{14.04.2016} & Statusbericht 1                               & E-Mail \\
+        \texttt{21.04.2016} & Zwischenpr\"asentation                        & Vortrag \\
+        \texttt{28.04.2016} & Statusbericht 2                               & E-Mail \\
+        \texttt{05.05.2016} & Einleitung/Disposition                        & E-Mail \\
+        \texttt{19.05.2016} & Statusbericht 3                               & E-Mail \\
+        \texttt{09.06.2016} & Statusbericht 4                               & E-Mail \\
+        \texttt{16.06.2016} & Schlusspr\"asentation                         & Vortrag \\
+        \texttt{16.06.2016} & Fachbericht                                   & USB-Stick \\
+        \texttt{16.06.2016} & PMA-Bericht                                   & USB-Stick \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+% TODO
+% ---------------------------------------------------------------------------- %
+%\subsection{Rahmenbedingungen}
+% ---------------------------------------------------------------------------- %

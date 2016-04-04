@@ -1,0 +1,61 @@
+%Zu erf\"ullende Aufgaben:
+%
+%\begin{itemize}
+%    \item
+%        Kommunikation Sensoren <-> Hub
+%        \begin{itemize}
+%            \item
+%                Establishing contact
+%            \item
+%                \"ubertragung von messdaten
+%            \item
+%                fehlerhandhabung
+%            \item
+%                addressieren/verwalten
+%        \end{itemize}
+%    \item
+%        Hub
+%        \begin{itemize}
+%            \item
+%                Sammeln von messdaten (anfordern oder push?)
+%            \item
+%                speichern von messdaten
+%            \item
+%                auswerten von gespeicherten messdaten: definition von failure modes, statistische auswertung der moduldaten, adaptiv?
+%            \item
+%                kommunikation des Zustands der Anlage nach aussen (relay, LEDs, SMS, etc.)
+%        \end{itemize}
+%    \item
+%        sensoren
+%        \begin{itemize}
+%            \item
+%                sammeln von daten
+%            \item
+%                failure handling
+%            \item
+%                senden von daten
+%        \end{itemize}
+%\end{itemize}
+
+Da die Hardware  aus zwei einzelnen Boards besteht, wird  nat\"urlich auch pro
+Board eine separate Software ben\"otigt.
+
+Der  in der  Sensorplatine  verbaute  Atmel-Chip wird  in  C programmiert,  da
+sich  diese  Programmiersprache  durch   die  Hardwaren\"ahe  optimal  daf\"ur
+eignet. Die Aufgabe der  Software besteht hier darin, die  gemessenen Daten zu
+verarbeiten, falls ben\"otigt Pr\"ufsummen zu berechnen sowie die zu sendenden
+Daten  als  Pakete  bereitzustellen, um  sie  auf  die  DC-Leitung  modulieren
+zu  k\"onnen. Zus\"atzlich muss  zur  Identifikation  beim Masterger\"at  eine
+Sensorspezifische  Nummer  eingelesen  und ebenfalls  \"uber  die  Netzleitung
+kommuniziert werden k\"onnen.
+
+Die  Programmierung  des  Master-Ger\"ates  erfolgt in  Python,  da  hier  die
+zur  Verf\"ugung  stehenden Libraries  besser  mit  dem verwendeten  Raspberry
+Pi  kombiniert  werden k\"onnen. Dabei  ist  die  Software einerseits  daf\"ur
+zust\"andig  die  von den  Sensoren  \"ubermittelten,  demodulierten Daten  zu
+erfassen und  zu verarbeiten. Dabei m\"ussen die  erhaltenen Daten verglichen,
+eventuel  defekte Module  evaluiert, Fehler  ber\"ucksichtigt sowie  bei einem
+erkannten  Defekt dies  gemeldet  werden. Andererseits  m\"ussen die  Sensoren
+anhand  der  \"ubermittelten   Erkennungsnummern  den  einzelnen  Solarmodulen
+zugewiesen werden,  damit die Messwerte korrekt  miteinander verglichen werden
+k\"onnen.

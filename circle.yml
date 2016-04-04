@@ -1,0 +1,15 @@
+general:
+  branches:
+    ignore:
+      - hardware
+      - latex
+  artifacts:
+    - software/sensor/bin
+
+dependencies:
+  pre:
+    - sudo apt-get install make gcc-arm-none-eabi libnewlib-arm-none-eabi binutils-arm-none-eabi
+
+test:
+  pre:
+    - cd software/sensor/ && make

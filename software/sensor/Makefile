@@ -101,7 +101,7 @@ OBJS 			+= $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS_EXTERN))))
 # Flags for compiler and linker
 CFLAGS			+= -I$(INCDIR)
 CFLAGS			+= $(foreach INC, $(INCDIR_EXTERN),-I$(INC))
-LDFLAGS			+= -Wl,-Map="$(TAREGT).map"
+LDFLAGS			+= -Wl,-Map="$(TARGET).map"
 LDFLAGS			+= -specs=$(SPECS)
 LDFLAGS			+= -Wl,--start-group
 LDFLAGS         += $(foreach LIB,$(LIBS),-l$(LIB))
@@ -141,9 +141,8 @@ size: $(TARGET)
 	
 # flashing (TODO: adjust for stlink v2 and binary)
 
-flash: $(TARGET).hex
-	avrdude -c USBasp -p atmega48 -U flash:w:$(TARGET).hex -v
-
+flash: $(TARGET).bin
+	openocd -f target/atsamd09.cfg -c "program bin/$< verify reset exit"
 # cleaning
 
 clean:

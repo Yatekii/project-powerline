@@ -8,7 +8,9 @@ general:
 
 dependencies:
   pre:
-    - sudo apt-get install make gcc-arm-none-eabi libnewlib-arm-none-eabi binutils-arm-none-eabi
+    - sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded -y
+    - sudo apt-get update
+    - sudo apt-get install gcc-arm-none-eabi=4.9.3.2015q3-1trusty1
 
 test:
   pre:

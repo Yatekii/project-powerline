@@ -144,7 +144,7 @@ size: $(TARGET)
 # flashing (TODO: adjust for stlink v2 and binary)
 
 flash: $(TARGET).bin
-	openocd -f target/atsamd09.cfg -c "program bin/$< verify reset exit"
+	openocd -f atsamd09.cfg -c "program bin/$< verify reset exit"
 # cleaning
 
 clean:

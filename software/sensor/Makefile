@@ -64,7 +64,8 @@ LIBDIR_EXTERN	= \
 					thirdparty/CMSIS/Lib/GCC
 # Project sources
 CSRCS 			= \
-					main.c
+					main.c\
+					led.c
 # Framework sources
 CSRCS_EXTERN 	= \
 					common/utils/interrupt/interrupt_sam_nvic.c\
@@ -126,13 +127,14 @@ $(TARGET): $(OBJS)
 	mkdir -p $(BINDIR)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFLAGS) -o $(BINDIR)/$@.elf $^
 
-obj/main.o: src/main.c
+$(OBJDIR)/%.o: src/%.c
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
+
 
 # size report
 

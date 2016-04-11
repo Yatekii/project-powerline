@@ -40,11 +40,3 @@ index 2730f71..cd7726d 100644
  			SAMD_NVMCTRL + SAMD_NVMCTRL_CTRLA, SAMD_NVM_CMD(cmd));
  	if (res != ERROR_OK)
  		return res;
-@@ -690,7 +698,6 @@ static int samd_write(struct flash_bank *bank, const uint8_t *buffer,
- 
- 	if (res != ERROR_OK)
- 		return res;
--
- 	if (nvm_ctrlb & SAMD_NVM_CTRLB_MANW)
- 		manual_wp = true;
- 	else

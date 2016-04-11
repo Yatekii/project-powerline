@@ -6,8 +6,8 @@
 #define LED_RED PIN_PA14
 #define LED_GREEN PIN_PA15
 
-#define LED_INACTIVE 1
-#define LED_ACTIVE 0
+#define LED_STATE_INACTIVE 1
+#define LED_STATE_ACTIVE 0
 
 void config_led(int pin);
 void set_led(int pin, int value);

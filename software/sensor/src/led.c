@@ -6,7 +6,7 @@ void config_led(int pin){
 
 	pin_conf.direction  = PORT_PIN_DIR_OUTPUT;
 	port_pin_set_config(pin, &pin_conf);
-	port_pin_set_output_level(pin, LED_INACTIVE);
+	port_pin_set_output_level(pin, LED_STATE_INACTIVE);
 }
 
 void set_led(int pin, int value){

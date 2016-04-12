@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:supervisor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -346,7 +347,7 @@ NC
 Text GLabel 2400 2100 2    60   Input ~ 0
 NC
 $Comp
-L RELAY K1
+L RELAY-RESCUE-supervisor K1
 U 1 1 56F404B9
 P 3900 5600
 F 0 "K1" H 3650 5950 70  0000 C CNN
@@ -357,7 +358,7 @@ F 3 "" H 3900 5800 60  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RELAY K2
+L RELAY-RESCUE-supervisor K2
 U 1 1 56F4085C
 P 3900 6350
 F 0 "K2" H 3650 6700 70  0000 C CNN
@@ -1855,4 +1856,45 @@ Wire Wire Line
 	7800 1100 7900 1100
 Wire Wire Line
 	7800 1300 7900 1300
+$Sheet
+S 4100 8550 950  1550
+U 570DBBD4
+F0 "Powerline FSK Module" 60
+F1 "powerline-fsk.sch" 60
+F2 "TX1_in" I R 5050 8675 60 
+F3 "RX1_out" I R 5050 8775 60 
+F4 "GND" I R 5050 9550 60 
+F5 "+3V3" I R 5050 9400 60 
+F6 "coupling" I R 5050 9000 60 
+$EndSheet
+$Comp
+L GND #PWR?
+U 1 1 570DCAAB
+P 5150 9625
+F 0 "#PWR?" H 5150 9375 50  0001 C CNN
+F 1 "GND" H 5150 9475 50  0000 C CNN
+F 2 "" H 5150 9625 50  0000 C CNN
+F 3 "" H 5150 9625 50  0000 C CNN
+	1    5150 9625
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 9550 5150 9550
+Wire Wire Line
+	5150 9550 5150 9625
+$Comp
+L +3V3 #PWR?
+U 1 1 570DCE8E
+P 5175 9325
+F 0 "#PWR?" H 5175 9175 50  0001 C CNN
+F 1 "+3V3" H 5175 9465 50  0000 C CNN
+F 2 "" H 5175 9325 50  0000 C CNN
+F 3 "" H 5175 9325 50  0000 C CNN
+	1    5175 9325
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5050 9400 5175 9400
+Wire Wire Line
+	5175 9400 5175 9325
 $EndSCHEMATC

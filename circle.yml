@@ -1,0 +1,17 @@
+general:
+  branches:
+    ignore:
+      - hardware
+      - latex
+  artifacts:
+    - software/sensor/bin
+
+dependencies:
+  pre:
+    - sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded -y
+    - sudo apt-get update
+    - sudo apt-get install gcc-arm-none-eabi=4.9.3.2015q3-1trusty1
+
+test:
+  pre:
+    - cd software/sensor/ && make

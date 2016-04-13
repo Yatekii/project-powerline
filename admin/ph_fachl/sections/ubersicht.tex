@@ -4,18 +4,18 @@
 
 Bei  den heutzutage  verwendeten  Photovoltaik-Anlagen werden  \"ublicherweise
 mehrere einzelne PV-Module zu einem String zusammengefasst, indem diese Module
-in Serie geschalten werden. Dabei  kann ein abgeschattetes, verschmutztes oder
-gar  defektes  Modul den  Strom  dieser  Serienschaltung  und somit  auch  die
-Leistung des gesamten Strings und der Anlage stark beeintr\"achtigen.
+in Serie geschaltet werden. Dabei  kann ein abgeschattetes, verschmutztes oder
+gar defektes Modul den Strom dieser Serieschaltung und somit auch die Leistung
+des gesamten Strings und der Anlage stark beeintr\"achtigen.
 
 Um  diese Einbussen  zu vermeiden,  braucht es  ein Modul\"uberwachungssystem,
 welches ein  solches fehlerhaftes  Modul erkennen und  melden kann,  damit die
-notwendigen Massnahmen getroffen werden  k\"onnen. Doch die bisher vorhandenen
+notwendigen  Massnahmen  getroffen  werden  k\"onnen. Die  bisher  vorhandenen
 Systeme  f\"ur  diese \"Uberwachung  werden  meist  aus Kostengr\"unden  nicht
 verwendet.
 
-Im Projekt  soll nun ein Modul\"uberwachungssystem  entwickelt werden, welches
-genug  kosteng\"unstig  ist, um   den  Einbau  dieses  Systems  wirtschaftlich
+In diesem  Projekt soll  nun ein Modul\"uberwachungssystem  entwickelt werden,
+welches genug kosteng\"unstig ist, um den Einbau dieses Systems wirtschaftlich
 attraktiv zu gestalten. Dies wird realisiert,  indem bei den einzelnen Modulen
 jeweils nur eine  sehr g\"unstige Sensorplatine angebracht wird  und die Daten
 dieser Platinen  zentral in einem Meldeger\"at  ausgewertet werden. Somit kann
@@ -40,15 +40,17 @@ gering gehalten werden.
     \item
         Die Spannungsversorgung erfolgt direkt vom Modul.
     \item
-        Die Platine nimmt durchschnittlich nicht mehr Leistung als 200mW auf.
+        Die   Platine  nimmt   durchschnittlich   nicht   mehr  Leistung   als
+        \SI{200}{\milli\watt} auf.
     \item
         Die Versorgungsspannung kommt ohne Pufferung aus.
     \item
-        Die Bauteile die zur Einkopplung der Signale gebraucht werden m\"ussen
-        f\"ur einen Strom von bis zu 10 Ampere ausgelegt sein.
+        Die  Bauteile,  die  zur  Einkopplung der  Signale  gebraucht  werden,
+        m\"ussen f\"ur einen Strom von bis zu 10 Ampere ausgelegt sein.
     \item
-        Die Modulspannung  wird in einem Bereich  von 12 bis 60  Volt gemessen
-        mit einer Genauigkeit von mindestens 0.1 Ampere.
+        Die   Modulspannung  wird   in   einem   Bereich  von   \SI{12}{\volt}
+        bis  \SI{60}{\volt}gemessen  mit   einer  Genauigkeit  von  mindestens
+        \SI{0.1}{\volt}.
     \item
         Die  Kommunikation zwischen  Sensoren  und Master  erfolgt \"uber  die
         Powerleitung.
@@ -83,6 +85,8 @@ gering gehalten werden.
         werden.
 \end{enumerate}
 
+\textsc{TODO}: Da war doch noch was mit 255 Sensoren?
+
 
 % ---------------------------------------------------------------------------- %
 \subsubsection{Wunschziele}
@@ -95,6 +99,10 @@ gering gehalten werden.
         Strommessung beim Masterger\"at.
     \item
         Fehler- und Statusmeldungen via SMS.
+    \item
+        Sensor: Maximaler Leistungsverbrauch von \SI{100}{\milli\watt}
+	\item
+		Sensor: Maximale Gr\"osse der Platine von $\SI{50}{\milli\meter} \times \SI{50}{\milli\meter}$
 \end{enumerate}
 
 

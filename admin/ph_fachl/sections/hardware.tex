@@ -3,10 +3,9 @@
 % ---------------------------------------------------------------------------- %
 
 Das System besteht  aus zwei Teilen. Aus Sensoren, welche sich  direkt bei den
-einzelnen Solarmodulen  befinden und einer Zentrale,  welche die Informationen
-der Sensoren auswertet.
+einzelnen Solarmodulen befinden und einer Zentrale (Masterger\"at), welche die
+Informationen der Sensoren auswertet.
 
-\textsc{TODO}: Blockdiagramm Hardware
 %\begin{figure}[h!]
 %    \centering
 %    \includegraphics[width=.9\textwidth]{images/blockdiag.png}
@@ -15,45 +14,55 @@ der Sensoren auswertet.
 %\end{figure}
 
 
-% TODO
 % ---------------------------------------------------------------------------- %
 \subsection{Spezifikationen}
+\label{subsec:specs}
 % ---------------------------------------------------------------------------- %
 
+Die Spezifikationen  werden aufgegliedert gem\"ass den  beiden Hauptteilen des
+Gesamtsystems: Sensor und Masterger\"at.
 
 % ---------------------------------------------------------------------------- %
 \subsubsection{Sensor}
 % ---------------------------------------------------------------------------- %
 
-Der Sensor besteht  aus einer m\"oglichst kleinen  Leiterplatte, welche direkt
-bei den  einzelnen Modulen installiert  werden kann. Die Gr\"osse  des Sensors
-sollte maximal 5cm auf 5cm betragen.
+\begin{minipage}[c][][t]{.49\textwidth}
+	Der Sensor besteht  aus einer m\"oglichst kleinen  Leiterplatte, welche direkt
+	bei den  einzelnen Modulen installiert  werden kann.
 
-Der  Energiebedarf des  Sensors wird  maximal \SI{200}{\milli\watt}  betragen,
-wobei eine Leistung von unter 100 mW angestrebt wird.
+	Jeder  Sensor  \"uberwacht  dabei  die   Spannung  der  jeweiligen  Zelle  und
+	\"ubermittelt  diese  in  vorgegebenen Zeitabst\"anden  an  die  Zentrale. Die
+	Spannungsmessung  und  die  Kommunikation werden  von  einem  energiesparenden
+	Mikrokontroller geregelt.
 
-Jeder  Sensor  \"uberwacht  dabei  die   Spannung  der  jeweiligen  Zelle  und
-\"ubermittelt diese  in regelm\"assigen  Zeitabst\"anden an  die Zentrale. Die
-Spannungsmessung und  die Kommunikation  werden von einem  Energiesparenden 32
-Bit Mikrokontroller geregelt.
+	F\"ur  die  Daten\"ubertragung   werden  keine  zus\"atzlichen  Installationen
+	ben\"otigt. Die   Kommunikation   findet   \"uber   die   Stromleitungen   der
+	Solaranlage   statt. Daf\"ur  ist   eine   Modulation  vorgesehen. F\"ur   die
+	Realisierung werden  folgende zwei M\"oglichkeiten evaluiert  (siehe Abschnitt
+	\ref{subsec:losungsvarianten}).
 
-F\"ur  die  Daten\"ubertragung   werden  keine  zus\"atzlichen  Installationen
-ben\"otigt. Die Kommunikation findet \"uber die Stromleitungen der Solaranlage
-statt. Daf\"ur ist  eine Modulation vorgesehen. F\"ur die  Realisierung werden
-folgende zwei M\"oglichkeiten evaluiert:
+	\begin{itemize}
+		\item
+			kapazitiv eingekoppelte Frequenzumtastung (FSK)
+		\item
+			serielle \"Ubertragung durch kurzzeitiges Kurzschliessen der Zelle
+	\end{itemize}
 
-\begin{itemize}
-    \item
-        kapazitiv eingekoppelte Frequenzumtastung (FSK)
-    \item
-        serielle \"Ubertragung durch kurzzeitiges Kurzschliessen der Zelle
-\end{itemize}
+	Der     schematische    Aufbau     des     Sensors     ist    in     Abbildung
+	\ref{fig:blockdiag:sensor} zu sehen.
+\end{minipage}
+\hspace*{0.02\textwidth}
+\begin{minipage}[c][][t]{.49\textwidth}
+		\centering
+		\includegraphics[width=\textwidth]{images/blockdiag-sensor.png}
+		\captionof{figure}{Blockdiagramm des Sensors}
+		\label{fig:blockdiag:sensor}
+\end{minipage}
 
-Die Reichweite des Bussystems sollte minimal 100 Meter betragen.
 
-
+\clearpage
 % ---------------------------------------------------------------------------- %
-\subsubsection{Master}
+\subsubsection{Masterger\"at}
 % ---------------------------------------------------------------------------- %
 
 \textbf{Supervisor}:

@@ -64,7 +64,8 @@ LIBDIR_EXTERN	= \
 					thirdparty/CMSIS/Lib/GCC
 # Project sources
 CSRCS 			= \
-					main.c
+					main.c\
+					led.c
 # Framework sources
 CSRCS_EXTERN 	= \
 					common/utils/interrupt/interrupt_sam_nvic.c\
@@ -101,7 +102,7 @@ OBJS 			+= $(addprefix $(OBJDIR)/,$(addsuffix .o,$(basename $(CSRCS_EXTERN))))
 # Flags for compiler and linker
 CFLAGS			+= -I$(INCDIR)
 CFLAGS			+= $(foreach INC, $(INCDIR_EXTERN),-I$(INC))
-LDFLAGS			+= -Wl,-Map="$(TAREGT).map"
+LDFLAGS			+= -Wl,-Map="$(TARGET).map"
 LDFLAGS			+= -specs=$(SPECS)
 LDFLAGS			+= -Wl,--start-group
 LDFLAGS         += $(foreach LIB,$(LIBS),-l$(LIB))
@@ -126,13 +127,14 @@ $(TARGET): $(OBJS)
 	mkdir -p $(BINDIR)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) $(LDFLAGS) $(LIBFLAGS) -o $(BINDIR)/$@.elf $^
 
-obj/main.o: src/main.c
+$(OBJDIR)/%.o: src/%.c
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
 
 $(OBJDIR)/%.o: %.c
 	mkdir -p $(dir $@)
 	$(TOOLCHAIN)$(CC) $(CFLAGS) -c $< -o $@
+
 
 # size report
 
@@ -141,9 +143,8 @@ size: $(TARGET)
 	
 # flashing (TODO: adjust for stlink v2 and binary)
 
-flash: $(TARGET).hex
-	avrdude -c USBasp -p atmega48 -U flash:w:$(TARGET).hex -v
-
+flash: $(TARGET).bin
+	openocd -f target/atsamd09.cfg -c "program bin/$< verify reset exit"
 # cleaning
 
 clean:

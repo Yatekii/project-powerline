@@ -39,3 +39,6 @@
 *-cache.lib
 *-rescue.lib
 *-save.kicad_pcb
+
+# Linker
+*.map

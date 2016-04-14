@@ -1,63 +1,72 @@
-%Zu erf\"ullende Aufgaben:
-%
-%\begin{itemize}
-%    \item
-%        Kommunikation Sensoren <-> Hub
-%        \begin{itemize}
-%            \item
-%                Establishing contact
-%            \item
-%                \"ubertragung von messdaten
-%            \item
-%                fehlerhandhabung
-%            \item
-%                addressieren/verwalten
-%        \end{itemize}
-%    \item
-%        Hub
-%        \begin{itemize}
-%            \item
-%                Sammeln von messdaten (anfordern oder push?)
-%            \item
-%                speichern von messdaten
-%            \item
-%                auswerten von gespeicherten messdaten: definition von failure modes, statistische auswertung der moduldaten, adaptiv?
-%            \item
-%                kommunikation des Zustands der Anlage nach aussen (relay, LEDs, SMS, etc.)
-%        \end{itemize}
-%    \item
-%        sensoren
-%        \begin{itemize}
-%            \item
-%                sammeln von daten
-%            \item
-%                failure handling
-%            \item
-%                senden von daten
-%        \end{itemize}
-%\end{itemize}
-
 Da die Hardware  aus zwei einzelnen Boards besteht, wird  nat\"urlich auch pro
 Board eine separate Software ben\"otigt.
 
+% ---------------------------------------------------------------------------- %
+\subsection{Sensorplatine}
+% ---------------------------------------------------------------------------- %
+
 Der  in der  Sensorplatine  verbaute  Atmel-Chip wird  in  C programmiert,  da
-sich  diese  Programmiersprache  durch   die  Hardwaren\"ahe  optimal  daf\"ur
-eignet. Die Aufgabe der  Software besteht hier darin, die  gemessenen Daten zu
-verarbeiten, falls ben\"otigt Pr\"ufsummen zu berechnen sowie die zu sendenden
-Daten  als  Pakete  bereitzustellen, um  sie  auf  die  DC-Leitung  modulieren
-zu  k\"onnen. Zus\"atzlich muss  zur  Identifikation  beim Masterger\"at  eine
-Sensorspezifische  Nummer  eingelesen  und ebenfalls  \"uber  die  Netzleitung
+sich  diese Programmiersprache  durch die  Hardwaren\"ahe optimal  f\"ur diese
+Aufgabenstellung  eignet. Die Aufgabe  der  Software besteht  hier darin,  die
+gemessenen Daten zu verarbeiten, falls n\"otig Pr\"ufsummen zu berechnen sowie
+die zu sendenden  Daten als Pakete bereitzustellen, um sie  auf die DC-Leitung
+modulieren zu k\"onnen. Zus\"atzlich muss  zur Identifikation beim Master eine
+sensorspezifische  Nummer  eingelesen  und ebenfalls  \"uber  die  Netzleitung
 kommuniziert werden k\"onnen.
 
-Die  Programmierung  des  Master-Ger\"ates  erfolgt in  Python,  da  hier  die
-zur  Verf\"ugung  stehenden Libraries  besser  mit  dem verwendeten  Raspberry
-Pi  kombiniert  werden k\"onnen. Dabei  ist  die  Software einerseits  daf\"ur
-zust\"andig  die  von den  Sensoren  \"ubermittelten,  demodulierten Daten  zu
-erfassen und  zu verarbeiten. Dabei m\"ussen die  erhaltenen Daten verglichen,
-eventuel  defekte Module  evaluiert, Fehler  ber\"ucksichtigt sowie  bei einem
-erkannten  Defekt dies  gemeldet  werden. Andererseits  m\"ussen die  Sensoren
-anhand  der  \"ubermittelten   Erkennungsnummern  den  einzelnen  Solarmodulen
-zugewiesen werden,  damit die Messwerte korrekt  miteinander verglichen werden
-k\"onnen.
+% ---------------------------------------------------------------------------- %
+\subsection{Master}
+% ---------------------------------------------------------------------------- %
 
-\textsc{TODO}: RasPi corrupted SD Cards?
+Beim  Master gibt  es  zwei  Hauptbereiche, die  zu  betrachten sind.   Zuerst
+muss  eine passende  Plattform  in Form  eines  Betriebssystems gew\"ahlt  und
+konfiguriert werden.   Anschliessend muss  die passende Technologie  f\"ur die
+Implementation der eigentlichen Applikationen gew\"ahlt werden.
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Betriebssystem}
+% ---------------------------------------------------------------------------- %
+
+F\"ur  das Raspberry  Pi  sind angepasste  Versionen diverser  Betriebssysteme
+verf\"ugbar. Das  am  besten  unterst\"utzte  ist eine  Variante  von  Debian,
+genannt Raspbian. Diese bietet neben  grundlegenden Systemfunktionen auch eine
+Vielzahl von  Programmbibliotheken, welche zur Entwicklung  von Auswertung und
+Benutzerinterface von grossem Nutzen sind.
+
+Zur Erh\"ohgung der  Lebensdauer der SD-Karte, auf der  das Betriebssystem des
+RasPi  gespeichert  ist,  werden  die Systemlog-Daten  kontinuierlich  in  ein
+RAM-Dateisystem  (\code{/var/}  als  \code{tempfs}  eingebunden)  gespeichert.
+Nachteil  dieser  L\"osung  ist,  dass bei  Verlust  der  Stromversorgung  die
+Log-Daten verloren  gehen. Da diese aber  f\"ur uns nicht von  Interesse sind,
+ist dies akzeptabel.
+
+Die vom Betriebssystem verursachten Schreibvorg\"ange werden weiter reduziert,
+indem das  Aktualisieren der Zugriffszeit  beim Lesen einer  Datei unterbunden
+wird (Mount-Option \code{noatime}).
+
+Diese  beiden  Massnahmen  reduzieren  die Anzahl  Schreibvorg\"ange  auf  der
+SD-Karte bedeutend und erh\"ohen somit ihre Lebensdauer.
+
+Die \"Uberwachungsdaten  der Solarmodule  werden hingegen fortlaufend  auf der
+SD-Karte  gespeichert, da  diese Daten  einerseits wichtig  sind (Datenverlust
+nicht w\"unschenswert)  und nicht viele Schreibvorg\"ange  verursachen (kleine
+Datenmenge).
+
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\subsubsection{Applikationen}
+% ---------------------------------------------------------------------------- %
+
+Die Programmierung des Masters erfolgt in  Python, da hier die zur Verf\"ugung
+stehenden Libraries besser mit dem  verwendeten Raspberry Pi kombiniert werden
+k\"onnen als mit C. Dabei ist die Software einerseits daf\"ur zust\"andig, die
+von  den Sensoren  \"ubermittelten,  demodulierten Daten  zu  erfassen und  zu
+verarbeiten. Die  erhaltenen  Daten  m\"ussen  verglichen,  eventuell  defekte
+Module  evaluiert, Fehler  ber\"ucksichtigt sowie  bei einem  erkannten Defekt
+dieser gemeldet werden.
+
+Andererseits    m\"ussen    die    Sensoren   anhand    der    \"ubermittelten
+Identifikationsnummern den einzelnen Solarmodulen zugewiesen werden, damit die
+Messwerte korrekt miteinander verglichen werden k\"onnen.

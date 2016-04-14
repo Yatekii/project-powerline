@@ -1,11 +1,46 @@
+Die Bedienung wird sinnvollerweise gem\"ass Sensor und Master unterteilt.
+
+% Initialisierung/Inbetriebnahme
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Sensor}
+% ---------------------------------------------------------------------------- %
+
+Jeder   Sensor   ist   werkseitig   mit   einem   Kleber   mit   vorgedruckter
+Identifikationsnummer  ausgestattet. Bei der  Installation wird  dieser Kleber
+abgezogen  und  auf  dem  Installationsplan  an  der  entsprechenden  Position
+aufgeklebt. So beh\"alt der Installateur  automatisch den \"Uberblick, welcher
+Sensor wo  platziert ist. Damit  der Sensor permanent  identifizierbar bleibt,
+ist seine Identifikationsnummer auch aufgedruckt.
+
+Sobald der Sensor mit Strom versorgt ist, schaltet er sich automatisch ein und
+sendet ein Datenpaket mit seiner  Identifikationsnummer an den Master, welcher
+dann die ankommenden Daten auswertet.
+
+Zum Erzwingen  einer erneuten Initialisierung  ist am Sensor  ein Reset-Button
+angebracht; das Debuggen wird durch LEDs erleichtert.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Master}
+% ---------------------------------------------------------------------------- %
+
+
+Auch  der Master  schaltet  sich bei  vorhandener Stromversorgung  automatisch
+ein.  Ohne weitere Inputs der  Aussenwelt (Sensoren oder Benutzer) werden nach
+dem  Hochfahren  die  konfigurierten  Sensoren  ausgewertet  (bzw.  ankommende
+Datenpakete) und bei Bedarf die konfigurierten Reaktionen ausgel\"ost.
+
+Falls ein  GSM-Modul (Wunschziel)  vorhanden ist,  kann die  Telefonnummer, an
+welche  Fehler-  und  Statusmeldungen versendet  werden  sollen,  konfiguriert
+werden. Das  gew\"unschte Verhalten  f\"ur verschiedene  Fehlerzust\"ande kann
+ebenfalls  vom  Benutzer  definiert  werden. Ansonsten  sind  bei  der  ersten
+Inbetriebnahme   keine   speziellen   Massnahmen   erforderlich. Im   normalen
+Betriebsfall ist keine menschliche Intervention n\"otig.
+
 Die  Bedienung  soll  m\"oglichst einfach  sein. Ein  integriertes  Touchpanel
-im  Masterger\"at   erlaubt  eine  komfortable  Bedienung   und  eine  einfach
-Inbetriebnahme des  Systems. F\"ur einen allf\"alligen Systemneustart  ist ein
-Reset-Knopf neben  dem Touchpanel angebracht. Links vom  Touchpanel sorgt eine
-gr\"une LED f\"ur  die Signalisierung des Betriebszustandes und  eine rote LED
-f\"ur die Signalisierung eines defekten Solarpanels.
-
-Der  Sensor  weist  keine  aktiven   Bedienelemente  auf,  hat  jedoch  einige
-Status-LEDs zum \"Uberpr\"ufen der Funktionalit\"at.
-
-\textsc{TODO}: Inbetriebnahme, Initialisierung
+im  Master  erlaubt ein  komfortables  Interagieren  mit dem  Ger\"at.   F\"ur
+einen  allf\"alligen  Systemneustart  ist ein  Reset-Button  angebracht.   Zum
+erleichterten  Debuggen  und  allenfalls  sonstige  Informationsausgabe  (z.B.
+defektes Solarpanel) sind LEDs vorhanden.

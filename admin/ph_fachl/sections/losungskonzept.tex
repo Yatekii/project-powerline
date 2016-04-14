@@ -14,40 +14,64 @@ des Sensors bzw. der Zentrale.
 % ---------------------------------------------------------------------------- %
 
 Unser  Produkt  dient  zur  \"Uberwachung der  Spannung  an  Solarmodulen. Die
-gemessene Spannung  pro Modul wird  \"uber die  DC Leitung der  Solaranlage zu
-einem Masterger\"at \"ubertragen, welcher die gemessenen Werte verarbeitet und
-allf\"allige  Fehler erkennt. Tritt  ein Fehler  auf, wird  eine entsprechende
-Meldung  auf einem  Display  angezeigt, ein  Relais  f\"ur eine  zus\"atzliche
-Alarmierung bet\"atigt und eine  Nachricht mittels SMS versendet. Dadurch wird
-sichergestellt, dass defekte Solarmodule m\"oglichst schnell erkannt werden.
+gemessene Spannung  pro Modul  wird \"uber die  DC-Leitung der  Solaranlage zu
+einem zentralen  Ger\"at (\emph{Master}) \"ubertragen, welches  die gemessenen
+Werte verarbeitet und allf\"allige Fehler  erkennt. Tritt ein Fehler auf, wird
+eine  entsprechende Meldung  auf  einem Display  angezeigt,  ein Relais  f\"ur
+eine  zus\"atzliche  Alarmierung bet\"atigt  und  eine  Nachricht mittels  SMS
+versendet. Dadurch wird  sichergestellt, dass der Benutzer m\"oglichst schnell
+\"uber defekte Solarmodule in Kenntnis gesetzt wird.
+
+Als Fehler werden folgende Ereignisse definiert:
+\begin{itemize}
+    \item
+        eine defekte Zelle
+    \item
+        eine dauerhaft verschmutzte Zelle
+    \item
+        eine defekte Leitung
+\end{itemize}
+
+Kein Fehler soll in folgenden Situationen ausgel\"ost werden:
+\begin{itemize}
+    \item
+        kurzzeitige Abschattungen (z.B. Vogel auf Zelle)
+    \item
+        regelm\"assige Abschattungen, die zu den Umweltbedingungen geh\"ohren
+        (z.B. Baum, der t\"aglich abschattet)
+    \item
+        Nacht-/Schlechtwetter
+    \item
+        Anlage absichtlich ausser Betrieb genommen (z.B. Unterhaltsarbeiten)
+\end{itemize}
 
 Die Bedienung des  Produktes wird einfach gehalten. Mittels  Touch Display auf
-dem Masterger\"at k\"onnen die  n\"otigen Grundeinstellungen get\"atigt werden
-und im  Fehlerfall wird die  Bezeichung des fehlerhaften  Moduls angezeigt. Im
+dem  Master k\"onnen  die n\"otigen  Grundeinstellungen get\"atigt  werden und
+im  Fehlerfall  wird  die  Bezeichung des  fehlerhaften  Moduls  angezeigt. Im
 Normalbetrieb muss keine Bedienung erfolgen.
 
-Installiert  wird  der  Master beim  Generatoranschlusskasten  (GAK). Er  wird
-in  Form  eines  Hutschienenger\"at  (REG)  produziert,  zur  Montage  in  das
-bestehend GAK. Damit wird ein kleinst m\"oglicher Montagaufwand erreicht.  Die
+Installiert wird  der Master  beim Generatoranschlusskasten (GAK). Er  wird in
+Form eines Hutschienenger\"ats (REG) produziert zur Montage in den bestehenden
+GAK. Damit   wird  ein   kleinstm\"oglicher   Montageaufwand  erreicht.    Die
 Sensorplatine wird  bei jedem Modul in  der Modulanschlussbox installiert. Aus
 diesem Grund wird der Sensor m\"oglichst klein, jedoch nicht wasserfest.
 
-\textsc{TODO}: Genaue Definition eines Fehlers (Feedback)
+
 
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Systembereich}
 % ---------------------------------------------------------------------------- %
 
 Das      System      (schematische       Darstellung      siehe      Abbildung
 \ref{fig:blockdiag:hardware})     besteht     grunds\"atzlich     auf     zwei
-Teilsysteme. Einerseits aus der Sensorplatine, welche in der Modulanschlussbox
-platziert   ist,   andererseits   aus    dem   Masterger\"at,   welches   beim
+Teilsystemen. Einerseits    aus    der    Sensorplatine,   welche    in    der
+Modulanschlussbox  platziert ist,  andererseits aus  dem Master,  welcher beim
 Generatoranschlusskasten installiert ist.
 
 Die Sensorplatine ist nur f\"ur die Datenerfassung zust\"andig.
 
-%\textsc{TODO}: Noch ein wenig ausformulieren.
 \begin{figure}[h!]
     \centering
     \includegraphics[width=.9\textwidth]{images/blockdiag.png}
@@ -56,7 +80,6 @@ Die Sensorplatine ist nur f\"ur die Datenerfassung zust\"andig.
 \end{figure}
 
 
-% TODO
 % ---------------------------------------------------------------------------- %
 \subsection{L\"osungsvarianten}
 \label{subsec:losungsvarianten}
@@ -69,29 +92,32 @@ Eine erste Methode ist die Verwendung eines fertig entwickelten Chips.  Solche
 Chips sind  praxiserprobt und  garantieren Funktionalit\"at.  Jedoch  sind sie
 \"uberladen mit Features und verh\"altnism\"assig teuer.
 
-Alternativ  kann  mittels  eines   PLL-Chips  FSK  moduliert  und  demoduliert
-werden. Fertige Chips basieren  ebenfalls auf diesem Prinzip,  jedoch ist eine
-L\"osung mit  PLL-Chip und Peripherie  wesentlich g\"unstiger (Faktor  10) als
-eine auf einem fertigen Chip basierende L\"osung.
+Alternativ   kann  mittels   eines  PLL-Chips   (\textbf{P}hase  \textbf{L}ock
+\textbf{L}oop)      FSK-moduliert      (\textbf{F}requency      \textbf{S}hift
+\textbf{K}eying)  und -demoduliert  werden. Fertige  Chips basieren  ebenfalls
+auf  diesem Prinzip,  jedoch ist  eine  L\"osung mit  PLL-Chip und  Peripherie
+wesentlich g\"unstiger (Faktor 10) als eine auf einem fertigen Chip basierende
+L\"osung.
 
 Diese  beiden   Methoden  m\"ussten   induktiv  oder   kapazitiv  eingekoppelt
-werden. Induktiv   ist  potentialgetrennt   und  braucht   wesentlich  weniger
-Energie. Kapazitiv ist daf\"ur in der  Herstellung viel g\"unstiger und in der
-Baugr\"osse wesentlich kleiner.
+werden. Eine  induktive  Einkopplung   ist  potentialgetrennt  und  verbraucht
+wesentlich  weniger Energie. Eine  kapazitive Einkopplung  ist daf\"ur  in der
+Herstellung viel g\"unstiger und in der Baugr\"osse wesentlich kleiner.
 
+\newpage
 Eine letzte  m\"ogliche Methode besteht  darin, mit einem Mosfet  die Spannung
 \"uber der  Solarzelle mit einem Kurzschluss  einbrechen zu lassen und  so die
 einzelnen  Bits amplitudenmoduliert  zu  \"ubertragen. Diese  Methode ist  die
 kompakteste und  ist ein wenig kostspieliger  als die zweite aber  dennoch bei
 weitem g\"unstiger  als die  erste. Ein Wermutstropfen  ist dabei,  dass diese
 Daten\"ubertragung  lediglich  unidirektional  realisierbar  w\"are,  da  beim
-Masterger\"at die  Spannung bzw. der Strom  zu hoch ist, um  dort die Spannung
+Master  die  Spannung  bzw. der  Strom  zu  hoch  ist,  um dort  die  Spannung
 einbrechen zu lassen.
 
 Die  kostspieligste Variante  wurde f\"urs  erste ausgeschlossen. Die  anderen
 zwei werden intensiv getestet.
 
-Eine    \"Ubersicht     der    Vor-    und    Nachteile     liefert    Tabelle
+Eine \"Ubersicht  der Vor-  und Nachteile der  drei Varianten  liefert Tabelle
 \ref{tab:signalvariants}.
 
 \begin{table}[h!]
@@ -165,11 +191,3 @@ Eine    \"Ubersicht     der    Vor-    und    Nachteile     liefert    Tabelle
         \bottomrule
     \end{tabular}
 \end{table}
-
-\textsc{TODO}: varianten RasPi vs. Alternativen?
-
-% TODO
-% ---------------------------------------------------------------------------- %
-%\subsection{Evaluation L\"osungsvarianten}
-% ---------------------------------------------------------------------------- %
-%\textsc{TODO}

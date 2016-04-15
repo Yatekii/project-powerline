@@ -266,10 +266,7 @@
 #include <compiler.h>
 #include <sercom.h>
 #include <pinmux.h>
-
-#if USART_CALLBACK_MODE == true
-#  include <sercom_interrupt.h>
-#endif
+#include <sercom_interrupt.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -486,6 +483,7 @@ struct iso7816_config_t {
 #endif
 
 #if USART_CALLBACK_MODE == true
+
 /**
  * \brief USART callback enum
  *

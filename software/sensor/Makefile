@@ -23,7 +23,7 @@ CFLAGS			+=\
 					-D __$(CHIP)__\
 					-D BOARD=USER_BOARD\
 					-D ARM_MATH_CM0PLUS=true\
-					-D SPI_CALLBACK_MODE=true
+					-D USART_CALLBACK_MODE=true
 
 # Config directories and files. Please do adjust here!
 
@@ -37,7 +37,7 @@ INCDIR_EXTERN	= \
 					common/utils\
 					sam0/drivers/port\
 					sam0/drivers/sercom\
-					sam0/drivers/sercom/spi\
+					sam0/drivers/sercom/usart\
 					sam0/drivers/system\
 					sam0/drivers/system/clock\
 					sam0/drivers/system/clock/clock_samd09_d10_d11\
@@ -65,15 +65,17 @@ LIBDIR_EXTERN	= \
 # Project sources
 CSRCS 			= \
 					main.c\
-					led.c
+					led.c\
+					uart.c
+
 # Framework sources
 CSRCS_EXTERN 	= \
 					common/utils/interrupt/interrupt_sam_nvic.c\
 					sam0/drivers/port/port.c\
 					sam0/drivers/sercom/sercom.c\
 					sam0/drivers/sercom/sercom_interrupt.c\
-					sam0/drivers/sercom/spi/spi.c\
-					sam0/drivers/sercom/spi/spi_interrupt.c\
+					sam0/drivers/sercom/usart/usart.c\
+					sam0/drivers/sercom/usart/usart_interrupt.c\
 					sam0/drivers/system/clock/clock_samd09_d10_d11/clock.c\
 					sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.c\
 					sam0/drivers/system/interrupt/system_interrupt.c\

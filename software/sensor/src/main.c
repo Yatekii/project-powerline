@@ -12,7 +12,6 @@ void SysTick_Handler(void){
 		toggle_led(LED_RED);
 		toggle_led(LED_GREEN);
 	}
-	usart_write_buffer_job(&usart_instance, string, sizeof(string));
 }
 
 void main(void){

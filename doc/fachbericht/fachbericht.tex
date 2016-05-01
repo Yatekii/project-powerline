@@ -1,0 +1,112 @@
+\documentclass{fhnwreport/fhnwreport}
+
+\input{preamble/packages.tex}
+\input{preamble/hyperref.tex}
+\input{preamble/title.tex}
+\input{preamble/colfigure.tex}
+\input{preamble/enumerate.tex}
+\input{preamble/code.tex}
+
+
+\begin{document}
+
+\input{titlepage/titlepage.tex}
+
+\clearpage
+\pagestyle{empty}
+{
+    % ************************************************************************ %
+    \section*{Abstract}
+    \label{sec:abstract}
+    % ************************************************************************ %
+    \input{sections/abstract.tex}
+}
+
+\clearpage
+\tableofcontents
+\vspace{10mm}
+\subsection*{Versionsgeschichte}
+\begin{itemize}
+    \item[]
+        \emph{06.05.2016:} \texttt{Version 0.1:} Einleitung und Disposition
+\end{itemize}
+\clearpage
+
+
+% **************************************************************************** %
+\clearpage
+\section{Einleitung}
+\label{sec:einleitung}
+% **************************************************************************** %
+\input{sections/einleitung.tex}
+
+
+% **************************************************************************** %
+\clearpage
+\section{\"Uberblick und Bedienung}
+\label{sec:uberblick}
+% **************************************************************************** %
+\input{sections/uberblick.tex}
+
+
+% **************************************************************************** %
+\clearpage
+\section{Hardware}
+\label{sec:hardware}
+% **************************************************************************** %
+\input{sections/hardware.tex}
+
+
+% **************************************************************************** %
+\clearpage
+\section{Firmware}
+\label{sec:firmware}
+% **************************************************************************** %
+\input{sections/firmware.tex}
+
+
+% **************************************************************************** %
+\clearpage
+\section{Testphase}
+\label{sec:testphase}
+% **************************************************************************** %
+\input{sections/testphase.tex}
+
+
+% **************************************************************************** %
+\clearpage
+\section{Fazit}
+\label{sec:fazit}
+% **************************************************************************** %
+\input{sections/fazit.tex}
+
+
+% **************************************************************************** %
+%\appendix
+%\addcontentsline{toc}{section}{Appendix}
+% **************************************************************************** %
+%\input{sections/appendix.tex}
+
+% **************************************************************************** %
+%\cleardoublepage
+%\phantomsection
+%\addcontentsline{toc}{section}{\listigurename}
+%\listoffigures
+% **************************************************************************** %
+
+% **************************************************************************** %
+%\clearpage
+%\phantomsection
+%\addcontentsline{toc}{section}{\bibname}
+%\bibliography{bibliography/fachbericht}{\bibliographystyle{bibliography/deIEEEtran.bst}}
+% **************************************************************************** %
+
+% **************************************************************************** %
+%\clearpage
+%\section*{Projektvereinbarung}
+%\label{sec:projektvereinbarung}
+% **************************************************************************** %
+%\input{sections/projektvereinbarung.tex}
+
+
+\end{document}

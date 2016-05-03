@@ -6,7 +6,7 @@
 ###  Makefile
 ###
 ###  Yatekii
-###                  
+###
 ############################################################################
 
 TARGET  		= firmware-sensor
@@ -18,7 +18,7 @@ STD 			= c11
 TOOLCHAIN 		= arm-none-eabi-
 CC				= gcc
 OPTIMIZATION	= -O2
-CFLAGS			= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD) $(OPTIMIZATION)
+CFLAGS			= -mthumb -march=$(ARCH) -mtune=$(MCU) -std=$(STD) $(OPTIMIZATION) -Werror
 CFLAGS			+=\
 					-D __$(CHIP)__\
 					-D BOARD=USER_BOARD\
@@ -38,6 +38,8 @@ INCDIR_EXTERN	= \
 					sam0/drivers/port\
 					sam0/drivers/sercom\
 					sam0/drivers/sercom/usart\
+					sam0/drivers/adc\
+					sam0/drivers/adc/adc_sam_d_r\
 					sam0/drivers/system\
 					sam0/drivers/system/clock\
 					sam0/drivers/system/clock/clock_samd09_d10_d11\
@@ -66,7 +68,8 @@ LIBDIR_EXTERN	= \
 CSRCS 			= \
 					main.c\
 					led.c\
-					uart.c
+					uart.c\
+					adc_toolset.c
 
 # Framework sources
 CSRCS_EXTERN 	= \
@@ -76,6 +79,7 @@ CSRCS_EXTERN 	= \
 					sam0/drivers/sercom/sercom_interrupt.c\
 					sam0/drivers/sercom/usart/usart.c\
 					sam0/drivers/sercom/usart/usart_interrupt.c\
+					sam0/drivers/adc/adc_sam_d_r/adc.c\
 					sam0/drivers/system/clock/clock_samd09_d10_d11/clock.c\
 					sam0/drivers/system/clock/clock_samd09_d10_d11/gclk.c\
 					sam0/drivers/system/interrupt/system_interrupt.c\
@@ -142,7 +146,7 @@ $(OBJDIR)/%.o: %.c
 
 size: $(TARGET)
 	$(TOOLCHAIN)size $(BINDIR)/$<.elf
-	
+
 # flashing (TODO: adjust for stlink v2 and binary)
 
 flash: $(TARGET).bin

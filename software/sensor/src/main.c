@@ -28,6 +28,11 @@ int main(void){
 	pin_conf.direction  = PORT_PIN_DIR_INPUT;
 	port_pin_set_config(BTN, &pin_conf);
 
+  pin_conf.direction  = PORT_PIN_DIR_INPUT;
+  pin_conf.powersave = 0;
+  pin_conf.input_pull = PORT_PIN_PULL_NONE;
+  port_pin_set_config(PIN_PA05, &pin_conf);
+
 	config_led(LED_RED);
 	config_led(LED_GREEN);
 

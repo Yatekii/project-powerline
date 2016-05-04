@@ -11,7 +11,7 @@ void configure_usart(void)
     struct usart_config config_usart;
     usart_get_config_defaults(&config_usart);
     config_usart.baudrate    = 9600;
-    config_usart.mux_setting = SERCOM_USART_CTRLA_TXPO(0) | SERCOM_USART_CTRLA_RXPO(0);
+    config_usart.mux_setting = SERCOM_USART_CTRLA_TXPO(0) | SERCOM_USART_CTRLA_RXPO(3);
     config_usart.pinmux_pad0 = PINMUX_PA04D_SERCOM0_PAD0;
     config_usart.pinmux_pad1 = PINMUX_PA05D_SERCOM0_PAD1;
     config_usart.transfer_mode = USART_TRANSFER_ASYNCHRONOUSLY;
@@ -34,8 +34,9 @@ void configure_usart_callbacks(void)
 
 void usart_read_callback(struct usart_module *const usart_module)
 {
-    usart_write_buffer_job(&usart_instance,
-            (uint8_t *)rx_buffer, MAX_RX_BUFFER_LENGTH);
+    /*usart_write_buffer_job(&usart_instance,
+            (uint8_t *)rx_buffer, MAX_RX_BUFFER_LENGTH);*/
+    toggle_led(LED_GREEN);
 }
 
 void usart_write_callback(struct usart_module *const usart_module)

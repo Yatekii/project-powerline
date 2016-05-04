@@ -14,6 +14,7 @@ void configure_adc(void)
   port_get_config_defaults(&pin_conf);
   pin_conf.powersave = 0;
   pin_conf.direction = PORT_PIN_DIR_INPUT;
+  pin_conf.input_pull = PORT_PIN_PULL_DOWN;
   port_pin_set_config(PIN_PA02, &pin_conf);
 
   struct adc_config config_adc;

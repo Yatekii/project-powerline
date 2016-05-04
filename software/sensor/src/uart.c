@@ -1,5 +1,10 @@
 #include <led.h>
 #include <uart.h>
+#include <adc_toolset.h>
+#include <helpers.h>
+
+uint16_t result = 0;
+uint8_t buffer[20] = "42";
 
 void configure_usart(void)
 {
@@ -10,7 +15,7 @@ void configure_usart(void)
     config_usart.pinmux_pad0 = PINMUX_PA04D_SERCOM0_PAD0;
     config_usart.pinmux_pad1 = PINMUX_PA05D_SERCOM0_PAD1;
     config_usart.transfer_mode = USART_TRANSFER_ASYNCHRONOUSLY;
-    
+
     while (usart_init(&usart_instance,
             SERCOM0, &config_usart) != STATUS_OK) {
     }
@@ -35,5 +40,11 @@ void usart_read_callback(struct usart_module *const usart_module)
 
 void usart_write_callback(struct usart_module *const usart_module)
 {
-    toggle_led(LED_RED);
+  read_adc_data(&result);
+  itoa(result, buffer);
+  int len = strlen(buffer) + 1;
+  buffer[len + 1] = '\r';
+  buffer[len + 2] = '\n';
+  usart_write_buffer_job(&usart_instance, buffer, len + 3);
+  //toggle_led(LED_RED);
 }

@@ -1,11 +1,14 @@
 #include <asf.h>
 #include <led.h>
 #include <uart.h>
+#include <adc_toolset.h>
+#include <stdlib.h>
 
 #define BTN PIN_PA16
 
 int leds_active = 0;
 uint8_t string[] = "Hello World!\r\n";
+uint8_t string2[] = "DUUUUUDE\r\n";
 
 void SysTick_Handler(void){
 	if(leds_active){
@@ -14,8 +17,10 @@ void SysTick_Handler(void){
 	}
 }
 
-void main(void){
+int main(void){
 	system_init();
+
+  configure_adc();
 
 	struct port_config pin_conf;
 	port_get_config_defaults(&pin_conf);
@@ -25,12 +30,10 @@ void main(void){
 
 	config_led(LED_RED);
 	config_led(LED_GREEN);
-	set_led(LED_GREEN, LED_STATE_ACTIVE);
 
 	configure_usart();
-    configure_usart_callbacks();
-
-    system_interrupt_enable_global();
+  configure_usart_callbacks();
+  system_interrupt_enable_global();
 
 	/*Configure system tick to generate periodic interrupts */
 	SysTick_Config(system_gclk_gen_get_hz(GCLK_GENERATOR_0) / 8);

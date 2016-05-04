@@ -69,7 +69,8 @@ CSRCS 			= \
 					main.c\
 					led.c\
 					uart.c\
-					adc_toolset.c
+					adc_toolset.c\
+					helpers.c
 
 # Framework sources
 CSRCS_EXTERN 	= \

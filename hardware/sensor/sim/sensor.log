@@ -2,21 +2,21 @@ Circuit: * Z:\home\yatekii\Projects\project-powerline\hardware\sensor\sim\sensor
 
 Direct Newton iteration for .op point succeeded.
 
-Date: Thu Apr 21 15:20:21 2016
-Total elapsed time: 0.463 seconds.
+Date: Thu Apr 21 23:18:44 2016
+Total elapsed time: 0.697 seconds.
 
 tnom = 27
 temp = 27
 method = modified trap
-totiter = 72940
-traniter = 72930
-tranpoints = 36466
-accept = 24636
-rejected = 11830
+totiter = 73370
+traniter = 73360
+tranpoints = 36681
+accept = 24692
+rejected = 11989
 matrix size = 16
 fillins = 13
 solver = Normal
-Matrix Compiler1: 1.39 KB object code size  1.1/0.5/[0.5]
-Matrix Compiler2: off  [0.5]/0.5/0.6
+Matrix Compiler1: 1.39 KB object code size  0.7/0.4/[0.3]
+Matrix Compiler2: off  [0.3]/0.3/0.4
 
 

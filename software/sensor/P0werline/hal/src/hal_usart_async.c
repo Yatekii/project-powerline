@@ -295,9 +295,9 @@ int32_t usart_async_get_status(struct usart_async_descriptor *const descr,
 {
 	ASSERT(descr && status);
 
-	volatile uint32_t *tmp_stat = &(descr->stat); 
-	volatile uint16_t *tmp_txcnt = &(descr->tx_por); 
-	volatile uint16_t *tmp_rxcnt = &(descr->rx_bytes_in_buffer); 
+	volatile uint32_t *tmp_stat = &(descr->stat);
+	volatile uint16_t *tmp_txcnt = &(descr->tx_por);
+	volatile uint16_t *tmp_rxcnt = &(descr->rx_bytes_in_buffer);
 
 	if (status) {
 		status->flags = *tmp_stat;

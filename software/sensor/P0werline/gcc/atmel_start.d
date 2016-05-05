@@ -41,7 +41,21 @@ atmel_start.d atmel_start.o: ../atmel_start.c ../atmel_start.h \
  ../hal/hpl/include/hpl_init.h ../hal/hpl/include/hpl_irq.h \
  ../hal/hpl/pm/hpl_pm1_v201_base.h ../hal/hpl/gclk/hpl_gclk1_v210_base.h \
  ../hal/hri/hri_gclk1_v210.h ../hal/include/hal_atomic.h \
- ../config/peripheral_gclk_config.h
+ ../config/peripheral_gclk_config.h ../helpers.h \
+ /usr/arm-none-eabi/include/stdio.h /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/newlib.h \
+ /usr/arm-none-eabi/include/sys/config.h \
+ /usr/arm-none-eabi/include/machine/ieeefp.h \
+ /usr/arm-none-eabi/include/sys/cdefs.h \
+ /usr/lib/gcc/arm-none-eabi/5.2.0/include/stdarg.h \
+ /usr/arm-none-eabi/include/sys/reent.h \
+ /usr/arm-none-eabi/include/_ansi.h \
+ /usr/arm-none-eabi/include/sys/_types.h \
+ /usr/arm-none-eabi/include/machine/_types.h \
+ /usr/arm-none-eabi/include/sys/lock.h \
+ /usr/arm-none-eabi/include/sys/types.h \
+ /usr/arm-none-eabi/include/machine/types.h \
+ /usr/arm-none-eabi/include/sys/stdio.h
 
 ../atmel_start.h:
 
@@ -202,3 +216,35 @@ atmel_start.d atmel_start.o: ../atmel_start.c ../atmel_start.h \
 ../hal/include/hal_atomic.h:
 
 ../config/peripheral_gclk_config.h:
+
+../helpers.h:
+
+/usr/arm-none-eabi/include/stdio.h:
+
+/usr/arm-none-eabi/include/_ansi.h:
+
+/usr/arm-none-eabi/include/newlib.h:
+
+/usr/arm-none-eabi/include/sys/config.h:
+
+/usr/arm-none-eabi/include/machine/ieeefp.h:
+
+/usr/arm-none-eabi/include/sys/cdefs.h:
+
+/usr/lib/gcc/arm-none-eabi/5.2.0/include/stdarg.h:
+
+/usr/arm-none-eabi/include/sys/reent.h:
+
+/usr/arm-none-eabi/include/_ansi.h:
+
+/usr/arm-none-eabi/include/sys/_types.h:
+
+/usr/arm-none-eabi/include/machine/_types.h:
+
+/usr/arm-none-eabi/include/sys/lock.h:
+
+/usr/arm-none-eabi/include/sys/types.h:
+
+/usr/arm-none-eabi/include/machine/types.h:
+
+/usr/arm-none-eabi/include/sys/stdio.h:

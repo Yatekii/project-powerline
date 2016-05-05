@@ -149,7 +149,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 %.o: %.c
 	@echo Building file: $<
 	@echo ARM/GNU C Compiler
-	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb  -D__SAMD09D14A__ -DDEBUG -O1 -ffunction-sections -mlong-calls -g3 -Wall -c -std=gnu99  -I"../" -I"../hal/hri" -I"../hal/hpl/gclk" -I"../hal/include" -I"../hal/hpl/include" -I"../hal/hpl/dmac" -I"../CMSIS/Include/" -I"../hal/hpl/sysctrl" -I"../include" -I"../config" -I"../hal/hpl/core" -I"../hal/hpl/port" -I"../hal/hpl/pm" -I"../hal/hpl/adc" -I"../hal/hpl/sercom" -I"../utils/include" -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<" -mcpu=cortex-m0plus
+	$(QUOTE)arm-none-eabi-gcc$(QUOTE) -x c -mthumb  -D__SAMD09D14A__ -DDEBUG -O1 -ffunction-sections -mlong-calls -g3 -Werror -c -std=gnu99  -I"../" -I"../hal/hri" -I"../hal/hpl/gclk" -I"../hal/include" -I"../hal/hpl/include" -I"../hal/hpl/dmac" -I"../CMSIS/Include/" -I"../hal/hpl/sysctrl" -I"../include" -I"../config" -I"../hal/hpl/core" -I"../hal/hpl/port" -I"../hal/hpl/pm" -I"../hal/hpl/adc" -I"../hal/hpl/sercom" -I"../utils/include" -MD -MP -MF "$(@:%.o=%.d)" -MT"$(@:%.o=%.d)" -MT"$(@:%.o=%.o)"  -o "$@" "$<" -mcpu=cortex-m0plus
 	@echo Finished building: $<
 
 

@@ -1,0 +1,105 @@
+In  diesem  Abschnitt  wird  genauer auf  die  Hardware  eingegangen. Es  wird
+erl\"autert, welche Probleme zu l\"osen und welche Anforderungen zu erf\"ullen
+sind  (und wie  diese ermittelt  und  definiert werden),  und welche  Hardware
+aus  welchen Gr\"unden  ausgew\"ahlt  worden ist,  um  diese Anforderungen  zu
+erf\"ullen.
+
+Der Abschnitt  ist dabei  aufgeteilt gem\"ass  unserem System  selbst: Es wird
+separat auf Sensor  und Master-Ger\"at und ihre  jeweiligen Subsysteme (soweit
+sinnvoll) eingegangen.
+
+\anweisung Verifizierbare  Angaben machen, nicht  allgemeine Floskeln. Zahlen,
+Fakten,  theoretische Hintergrundinformationen,  daraus gezogene  Konsequenzen
+etc. Bezug auf das Pflichtenheft, wo m\"oglich.
+
+\anweisung Bilder, Diagramme, Formeln etc.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Sensorplatine}
+\label{subsec:hw:sensorplatine}
+% ---------------------------------------------------------------------------- %
+
+Was  ist der  Zweck  der Sensorplatine? Welche  Aufgaben  muss sie  erf\"ullen
+k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
+
+\anweisung Dimensionierung der Bauteile: Berechnungen
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Energieversorgung}
+\label{subsubsec:sensor:pcb}
+% ---------------------------------------------------------------------------- %
+
+Energiebezug,  Leistungsanforderungen, Standby,  Verhalten bei  ungen\"ugender
+Leistungszufuhr, ...
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{PCB}
+\label{subsubsec:sensor:pcb}
+% ---------------------------------------------------------------------------- %
+
+Wie sieht das PCB aus, und weshalb?
+
+% ---------------------------------------------------------------------------- %
+\subsection{Master-Ger\"at}
+\label{subsec:hw:mastergerat}
+% ---------------------------------------------------------------------------- %
+
+Was ist der Zweck des Master-Ger\"ats? Aufgaben? Aufbau?
+
+\anweisung Dimensionierung der Bauteile: Berechnungen
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Speisung}
+\label{subsubsec:mastergerat:speisung}
+% ---------------------------------------------------------------------------- %
+
+Woher bezieht das Master-Ger\"at  seine Energie, weshalb? Wieviel Energie wird
+ben\"otigt?
+
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Benutzer-Interface}
+\label{subsubsec:mastergerat:interface}
+% ---------------------------------------------------------------------------- %
+
+\anweisung Das Benutzerinterface ist schon in der Anleitung im vorigen Kapitel
+beschrieben worden. Es soll  hier um die Komponentenwahl gehen,  nicht um eine
+Rekapitulation bereits gemachter Informationen.
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{PCB}
+\label{subsubsec:mastergerat:pcb}
+% ---------------------------------------------------------------------------- %
+
+Wie sieht das PCB aus, und weshalb?
+
+% ---------------------------------------------------------------------------- %
+\subsubsection{Montage/Geh\"ause}
+\label{subsubsec:mastergerat:pcb}
+% ---------------------------------------------------------------------------- %
+
+Einbindung in die Umgebung, Wahl des Geh\"auses.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Kommunikation}
+\label{subsec:kommunikation}
+% ---------------------------------------------------------------------------- %
+
+Die   Kommunikation  zwischen   Sensor  und   Master-Ger\"at  ist   eines  der
+Herzst\"ucke des ganzen Systems und betrifft beide Sub-Systeme. Daher in einem
+eigenen Abschnitt.
+
+\begin{itemize}
+    \item
+        Grunds\"atzliches Problem
+    \item
+        Verfolgte L\"osungsans\"atze
+    \item
+        Ausgew\"ahlter L\"osungsansatz (mit Begr\"undung(en))
+    \item
+        Genauere Beschreibung dieses L\"osungsansatzes
+\end{itemize}

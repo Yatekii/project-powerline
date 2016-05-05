@@ -80,6 +80,7 @@ static void ADC_0_init(void)
 	_pm_enable_bus_clock(PM_BUS_APBC, ADC);
 	_gclk_enable_channel(ADC_GCLK_ID, CONF_GCLK_ADC_SRC);
 	adc_async_init(&ADC_0, ADC, ADC_0_buffer, ADC_0_BUFFER_SIZE);
+  adc_async_set_resolution(&ADC_0, 12);
 
 	// Disable digital pin circuitry
 	gpio_set_pin_direction(PA02, GPIO_DIRECTION_OFF);
@@ -140,7 +141,7 @@ void PM_Handler(void)
  */
 
 static uint8_t example_USART_0[14] = "Hello World!\r\n";
-char str_buf[10] = "FUUUUU\r\n";
+char str_buf[20] = "FUUUUU\r\n";
 
 struct buffer_data{
   char buffer[80];
@@ -177,6 +178,7 @@ void USART_0_example(void)
 {
 	struct io_descriptor *io;
   struct buffer_data buffer;
+  uint16_t adc_value = 0;
   buffer.length = 0;
 
 	usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, tx_cb_USART_0);
@@ -184,6 +186,8 @@ void USART_0_example(void)
 	usart_async_register_callback(&USART_0, USART_ASYNC_ERROR_CB, err_cb);
 	usart_async_get_io_descriptor(&USART_0, &io);
 	usart_async_enable(&USART_0);
+
+	adc_async_enable(&ADC_0);
 
 	io_write(io, example_USART_0, 14);
   gpio_set_pin_level(LED_RED, false);
@@ -194,10 +198,15 @@ void USART_0_example(void)
       io_write(io, buffer.buffer + buffer.length - res, res);
       //snprintf(str_buf, 12, "yolo %d\r\n", buffer.length);
       //io_write(io, (uint8_t*)str_buf, 10);
+      adc_async_start_conversion(&ADC_0);
+      while(!adc_async_is_conversion_complete(&ADC_0));
+      while(!adc_async_read(&ADC_0, (uint8_t*)(&adc_value), 1));
+
+      snprintf(str_buf, 20, "adc_value: %hd\r\n", adc_value);
+      io_write(io, (uint8_t*)str_buf, 20);
     }
   }
-  snprintf(str_buf, 12, "yolo %d\r\n", 12);
-  io_write(io, (uint8_t*)str_buf, 10);
+
   gpio_set_pin_level(LED_GREEN, false);
 }
 

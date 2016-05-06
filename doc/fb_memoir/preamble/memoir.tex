@@ -7,25 +7,45 @@
 % -------------------------------------------------------- %
 % Choose a page layout                                     %
 % -------------------------------------------------------- %
-\isopage
-% 30mm | textblock | 45 mm %
-%\setlrmarginsandblock{0.142857111\paperwidth}{0.214285714\paperwidth}{*}
-% 1/9 | textblock | 1.5/9 %
-%\setulmarginsandblock{0.111111111\paperheight}{*}{1.5}
+%                                                          %
+% The  layout  is based  on isopage,  with  the  following %
+% changes:                                                 %
+% - The spine margin is 30 mm. This is so that binding the %
+% document with  a ringbinder does  not come too  close to %
+% the text.                                                %
+% - The edge  margin is  1.5 times the spine  margin, i.e. %
+% 45 mm.                                                   %
+% - The top margin is 1/9  of the paper height, same as in %
+% \isopage                                                 %
+% - The bottom margin is decreased from isopage's value to %
+% 1.5 times the top margin, i.e. about 50 mm.              %
+% -------------------------------------------------------- %
 
-%\iftoggle{paper}{%
-    % 30mm | textblock | 45 mm %
-    \setlrmarginsandblock{0.142857111\paperwidth}{0.190476190\paperwidth}{*}
-    % 1/9 | textblock | 1.5/9 %
-    \setulmarginsandblock{0.111111111\paperheight}{*}{1.5}%
-%}{%
-%    \setlrmarginsandblock{15mm}{15mm}{*}
-%    \setulmarginsandblock{20mm}{30mm}{*}%
-%}
-
-%\semiisopage
-%\medievalpage
-\checkandfixthelayout
+%    +----------^--------------------+
+%    |          | 33mm               |
+%    |     +----v------------+       |
+%    |30mm |                 | 45mm  |
+%    |<--->|                 |<----->|
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     |                 |       |
+%    |     +----^------------+       |
+%    |          | 49.5mm             |
+%    |          |                    |
+%    +----------v--------------------+
+\isopage%
+\setlrmarginsandblock{0.142857111\paperwidth}{0.190476190\paperwidth}{*}
+\setulmarginsandblock{0.111111111\paperheight}{*}{1.5}%
+\checkandfixthelayout%
 
 
 % -------------------------------------------------------- %
@@ -33,15 +53,27 @@
 % We're  going  with  veelo, but  removing  the  "Chapter" %
 % designation in front of the chapter number.              %
 % -------------------------------------------------------- %
-%\iftoggle{paper}{%
-    \input{preamble/chapterstyle.tex}
-    \chapterstyle{fhnw} % requires graphicx package
-%}{%
-%    \chapterstyle{verville}%
-%}
+\input{preamble/chapterstyle.tex}
+\chapterstyle{fhnw} % requires graphicx package
 
 
+% -------------------------------------------------------- %
+% Pagestyle (Headers, Footers)                             %
+% -------------------------------------------------------- %
 \pagestyle{headings}
+
+
+% -------------------------------------------------------- %
+% Caption Configurations                                   %
+% -------------------------------------------------------- %
+\captionnamefont{\bfseries\small}
+\captiontitlefont{\small}
+\captiondelim{: }
+
+% Captions for use outside of floats
+\newfixedcaption{\figcaption}{figure}
+\newfixedcaption{\tabcaption}{table}
+
 % -------------------------------------------------------- %
 % Define  what  sort  of  sectional  divisions  should  be %
 % numbered.  See also "Document Divisions -- Numbering" in %

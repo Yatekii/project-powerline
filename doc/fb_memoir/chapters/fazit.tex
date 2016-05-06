@@ -5,3 +5,165 @@
 
 Was  l\"auft? Was  l\"auft  nicht? Weshalb? Weiteres Vorgehen  bei  gen\"ugend
 Zeit? Schwierigkeiten w\"ahren des Projekts?
+
+\lipsum[1]
+\begin{equation}
+    \label{eq:errorTurbulent:simple}
+    s_{\overline{\dot{V}}} = \sqrt{ A^2 + B^2 + C^2 } = \SI{0.304}{\liter\per\minute}
+\end{equation}
+
+\lipsum[2]
+
+\begin{align}
+    \label{eq:errorTurbulent:complicated}
+    A
+    &=
+    \frac{%
+        2
+        \cdot
+        \pi
+        \cdot
+        \overline{R}^2
+        \cdot
+        \overline{k}^2
+        \cdot
+        s_{\overline{v}}
+    }{%
+        (
+            \overline{k}
+            +
+            1
+        )
+        (
+            2
+            \cdot
+            \overline{k}
+            +
+            1
+        )
+    }
+    \\
+    B
+    &=
+    \frac{%
+        4
+        \cdot
+        \pi
+        \cdot
+        \overline{R}
+        \cdot
+        \overline{k}^2
+        \cdot
+        s_{\overline{R}}
+        \cdot
+        \overline{v}_{\mathrm{max}}
+    }{%
+        (
+            \overline{k}
+            +
+            1
+        )
+        (
+            2
+            \cdot
+            \overline{k}
+            +
+            1
+        )
+    }
+    \\
+    C
+    &=
+    s_{\overline{k}}
+    \cdot
+    \left(
+        -
+        \frac{%
+            4
+            \cdot
+            \pi
+            \overline{R}^2
+            \cdot
+            \overline{k}^2
+            \cdot
+            \overline{v}_{\mathrm{max}}
+        }{%
+            (
+                \overline{k}
+                +
+                1
+            )
+            \cdot
+            (
+                2
+                \cdot
+                \overline{k}
+                +
+                1
+            )^2
+        }
+        -
+        \frac{%
+            2
+            \cdot
+            \pi
+            \cdot
+            \overline{R}^2
+            \cdot
+            \overline{k}^2
+            \cdot
+            \overline{v}_{\mathrm{max}}
+        }{%
+            (
+                \overline{k}
+                +
+                1
+            )^2
+            \cdot
+            (
+                2
+                \cdot
+                \overline{k}
+                +
+                1
+            )
+        }
+        +
+        \frac{%
+            4
+            \cdot
+            \pi
+            \cdot
+            \overline{R}^2
+            \cdot
+            \overline{k}
+            \cdot
+            \overline{v}_{\mathrm{max}}
+        }{%
+            (
+                \overline{k}
+                +
+                1
+            )
+            \cdot
+            (
+                2
+                \cdot
+                \overline{k}
+                +
+                1
+            )
+        }
+    \right)
+\end{align}
+
+\begin{conditions}
+    \overline{R}                 & \SI{20}{\milli\meter}, Durchmesser Messleitung                   \\
+    \overline{k}                 & \num{7.8876}, aus Regression                                     \\
+    \overline{v}_{\mathrm{max}}  & \SI{10.793}{\centi\meter\per\second}, aus Regression             \\
+    s_{\overline{v}}             & \SI{0.15720}{\centi\meter\per\second}, aus Regression            \\
+    s_{\overline{R}}             & \SI{0.25}{\milli\meter}, Unsicherheit Durchmesser Messleitung    \\
+    s_{\overline{k}}             & \num{1.572}, aus Regression                                      \\
+\end{conditions}
+
+\lipsum[3]

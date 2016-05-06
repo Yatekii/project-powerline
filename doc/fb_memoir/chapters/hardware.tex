@@ -30,6 +30,17 @@ k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
 
 \anweisung Dimensionierung der Bauteile: Berechnungen
 
+\begin{minipage}{\textwidth}
+    \centering
+    \resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
+        \begin{axis}
+            \addplot[-,color=blue] table {data/fetsim.dat};
+        \end{axis}
+    \end{tikzpicture}}
+    \captionof{figure}{test}
+    \label{fig:test}
+\end{minipage}
+
 % ---------------------------------------------------------------------------- %
 \subsection{Energieversorgung}
 \label{subsec:sensor:pcb}

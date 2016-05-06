@@ -52,6 +52,44 @@ wie das Ergebnis aussieht.
     \lipsum
     \lipsum
     \lipsum
+    \begin{minipage}{.5\textwidth}
+        \lipsum
+    \end{minipage}
+    \begin{minipage}{.5\textwidth}
+            %\pgfplotsset{
+            %    tick label style={font=\normalsize},
+            %    label style={font=\normalsize},
+            %    legend style={font=\footnotesize}
+            %}
+            \centering
+            \begin{tikzpicture}
+                \begin{scope}[x={(0mm,0mm)},y={(170mm,\textwidth)}]
+                    \begin{axis}[%
+                            height=80mm,
+                            width=\textwidth,
+                            at={(0,80mm)},
+                            %grid=both,
+                        ]
+                        \addplot[-,color=blue] table {data/fetsim.dat};
+                    \end{axis}
+                    \begin{axis}[%
+                            height=80mm,
+                            width=\textwidth,
+                            at={(0,0mm)},
+                            %grid=both,
+                        ]
+                        \addplot[-,color=red] table {data/fetsim.dat};
+                    \end{axis}
+                \end{scope}
+            \end{tikzpicture}
+        %\resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
+        %    \begin{axis}
+        %        \addplot[-,color=blue] table {data/fetsim.dat};
+        %    \end{axis}
+        %\end{tikzpicture}}
+        \captionof{figure}{test}
+        \label{fig:test}
+    \end{minipage}
 \end{a3pages}}
 %{
 %    \clearpage

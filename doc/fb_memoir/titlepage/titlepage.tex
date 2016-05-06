@@ -60,10 +60,15 @@
     % ---------------------------------------------------- %
     % Work some  magic to  automatically adjust  the hrule %
     % lengths to the length of the book title.             %
+    %                                                      %
     % NOTE: The  font  size setting  needs  to  be in  the %
     % \mytitle  command, otherwise  \settolength will  not %
     % take it  into account  and will only  calculate with %
     % the default font size.                               %
+    %                                                      %
+    % NOTE  2: This mechanism  breaks if  the title  spans %
+    % across multiple  lines. You're on  your own  in that %
+    % case.                                                %
     % ---------------------------------------------------- %
     \newcommand{\mytitle}{{\textbf{\fontsize{25mm}{1em}\selectfont Project Powerline}}}
     \newlength{\titlelength}            % Length of title text

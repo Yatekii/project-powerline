@@ -7,8 +7,23 @@
 % -------------------------------------------------------- %
 % Choose a page layout                                     %
 % -------------------------------------------------------- %
-%\isopage
-\semiisopage
+\isopage
+% 30mm | textblock | 45 mm %
+%\setlrmarginsandblock{0.142857111\paperwidth}{0.214285714\paperwidth}{*}
+% 1/9 | textblock | 1.5/9 %
+%\setulmarginsandblock{0.111111111\paperheight}{*}{1.5}
+
+%\iftoggle{paper}{%
+    % 30mm | textblock | 45 mm %
+    \setlrmarginsandblock{0.142857111\paperwidth}{0.190476190\paperwidth}{*}
+    % 1/9 | textblock | 1.5/9 %
+    \setulmarginsandblock{0.111111111\paperheight}{*}{1.5}%
+%}{%
+%    \setlrmarginsandblock{15mm}{15mm}{*}
+%    \setulmarginsandblock{20mm}{30mm}{*}%
+%}
+
+%\semiisopage
 %\medievalpage
 \checkandfixthelayout
 
@@ -18,8 +33,13 @@
 % We're  going  with  veelo, but  removing  the  "Chapter" %
 % designation in front of the chapter number.              %
 % -------------------------------------------------------- %
-\input{preamble/chapterstyle.tex}
-\chapterstyle{fhnw} % requires graphicx package
+%\iftoggle{paper}{%
+    \input{preamble/chapterstyle.tex}
+    \chapterstyle{fhnw} % requires graphicx package
+%}{%
+%    \chapterstyle{verville}%
+%}
+
 
 \pagestyle{headings}
 % -------------------------------------------------------- %

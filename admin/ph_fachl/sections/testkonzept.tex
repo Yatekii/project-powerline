@@ -1,58 +1,61 @@
 Um  reibungslose  Funktionalit\"at  zu gew\"ahrleisten  sind  intensive  Tests
-notwendig.
+notwendig. Sie  werden   aufgegliedert  gem\"ass  den  Modulen   des  Systems:
+Hardware, bestehend aus Sensor und  Master, und Software, ebenfalls aufgeteilt
+zwischen Sensor und Master.
 
 
 % ---------------------------------------------------------------------------- %
 \subsection{Gesamtsystem}
 % ---------------------------------------------------------------------------- %
 
-Um   das  System   automatisiert  zu   testen,  werden   Agilent-Netzger\"ate,
+Um   das   System   automatisiert  zu   testen,   werden   Labor-Netzger\"ate,
 Funktionsgeneratoren und  Oszilloskope verwendet,  welche \"uber  das Netzwerk
-Daten  liefern   k\"onnen  und   somit  zur   \"Uberwachung  des   24  Stunden
-Tests  geeignet  sind. Nat\"urlich  geh\"ort   hier  ein  Computer  mit  einer
-UART-Schnittstelle   dazu,  welcher   den   Herzschlag  des   Mikrokontrollers
-\"uberpr\"uft.
+Daten  liefern k\"onnen  und  somit zur  \"Uberwachung  des 24-Stunden-  Tests
+geeignet  sind. Ein  Computer  mit einer  UART-Schnittstelle  \"uberwacht  den
+Herzschlag des Mikrokontrollers.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Hardware}
 % ---------------------------------------------------------------------------- %
 
 F\"ur die  Hardware werden  das Master-Ger\"at  und die  Sensorplatine jeweils
-einzeln getestet.
-% TODO: Gesamtsystem?
+einzeln  getestet.   Zus\"atzlich   zur  experimentellen  \"Uberpr\"ufung  des
+Systems werden  zur \"Uberpr\"ufung von m\"oglichen  Worst-Case-Szenarios noch
+Computersimulationen benutzt (z.B. LTSpice).
+
 
 % ---------------------------------------------------------------------------- %
 \subsubsection{Sensorplatine}
 % ---------------------------------------------------------------------------- %
 
 Zu Debugzwecken hat die Sensorplatine 2 LEDs, 2 Buttons und eine zus\"atzliche
-UART  sowie  auch eine  SWD  Schnittstelle. Mit  diesen Schnittstellen  sollte
-es   auch  f\"ur   die  Softwareentwickler   m\"oglich  sein   akkurate  Tests
+UART-  sowie auch  eine  SWD-Schnittstelle. Mit  diesen Schnittstellen  sollte
+es   auch  f\"ur   die  Softwareentwickler   m\"oglich  sein,  akkurate  Tests
 durchzuf\"uhren.
 
 \textbf{Spannungsversorgung}: Eine     stabile    Spannungsversorgung     wird
-sichergestellt. Hier  ist  nicht  der  genaue Wert  entscheidend  sondern  die
+sichergestellt. Hier  ist  nicht der  genaue  Wert  entscheidend, sondern  die
 Stabilit\"at  dessen. Falls  die Methode  mit  dem  Kurzschliessen der  Panels
-gew\"ahlt  wird, so  muss  sichergestellt sein,  dass die  Spannungsversorgung
-nicht einknickt!
+gew\"ahlt wird,  muss sichergestellt sein, dass  die Spannungsversorgung nicht
+einknickt!
 
 \textbf{Mikrokontroller}: Um  nicht Zeit  beim  Suchen eines  Softwarefehlers,
-welchen  es gar nicht, gibt  zu  verschwenden, wird  die Funktionalit\"at  des
+welchen  es gar  nicht gibt,  zu verschwenden,  wird die  Funktionalit\"at des
 Mikrokontrollers  durch  ein  Programm,  welches die  zwei  LEDs  alternierend
 blinken l\"asst, geschrieben und geflasht. Ist diese H\"urde einmal geschafft,
 kann die Software ohne Weiteres entwickelt und getestet werden.
 
-\textbf{Kommunikation}: Erst wird die Funktionalit\"at der UART getestet, ohne
-das Modem zu  verwenden. Ist die Funktionalt\"at der UART  gesichert, wird das
-Modem gepr\"uft. Im Falle  der PLL wird schrittweise gepr\"uft,  ob das Signal
-an den einzelnen Stationen korrekt anliegt.
+\textbf{Kommunikation}: Erst wird die  Funktionalit\"at der UART-Schnittstelle
+getestet,  ohne das  Modem zu  verwenden. Ist ihre  Funktionalt\"at gesichert,
+wird das Modem gepr\"uft. Im Falle der PLL wird schrittweise gepr\"uft, ob das
+Signal an den einzelnen Stationen korrekt anliegt.
 
-\textbf{Energieverbrauch}: Es   wird   gemessen   wieviel   Energie   effektiv
-verbraucht wird um das Einhalten der Vorgaben zu pr\"ufen.
+\textbf{Energieverbrauch}: Es   wird   gemessen,  wieviel   Energie   effektiv
+verbraucht wird, um das Einhalten der Vorgaben zu pr\"ufen.
 
-\textbf{Sicherheit}: Wird der  Ansatz mit der  Leistungsmodullierung verwedet,
-muss gepr\"uft werden, dass der  FET, welcher die Spannung herunterzieht nicht
-zu heiss wird.
+\textbf{Sicherheit}: Wird der Ansatz  mit der Leistungsmodullierung verwendet,
+muss sichergestellt werden, dass der  FET, welcher die Spannung herunterzieht,
+nicht zu heiss wird.
 
 \textbf{Dauertest}: Um  sicherzustellen, dass  der Betrieb  auch \"uber  lange
 Zeit gew\"ahrleistet  ist, wird ein  Testsetup errichtet, welches  den Betrieb
@@ -64,7 +67,8 @@ w\"ahrend 24 Stunden \"uberwacht.
 % ---------------------------------------------------------------------------- %
 
 Beim  Master wird  analog zur  Sensorplatine vorgegangen. Hier  muss noch  die
-Funktionalit\"at des GSM Modems sowie der Strommessung sichergestellt werden.
+Funktionalit\"at des  GSM Modems (falls implementiert)  sowie der Strommessung
+sichergestellt werden.
 
 
 % ---------------------------------------------------------------------------- %
@@ -73,8 +77,6 @@ Funktionalit\"at des GSM Modems sowie der Strommessung sichergestellt werden.
 
 Auch auf  der Software-Seite gilt  es, sowohl  die Sensorplatine wie  auch das
 Masterger\"at separat und dann im Verbund zu testen.
-% TODO: korrekt?
-
 
 
 % ---------------------------------------------------------------------------- %
@@ -90,7 +92,7 @@ dem Testen der Hardware.
 sichergestellt, dass die Sensorik korrekt misst und die Mittelwerte \"uber die
 letzte Zeitperiode korrekt berechnet.
 
-\textbf{Kommunikation}: Nachdem  die  UART   Daten  korrekt  verschickt,  wird
+\textbf{Kommunikation}: Nach   dem   Versand   von   Daten   via   UART   wird
 sichergestellt,  dass Kollisionen  von Daten  korrekt erkannt  und abgehandelt
 werden.
 
@@ -99,29 +101,29 @@ f\"ur  die Zeitperioden  in  welchen  er inaktiv  ist,  in den  Low-Power-Mode
 versetzt. Es muss  getestet werden, dass er  dies korrekt tut und  diesen auch
 korrekt wieder verl\"asst.
 
-\textbf{Verl\"asslichkeit}: In  einem 24  St\"undigen Dauertest  wird getestet
-dass, sich die Software nicht irgendwann aufh\"angt.
+\textbf{Verl\"asslichkeit}: In einem  24 St\"undigen Dauertest  wird getestet,
+dass sich die Software nicht irgendwann aufh\"angt.
 
 % ---------------------------------------------------------------------------- %
 \subsubsection{Master}
 % ---------------------------------------------------------------------------- %
 
-Beim Master  wird analog  zur Sensorplatine  vorgegangen. Hier muss  noch die.
+Beim Master  wird analog  zur Sensorplatine  vorgegangen. Hier muss  noch die
 Funktionalit\"at des GSM Modems  sowie der Strommessung sichergestellt werden.
 Der Master braucht eine bedeutend kompliziertere Logik.
 
 \textbf{Blinky  LED}: Ein  einfaches  Programm   wird  verfasst,  welches  die
-korrekte Ansteuerung von GPIO Pins durch alternierendes Blinken sicherstellt.
+korrekte Ansteuerung von GPIO Pins durch alternierendes Blinken meldet.
 
-\textbf{UART}: Auch hier ist die korrekte Funktionsweise der UART vital. Diese
-muss fr\"uhzeitig gepr\"uft werden.
+\textbf{UART}: Auch    hier    ist    die    korrekte    Funktionsweise    der
+UART-Schnittstellt zentral. Diese muss fr\"uhzeitig gepr\"uft werden.
 
-\textbf{GSM}: Das  GSM  Modul  wird  gepr\"uft, in  dem  eine  einfache  erste
-Botschaft verfasst wird und an ein Telefon geschickt wird.
+\textbf{GSM (falls implementiert)}: Das GSM-Modul  wird gepr\"uft, in dem eine
+einfache erste Botschaft verfasst wird und an ein Telefon geschickt wird.
 
 \textbf{Sensorik}: Nat\"urlich  muss  auch  hier  die  Sensorik  mit  externen
 Messger\"aten verifiziert werden.
 
 \textbf{Alarmlogik}: F\"ur  die  Alarmlogik werden  fr\"uhzeitig  verschiedene
 Testszenarios verfasst. Die  Alarmlogik muss diese dann  korrekt abhandeln, um
-zu gew\"ahrleisten dass keine falschen Alarme losgehen.
+zu gew\"ahrleisten, dass keine falschen Alarme losgehen.

@@ -1,0 +1,158 @@
+%\newgeometry{bottom=5mm}
+
+%\thispagestyle{empty}
+\begin{titlingpage}
+%\twocolumn[{
+    %\hspace{-2.555mm}
+
+    % ---------------------------------------------------- %
+    % Place the Background Picture                         %
+    % ---------------------------------------------------- %
+    \hspace{-2.54mm}
+    \begin{tikzpicture}[remember picture, overlay]
+        \node[inner sep=0pt] at (current page.center) {%
+            \includegraphics[width=\paperwidth,height=\paperheight]{images/titlepage/titlepic.jpg}%
+        };
+    \end{tikzpicture}
+
+    % ---------------------------------------------------- %
+    % Place the FHNW Logo                                  %
+    % ---------------------------------------------------- %
+    \newlength{\logoX}
+    \setlength{\logoX}{15mm}
+    \newlength{\logoY}
+    \setlength{\logoY}{12mm}
+    \begin{tikzpicture}[remember picture, overlay]
+        %\node[inner sep=0pt] at (current page.north west) {%
+        \node[inner sep=0pt] at (\logoX,\logoY) {%
+            \includegraphics[height=12mm]{images/titlepage/fhnw.eps}%
+        };
+    \end{tikzpicture}
+
+
+
+    % ---------------------------------------------------- %
+    % The Text can  be set rather low in  the page without %
+    % adjusting the top lengths.                           %
+    % Backing up  and reseting these lengths  seems not to %
+    % be necessary;  it appears  they are restored  at the %
+    % end of the titlingpage environment.                  %
+    % ---------------------------------------------------- %
+    \setlength{\headsep}{0pt}
+    \setlength{\headheight}{0pt}
+    \setlength{\uppermargin}{4em}
+    \checkandfixthelayout
+
+
+    % ---------------------------------------------------- %
+    % By   default,  centering   inside  the   titlingpage %
+    % environment  will   center  with  respects   to  the %
+    % typeblock. When  the  typeblock  is  centered,  this %
+    % leads to  centered text  with respect to  the entire %
+    % title  page. However,  When  the  typeblock  is  not %
+    % centered, some adjustment is needed.                 %
+    % See memman Chapter "Titles" for more information.    %
+    % ---------------------------------------------------- %
+    \calccentering{\unitlength}
+    \begin{adjustwidth*}{\unitlength}{-\unitlength}
+
+
+    % ---------------------------------------------------- %
+    % Work some  magic to  automatically adjust  the hrule %
+    % lengths to the length of the book title.             %
+    % NOTE: The  font  size setting  needs  to  be in  the %
+    % \mytitle  command, otherwise  \settolength will  not %
+    % take it  into account  and will only  calculate with %
+    % the default font size.                               %
+    % ---------------------------------------------------- %
+    \newcommand{\mytitle}{{\textbf{\fontsize{25mm}{1em}\selectfont Project Powerline}}}
+    \newlength{\titlelength}            % Length of title text
+    \settowidth{\titlelength}{\mytitle}
+    \newcommand{\titlerulefactor}{1.2}  % Length of title rules, as a factor
+
+    % ---------------------------------------------------- %
+    % Set the title color                                  %
+    % ---------------------------------------------------- %
+    \newcommand{\titlecolor}{black}
+
+    % ---------------------------------------------------- %
+    % Put the title onto the page                          %
+    % ---------------------------------------------------- %
+    \textcolor{\titlecolor}{%
+        % ------------------------------------------------ %
+        % The actual  text content of the  title page goes %
+        % in here.                                         %
+        % ------------------------------------------------ %
+        \centering
+        \rule{\titlerulefactor\titlelength}{1pt} \\
+        \vspace*{4mm}
+        \mytitle\\
+        %\vspace*{5mm}
+        \rule{\titlerulefactor\titlelength}{1pt} \\
+    }
+
+
+    % ---------------------------------------------------- %
+    % More specific Information on the Project             %
+    % ---------------------------------------------------- %
+    \newlength{\infoX}
+    \setlength{\infoX}{-30mm}
+    \newlength{\infoY}
+    \setlength{\infoY}{-180mm}
+    \newlength{\infoBoxXStart}
+    \setlength{\infoBoxXStart}{-35mm}
+    \newlength{\infoBoxXEnd}
+    \setlength{\infoBoxXEnd}{150mm}
+    \newlength{\infoBoxYStart}
+    \setlength{\infoBoxYStart}{0.95\infoY}
+    \newlength{\infoBoxYEnd}
+    \setlength{\infoBoxYEnd}{-235mm}
+    \color{white}
+    \begin{tikzpicture}[remember picture, overlay]
+        %\node[inner sep=0pt] at (current page.north west) {%
+        \fill[anchor=north west,rounded corners,black,opacity=0.75] (\infoBoxXStart,\infoBoxYStart) rectangle (\infoBoxXEnd,\infoBoxYEnd);
+        \node[anchor=north west,inner sep=0pt] at (\infoX,\infoY) {%
+            \begin{tabular}{r|l}
+
+                \textsc{\textbf{Studiengang}}
+                & EIT\\
+                [4mm]
+
+                \textsc{\textbf{Modul}}
+                & Projekt 4 \\
+                [4mm]
+
+                \textsc{\textbf{Team}}
+                & 3 \\
+                [4mm]
+
+                \textsc{\textbf{Autoren}}
+                & Marcel Heymann, Noah H\"usser, Raphael Frey, Dominik Keller,  \\
+                & Marco Koch, Reto Nussbaumer, Francesco Rovelli                \\
+                [4mm]
+
+                \textsc{\textbf{Version}}
+                & 0.1 \\
+            \end{tabular}
+        };
+    \end{tikzpicture}
+
+
+    % ---------------------------------------------------- %
+    % This is the end of the centering magic.              %
+    % ---------------------------------------------------- %
+    \end{adjustwidth*}
+
+
+    % ---------------------------------------------------- %
+    % Make  sure  this  is   not  put  into  \frontmatter, %
+    % otherwise it will get a \frontmatter folio.          %
+    % \cleardoblepage  is not  actually necessary  because %
+    % it  is  automatically   called  by  the  titlingpage %
+    % environment.                                         %
+    % ---------------------------------------------------- %
+    %\cleardoublepage
+
+    %\setlength{\headsep}{\originallength}
+    %\checkandfixthelayout
+\end{titlingpage}

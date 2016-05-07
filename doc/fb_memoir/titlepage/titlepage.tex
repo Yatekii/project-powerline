@@ -1,30 +1,67 @@
-%\newgeometry{bottom=5mm}
-
-%\thispagestyle{empty}
 \begin{titlingpage}
-%\twocolumn[{
-    %\hspace{-2.555mm}
+
 
     % ---------------------------------------------------- %
-    % Place the Background Picture                         %
+    % Main Info on Contents                                %
+    % ---------------------------------------------------- %
+    \newcommand{\infotable}{%
+        \begin{tabular}{r|l}
+            \textsc{\textbf{Studiengang}}
+            & EIT\\
+            [4mm]
+
+            \textsc{\textbf{Modul}}
+            & Projekt 4 \\
+            [4mm]
+
+            \textsc{\textbf{Team}}
+            & 3 \\
+            [4mm]
+
+            \textsc{\textbf{Autoren}}
+            & Marcel Heymann, Noah H\"usser, Raphael Frey, Dominik Keller,  \\
+            & Marco Koch, Reto Nussbaumer, Francesco Rovelli                \\
+            [4mm]
+
+            \textsc{\textbf{Version}}
+            & 0.1 \\
+        \end{tabular}%
+    }%
+
+
+    % ---------------------------------------------------- %
+    % Place the Background Picture and Info Table          %
     % ---------------------------------------------------- %
     \hspace{-2.54mm}
+    \newlength{\logoX}
+    \setlength{\logoX}{5mm}
+    \newlength{\logoY}
+    \setlength{\logoY}{5mm}
     \begin{tikzpicture}[remember picture, overlay]
+        % ------------------------------------------------ %
+        % Background Picture                               %
+        % ------------------------------------------------ %
         \node[inner sep=0pt] at (current page.center) {%
             \includegraphics[width=\paperwidth,height=\paperheight]{images/titlepage/titlepic.jpg}%
         };
-    \end{tikzpicture}
 
-    % ---------------------------------------------------- %
-    % Place the FHNW Logo                                  %
-    % ---------------------------------------------------- %
-    \newlength{\logoX}
-    \setlength{\logoX}{15mm}
-    \newlength{\logoY}
-    \setlength{\logoY}{12mm}
-    \begin{tikzpicture}[remember picture, overlay]
-        %\node[inner sep=0pt] at (current page.north west) {%
-        \node[inner sep=0pt] at (\logoX,\logoY) {%
+        % ------------------------------------------------ %
+        % Info Table                                       %
+        % ------------------------------------------------ %
+        \node[%
+            fill=black,
+            fill opacity=0.75,
+            rounded corners,
+            outer sep=0pt,
+            inner sep=1em,
+            yshift=9em,
+            anchor = south%
+        ] at (current page.south) {\textcolor{white}{\infotable}};
+
+        % ------------------------------------------------ %
+        % FHNW Logo                                        %
+        % ------------------------------------------------ %
+        \node[anchor=north west,xshift=\logoX,yshift=-\logoY,outer sep=0pt,inner sep=0pt] at (current page.north west) {%
             \includegraphics[height=12mm]{images/titlepage/fhnw.eps}%
         };
     \end{tikzpicture}
@@ -84,10 +121,6 @@
     % Put the title onto the page                          %
     % ---------------------------------------------------- %
     \textcolor{\titlecolor}{%
-        % ------------------------------------------------ %
-        % The actual  text content of the  title page goes %
-        % in here.                                         %
-        % ------------------------------------------------ %
         \centering
         \rule{\titlerulefactor\titlelength}{1pt} \\
         \vspace*{4mm}
@@ -97,52 +130,6 @@
         \vspace*{6mm}
         \fontsize{8mm}{1em}\selectfont Fachbericht \\
     }
-
-
-    % ---------------------------------------------------- %
-    % More specific Information on the Project             %
-    % ---------------------------------------------------- %
-    \newlength{\infoX}
-    \setlength{\infoX}{-30mm}
-    \newlength{\infoY}
-    \setlength{\infoY}{-170mm}
-    \newlength{\infoBoxXStart}
-    \setlength{\infoBoxXStart}{-35mm}
-    \newlength{\infoBoxXEnd}
-    \setlength{\infoBoxXEnd}{150mm}
-    \newlength{\infoBoxYStart}
-    \setlength{\infoBoxYStart}{0.95\infoY}
-    \newlength{\infoBoxYEnd}
-    \setlength{\infoBoxYEnd}{-225mm}
-    \color{white}
-    \begin{tikzpicture}[remember picture, overlay]
-        %\node[inner sep=0pt] at (current page.north west) {%
-        \fill[anchor=north west,rounded corners,black,opacity=0.75] (\infoBoxXStart,\infoBoxYStart) rectangle (\infoBoxXEnd,\infoBoxYEnd);
-        \node[anchor=north west,inner sep=0pt] at (\infoX,\infoY) {%
-            \begin{tabular}{r|l}
-
-                \textsc{\textbf{Studiengang}}
-                & EIT\\
-                [4mm]
-
-                \textsc{\textbf{Modul}}
-                & Projekt 4 \\
-                [4mm]
-
-                \textsc{\textbf{Team}}
-                & 3 \\
-                [4mm]
-
-                \textsc{\textbf{Autoren}}
-                & Marcel Heymann, Noah H\"usser, Raphael Frey, Dominik Keller,  \\
-                & Marco Koch, Reto Nussbaumer, Francesco Rovelli                \\
-                [4mm]
-
-                \textsc{\textbf{Version}}
-                & 0.1 \\
-            \end{tabular}
-        };
-    \end{tikzpicture}
 
 
     % ---------------------------------------------------- %

@@ -38,11 +38,7 @@
 % https://github.com/alpenwasser/longtex                   %
 % -------------------------------------------------------- %
 
-\documentclass[%
-    11pt,
-    a4paper,
-    oneside
-    ]{memoir}
+\documentclass[11pt, a4paper, oneside]{memoir}
 
 % -------------------------------------------------------- %
 % Different font and pages  sizes, layouts. Not a complete %
@@ -72,17 +68,7 @@
 % compilation run, specify those files here.               %
 % -------------------------------------------------------- %
 %\includeonly{%
-%    chapters/abstract,
-%    chapters/dedication,
-%    chapters/declaration,
-%    chapters/acknowledgements,
-%    chapters/chapter1,
-%    chapters/chapter2,
-%    chapters/chapter3,
-%    appendices/appendixA,
-%    appendices/appendixB,
-%    appendices/appendixC,
-%    appendices/appendixD
+%    titlepage/titlepage,
 %}
 
 
@@ -118,10 +104,12 @@
 
 
 % -------------------------------------------------------- %
-% The starred version of  tableofcontents does not make an %
-% entry for itself in the ToC.                             %
+% The starred versions do not make an entry for themselves %
+% in the ToC, the unstarred versions do.                   %
 % -------------------------------------------------------- %
 \tableofcontents*
+%\listoffigures
+%\listoftables
 
 
 % -------------------------------------------------------- %
@@ -159,9 +147,6 @@
 \appendixpage
 \appendix
 \include{appendices/datentrager}
-%\include{appendices/appendixB}
-%\include{appendices/appendixC}
-%\include{appendices/appendixD}
 
 
 % -------------------------------------------------------- %
@@ -170,7 +155,21 @@
 % information.                                             %
 % -------------------------------------------------------- %
 \backmatter
+
+% -------------------------------------------------------- %
+% Bibliography: We  are using  the  IEEEtran package  from %
+% Michael Shell                                            %
+%                                                          %
+% There  are  a  few  different  styles  in  the  IEEEtran %
+% package.   We are  going to  use  one of  two of  those, %
+% either in the sorted or unsorted variety.                %
+%                                                          %
+% The sorted  version sorts  bibliographic entries  in the %
+% bibliography alphabetically, while  the unsorted version %
+% lists bibliographic  entries in the order  in which they %
+% were cited (first occurrence).                           %
+% -------------------------------------------------------- %
 %\bibliographystyle{bibliography/IEEEtranS.bst} % sorted
-\bibliographystyle{bibliography/IEEEtran.bst}  % unsorted, entries appear in order in which they have been cited
+\bibliographystyle{bibliography/IEEEtran.bst} % unsorted
 \bibliography{bibliography/references}
 \end{document}

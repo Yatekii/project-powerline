@@ -14,26 +14,27 @@
 
 \makeatletter
 \makechapterstyle{fhnw}{%
-   \setlength{\afterchapskip}{40pt}
-  \renewcommand*{\chapterheadstart}{\vspace*{40pt}}
-  \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
-   \renewcommand*{\chapnamefont}{\normalfont\LARGE\flushright}
-   \renewcommand*{\chapnumfont}{\normalfont\HUGE}
-   \renewcommand*{\chaptitlefont}{\normalfont\HUGE\bfseries\flushright}
-   \renewcommand*{\printchaptername}{%
-       \chapnamefont\MakeTextUppercase{}}
-   \renewcommand*{\chapternamenum}{}
-  \setlength{\beforechapskip}{18mm}%  \numberheight
-  \setlength{\midchapskip}{\paperwidth}% \barlength
-  \addtolength{\midchapskip}{-\textwidth}
-  \addtolength{\midchapskip}{-\spinemargin}
-   \renewcommand*{\printchapternum}{%
-     \makebox[0pt][l]{%
-       \hspace{.8em}%
-       \resizebox{!}{\beforechapskip}{\chapnumfont \thechapter}%
-       \hspace{.8em}%
-       \rule{\midchapskip}{\beforechapskip}%
-     }%
-   }%
-   \makeoddfoot{plain}{}{}{\thepage}}
+    \setlength{\afterchapskip}{40pt}
+    \renewcommand*{\chapterheadstart}{\vspace*{40pt}}
+    \renewcommand*{\afterchapternum}{\par\nobreak\vskip 25pt}
+    \renewcommand*{\chapnamefont}{\sffamily\LARGE\flushright}
+    \renewcommand*{\chapnumfont}{\sffamily\HUGE}
+    \renewcommand*{\chaptitlefont}{\sffamily\HUGE\bfseries\flushright}
+    \renewcommand*{\printchaptername}{%
+        \chapnamefont\MakeTextUppercase{}}
+    \renewcommand*{\chapternamenum}{}
+    \setlength{\beforechapskip}{18mm}%  \numberheight
+    \setlength{\midchapskip}{\paperwidth}% \barlength
+    \addtolength{\midchapskip}{-\textwidth}
+    \addtolength{\midchapskip}{-\spinemargin}
+    \renewcommand*{\printchapternum}{%
+        \makebox[0pt][l]{%
+            \hspace{.8em}%
+            \resizebox{!}{\beforechapskip}{\chapnumfont \thechapter}%
+            \hspace{.8em}%
+            \rule{\midchapskip}{\beforechapskip}%
+        }%
+    }%
+   \makeoddfoot{plain}{}{}{\thepage}%
+}
 \makeatother

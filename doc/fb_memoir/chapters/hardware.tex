@@ -29,45 +29,19 @@ ein  Signal  \"uber   die  Gleichstromleitung  vom  \Sensor   zum  \Master  zu
 \"ubertragen. Der  Gleichstromanteil   bel\"auft  sich  in  der   Leitung  auf
 ca. \SI{960}{\volt} \todo{Berechnung/Begr\"undung}.
 
-\begin{itemize}
-    \item
-        \emph{Frequency-shift      keying}     (\emph{Frequenzumtastung}): Dem
-        in      der       Leitung      fliessenden       Gleichstrom      wird
-        ein    (verh\"altnism\"assig   kleines\todo{Amplitudenverh\"altnisse})
-        Wechelstromsignal   aufmoduliert,  welches   die  zu   \"ubertragenden
-        Informationen    enth\"alt. Dabei    wird    die    Frequenz    dieses
-        Wechselstromsignals  in  diskreten Schritten  variiert, \todo{korrekt?}
-        und diese \"Anderung der Frequenz ist der Informationstr\"ager.  F\"ur
-        einen kurzen \"Uberblick zum Thema  sie an dieser Stelle auf Wikipedia
-        verwiesen~\cite{ref:fsk:wikipedia}.
+\myfancybreak
 
-        Das  Verfahren  ist   schematisch  in  Abbildung~\ref{fig:fsk:concept}
-        dargestellt.\todo{Achsen: Einheiten}
-    \item
-        \emph{Amplitude-shift    keying}   (\emph{Amplitudenumtastung}): Statt
-        diskreten  Frequenzen  werden  in   diesem  Fall  diskrete  Amplituden
-        als   Informationstr\"ager  benutzt. Die   Umsetzung  w\"urde   darauf
-        basieren,  dass kurzfristig  (mit  Frequenzen im  Bereich von  einigen
-        \si{\kilo\hertz})   ein  Solarmodul   \todo{Modul? Zelle? String?}  in
-        einem  String (Serieschaltung)  kurzgeschlossen w\"urde. Dies  w\"urde
-        die  auf  der  Leitung  anliegende  Spannung in  dieser  Zeit  um  den
-        Spannungsanteil  des kurzgeschlossenen  Moduls einbrechen  lassen. Die
-        Einbr\"uche w\"urden als Informationstr\"ager fungieren und im \Master
-        ausgewertet.
+\emph{Frequency-shift    keying}   (\emph{Frequenzumtastung}): Dem    in   der
+Leitung    fliessenden    Gleichstrom     wird    ein    (verh\"altnism\"assig
+kleines\todo{Amplitudenverh\"altnisse})     Wechelstromsignal    aufmoduliert,
+welches   die   zu   \"ubertragenden   Informationen   enth\"alt. Dabei   wird
+die    Frequenz   dieses    Wechselstromsignals    in   diskreten    Schritten
+variiert,  \todo{korrekt?}   und  diese   \"Anderung  der  Frequenz   ist  der
+Informationstr\"ager.  F\"ur einen kurzen \"Uberblick  zum Thema sie an dieser
+Stelle auf Wikipedia verwiesen~\cite{ref:fsk:wikipedia}.
 
-        Grunds\"atzlich  handelt   es  sich  beim  aufmodulierten   Signal  um
-        \emph{ASK}  mit   zwei  Amplituden: \SI{0}{\volt}  (wenn   kein  Modul
-        kurzgeschlossen  ist und  ein  reiner Gleichstrom  \"uber die  Leitung
-        fliesst)  und einer  negativen Amplitude  im Umfang  der Spannung  des
-        kurzgeschlossenen Modules.
-
-        F\"ur   einen  kurzen   Einblick  ins   Thema  sei   auch  an   dieser
-        Stelle  auf   den  entsprechenden  Artikel  auf   Wikipedia  verwiesen
-        \cite{ref:ask:wikipedia}.
-
-        Abbildung~\ref{fig:ask:concept}  stellt  das  Konzept  des  Verfahrens
-        schematisch dar. \todo{Achsen: Einheiten}
-\end{itemize}
+Das    Verfahren    ist   schematisch    in    Abbildung~\ref{fig:fsk:concept}
+dargestellt.\todo{Achsen: Einheiten}
 
 \begin{figure}[h!tb]
     \centering
@@ -81,6 +55,29 @@ ca. \SI{960}{\volt} \todo{Berechnung/Begr\"undung}.
     \label{fig:fsk:concept}
 \end{figure}
 
+\myfancybreak
+
+\emph{Amplitude-shift  keying}  (\emph{Amplitudenumtastung}): Statt  diskreten
+Frequenzen werden in diesem  Fall diskrete Amplituden als Informationstr\"ager
+benutzt. Die   Umsetzung    w\"urde   darauf   basieren,    dass   kurzfristig
+(mit   Frequenzen   im  Bereich   von   einigen   Kilohertz)  ein   Solarmodul
+\todo{Modul? Zelle? String?} in einem  String (Serieschaltung) kurzgeschlossen
+w\"urde. Dies w\"urde die  auf der Leitung anliegende Spannung  in dieser Zeit
+um  den Spannungsanteil  des kurzgeschlossenen  Moduls einbrechen  lassen. Die
+Einbr\"uche  w\"urden  als  Informationstr\"ager   fungieren  und  im  \Master
+ausgewertet.
+
+Grunds\"atzlich handelt es  sich beim aufmodulierten Signal  um \emph{ASK} mit
+zwei Amplituden: \SI{0}{\volt}  (wenn kein  Modul kurzgeschlossen ist  und ein
+reiner Gleichstrom \"uber  die Leitung fliesst) und  einer negativen Amplitude
+im Umfang der Spannung des kurzgeschlossenen Modules.
+
+F\"ur  einen kurzen  Einblick ins  Thema  sei auch  an dieser  Stelle auf  den
+entsprechenden Artikel auf Wikipedia verwiesen \cite{ref:ask:wikipedia}.
+
+Abbildung~\ref{fig:ask:concept} stellt das  Konzept des Verfahrens schematisch
+dar. \todo{Achsen: Einheiten}
+
 \begin{figure}[h!tb]
     \centering
     \input{images/python/ask.pgf}
@@ -91,12 +88,12 @@ ca. \SI{960}{\volt} \todo{Berechnung/Begr\"undung}.
         Signals w\"urde  in unserem System  etwas anders aussehen, da  wir ein
         \SI{960}{\volt}-Signal  kurzzeitig um  jeweils  bis zu  \SI{60}{\volt}
         einbrechen lassen  w\"urden, anstatt mit  sch\"onen Sinus-Schwingungen
-        zu arbeiten. Das Konzept von einer  diskreten Anzahl (sowohl in dieser
-        Abbildung  wie auch  in unserem  System zwei)  und ihrer  Zuordnung zu
-        entweder \code{0} oder \code{1} bleibt aber identisch.%
+        zu arbeiten. Das  Konzept einer diskreten Anzahl  Frequenzen und ihrer
+        Zuordnung zu entweder \code{0} oder \code{1} bleibt aber identisch.%
     }
     \label{fig:ask:concept}
 \end{figure}
+\todo{Verweis auf Simulationen}
 
 
 % ---------------------------------------------------------------------------- %

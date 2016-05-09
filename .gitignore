@@ -42,3 +42,4 @@
 
 # Linker
 *.map
+*.pyc

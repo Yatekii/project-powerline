@@ -1,0 +1,255 @@
+% **************************************************************************** %
+\chapter{Hardware}
+\label{chap:hardware}
+% **************************************************************************** %
+
+Das folgende Kapitel dokumentiert  unseren L\"osungsfindungsprozess im Bereich
+Hardware. Zuerst  wird  auf  die  Problematik  der  Kommunikation  \"uber  die
+DC-Leitung  zwischen  Solarmodul  und \Master  eingegangen. Es  werden  unsere
+L\"osungsans\"atze erl\"autert  und auf St\"arken und  Schw\"achen untersucht,
+um daraus anschliessend eine Entscheidung abzuleiten.
+
+In   einem  n\"achsten   Schritt  werden   die  L\"osungskonzepte   f\"ur  die
+Sensor-Platine und das \Master genauer erkl\"art.
+
+\anweisung Verifizierbare  Angaben machen, nicht  allgemeine Floskeln. Zahlen,
+Fakten,  theoretische Hintergrundinformationen,  daraus gezogene  Konsequenzen
+etc. Bezug auf das Pflichtenheft, wo m\"oglich.
+
+\anweisung Bilder, Diagramme, Formeln etc.
+
+
+% ---------------------------------------------------------------------------- %
+\section{Kommunikation \"uber DC-Leitung}
+\label{sec:hardware:dcLeitung}
+% ---------------------------------------------------------------------------- %
+
+W\"ahrend  des   Projekts  wurden   zwei  L\"osungsans\"atze   untersucht,  um
+ein  Signal  \"uber   die  Gleichstromleitung  vom  \Sensor   zum  \Master  zu
+\"ubertragen. Der  Gleichstromanteil   bel\"auft  sich  in  der   Leitung  auf
+ca. \SI{960}{\volt} \todo{Berechnung/Begr\"undung}.
+
+\myfancybreak
+
+\emph{Frequency-shift    keying}   (\emph{Frequenzumtastung}): Dem    in   der
+Leitung    fliessenden    Gleichstrom     wird    ein    (verh\"altnism\"assig
+kleines\todo{Amplitudenverh\"altnisse})    Wechselstromsignal    aufmoduliert,
+welches   die   zu   \"ubertragenden   Informationen   enth\"alt. Dabei   wird
+die    Frequenz   dieses    Wechselstromsignals    in   diskreten    Schritten
+variiert,  \todo{korrekt?}   und  diese   \"Anderung  der  Frequenz   ist  der
+Informationstr\"ager.  F\"ur einen kurzen \"Uberblick  zum Thema sie an dieser
+Stelle auf Wikipedia verwiesen~\cite{ref:fsk:wikipedia}.
+
+Das    Verfahren    ist   schematisch    in    Abbildung~\ref{fig:fsk:concept}
+dargestellt.\todo{Achsen: Einheiten}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/fsk.pgf}
+    \caption{%
+        \emph{Frequency-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
+        zugeh\"orige Verhalten des  modulierten Signals. Dieses Signal w\"urde
+        bei unserem System auf eine \SI{960}{\volt}-DC-Spannung aufmoduliert.%
+    }
+    \label{fig:fsk:concept}
+\end{figure}
+
+\myfancybreak
+
+\emph{Amplitude-shift  keying}  (\emph{Amplitudenumtastung}): Statt  diskreten
+Frequenzen werden in diesem  Fall diskrete Amplituden als Informationstr\"ager
+benutzt. Die   Umsetzung    w\"urde   darauf   basieren,    dass   kurzfristig
+(mit   Frequenzen   im  Bereich   von   einigen   Kilohertz)  ein   Solarmodul
+\todo{Modul? Zelle? String?} in einem  String (Serieschaltung) kurzgeschlossen
+w\"urde. Dies w\"urde die  auf der Leitung anliegende Spannung  in dieser Zeit
+um  den Spannungsanteil  des kurzgeschlossenen  Moduls einbrechen  lassen. Die
+Einbr\"uche  w\"urden  als  Informationstr\"ager   fungieren  und  im  \Master
+ausgewertet.
+
+Grunds\"atzlich handelt es  sich beim aufmodulierten Signal  um \emph{ASK} mit
+zwei Amplituden: \SI{0}{\volt}  (wenn kein  Modul kurzgeschlossen ist  und ein
+reiner Gleichstrom \"uber  die Leitung fliesst) und  einer negativen Amplitude
+im Umfang der Spannung des kurzgeschlossenen Modules.
+
+F\"ur  einen kurzen  Einblick ins  Thema  sei auch  an dieser  Stelle auf  den
+entsprechenden Artikel auf Wikipedia verwiesen \cite{ref:ask:wikipedia}.
+
+Abbildung~\ref{fig:ask:concept} stellt das  Konzept des Verfahrens schematisch
+dar. \todo{Achsen: Einheiten}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/ask.pgf}
+    \caption{%
+        \emph{Amplitude-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
+        zugeh\"orige  Verhalten  des   \"ubertragenen  Signals. Die  Form  des
+        Signals w\"urde  in unserem System  etwas anders aussehen, da  wir ein
+        \SI{960}{\volt}-Signal  kurzzeitig um  jeweils  bis zu  \SI{60}{\volt}
+        einbrechen lassen  w\"urden, anstatt mit  sch\"onen Sinus-Schwingungen
+        zu arbeiten. Das  Konzept einer diskreten Anzahl  Frequenzen und ihrer
+        Zuordnung zu entweder \code{0} oder \code{1} bleibt aber identisch.%
+    }
+    \label{fig:ask:concept}
+\end{figure}
+\todo{Verweis auf Simulationen}
+
+Die  Implementierung   einer  FSK-L\"osung  ist  prinzipiell   dich  sicherere
+Variante.  Fertige  Microchips, auf denen  man eine solche  Schaltung aufbauen
+kann,  existieren  bereits  am  Markt. Die prim\"are  Schwierigkeit  liegt  in
+der  Frage,  wie man  das  Signal  in  die DC-Leitung  einkoppelt. Wichtig  an
+der  Einkopplung  ist,  dass  sie potentialgetrennt  von  der  DC-Leitung  ist
+\todo{Korrekt? Begr\"undung?};  man kann  also  nicht  einfach die  DC-Leitung
+mit   dem  Ausgang   des   Signalgebers  verbinden   \todo{Strom  geht   durch
+Signalgeber? Spannung?} Daf\"ur bietet sich entweder eine kapazitive oder eine
+induktive Einkopplung an \todo{Schaltungen}.
+
+Ein  Modul kurzzuschliessen  und damit  eine  Form von  ASK zu  implementieren
+w\"are  eine sehr  sparsame L\"osung  mit  minimalem Aufwand  (und somit  auch
+Kosten) f\"ur die Schaltung. Allerdings  bringt sie einige Schwierigkeiten mit
+sich. Es  ist  ein  Konzept,  das  nicht  verbreitet  und  gut  getestet  ist;
+die  Machbarkeit  ist  nicht  garantiert. Es ist  daher  sinnvoll,  vor  einer
+allf\"alligen Umsetzung so viele Informationen wie m\"oglich \"uber m\"ogliche
+Problemzonen einzuholen, anhand  derer beurteilt werden kann,  ob die L\"osung
+im Rahmen  des Projektes  realisiertbar ist,  oder ob  ein Erfolg  zu unsicher
+w\"are.
+
+% ---------------------------------------------------------------------------- %
+\subsection{FSK: Kapazitive oder induktive Einkopplung}
+\label{subsec:hw:fsk:kapaVsInduk}
+% ---------------------------------------------------------------------------- %
+
+Eine kapazitive Einkopplung hat die Vor- und Nachteile, dass \ldots, w\"ahrend
+\ldots Nachteile sind.\todo{Vor- Nachteile}
+
+Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{ASK: Machbarkeitsanalyse}
+\label{subsec:hw:ask:machbarkeit}
+% ---------------------------------------------------------------------------- %
+
+Im Folgenden werden die \"Uberlegungen dargelegt, anhand derer die Machbarkeit
+der Kurzschlussvariante evaluiert wird.
+
+
+
+%\begin{minipage}{\textwidth}
+%    \centering
+%    \begin{tikzpicture}
+%        \begin{scope}[x={(0mm,0mm)},y={(80mm,.75\textwidth)}]
+%            \begin{axis}[%
+%                    height=80mm,
+%                    width=.75\textwidth,
+%                    at={(0,80mm)},
+%                    %grid=both,
+%                ]
+%                \addplot[-,color=blue] table {data/fetsim.dat};
+%            \end{axis}
+%        \end{scope}
+%    \end{tikzpicture}
+%    \figcaption{This is a simulation of some things to show some stuff to deduce some conclusions do draw some deductions.}
+%\end{minipage}
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Sensorplatine}
+\label{sec:hw:sensorplatine}
+% ---------------------------------------------------------------------------- %
+
+Was  ist der  Zweck  der Sensorplatine? Welche  Aufgaben  muss sie  erf\"ullen
+k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
+
+\anweisung Dimensionierung der Bauteile: Berechnungen
+
+%\begin{figure}[h!t]
+%    \centering
+%    \resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
+%        \begin{axis}
+%            \addplot[-,color=blue] table {data/fetsim.dat};
+%        \end{axis}
+%    \end{tikzpicture}}
+%    \caption{test}
+%    \label{fig:test}
+%\end{figure}
+
+% ---------------------------------------------------------------------------- %
+\subsection{Energieversorgung}
+\label{subsec:sensor:pcb}
+% ---------------------------------------------------------------------------- %
+
+Energiebezug,  Leistungsanforderungen, Standby,  Verhalten bei  ungen\"ugender
+Leistungszufuhr, ...
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{PCB}
+\label{subsec:sensor:pcb}
+% ---------------------------------------------------------------------------- %
+
+Wie sieht das PCB aus, und weshalb?
+
+% ---------------------------------------------------------------------------- %
+\section{Master-Ger\"at}
+\label{sec:hw:mastergerat}
+% ---------------------------------------------------------------------------- %
+
+Was ist der Zweck des Master-Ger\"ats? Aufgaben? Aufbau?
+
+\anweisung Dimensionierung der Bauteile: Berechnungen
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Speisung}
+\label{subsec:mastergerat:speisung}
+% ---------------------------------------------------------------------------- %
+
+Woher bezieht das Master-Ger\"at  seine Energie, weshalb? Wieviel Energie wird
+ben\"otigt?
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Benutzer-Interface}
+\label{subsec:mastergerat:interface}
+% ---------------------------------------------------------------------------- %
+
+\anweisung Das Benutzerinterface ist schon in der Anleitung im vorigen Kapitel
+beschrieben worden. Es soll  hier um die Komponentenwahl gehen,  nicht um eine
+Rekapitulation bereits gemachter Informationen.
+
+% ---------------------------------------------------------------------------- %
+\subsection{PCB}
+\label{subsec:mastergerat:pcb}
+% ---------------------------------------------------------------------------- %
+
+Wie sieht das PCB aus, und weshalb?
+
+% ---------------------------------------------------------------------------- %
+\subsection{Montage/Geh\"ause}
+\label{subsec:mastergerat:pcb}
+% ---------------------------------------------------------------------------- %
+
+Einbindung in die Umgebung, Wahl des Geh\"auses.
+
+
+% ---------------------------------------------------------------------------- %
+\section{Kommunikation}
+\label{sec:kommunikation}
+% ---------------------------------------------------------------------------- %
+
+Die   Kommunikation  zwischen   Sensor  und   Master-Ger\"at  ist   eines  der
+Herzst\"ucke des ganzen Systems und betrifft beide Sub-Systeme. Daher in einem
+eigenen Abschnitt.
+
+\begin{itemize}
+    \item
+        Grunds\"atzliches Problem
+    \item
+        Verfolgte L\"osungsans\"atze
+    \item
+        Ausgew\"ahlter L\"osungsansatz (mit Begr\"undung(en))
+    \item
+        Genauere Beschreibung dieses L\"osungsansatzes
+\end{itemize}

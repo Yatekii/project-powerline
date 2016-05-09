@@ -174,8 +174,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{0.225000in}{2.065000in}}%
-\pgfpathlineto{\pgfqpoint{4.275000in}{2.065000in}}%
+\pgfpathmoveto{\pgfqpoint{4.275000in}{2.065000in}}%
+\pgfpathlineto{\pgfqpoint{4.275000in}{3.325000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -185,8 +185,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{4.275000in}{2.065000in}}%
-\pgfpathlineto{\pgfqpoint{4.275000in}{3.325000in}}%
+\pgfpathmoveto{\pgfqpoint{0.225000in}{2.065000in}}%
+\pgfpathlineto{\pgfqpoint{4.275000in}{2.065000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1341,8 +1341,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{0.225000in}{0.175000in}}%
-\pgfpathlineto{\pgfqpoint{4.275000in}{0.175000in}}%
+\pgfpathmoveto{\pgfqpoint{4.275000in}{0.175000in}}%
+\pgfpathlineto{\pgfqpoint{4.275000in}{1.435000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1352,8 +1352,8 @@
 \definecolor{currentstroke}{rgb}{0.000000,0.000000,0.000000}%
 \pgfsetstrokecolor{currentstroke}%
 \pgfsetdash{}{0pt}%
-\pgfpathmoveto{\pgfqpoint{4.275000in}{0.175000in}}%
-\pgfpathlineto{\pgfqpoint{4.275000in}{1.435000in}}%
+\pgfpathmoveto{\pgfqpoint{0.225000in}{0.175000in}}%
+\pgfpathlineto{\pgfqpoint{4.275000in}{0.175000in}}%
 \pgfusepath{stroke}%
 \end{pgfscope}%
 \begin{pgfscope}%
@@ -1764,7 +1764,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=0.232273in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -60\)}%
+\pgftext[x=0.169444in,y=0.232273in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -30\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1805,7 +1805,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=0.423182in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -40\)}%
+\pgftext[x=0.169444in,y=0.423182in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -20\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1846,7 +1846,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=0.614091in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -20\)}%
+\pgftext[x=0.169444in,y=0.614091in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle -10\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1928,7 +1928,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=0.995909in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 20\)}%
+\pgftext[x=0.169444in,y=0.995909in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 10\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -1969,7 +1969,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=1.186818in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 40\)}%
+\pgftext[x=0.169444in,y=1.186818in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 20\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgfsetbuttcap%
@@ -2010,7 +2010,7 @@
 \end{pgfscope}%
 \end{pgfscope}%
 \begin{pgfscope}%
-\pgftext[x=0.169444in,y=1.377727in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 60\)}%
+\pgftext[x=0.169444in,y=1.377727in,right,]{\rmfamily\fontsize{9.000000}{10.800000}\selectfont \(\displaystyle 30\)}%
 \end{pgfscope}%
 \begin{pgfscope}%
 \pgftext[x=2.250000in,y=1.504444in,,base]{\rmfamily\fontsize{11.000000}{13.200000}\selectfont Moduliertes Signal}%

@@ -12,8 +12,8 @@ deltaW = 33e3
 T    = 2 * np.pi / w
 T_lo = 2 * np.pi / (w - deltaW)
 T_hi = 2 * np.pi / (w + deltaW)
-A1    = 10
-A2    = 60
+A1    =  5
+A2    = 30
 
 x = sp.Symbol('x')
 #func1 = 1/2 * (2 + sp.cos(2*w1*x) + sp.cos(2*w2*x) + 2*sp.cos((w1+w2)*x) + 2*sp.cos((w1-w2)*x))

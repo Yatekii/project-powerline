@@ -95,6 +95,46 @@ dar. \todo{Achsen: Einheiten}
 \end{figure}
 \todo{Verweis auf Simulationen}
 
+Die  Implementierung   einer  FSK-L\"osung  ist  prinzipiell   dich  sicherere
+Variante.  Fertige  Microchips, auf denen  man eine solche  Schaltung aufbauen
+kann,  existieren  bereits  am  Markt. Die prim\"are  Schwierigkeit  liegt  in
+der  Frage,  wie man  das  Signal  in  die DC-Leitung  einkoppelt. Wichtig  an
+der  Einkopplung  ist,  dass  sie potentialgetrennt  von  der  DC-Leitung  ist
+\todo{Korrekt? Begr\"undung?};  man kann  also  nicht  einfach die  DC-Leitung
+mit   dem  Ausgang   des   Signalgebers  verbinden   \todo{Strom  geht   durch
+Signalgeber? Spannung?} Daf\"ur bietet sich entweder eine kapazitive oder eine
+induktive Einkopplung an \todo{Schaltungen}.
+
+Ein  Modul kurzzuschliessen  und damit  eine  Form von  ASK zu  implementieren
+w\"are  eine sehr  sparsame L\"osung  mit  minimalem Aufwand  (und somit  auch
+Kosten) f\"ur die Schaltung. Allerdings  bringt sie einige Schwierigkeiten mit
+sich. Es  ist  ein  Konzept,  das  nicht  verbreitet  und  gut  getestet  ist;
+die  Machbarkeit  ist  nicht  garantiert. Es ist  daher  sinnvoll,  vor  einer
+allf\"alligen Umsetzung so viele Informationen wie m\"oglich \"uber m\"ogliche
+Problemzonen einzuholen, anhand  derer beurteilt werden kann,  ob die L\"osung
+im Rahmen  des Projektes  realisiertbar ist,  oder ob  ein Erfolg  zu unsicher
+w\"are.
+
+% ---------------------------------------------------------------------------- %
+\subsection{FSK: Kapazitive oder induktive Einkopplung}
+\label{subsec:hw:fsk:kapaVsInduk}
+% ---------------------------------------------------------------------------- %
+
+Eine kapazitive Einkopplung hat die Vor- und Nachteile, dass \ldots, w\"ahrend
+\ldots Nachteile sind.\todo{Vor- Nachteile}
+
+Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{ASK: Machbarkeitsanalyse}
+\label{subsec:hw:ask:machbarkeit}
+% ---------------------------------------------------------------------------- %
+
+Im Folgenden werden die \"Uberlegungen dargelegt, anhand derer die Machbarkeit
+der Kurzschlussvariante evaluiert wird.
+
+
 
 %\begin{minipage}{\textwidth}
 %    \centering

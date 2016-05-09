@@ -29,6 +29,7 @@ LIBS:atmel
 LIBS:contrib
 LIBS:valves
 LIBS:pro4
+LIBS:sensor-cache
 EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
@@ -654,7 +655,6 @@ F 3 "" H 3200 7125 50  0000 C CNN
 	1    3200 7125
 	0    -1   1    0   
 $EndComp
-NoConn ~ 3300 7175
 Text Label 5450 6575 0    60   ~ 0
 RX1_out
 $Comp
@@ -1277,7 +1277,7 @@ Wire Wire Line
 Wire Wire Line
 	3800 6875 3900 6875
 Wire Wire Line
-	3300 6675 3600 6675
+	3250 6675 3600 6675
 Wire Wire Line
 	3200 6875 3600 6875
 Wire Wire Line
@@ -1583,4 +1583,19 @@ Wire Wire Line
 	3050 7125 2800 7125
 Wire Wire Line
 	2800 7125 2800 6875
+$Comp
+L GND #PWR?
+U 1 1 5730DD28
+P 3250 6700
+F 0 "#PWR?" H 3250 6450 50  0001 C CNN
+F 1 "GND" H 3250 6550 50  0000 C CNN
+F 2 "" H 3250 6700 50  0000 C CNN
+F 3 "" H 3250 6700 50  0000 C CNN
+	1    3250 6700
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3250 6425 3250 6700
+Connection ~ 3250 6675
+NoConn ~ 3200 7375
 $EndSCHEMATC

@@ -3,15 +3,14 @@
 \label{chap:hardware}
 % **************************************************************************** %
 
-In  diesem  Abschnitt  wird  genauer auf  die  Hardware  eingegangen. Es  wird
-erl\"autert, welche Probleme zu l\"osen und welche Anforderungen zu erf\"ullen
-sind  (und wie  diese ermittelt  und  definiert werden),  und welche  Hardware
-aus  welchen Gr\"unden  ausgew\"ahlt  worden ist,  um  diese Anforderungen  zu
-erf\"ullen.
+Das folgende Kapitel dokumentiert  unseren L\"osungsfindungsprozess im Bereich
+Hardware. Zuerst  wird  auf  die  Problematik  der  Kommunikation  \"uber  die
+DC-Leitung  zwischen  Solarmodul  und \Master  eingegangen. Es  werden  unsere
+L\"osungsans\"atze erl\"autert  und auf St\"arken und  Schw\"achen untersucht,
+um daraus anschliessend eine Entscheidung abzuleiten.
 
-Der Abschnitt  ist dabei  aufgeteilt gem\"ass  unserem System  selbst: Es wird
-separat auf Sensor  und Master-Ger\"at und ihre  jeweiligen Subsysteme (soweit
-sinnvoll) eingegangen.
+In   einem  n\"achsten   Schritt  werden   die  L\"osungskonzepte   f\"ur  die
+Sensor-Platine und das \Master genauer erkl\"art.
 
 \anweisung Verifizierbare  Angaben machen, nicht  allgemeine Floskeln. Zahlen,
 Fakten,  theoretische Hintergrundinformationen,  daraus gezogene  Konsequenzen
@@ -21,6 +20,87 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 
 % ---------------------------------------------------------------------------- %
+\section{Kommunikation \"uber DC-Leitung}
+\label{sec:hardware:dcLeitung}
+% ---------------------------------------------------------------------------- %
+
+W\"ahrend  des   Projekts  wurden   zwei  L\"osungsans\"atze   untersucht,  um
+ein  Signal  \"uber   die  Gleichstromleitung  vom  \Sensor   zum  \Master  zu
+\"ubertragen. Der  Gleichstromanteil   bel\"auft  sich  in  der   Leitung  auf
+ca. \SI{960}{\volt} \todo{Berechnung/Begr\"undung}.
+
+\begin{itemize}
+    \item
+        \emph{Frequency-shift      keying}     (\emph{Frequenzumtastung}): Dem
+        in      der       Leitung      fliessenden       Gleichstrom      wird
+        ein    (verh\"altnism\"assig   kleines\todo{Amplitudenverh\"altnisse})
+        Wechelstromsignal   aufmoduliert,  welches   die  zu   \"ubertragenden
+        Informationen    enth\"alt. Dabei    wird    die    Frequenz    dieses
+        Wechselstromsignals  in  diskreten Schritten  variiert, \todo{korrekt?}
+        und diese \"Anderung der Frequenz ist der Informationstr\"ager.  F\"ur
+        einen kurzen \"Uberblick zum Thema  sie an dieser Stelle auf Wikipedia
+        verwiesen~\cite{ref:fsk:wikipedia}.
+
+        Das  Verfahren  ist   schematisch  in  Abbildung~\ref{fig:fsk:concept}
+        dargestellt.\todo{Achsen: Einheiten}
+    \item
+        \emph{Amplitude-shift    keying}   (\emph{Amplitudenumtastung}): Statt
+        diskreten  Frequenzen  werden  in   diesem  Fall  diskrete  Amplituden
+        als   Informationstr\"ager  benutzt. Die   Umsetzung  w\"urde   darauf
+        basieren,  dass kurzfristig  (mit  Frequenzen im  Bereich von  einigen
+        \si{\kilo\hertz})   ein  Solarmodul   \todo{Modul? Zelle? String?}  in
+        einem  String (Serieschaltung)  kurzgeschlossen w\"urde. Dies  w\"urde
+        die  auf  der  Leitung  anliegende  Spannung in  dieser  Zeit  um  den
+        Spannungsanteil  des kurzgeschlossenen  Moduls einbrechen  lassen. Die
+        Einbr\"uche w\"urden als Informationstr\"ager fungieren und im \Master
+        ausgewertet.
+
+        Grunds\"atzlich  handelt   es  sich  beim  aufmodulierten   Signal  um
+        \emph{ASK}  mit   zwei  Amplituden: \SI{0}{\volt}  (wenn   kein  Modul
+        kurzgeschlossen  ist und  ein  reiner Gleichstrom  \"uber die  Leitung
+        fliesst)  und einer  negativen Amplitude  im Umfang  der Spannung  des
+        kurzgeschlossenen Modules.
+
+        F\"ur   einen  kurzen   Einblick  ins   Thema  sei   auch  an   dieser
+        Stelle  auf   den  entsprechenden  Artikel  auf   Wikipedia  verwiesen
+        \cite{ref:ask:wikipedia}.
+
+        Abbildung~\ref{fig:ask:concept}  stellt  das  Konzept  des  Verfahrens
+        schematisch dar. \todo{Achsen: Einheiten}
+\end{itemize}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/fsk.pgf}
+    \caption{%
+        \emph{Frequency-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
+        zugeh\"orige Verhalten des  modulierten Signals. Dieses Signal w\"urde
+        bei unserem System auf eine \SI{960}{\volt}-DC-Spannung aufmoduliert.%
+    }
+    \label{fig:fsk:concept}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/ask.pgf}
+    \caption{%
+        \emph{Amplitude-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
+        zugeh\"orige  Verhalten  des   \"ubertragenen  Signals. Die  Form  des
+        Signals w\"urde  in unserem System  etwas anders aussehen, da  wir ein
+        \SI{960}{\volt}-Signal  kurzzeitig um  jeweils  bis zu  \SI{60}{\volt}
+        einbrechen lassen  w\"urden, anstatt mit  sch\"onen Sinus-Schwingungen
+        zu arbeiten. Das Konzept von einer  diskreten Anzahl (sowohl in dieser
+        Abbildung  wie auch  in unserem  System zwei)  und ihrer  Zuordnung zu
+        entweder \code{0} oder \code{1} bleibt aber identisch.%
+    }
+    \label{fig:ask:concept}
+\end{figure}
+
+
+% ---------------------------------------------------------------------------- %
+\clearpage
 \section{Sensorplatine}
 \label{sec:hw:sensorplatine}
 % ---------------------------------------------------------------------------- %
@@ -30,16 +110,16 @@ k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
 
 \anweisung Dimensionierung der Bauteile: Berechnungen
 
-\begin{figure}[h!t]
-    \centering
-    \resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
-        \begin{axis}
-            \addplot[-,color=blue] table {data/fetsim.dat};
-        \end{axis}
-    \end{tikzpicture}}
-    \caption{test}
-    \label{fig:test}
-\end{figure}
+%\begin{figure}[h!t]
+%    \centering
+%    \resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
+%        \begin{axis}
+%            \addplot[-,color=blue] table {data/fetsim.dat};
+%        \end{axis}
+%    \end{tikzpicture}}
+%    \caption{test}
+%    \label{fig:test}
+%\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Energieversorgung}

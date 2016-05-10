@@ -4,6 +4,7 @@ from database import insertp, inserts, db
 
 
 # todo While Schleife mit delay und Abfrage beim IC oder falls möglich auf Meldung von IC warten ob neue Daten gekommen sind
+# todo ev. Interrupt um angekickt zu werden
 
 
 # todo Wenn Daten gekommen sind:
@@ -24,37 +25,46 @@ class ModulePackage(object):
         self.timestamp = time.time()
 
 # Creates the Object with all the data
-module = ModulePackage(1, 2345, 67)  # Creates the Datapackage (stringnumber, serialnumber,voltage)
+module = ModulePackage(5, 123456, 67.6)  # Creates the Datapackage (stringnumber, serialnumber, voltage)
 
 # Save the package into datebase
+# -----------------------------------------------------------------------------------------------------------
 # todo hier nur syntaxbeispiel
-insertp.execute(serialnumber=module.serialnumber, voltage=module.voltage,
-                stringnumber=module.stringnumber, timestamp=time.time())
+insertp.execute(serialnumber=123456, voltage=30, stringnumber=3, timestamp=time.time(), flag_reported=1)
+insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=0)
+insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=1)
+insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=0)
 
-inserts.execute(stringnumber=6, stringcurrent=35, timestamp=time.time())
+inserts.execute(stringnumber=1, stringcurrent=35, timestamp=time.time(), flag_watch=1)
+inserts.execute(stringnumber=2, stringcurrent=35, timestamp=time.time(), flag_watch=1)
+inserts.execute(stringnumber=3, stringcurrent=35, timestamp=time.time(), flag_watch=1)
+inserts.execute(stringnumber=4, stringcurrent=35, timestamp=time.time(), flag_watch=1)
+# ------------------------------------------------------------------------------------------------------------
 
-# todo Überprüfen ob die SN in entsprechendem String bereits vorhanden ist
-
-
-t = db.execute('select id from panels where serialnumber = 123456;')
-l = t.fetchall()
-print(l)
-if len(l) == 0:
-    print('null')
+# check if serial number already exists in the string and write their IDs into "select"
+pointers = db.execute('select id from panels where stringnumber = 5 and serialnumber = 123456;')  # todo serienummer automatisch übernehmen stringnummer?
+select = pointers.fetchall()
+print(select)
+# serial number does not exist in the string
+if len(select) == 0:
+    print('SN nicht in String vorhanden')
+    pointers2 = db.execute('select id from panels where stringnumber = 5 and flag_reported = 1;')
+    select2 = pointers2.fetchall()
+    print(select2)
+    # no module from this string is reported
+    if len(select2) == 0:
+        print('Kein defekt gemeldtes Modul')
+        insertp.execute(serialnumber=module.serialnumber, voltage=module.voltage,
+                        stringnumber=module.stringnumber, timestamp=time.time())
+    # Theres a reported module inside this string
+    else:
+        print('es existiert ein defekt gemeldetes Modul')
+        # todo ersetzen des gemeldeten Modules (löschen des alten und speichern des neuen)
+# SN already exists in the sring
 else:
-    print('else')
+    print('SN schon in String vorhanden')
+    insertp.execute(serialnumber=module.serialnumber, voltage=module.voltage,
+                    stringnumber=module.stringnumber, timestamp=time.time())
 
-# todo --> Falls ja: Objekt ganz normal mit String und Modulnummer speichern
-
-# todo --> Falls nein: Überprüfen ob in entsprechendem String ein Modul als nicht gut gemeldet wurde
-
-# todo -----> Falls ja: Defekt gemeldetes Modul löschen (oder muten?) und das neue in den String platzieren (quasi ersetzen)
-
-# todo -----> Falls nein: Das neue Objekt (Modul) als neues Modul in diesem String speichern (zusätliches, neues Modul)
 
 # todo Interrupt von statician ankicken
-
-# todo class um ein Datenpaket zu erstellen (mit self.x=x etc)
-
-
-# todo ev. Interrupt um angekickt zu werden

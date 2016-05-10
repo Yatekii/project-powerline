@@ -1,18 +1,17 @@
-#imports
+# todo imports
 
-# Wird per interrupt oder per timer angekickt
-
-
-# Die richtigen Daten aus der Datenbank holen
-
-# Stringströme vergleichen (?) und entsprechend Flags setzen (wo?) (Durchschnitt mit prozentualer Abweichung)
-
-# Modulspannungen im String vergleichen und Flags entsprechend setzen (Normalverteilung)
-
-# Interrupt von evaluator ankicken
+# todo Wird per interrupt oder per timer angekickt
 
 
+# todo Die richtigen Daten aus der Datenbank holen
 
-# Interrupt falls benötigt
+# todo Stringströme vergleichen (?) und entsprechend Flags setzen (wo?) (Durchschnitt mit prozentualer Abweichung)
 
-# Timer falls benötigt
+# todo Modulspannungen im String vergleichen und Flags entsprechend setzen (Normalverteilung)
+
+# todo Interrupt von evaluator ankicken
+
+
+# todo Interrupt falls benötigt
+
+# todo Timer falls benötigt

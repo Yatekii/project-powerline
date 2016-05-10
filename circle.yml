@@ -6,19 +6,12 @@ general:
   artifacts:
     - software/sensor/bin
 
-machine:
-  python:
-    version: 3.4.3
-
 dependencies:
   pre:
     - sudo add-apt-repository ppa:terry.guo/gcc-arm-embedded -y
     - sudo apt-get update
-    - sudo apt-get install gcc-arm-none-eabi=4.9.3.2015q3-1trusty1 python3-pyqt5
-    - pip install transitions sqlalchemy flake8 pylint
+    - sudo apt-get install gcc-arm-none-eabi=4.9.3.2015q3-1trusty1
 
 test:
   pre:
     - cd software/sensor/ && make
-    - cd software/supervisor/ && pylint -E *.py
-    - cd software/supervisor/ && flake8 *.py

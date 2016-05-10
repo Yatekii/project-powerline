@@ -1,50 +1,55 @@
 # imports
-from sqlalchemy import MetaData, Column, Table, Integer, create_engine
-#todo nur debug - wieder rausnehmen
+from sqlalchemy import MetaData, Column, Table, Integer, Float, Boolean, create_engine
+# todo nur debug - wieder rausnehmen
 import time
 
-# Erstellen des Database-File
+# Creates the database file
 db = create_engine('sqlite:///powerline.db')
 
-# Ausgaben unterdrücken
+# disables database outputs
 db.echo = False
 
-# Metadaten erstellen
+# creates metadata
 metadata = MetaData(bind=db)
 
-# Struktur des Panel-Tables definieren
+# defines sturcture of the panels table
 
 panels = Table('panels', metadata,
                Column('id', Integer, primary_key=True, autoincrement=True),
                Column('serialnumber', Integer),
-               Column('voltage', Integer),
+               Column('voltage', Float),
                Column('stringnumber', Integer),
-               Column('timestamp', Integer)
+               Column('timestamp', Integer),
+               Column('flag_watch', Boolean, default=False),
+               Column('flag_reported', Boolean, default=False)
                )
 insertp = panels.insert()
 
-# Alter Table löschen falls vorhanden todo(noch rausnehmen?)
-panels.drop(db, checkfirst=False)
+# todo(noch rausnehmen?) # Alter Table löschen falls vorhanden
+panels.drop(db, checkfirst=True)
 
-# Panel-Table erstellen
+# creates panels talbe
 panels.create()
 
-# Struktur des String-Tables definieren
+# defines structure of the strings table
 
 strings = Table('strings', metadata,
                 Column('id', Integer, primary_key=True, autoincrement=True),
                 Column('stringnumber', Integer),
-                Column('stringcurrent', Integer)
+                Column('stringcurrent', Integer),
+                Column('timestamp', Integer),
+                Column('flag_watch', Boolean, default=False),
+                Column('flag_reported', Boolean, default=False)
                 )
 inserts = strings.insert()
 
-# Alter Table löschen falls vorhanden todo(noch rausnehmen?)
-strings.drop(db, checkfirst=False)
+# todo(noch rausnehmen?) Alter Table löschen falls vorhanden
+strings.drop(db, checkfirst=True)
 
-# String-Table erstellen
+# creates sings table
 strings.create()
 
 
-#todo nur zu debugzwecken
-insertp.execute(serialnumber=123456, voltage=30, stringnumber=4, timestamp=time.time())
-inserts.execute(stringnumber=27, stringcurrent=35)
+# todo nur zu debugzwecken
+insertp.execute(serialnumber=123456, voltage=30, stringnumber=4, timestamp=time.time(), flag_reported=1)
+inserts.execute(stringnumber=27, stringcurrent=35, timestamp=time.time(), flag_watch=1)

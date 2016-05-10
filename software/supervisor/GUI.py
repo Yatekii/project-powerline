@@ -28,7 +28,10 @@ class Example(QWidget):
 
         hystoryBt = QPushButton("Hystory")
         settingBt = QPushButton("Einstellungen")
-        strom = 
+        currentTitle = QLabel("Strommessung")
+        current1Label = QLabel("String 1")
+        current2Label = QLabel("String 2")
+        current3Label = QLabel("String 3")
 
         hbox = QHBoxLayout()
         hbox.addWidget(hystoryBt)
@@ -37,6 +40,9 @@ class Example(QWidget):
         vbox = QVBoxLayout()
         vbox.addLayout(hbox)
         vbox.addStretch(1)
+        vbox.addWidget(current1Label)
+        vbox.addWidget(current2Label)
+        vbox.addWidget(current3Label)
 
 
 
@@ -46,7 +52,33 @@ class Example(QWidget):
         self.setWindowTitle('Home')
         self.show()
 
+    def initUI2(self):
+        
+        title = QLabel('Title')
+        author = QLabel('Author')
+        review = QLabel('Review')
 
+        titleEdit = QLineEdit()
+        authorEdit = QLineEdit()
+        reviewEdit = QTextEdit()
+
+        grid = QGridLayout()
+        grid.setSpacing(10)
+
+        grid.addWidget(title, 1, 0)
+        grid.addWidget(titleEdit, 1, 1)
+
+        grid.addWidget(author, 2, 0)
+        grid.addWidget(authorEdit, 2, 1)
+
+        grid.addWidget(review, 3, 0)
+        grid.addWidget(reviewEdit, 3, 1, 5, 1)
+
+        self.setLayout(grid)
+
+        self.setGeometry(300, 300, 350, 300)
+        self.setWindowTitle('Review')
+        self.show()
 
 if __name__ == '__main__':
 

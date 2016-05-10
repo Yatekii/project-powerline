@@ -1,3 +1,29 @@
+% Plot from tabular data
+%\begin{figure}
+%    \begin{tikzpicture}
+%       \begin{scope}[x={(0mm,0mm)},y={(170mm,\textwidth)}]
+%           \begin{axis}[%
+%                   xmode=log,
+%                   height=80mm,
+%                   width=\textwidth,
+%                   at={(0,80mm)},
+%                   %grid=both,
+%               ]
+%               \addplot[-,color=blue] table {data/measurement-inductor-1layer-inductance.dat};
+%               %\addplot[-,color=blue] table {data/fetsim.dat};
+%           \end{axis}
+%           %\begin{axis}[%
+%           %        height=80mm,
+%           %        width=\textwidth,
+%           %        at={(0,0mm)},
+%           %        %grid=both,
+%           %    ]
+%           %    \addplot[-,color=red] table {data/fetsim.dat};
+%           %\end{axis}
+%       \end{scope}
+%   \end{tikzpicture}
+%\end{figure}
+
 % **************************************************************************** %
 \chapter{Hardware}
 \label{chap:hardware}
@@ -122,8 +148,25 @@ w\"are.
 
 Eine kapazitive Einkopplung hat die Vor- und Nachteile, dass \ldots, w\"ahrend
 \ldots Nachteile sind.\todo{Vor- Nachteile}
+\todo{Circuit}
 
-Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
+
+Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
+wird von der FSK-Schaltung das zu  \"ubertragende Signal gegeben und die Spule
+induziert in  der DC-Leitung  entsprechende Spannungs-Rippel, die  vom \Master
+ausgewertet werden k\"onnen. Der entsprechende  Schaltkreis ist schematisch in
+Abbildung \ref{fig:circ:coupling:inductive} dargestellt.
+
+Verglichen mit  Kondensatoren sind Spulen relativ  gross und teuer. Allerdings
+ist das Prinzip  der induktiven Einkopplung gut dokumentiert  und die Aussicht
+auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/coupling-inductive.tex}
+    \caption{Induktive Einkopplung}
+    \label{fig:circ:coupling:inductive}
+\end{figure}
 
 
 % ---------------------------------------------------------------------------- %
@@ -131,27 +174,157 @@ Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
 \label{subsec:hw:ask:machbarkeit}
 % ---------------------------------------------------------------------------- %
 
-Im Folgenden werden die \"Uberlegungen dargelegt, anhand derer die Machbarkeit
-der Kurzschlussvariante evaluiert wird.
+Die Machbarkeit dieser L\"osungsvariante soll anhand von Simulationen so weit als
+m\"oglich beurteilt werden.
+%Um die Machbarkeit dieser L\"osungsvariante zu beurteilen, wurden Simulationen
+%durchgef\"uhrt.
+Dazu  wurde  zuerst  eine  Modellschaltung  entwickelt,  deren
+Parameter  definiert  und  anschliessend   Simulationen  mit  der  definierten
+Konfiguration durchgef\"uhrt.
+
+Als   Simulationstool  wird   \code{LTspice   IV}   von  Linear   Technologies
+eingesetzt~\cite{ref:ltspice}.
 
 
+% ---------------------------------------------------------------------------- %
+\subsubsection{Modellierung eines Solarmoduls}
+\label{subsubsec:hw:ask:modell}
+% ---------------------------------------------------------------------------- %
 
-%\begin{minipage}{\textwidth}
+Als  Ausganspunkt  des  Modells  f\"ur ein  Modul  dient  das  Eindiodenmodell
+\todo{Bindestrich  oder ein  Wort?} gem\"ass  Abbildung. Dabei wird  dieses um
+einen  Kondensator  der Kapazit\"at  $C$  parallel  zur Stromquelle  erg\"anzt
+(basierend  auf   Informationen  aus  Quellen   \cite{ref:solar:scofield}  und
+\cite{ref:solar:friesen}).
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/solarCell.tex}
+    \caption{%
+        Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
+        Eindiodenmodell mit zus\"atzlicher Kapazit\"at%
+    }
+    \label{fig:circuit:solarCell}
+\end{figure}
+
+Zur   Ermittlung  der   Parameter   dieses  Modells   wurde  pr\"imar   Quelle
+\cite{ref:solar:scofield}  herangezogen. Ihr   Autor  hat  $C$,   $R_{S}$  und
+$R_{P}$ einer  Solarzelle der Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber
+einen   Frequenzbereicht  von   \SI{1}{\kilo\hertz}  bis   \SI{1}{\mega\hertz}
+ausgemessen. Die Resultate waren:
+
+\begin{align}
+    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \; \text{bis} \; \SI{20}{\nano\farad}  = \SI{14 \pm 6}{\nano\farad} \\
+    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \; \text{bis} \; \SI{20}{\ohm}         = \SI{10.1 \pm 9.9}{\ohm}     \\
+    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; \text{bis} \; \SI{500}{\kilo\ohm}   = \SI{250.25 \pm 249.75}{\kilo\ohm}
+\end{align}
+
+Um  die obigen  Werte  f\"ur  unsere Zwecke  verwenden  zu k\"onnen,  m\"ussen
+sie   von  einer   Solarzelle  der   Gr\"osse  \SI{0.43}{\centi\meter\squared}
+auf   die  Gr\"osse   einer   Zelle,   wie  sie   in   der  Praxis   verwendet
+wird,  heraufskaliert   werden. Wir  werden   hierbei  von  einer   Zelle  der
+Gr\"osse $\SI{100}{\milli\meter} \times  \SI{100}{\milli\meter}$ ausgehen, was
+ungef\"ahr  der $230$-fachen  Fl\"ache  der Solarzellen  aus obigen  Messungen
+entspricht.
+\todo{Referenzen auf spezifische Textstellen?}
+
+$R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
+zur  Zellfl\"ache,  wogegen  $C$   bei  gr\"osser  werdender  Zelloberfl\"ache
+ansteigt~\cite{ref:solar:scofield}. Wir  nehmen  die  Mittelwerte  aus  obigen
+Gleichungen und bestimmen unsere Parameter:
+
+\begin{align}
+    C               &= C_{\mathrm{Messung}}    \cdot 230 = \SI{3.2}{\micro\farad} \\
+    R_{\mathrm{S,}} &= R_{\mathrm{S, Messung}} \div  230 = \SI{44}{\milli\ohm}    \\
+    R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} \div  230 = \SI{1.1}{\kilo\ohm}
+\end{align}
+
+Zur   Ermittlung  des   Quellenstromes   werden   die  Spezifikationen   eines
+\emph{Solarex    MSX-60}-Moduls    herangezogen   (verf\"ugbar    in    Quelle
+\cite{ref:solar:bonkoungou}). Das Modul  besteht aus  36 in  Serie verbundenen
+Zellen und hat  einen Strom von \todo{Kurzschlusstrom  oder Peak-Power Strom?}
+\SI{3.8}{\ampere}  bei maximaler  Leistungsabgabe. Die  Stromquelle im  Modell
+wird daher auf diesen Wert eingestellt.
+%Kurzzschlussstrom von \SI{3.8}{\ampere} bei
+Die  Spannung  bei   maximaler  Leistungsabgabe  liegt  bei
+\SI{17.1}{\volt}, die
+Leerlaufspannung gem\"ass IV-Kurve bei etwa \SI{21}{\volt}.
+
+Heruntergerechnet  auf  eine einzelne  Zelle  ergibt  dies eine  Spannung  bei
+maximaler Leistungsabgabe von  \SI{475}{\milli\volt} und eine Leerlaufspannung
+$V_{\mathrm{offen}}$ pro Zelle von \SI{580}{\milli\volt}.
+
+Als letzte  Komponente ist  die Diode zu  bestimmen. Dies erfolgt  iterativ in
+\code{LTspice}.
+\todo{Erkl\"arung von IS und N}
+\todo{Schema von LTspice. Appendix?}
+
+\begin{itemize}
+    \item
+        Definition eines simplen  Diodenmodells mit gesch\"atzten Startwerten: \\
+        \code{.model diode1 D(IS=1e-6 N=2)}
+    \item
+        Transientensimulation der Zelle: \code{.tran 1m}
+    \item
+        Messung  der   Zellenspannnung  $V_{\mathrm{offen}}$,   Vergleich  mit
+        Zielwert von ca. \SI{580}{\milli\volt}
+    \item
+        \"Andern von  \code{IS} und  \code{N} im Diodenmodell  und Wiederholen
+        des Vorgangs, bis ein zufriedenstellendes Ergebnis erzielt ist.
+\end{itemize}
+
+Nach einigen Iterationen liefert dieser Prozess:\todo{Einheiten}
+
+\begin{align}
+    \label{eq:cell:diode:IS:N:result}
+    I_s &= \SI{3}{\micro\ampere} \\
+    N   &= 1.5
+\end{align}
+
+Somit ist  das Modell  einer einzelnen  Zelle bestimmt  und kann  dazu benutzt
+werden,  ein Modul  zu modellieren. Es  soll dabei  ein Modul  aus 72  Zellen,
+geschaltet in zwei parallelen Str\"angen mit  je 36 Zellen in Serie, simuliert
+werden.
+
+\myfancybreak
+
+Bei der Modellierung eines Moduls stehen zwei Varianten zur Verf\"ugung:
+
+\begin{itemize}
+    \item
+        Modellierung  des  Modules  \"ahnlich  zur  einzelnen  Zelle  gem\'ass
+        dem  Schema in  Abbildung \ref{fig:circuit:solarCell}. Dabei  m\"ussen
+        Methoden gefunden werden, um die Parameter des Modells von einer Zelle
+        auf ein Modul umzurechnen.
+
+        Vorteil dieser Methode ist ihr einfaches Schaltbild. Der Rechenaufwand
+        wird gering  gehalten und  man verliert beim  Arbeiten mit  dem Modell
+        nicht die \"Ubersicht.
+
+        Der Knackpunkt besteht darin, brauchbare Methoden zu finden, mit denen
+        die  Parameter von  einer  Zelle auf  ein  Modul hochgerechnet  werden
+        k\"onnen.
+    \item
+        Man baut einen Schaltkreis auf, der die entsprechende Anzahl Module in
+        der  gew\"unschten  Weise  miteinander  verbindet,  wie  auch  in  der
+        Realit\"at ein Modul aus mehreren Zellen zusammengesetzt ist.
+
+        Vorausgesetzt, die PArameter f\"ur eine  Zelle sind gen\"ugend nahe an
+        der Realit\"at,  ist die  St\"arke dieser Herangehensweise,  dass ihre
+        Resultate ziemlich  glaubw\"urdig sind (nat\"urlich ist  es immer noch
+        ien Modell, nicht Realit\"at).
+
+        Nachteilig ist  hier die  Kompliexit\"at sowohl im  Zusammensetzen des
+        Modells wie auch im h\"oheren Rechenaufwand.
+\end{itemize}
+Entweder
+wird ein verfinachtes Modell, das sehr \"ahnlich zur einzelnen Zell
+%\begin{figure}[h!tb]
 %    \centering
-%    \begin{tikzpicture}
-%        \begin{scope}[x={(0mm,0mm)},y={(80mm,.75\textwidth)}]
-%            \begin{axis}[%
-%                    height=80mm,
-%                    width=.75\textwidth,
-%                    at={(0,80mm)},
-%                    %grid=both,
-%                ]
-%                \addplot[-,color=blue] table {data/fetsim.dat};
-%            \end{axis}
-%        \end{scope}
-%    \end{tikzpicture}
-%    \figcaption{This is a simulation of some things to show some stuff to deduce some conclusions do draw some deductions.}
-%\end{minipage}
+%    \includegraphics[width=\textwidth]{images/ltspice/solarmodul-zellenbasiert.eps}
+%    \caption{Solarmodul, modelliert durch 2 parallele Strings mit je 36 Zellen in Serie}
+%    \label{fig:ltspice:solarmodul:cellBased}
+%\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \clearpage
@@ -163,17 +336,6 @@ Was  ist der  Zweck  der Sensorplatine? Welche  Aufgaben  muss sie  erf\"ullen
 k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
 
 \anweisung Dimensionierung der Bauteile: Berechnungen
-
-%\begin{figure}[h!t]
-%    \centering
-%    \resizebox{0.5\textwidth}{!}{\begin{tikzpicture}[scale=1.5]
-%        \begin{axis}
-%            \addplot[-,color=blue] table {data/fetsim.dat};
-%        \end{axis}
-%    \end{tikzpicture}}
-%    \caption{test}
-%    \label{fig:test}
-%\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Energieversorgung}

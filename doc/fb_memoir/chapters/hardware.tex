@@ -122,9 +122,18 @@ w\"are.
 
 Eine kapazitive Einkopplung hat die Vor- und Nachteile, dass \ldots, w\"ahrend
 \ldots Nachteile sind.\todo{Vor- Nachteile}
+\todo{Circuit}
 
 
-Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
+Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
+wird von der FSK-Schaltung das zu  \"ubertragende Signal gegeben und die Spule
+induziert in  der DC-Leitung  entsprechende Spannungs-Rippel, die  vom \Master
+ausgewertet werden k\"onnen. Der entsprechende  Schaltkreis ist schematisch in
+Abbildung \ref{fig:circ:coupling:inductive} dargestellt.
+
+Verglichen mit  Kondensatoren sind Spulen relativ  gross und teuer. Allerdings
+ist das Prinzip  der induktiven Einkopplung gut dokumentiert  und die Aussicht
+auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
 
 \begin{figure}[h!tb]
     \centering
@@ -132,6 +141,7 @@ Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
     \caption{Induktive Einkopplung}
     \label{fig:circ:coupling:inductive}
 \end{figure}
+
 
 % ---------------------------------------------------------------------------- %
 \subsection{ASK: Machbarkeitsanalyse}
@@ -141,6 +151,11 @@ Eine induktive Einkopplung hat \ldots \todo{Vor- Nachteile}
 Im Folgenden werden die \"Uberlegungen dargelegt, anhand derer die Machbarkeit
 der Kurzschlussvariante evaluiert wird.
 
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/fetsim.tex}
+    \caption{Schaltschema zur Modellierung eines Solarmoduls mit MOSFET zum Kurzschliessen}
+\end{figure}
 
 
 %\begin{minipage}{\textwidth}

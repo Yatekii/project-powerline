@@ -23,12 +23,15 @@
 \NeedsTeXFormat{LaTeX2e}[1995/12/01]
 \ProvidesClass{fhnwreport}[2013/10/07 v2.0 PDF-LaTeX class for FHNW reports]
 \LoadClass{article}
+%\LoadClass{book}
 \RequirePackage{geometry}
 \RequirePackage{calc}
 \RequirePackage{times}
 \RequirePackage{graphicx}
+%\geometry{a4paper,twoside=true}
 \geometry{a4paper,twoside=false}
-\geometry{width=160mm,height=241mm,top=32mm,outer=25mm}
+%\geometry{width=160mm,height=241mm,top=32mm,outer=25mm}
+\geometry{width=150mm,height=231mm,top=40mm,outer=30mm}
 \geometry{footskip=19mm,headsep=13mm}
 \newcommand{\CaptionFont}{\em}
 \newcommand{\SecFont}{\sf\bfseries}

@@ -1,0 +1,17 @@
+* Z:\home\of-1\receiver_master.asc
+C1 P001 N002 100µ
+R1 Ausgang P001 100
+D1 Ausgang 3.3V diodePro4
+D2 0 Ausgang diodePro4
+R2 3.3V Ausgang 100k
+R3 Ausgang 0 100k
+R4 0 Ausgang 1e6
+V1 N002 N001 PULSE(0 -60 0 0 0 5e-4 1e-3)
+V2 N001 0 960
+V3 3.3V 0 3.3
+.model D D
+.lib Z:\usr\share\ltspice\lib\cmp\standard.dio
+.tran 50m
+.model diodePro4 D(Is=.88f Rs=.25 Cjo=175p M=.55 bv=2.7 Vj=.75 Isr=1.86n Nr=2 Ibv=20.254m Ibvl=1.96m Nbvl=15 Tbv1=-21.3u Vpk=60 type=Zener)
+.backanno
+.end

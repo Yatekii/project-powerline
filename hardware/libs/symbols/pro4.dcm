@@ -1,3 +1,8 @@
 EESchema-DOCLIB  Version 2.0
 #
+$CMP SC16IS740IPW
+D 8 bits Universer shift/storage Register
+K TTL REG SR SR8
+$ENDCMP
+#
 #End Doc Library

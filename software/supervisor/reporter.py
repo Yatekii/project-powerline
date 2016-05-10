@@ -1,13 +1,13 @@
-# imports
+# todo imports
 
-# wird vermutlich per Interrupt angekickt
-
-
-# Interrupt in configurator auslösen und Meldung auf Display darstellen
-
-# Relaiskontakt auslösen (umsetzung je nach additional board)
-
-# SMS-Nachricht auslösen
+# todo wird vermutlich per Interrupt angekickt
 
 
-# Interrupt
+# todo Interrupt in configurator auslösen und Meldung auf Display darstellen
+
+# todo Relaiskontakt auslösen (umsetzung je nach additional board)
+
+# todo SMS-Nachricht auslösen
+
+
+# todo Interrupt

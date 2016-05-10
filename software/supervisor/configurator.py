@@ -1,12 +1,11 @@
-# inputs
+# todo inputs
 
 
-# Die einzelnen Untermenus mit PyQt5 darstellen und miteinander verbinden
+# todo Die einzelnen Untermenus mit PyQt5 darstellen und miteinander verbinden
 
-# Menüpunkte?
+# todo Menüpunkte?
 
 
+# todo interrupt um zu jedem zeitpunkt Meldung darzustellen
 
-# interrupt um zu jedem zeitpunkt Meldung darzustellen
-
-# timer um nach genug langer Zeit wieder auf Grundscreen zurückzukehren
+# todo timer um nach genug langer Zeit wieder auf Grundscreen zurückzukehren

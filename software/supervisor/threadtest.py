@@ -20,6 +20,7 @@ class powerline_prototype(threading.Thread):
         while not self.stoprequest.isSet():
             try:
                 self.cmdQueue.get(True, 1)
+                self.log.debug('powerline_prototype run')
                 # TODO: CODE HERE
             except queue.Empty:
                 continue

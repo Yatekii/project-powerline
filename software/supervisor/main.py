@@ -15,12 +15,18 @@ log = logging.getLogger("MasterLog")
 log.setLevel(logging.DEBUG)
 logQue = queue.Queue(-1)
 logQueueHandler = logging.handlers.QueueHandler(logQue)
-logFormat = logging.Formatter('%(asctime)s | %(name)s | %(threadName)s: %(levelname)s: %(message)s')
+logFormat = logging.Formatter(
+    '%(asctime)s | %(name)s | %(threadName)s: %(levelname)s: %(message)s'
+)
 logTermHandler = logging.StreamHandler()
 logTermHandler.setFormatter(logFormat)
 logSyslogHandler = logging.handlers.SysLogHandler('/dev/log')
 logSyslogHandler.setFormatter(logFormat)
-logListener = logging.handlers.QueueListener(logQue, logTermHandler, logSyslogHandler)
+logListener = logging.handlers.QueueListener(
+    logQue,
+    logTermHandler,
+    logSyslogHandler
+)
 log.addHandler(logQueueHandler)
 
 dbSession_factory = sessionmaker(bind='sqlite:///powerline.db')

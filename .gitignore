@@ -42,4 +42,10 @@
 
 # Linker
 *.map
+
+# Python specific
 *.pyc
+
+# Sqlite databases
+*.db
+software/supervisor/.idea/workspace.xml

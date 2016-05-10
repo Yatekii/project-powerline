@@ -174,8 +174,11 @@ auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
 \label{subsec:hw:ask:machbarkeit}
 % ---------------------------------------------------------------------------- %
 
-Um die Machbarkeit dieser L\"osungsvariante zu beurteilen, wurden Simulationen
-durchgef\"uhrt. Dazu  wurde  zuerst  eine  Modellschaltung  entwickelt,  deren
+Die Machbarkeit dieser L\"osungsvariante soll anhand von Simulationen so weit als
+m\"oglich beurteilt werden.
+%Um die Machbarkeit dieser L\"osungsvariante zu beurteilen, wurden Simulationen
+%durchgef\"uhrt.
+Dazu  wurde  zuerst  eine  Modellschaltung  entwickelt,  deren
 Parameter  definiert  und  anschliessend   Simulationen  mit  der  definierten
 Konfiguration durchgef\"uhrt.
 
@@ -189,10 +192,10 @@ eingesetzt~\cite{ref:ltspice}.
 % ---------------------------------------------------------------------------- %
 
 Als  Ausganspunkt  des  Modells  f\"ur ein  Modul  dient  das  Eindiodenmodell
-\todo{Bindestrich  oder   ein  Wort?}   gem\"ass  Abbildung. Dabei   wird  das
-klassische   Eindiodenmodell  um   einen  Kondensator   der  Kapazit\"at   $C$
-parallel zur  Stromquelle erg\"anzt  (basierend auf Informationen  aus Quellen
-\cite{ref:solar:scofield} und \cite{ref:solar:friesen}).
+\todo{Bindestrich  oder ein  Wort?} gem\"ass  Abbildung. Dabei wird  dieses um
+einen  Kondensator  der Kapazit\"at  $C$  parallel  zur Stromquelle  erg\"anzt
+(basierend  auf   Informationen  aus  Quellen   \cite{ref:solar:scofield}  und
+\cite{ref:solar:friesen}).
 
 \begin{figure}[h!tb]
     \centering
@@ -205,15 +208,15 @@ parallel zur  Stromquelle erg\"anzt  (basierend auf Informationen  aus Quellen
 \end{figure}
 
 Zur   Ermittlung  der   Parameter   dieses  Modells   wurde  pr\"imar   Quelle
-\cite{ref:solar:scofield}  herangezogen. Es wurden  $C$,  $R_{S}$ und  $R_{P}$
-einer   Solarzelle   der   Gr\"osse   \SI{0.43}{\centi\meter\squared}   \"uber
+\cite{ref:solar:scofield}  herangezogen. Ihr   Autor  hat  $C$,   $R_{S}$  und
+$R_{P}$ einer  Solarzelle der Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber
 einen   Frequenzbereicht  von   \SI{1}{\kilo\hertz}  bis   \SI{1}{\mega\hertz}
 ausgemessen. Die Resultate waren:
 
 \begin{align}
-    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \text{bis} \SI{20}{\nano\farad}  = \SI{14 \pm 6}{\nano\farad} \\
-    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \text{bis} \SI{20}{\ohm}         = \SI{10.1 \pm 9.9}{\ohm}     \\
-    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \text{bis} \SI{500}{\kilo\ohm}   = \SI{250.25 \pm 249.75}{\kilo\ohm}
+    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \; \text{bis} \; \SI{20}{\nano\farad}  = \SI{14 \pm 6}{\nano\farad} \\
+    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \; \text{bis} \; \SI{20}{\ohm}         = \SI{10.1 \pm 9.9}{\ohm}     \\
+    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; \text{bis} \; \SI{500}{\kilo\ohm}   = \SI{250.25 \pm 249.75}{\kilo\ohm}
 \end{align}
 
 Um  die obigen  Werte  f\"ur  unsere Zwecke  verwenden  zu k\"onnen,  m\"ussen
@@ -236,12 +239,12 @@ Gleichungen und bestimmen unsere Parameter:
     R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} \div  230 = \SI{1.1}{\kilo\ohm}
 \end{align}
 
-Zur Bestimmung  werden die Spezifikationen eines  \emph{Solarex MSX-60}-Moduls
-herangezogen  (verf\"ugbar in  Quelle \cite{ref:solar:bonkoungou}). Das  Modul
-besteht  aus  36  in  Serie  verbundenen   Zellen  und  hat  einen  Strom  von
-\todo{Kurzschlusstrom   oder   Peak-Power   Strom?}    \SI{3.8}{\ampere}   bei
-maximaler  Leistungsabgabe. Die Stromquelle  im Modell  wird daher  auf diesen
-Wert  eingestellt.
+Zur   Ermittlung  des   Quellenstromes   werden   die  Spezifikationen   eines
+\emph{Solarex    MSX-60}-Moduls    herangezogen   (verf\"ugbar    in    Quelle
+\cite{ref:solar:bonkoungou}). Das Modul  besteht aus  36 in  Serie verbundenen
+Zellen und hat  einen Strom von \todo{Kurzschlusstrom  oder Peak-Power Strom?}
+\SI{3.8}{\ampere}  bei maximaler  Leistungsabgabe. Die  Stromquelle im  Modell
+wird daher auf diesen Wert eingestellt.
 %Kurzzschlussstrom von \SI{3.8}{\ampere} bei
 Die  Spannung  bei   maximaler  Leistungsabgabe  liegt  bei
 \SI{17.1}{\volt}, die
@@ -249,22 +252,22 @@ Leerlaufspannung gem\"ass IV-Kurve bei etwa \SI{21}{\volt}.
 
 Heruntergerechnet  auf  eine einzelne  Zelle  ergibt  dies eine  Spannung  bei
 maximaler Leistungsabgabe von  \SI{475}{\milli\volt} und eine Leerlaufspannung
-pro Zelle von \SI{580}{\milli\volt}.
+$V_{\mathrm{offen}}$ pro Zelle von \SI{580}{\milli\volt}.
 
-Als  letzte Komponente  ist  die Diode  zu  bestimmen. Dies erfolgt  iterative
-in  \code{LTspice}.
+Als letzte  Komponente ist  die Diode zu  bestimmen. Dies erfolgt  iterativ in
+\code{LTspice}.
 \todo{Erkl\"arung von IS und N}
-\todo{Schema von LTspice}
+\todo{Schema von LTspice. Appendix?}
 
 \begin{itemize}
     \item
-        Definition eines simplen  Diodenmodells mit gesch\"atzten Startwerten:
+        Definition eines simplen  Diodenmodells mit gesch\"atzten Startwerten: \\
         \code{.model diode1 D(IS=1e-6 N=2)}
     \item
         Transientensimulation der Zelle: \code{.tran 1m}
     \item
-        Messung    der   Zellenspannnung,    Vergleich   mit    Zielwert   von
-        ca. \SI{580}{\milli\volt}
+        Messung  der   Zellenspannnung  $V_{\mathrm{offen}}$,   Vergleich  mit
+        Zielwert von ca. \SI{580}{\milli\volt}
     \item
         \"Andern von  \code{IS} und  \code{N} im Diodenmodell  und Wiederholen
         des Vorgangs, bis ein zufriedenstellendes Ergebnis erzielt ist.
@@ -274,11 +277,48 @@ Nach einigen Iterationen liefert dieser Prozess:\todo{Einheiten}
 
 \begin{align}
     \label{eq:cell:diode:IS:N:result}
-    I_s &= 3e-6 \\
+    I_s &= \SI{3}{\micro\ampere} \\
     N   &= 1.5
 \end{align}
 
+Somit ist  das Modell  einer einzelnen  Zelle bestimmt  und kann  dazu benutzt
+werden,  ein Modul  zu modellieren. Es  soll dabei  ein Modul  aus 72  Zellen,
+geschaltet in zwei parallelen Str\"angen mit  je 36 Zellen in Serie, simuliert
+werden.
 
+\myfancybreak
+
+Bei der Modellierung eines Moduls stehen zwei Varianten zur Verf\"ugung:
+
+\begin{itemize}
+    \item
+        Modellierung  des  Modules  \"ahnlich  zur  einzelnen  Zelle  gem\'ass
+        dem  Schema in  Abbildung \ref{fig:circuit:solarCell}. Dabei  m\"ussen
+        Methoden gefunden werden, um die Parameter des Modells von einer Zelle
+        auf ein Modul umzurechnen.
+
+        Vorteil dieser Methode ist ihr einfaches Schaltbild. Der Rechenaufwand
+        wird gering  gehalten und  man verliert beim  Arbeiten mit  dem Modell
+        nicht die \"Ubersicht.
+
+        Der Knackpunkt besteht darin, brauchbare Methoden zu finden, mit denen
+        die  Parameter von  einer  Zelle auf  ein  Modul hochgerechnet  werden
+        k\"onnen.
+    \item
+        Man baut einen Schaltkreis auf, der die entsprechende Anzahl Module in
+        der  gew\"unschten  Weise  miteinander  verbindet,  wie  auch  in  der
+        Realit\"at ein Modul aus mehreren Zellen zusammengesetzt ist.
+
+        Vorausgesetzt, die PArameter f\"ur eine  Zelle sind gen\"ugend nahe an
+        der Realit\"at,  ist die  St\"arke dieser Herangehensweise,  dass ihre
+        Resultate ziemlich  glaubw\"urdig sind (nat\"urlich ist  es immer noch
+        ien Modell, nicht Realit\"at).
+
+        Nachteilig ist  hier die  Kompliexit\"at sowohl im  Zusammensetzen des
+        Modells wie auch im h\"oheren Rechenaufwand.
+\end{itemize}
+Entweder
+wird ein verfinachtes Modell, das sehr \"ahnlich zur einzelnen Zell
 %\begin{figure}[h!tb]
 %    \centering
 %    \includegraphics[width=\textwidth]{images/ltspice/solarmodul-zellenbasiert.eps}

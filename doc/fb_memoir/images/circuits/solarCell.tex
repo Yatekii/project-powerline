@@ -6,6 +6,10 @@
     % Open terminal at bottom
     (10,0) node[ocirc] {} -- (0,0)
 
+    % Voltage arrow over open terminals
+    (10,3.7) -- (10,0.3) node[currarrow,rotate=-90] {}
+    (10,2) node[anchor=west] {$V_{\mathrm{offen}}$}
+
     % Parallel elements
     (1.5,4) to[empty diode,*-*,l_=$D$] (1.5,0)
     (3,4) to[C,*-*,l_=$C$] (3,0)

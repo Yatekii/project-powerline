@@ -1565,7 +1565,7 @@ Wire Wire Line
 Wire Wire Line
 	3100 2450 3300 2450
 Wire Wire Line
-	3100 2550 3300 2550
+	3100 2550 3400 2550
 Wire Wire Line
 	3100 2650 3600 2650
 Wire Wire Line
@@ -1601,7 +1601,7 @@ Wire Wire Line
 Wire Wire Line
 	2200 2450 2600 2450
 Wire Wire Line
-	2400 2550 2600 2550
+	2275 2550 2600 2550
 Wire Wire Line
 	2250 2650 2600 2650
 Wire Wire Line

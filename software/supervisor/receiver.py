@@ -3,17 +3,17 @@ import time
 from database import insertp, inserts, db
 
 
-# todo While Schleife mit delay und Abfrage beim IC oder falls möglich auf Meldung von IC warten ob neue Daten gekommen sind
+# todo While Schleife mit delay und Abfrage beim IC oder falls moeglich auf Meldung von IC warten ob neue Daten gekommen sind
 # todo ev. Interrupt um angekickt zu werden
 
 
 # todo Wenn Daten gekommen sind:
-# todo I^2C entschlüsseln
+# todo I^2C entschluesseln
 
-# todo CRC entschlüsseln
+# todo CRC entschluesseln
 
 
-# todo wie stringnumber definieren? übergabeparameter oder nicht?
+# todo wie stringnumber definieren? uebergabeparameter oder nicht?
 
 # definition of the datapackage
 class ModulePackage(object):
@@ -59,7 +59,7 @@ if len(select) == 0:
     # Theres a reported module inside this string
     else:
         print('es existiert ein defekt gemeldetes Modul')
-        # todo ersetzen des gemeldeten Modules (löschen des alten und speichern des neuen)
+        # todo ersetzen des gemeldeten Modules (loeschen des alten und speichern des neuen)
 # SN already exists in the sring
 else:
     print('SN schon in String vorhanden')

@@ -285,43 +285,79 @@ ist ebenfalls in Anhang \label{app:sec:cell:UI} hergeleitet:
 \end{equation}
 
 
-Als   letzte   Komponente   ist   die   Diode   zu   bestimmen. Dies   erfolgt
-iterativ  in   \code{LTspice}. Es  wird   die  Schaltung   gem\"ass  Abbildung
-\ref{fig:circuit:solarCell}    von    Seite    \pageref{fig:circuit:solarCell}
-aufgebaut   und   die   oben   definierten   Werte   f\"ur   $R_{\mathrm{S}}$,
-$R_{\mathrm{P}}$  und $C$  gesetzt. F\"ur die  Diode wird  ein simples  Modell
-definiert mit Anfangswerten definiert:
+Es bleiben noch die Parameter der Diode zu bestimmen. Ausganslage f\"ur das
+Diodenmodell ist die Diodengleichung:\todo{source?}
 
+\begin{equation}
+    \label{eq:diode}
+    I_{\mathrm{D}} = I_{\mathrm{S}} \cdot \left( \exp\left(\frac{q \cdot V}{n \cdot k \cdot T}\right) - 1 \right)
+\end{equation}
 
-\begin{center}
-    \code{.model diode1 D(IS=1e-6 N=2)}
-\end{center}
+\begin{conditions}
+    I_{\mathrm{D}} & Diodenstrom \\
+    I_{\mathrm{S}} & Reverse saturation current \\
+    q              & Elementarladung eines Elektrons (\SI{1.602e-19}{\coulomb}) \\
+    V              & Diodenspannung \\
+    n              & Idealit\"atsfaktor \\
+    k              & Boltzmannkonstante (\SI{1.38e-23}{\joule\per\kelvin}) \\
+    T              & Diodentemperatur \\
+\end{conditions}
 
-Wobei \code{IS} der \emph{Reverse Saturation Current} \todo{Deutscher Begriff}
-und \code{N}  der Idealit\"atsfaktor  ist. Der Reverse Saturation  Current ist
-der Strom, der beim Anlegen einer negativen Spannung \"uber die Diode fliesst,
-bevor die  Diode durchbricht~\cite{ref:solar:diodeCharacteristics}.   Er liegt
-\"ublicherweise  Bereicht  von   Nano-Amp\`ere  bis  Femto-Amp\`ere\todo{F\"ur
-k\"aufliche  Dioden,  nicht  Solarzellen}.   Der  Idealit\"atsfaktor  ist  ein
-Indikator f\"ur  den Spannungsabfall  \"uber der  Diode in  Abh\"angigkeit des
-durchfliessenden Stromes und liegt normalerweise zwischen 1 (ideale Diode) und
-2. Je  gr\"osser  der  Idealit\"atsfaktor, umso  h\"oher  der  Spannungsabfall
-\"uber der  Diode f\"ur einen gegebenen  Strom. Abbildung \ref{fig:diodeVI:IS}
-zeigt dies schematisch.\todo{Pfeile auf Achsen}
+Der   Reverse   Saturation  Current   ist   der   Strom,  der   beim   Anlegen
+einer  negativen   Spannung  \"uber  die   Diode  fliesst,  bevor   die  Diode
+durchbricht~\cite{ref:solar:diodeCharacteristics}.    Er  liegt   bei  kleinen
+Dioden \"ublicherweise Bereich von Nano-Amp\`ere bis Femto-Amp\`ere\todo{F\"ur
+k\"aufliche Dioden, nicht  Solarzellen}, bei einer Solarzelle  wird er h\"oher
+liegen, da diese gr\"osser ist.
+
+Wie  man an  Gleichung \ref{eq:diode}  erkennen kann,  steigt der  Diodenstrom
+f\"ur eine gegebene Spannung, wenn der Reverse Saturation Current ansteigt.
+
+Der Idealit\"atsfaktor ist ein Indikator  f\"ur den Spannungsabfall \"uber der
+Diode in  Abh\"angigkeit des durchfliessenden Stromes  und liegt normalerweise
+zwischen  1  (ideale  Diode)   und  2. Je  gr\"osser  der  Idealit\"atsfaktor,
+umso  h\"oher  der Spannungsabfall  \"uber  der  Diode f\"ur  einen  gegebenen
+Strom  (bzw.  umso kleiner  der  Strom  bei einer  fixen  Spannung). Abbildung
+\ref{fig:diodeVI:IS} zeigt das Strom-Spannungsverhalten  einer Diode sowie den
+Einfluss von $I_{\mathrm{S}}$ und $n$ schematisch.\todo{Pfeile auf Achsen}
 
 \begin{figure}[h!tb]
     \input{images/python/diodeVI.pgf}
     \caption{%
         Vereinfachte Strom-Spannungs-Kurve einer Diode. Der Reverse Saturation
-        Current  $I_S$  tritt im  \textcolor{magenta}{magenta}  eingef\"arbten
-        Bereich  auf. Ein  Ansteigen  des  Idealit\"atsfaktors  bewirkt,  dass
-        bei   gleichem  Strom   eine  h\"ohere   Spannung  \"uber   der  Diode
-        anliegt. Die \textcolor{blue}{blaue  Kurve} wurde mit  einem kleineren
-        Idealit\"atsfaktor als die  \textcolor{red}{rote Kurve} erstellt (hier
-        nur im positiven Bereich gezeigt zur besseren \"Ubersichtlichkeit).%
+        Current   $I_{\mathrm{S}}$   tritt   im   \textcolor{magenta}{magenta}
+        eingef\"arbten Bereich auf. Der angegebene Zahlenwert bezieht sich auf
+        den  Bereich  der  Kurve,  in der  $I_{\mathrm{S}}$  relativ  konstant
+        ist.\protect\\
+        Die    \textcolor{blue}{blaue   Kurve}    dient   als    Referenz. Die
+        \textcolor{red}{rote  Kurve}  zeigt  den Einfluss  eines  ansteigenden
+        Idealit\"atsfaktors  (also  st\"arkeres  Abweichen von  einer  idealen
+        Diode) auf die IV-Kennlinie.\protect\\
+        Die \textcolor{green!50!black}{gr\"une Kurve} zeigt den Einfluss eines
+        ansteigenden  Reverse Saturation  Current: Der Diodenstrom  steigt bei
+        einer gegebenen Diodenspannung.\protect\\
+        Zur  Verbesserung  der  \"Ubersichtlichkeit  wurden  die  abweichenden
+        Kurven nur  im positiven Bereich geplottet,  nat\"urlich \"andert sich
+        auch das Verhalten im Reverse-Betrieb analog.%
     }
     \label{fig:diodeVI:IS}
 \end{figure}
+
+\todo{Reverse-Betrieb-Kurven: analog?}
+
+Zur Simulation  in \code{LTspice}  wir das Modell  auf den  Reverse Saturation
+Current und  den Idealit\"atsfaktor reduziert, und  folgendes Diodenmodell aus
+Ausgangslage benutzt:
+
+\begin{center}
+    \code{.model diode1 D(IS=1e-6 N=2)}
+\end{center}
+
+Es wird die Schaltung gem\"ass Abbildung \ref{fig:circuit:solarCell} von Seite
+\pageref{fig:circuit:solarCell} aufgebaut und die  oben bestimmten Werte f\"ur
+$R_{\mathrm{S}}$, $R_{\mathrm{P}}$ und $C$ eingesetzt.
+
+
 
 \todo{Schema von LTspice. Appendix?}
 Nun  wird  die  Zelle  simuliert   (Spice  Directive  \code{.tran  1m}),  ihre

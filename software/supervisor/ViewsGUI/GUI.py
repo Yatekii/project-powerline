@@ -17,32 +17,32 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import *
 from PyQt5.QtCore import *
 
-class Example(QWidget):
+home = QWidget()
+
+class Windows(QWidget):
 
     def __init__(self):
         super().__init__()
 
-        #self.initHome()
-        self.initError(2456775444)
-        #self.initConfig()
-        #self.initHandynr()
-        #self.initHistory()
+    def init_home(self):
 
-    def initHome(self):
+        hystoryBt = QPushButton("Hystory")
 
+        settingBt = QPushButton("Einstellungen")
+        currentTitle = QLabel("Strommessung")
+        current1Label = QLabel("String 1")
+        current2Label = QLabel("String 2")
+        current3Label = QLabel("String 3")
+        current1lb = QLabel(str(current1) + " A")
+        current2lb = QLabel(str(current2) + " A")
+        current3lb = QLabel(str(current3) + " A")
+
+
+
+    def show_home(self):
         current1 = 100
         current2 = 200
         current3 = 300
-
-        hystoryBt = QPushButton("Hystory", self)
-        settingBt = QPushButton("Einstellungen", self)
-        currentTitle = QLabel("Strommessung", self)
-        current1Label = QLabel("String 1", self)
-        current2Label = QLabel("String 2", self)
-        current3Label = QLabel("String 3", self)
-        current1lb = QLabel(str(current1) + " A", self)
-        current2lb = QLabel(str(current2) + " A", self)
-        current3lb = QLabel(str(current3) + " A", self)
 
         hystoryBt.resize(145, 50)
         hystoryBt.move(10, 10)
@@ -51,7 +51,7 @@ class Example(QWidget):
         settingBt.move(165, 10)
 
         currentTitle.move(110, 100)
-        currentTitle.resize(100,50)
+        currentTitle.resize(100, 50)
         current1Label.move(10, 150)
         current1lb.move(100, 150)
         current2Label.move(10, 175)
@@ -59,12 +59,12 @@ class Example(QWidget):
         current3Label.move(10, 200)
         current3lb.move(100, 200)
 
-        self.setGeometry(100,100,320,240)
+        self.setGeometry(100, 100, 320, 240)
         self.setWindowTitle('Home')
         self.show()
 
-    def initError(self, ErrorModul):
 
+    def init_error(self):
         font = QFont("Arial", 10)
 
         errorlb = QLabel("Modulfehler", self)
@@ -88,8 +88,7 @@ class Example(QWidget):
         self.setWindowTitle('Fehler')
         self.show()
 
-        print("Fehler")
-
+    def show_error(self, ErrorModul):
 
     def initConfig(self):
         homeBt = QPushButton("Home", self)
@@ -152,7 +151,7 @@ class Example(QWidget):
         self.setWindowTitle('Handynummer')
         self.show()
 
-    def initHistory(self):
+    def init_history(self):
 
         modulNr = 2346534234
 
@@ -172,8 +171,14 @@ class Example(QWidget):
         self.setWindowTitle('Handynummer')
         self.show()
 
-if __name__ == '__main__':
+#if __name__ == '__main__':
 
-    app = QApplication(sys.argv)
-    ex = Example()
-    sys.exit(app.exec_())
+   # app = QApplication(sys.argv)
+   # win = Windows()
+    #sys.exit(app.exec_())
+
+        #self.initHome()
+        #self.initError(2456775444)
+        #self.initConfig()
+        #self.initHandynr()
+        #self.initHistory()

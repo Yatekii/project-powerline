@@ -241,13 +241,17 @@ $EndComp
 Wire Wire Line
 	3750 1725 4150 1725
 Wire Wire Line
-	1425 1825 2650 1825
+	1425 1825 1525 1825
+Wire Wire Line
+	1525 1825 2650 1825
 Wire Wire Line
 	2000 1975 2350 1975
 Wire Wire Line
 	2000 2175 2350 2175
 Wire Wire Line
-	1525 1575 1525 1900
+	1525 1575 1525 1825
+Wire Wire Line
+	1525 1825 1525 1900
 Connection ~ 1525 1825
 Wire Wire Line
 	875  1825 1225 1825
@@ -395,8 +399,6 @@ Text Label 5350 4650 2    60   ~ 0
 VCOin
 Text Label 5250 5725 2    60   ~ 0
 JP2
-Text Label 3875 5325 2    60   ~ 0
-JP2
 $Comp
 L R_Small JP3.?
 U 1 1 570CB594
@@ -458,7 +460,7 @@ F 3 "" H 3325 6575 50  0000 C CNN
 	1    3325 6575
 	0    -1   1    0   
 $EndComp
-Text Label 5600 5850 0    60   ~ 0
+Text Label 5925 5875 0    60   ~ 0
 RX1_out
 $Comp
 L OPA376AIDCK U?
@@ -713,15 +715,21 @@ F 3 "" H 5575 6625 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 Wire Wire Line
-	2750 4925 3100 4925
+	2750 4925 3025 4925
+Wire Wire Line
+	3025 4925 3100 4925
 Connection ~ 1650 4825
 Wire Wire Line
-	1650 4625 1650 5025
+	1650 4625 1650 4825
+Wire Wire Line
+	1650 4825 1650 5025
 Wire Wire Line
 	2625 4450 2625 4575
 Connection ~ 2350 4450
 Wire Wire Line
-	2275 4450 2425 4450
+	2275 4450 2350 4450
+Wire Wire Line
+	2350 4450 2425 4450
 Wire Wire Line
 	2075 4450 2075 4575
 Wire Wire Line
@@ -731,7 +739,9 @@ Wire Wire Line
 Wire Wire Line
 	3875 5725 3425 5725
 Wire Wire Line
-	4975 5875 5925 5875
+	4975 5875 5575 5875
+Wire Wire Line
+	5575 5875 5925 5875
 Wire Wire Line
 	5575 5875 5575 6200
 Connection ~ 5575 5875
@@ -742,7 +752,9 @@ Wire Wire Line
 Wire Wire Line
 	4975 5725 5250 5725
 Wire Wire Line
-	5350 4650 5350 4800
+	5350 4650 5350 4725
+Wire Wire Line
+	5350 4725 5350 4800
 Wire Wire Line
 	5350 5000 5350 5125
 Wire Wire Line
@@ -756,9 +768,13 @@ Wire Wire Line
 Wire Wire Line
 	6100 5225 4975 5225
 Wire Wire Line
-	2675 5825 3875 5825
+	2675 5825 2775 5825
 Wire Wire Line
-	5350 4725 6100 4725
+	2775 5825 3875 5825
+Wire Wire Line
+	5350 4725 5725 4725
+Wire Wire Line
+	5725 4725 6100 4725
 Wire Wire Line
 	6100 4725 6100 4800
 Connection ~ 5350 4725
@@ -778,14 +794,20 @@ Connection ~ 3025 4925
 Wire Wire Line
 	2625 5425 1975 5425
 Wire Wire Line
-	1975 5025 1975 5450
+	1975 5025 1975 5425
+Wire Wire Line
+	1975 5425 1975 5450
 Wire Wire Line
 	2150 5025 1975 5025
 Connection ~ 1975 5425
 Wire Wire Line
 	1825 5450 1125 5450
 Wire Wire Line
-	1525 4825 2150 4825
+	1525 4825 1650 4825
+Wire Wire Line
+	1650 4825 1825 4825
+Wire Wire Line
+	1825 4825 2150 4825
 Connection ~ 1825 4825
 Wire Wire Line
 	1825 4825 1825 5450
@@ -794,7 +816,9 @@ Wire Wire Line
 Wire Wire Line
 	1975 5950 1975 6050
 Wire Wire Line
-	2350 4300 2350 4625
+	2350 4300 2350 4450
+Wire Wire Line
+	2350 4450 2350 4625
 Wire Wire Line
 	1650 4300 1650 4425
 Connection ~ 2350 4300
@@ -874,7 +898,7 @@ Wire Wire Line
 	9125 4350 8900 4350
 Text Label 8900 4350 2    60   ~ 0
 coupling
-Text Label 3775 1700 0    60   ~ 0
+Text Label 4150 1725 0    60   ~ 0
 coupling
 Wire Notes Line
 	475  3075 11225 3075
@@ -889,7 +913,7 @@ TX1_in
 Text Label 8900 4600 2    60   ~ 0
 RX1_out
 Wire Wire Line
-	2000 2175 2000 2200
+	2000 2175 2000 2300
 Wire Wire Line
 	2650 2325 2250 2325
 Wire Wire Line
@@ -933,9 +957,6 @@ Wire Wire Line
 	2525 925  2525 1025
 Wire Wire Line
 	2650 1425 2650 1325
-Wire Wire Line
-	3875 5425 3875 5325
-Connection ~ 3875 5425
 Wire Wire Line
 	1650 4300 2350 4300
 Wire Wire Line
@@ -1003,7 +1024,7 @@ Wire Wire Line
 Wire Wire Line
 	3575 6175 3325 6175
 Wire Wire Line
-	3325 6175 3325 6325
+	3325 6175 3325 6425
 $Comp
 L +3V3 #PWR?
 U 1 1 573B0A22
@@ -1020,4 +1041,10 @@ F 3 "" H 1525 1275 50  0000 C CNN
 $EndComp
 Wire Wire Line
 	1525 1275 1525 1375
+Wire Wire Line
+	3875 5325 3725 5325
+Text Label 3725 5325 0    60   ~ 0
+JP2
+Wire Wire Line
+	2525 1025 2650 1025
 $EndSCHEMATC

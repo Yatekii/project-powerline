@@ -1,0 +1,15 @@
+* Z:\home\of-1\repository\education\FHNW\2016-01\local\pro4E\project-powerline\doc\simulations\singlecell.asc
+I1 0 N001 10
+C1 N001 0 {Cpara}
+D1 N001 0 diode1
+R1 N001 0 {Rshunt}
+R2 N002 N001 {Rseries}
+.model D D
+.lib Z:\usr\share\ltspice\lib\cmp\standard.dio
+.model diode1 D(IS=5e-6 N=1.6)
+.tran 1m
+.param Rshunt = 830
+.param Rseries = 0.33m
+.param Cpara = 12u
+.backanno
+.end

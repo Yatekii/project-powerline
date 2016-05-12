@@ -2,30 +2,26 @@
 # -*- coding: utf-8 -*-
 
 import threading
-import queue
+import atexit
 import logging
 
 
 class powerline_prototype(threading.Thread):
-    def __init__(self, dbScoped, cmdQueue):
-        super(powerline_prototype, self).__init__()
+    def __init__(self, dbScoped, semCtrl):
+        super(powerline_prototype, self).__init__(name='prototype')
         self.stoprequest = threading.Event()
         self.log = logging.getLogger("MasterLog")
         self.log.debug('powerline_prototype loaded')
         self.dbScoped = dbScoped
         self.dbSession = self.dbScoped()
-        self.cmdQueue = cmdQueue
+        self.semCtrl = semCtrl
+        atexit.register(self.cleanup)
 
     def run(self):
-        while not self.stoprequest.isSet():
-            try:
-                self.cmdQueue.get(True, 1)
-                self.log.debug('powerline_prototype run')
-                # TODO: CODE HERE
-            except queue.Empty:
-                continue
+        while True:
+            self.semCtrl.acquire(True)
+            self.log.debug('powerline_prototype run')
+            # TODO: CODE HERE
 
-    def join(self, timeout=None):
-        self.stoprequest.set()
-        super(powerline_prototype, self).join(timeout)
+    def cleanup(self):
         self.dbScoped.remove()

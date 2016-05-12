@@ -28,24 +28,18 @@ logListener = logging.handlers.QueueListener(
     logSyslogHandler
 )
 log.addHandler(logQueueHandler)
+logListener.start()
 
 dbSession_factory = sessionmaker(bind='sqlite:///powerline.db')
 dbScoped = scoped_session(dbSession_factory)
 
-logListener.start()
-log.debug('test')
-log.info('test')
-log.warning('test')
-log.error('test')
-
-cmdQueueTest = queue.Queue()
-tt = threadtest.powerline_prototype(dbScoped, cmdQueueTest)
+semCtrlTest = threading.Semaphore()
+tt = threadtest.powerline_prototype(dbScoped, semCtrlTest)
+tt.setDaemon(True)
 tt.start()
-cmdQueueTest.put('lol')
+semCtrlTest.release()
 time.sleep(5)
-cmdQueueTest.put('lol')
-
+semCtrlTest.release()
 time.sleep(5)
-tt.join()
 
 logListener.stop()

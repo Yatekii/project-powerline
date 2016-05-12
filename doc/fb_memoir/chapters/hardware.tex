@@ -450,12 +450,113 @@ auf Seite \pageref{fig:ltspice:solarmodul:cellBased} zu finden.
 \end{figure}
 
 
-
 % ---------------------------------------------------------------------------- %
 \subsubsection{Simulation und Resultate}
 \label{subsubsec:hw:ask:simu}
 % ---------------------------------------------------------------------------- %
 
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--0005u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--0005u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0005u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--0070u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--0070u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0070u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--1000u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--1000u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--1000u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \clearpage

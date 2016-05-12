@@ -7,7 +7,7 @@ import logging
 
 
 class powerline_prototype(threading.Thread):
-    def __init__(self, dbScoped, semCtrl):
+    def __init__(self, dbScoped, semCtrl, semNext):
         super(powerline_prototype, self).__init__(name='prototype')
         self.stoprequest = threading.Event()
         self.log = logging.getLogger("MasterLog")
@@ -22,6 +22,7 @@ class powerline_prototype(threading.Thread):
             self.semCtrl.acquire(True)
             self.log.debug('powerline_prototype run')
             # TODO: CODE HERE
+            self.semNext.release()
 
     def cleanup(self):
         self.dbScoped.remove()

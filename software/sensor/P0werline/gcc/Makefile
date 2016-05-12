@@ -63,7 +63,8 @@ hal/src/hal_io.o \
 hal/hpl/core/hpl_core_m0plus_base.o \
 utils/src/utils_ringbuffer.o \
 hal/src/hal_usart_async.o \
-gcc/system_samd09.o
+gcc/system_samd09.o\
+cuart.o
 
 OBJS_AS_ARGS += \
 "hal/hpl/gclk/hpl_gclk1_v210_base.o" \
@@ -89,7 +90,8 @@ OBJS_AS_ARGS += \
 "hal/hpl/core/hpl_core_m0plus_base.o" \
 "utils/src/utils_ringbuffer.o" \
 "hal/src/hal_usart_async.o" \
-"gcc/system_samd09.o"
+"gcc/system_samd09.o"\
+"cuart.o"
 
 # List the dependency files
 DEPS := $(OBJS:%.o=%.d)
@@ -119,7 +121,8 @@ DEPS_AS_ARGS += \
 "hal/hpl/core/hpl_core_m0plus_base.d" \
 "utils/src/utils_ringbuffer.d" \
 "hal/src/hal_usart_async.d" \
-"gcc/system_samd09.d"
+"gcc/system_samd09.d"\
+"cuart.d"
 
 OUTPUT_FILE_NAME :=AtmelStart
 QUOTE := "
@@ -138,7 +141,7 @@ $(OUTPUT_FILE_PATH): $(OBJS)
 	$(QUOTE)arm-none-eabi-gcc$(QUOTE)  -o $(OUTPUT_FILE_NAME).elf $(OBJS_AS_ARGS) -Wl,--start-group -lm  -Wl,--end-group  -mthumb -Wl,-Map="$(OUTPUT_FILE_NAME).map" --specs=nano.specs -Wl,--gc-sections -T"../gcc/gcc/samd09d14a_flash.ld" -L"../gcc/gcc" -mcpu=cortex-m0plus
 	@echo Finished building target: $@
 
-	"arm-none-eabi-objcopy" -O binary "$(OUTPUT_FILE_NAME).elf" "$(OUTPUT_FILE_NAME).bin" 
+	"arm-none-eabi-objcopy" -O binary "$(OUTPUT_FILE_NAME).elf" "$(OUTPUT_FILE_NAME).bin"
 	"arm-none-eabi-objcopy" -O ihex -R .eeprom -R .fuse -R .lock -R .signature  "$(OUTPUT_FILE_NAME).elf" "$(OUTPUT_FILE_NAME).hex"
 	"arm-none-eabi-objcopy" -j .eeprom --set-section-flags=.eeprom=alloc,load --change-section-lma .eeprom=0 --no-change-warnings -O binary "$(OUTPUT_FILE_NAME).elf" "$(OUTPUT_FILE_NAME).eep" || exit 0
 	"arm-none-eabi-objdump" -h -S "$(OUTPUT_FILE_NAME).elf" > "$(OUTPUT_FILE_NAME).lss"

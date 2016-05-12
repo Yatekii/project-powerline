@@ -23,7 +23,7 @@
 	void USART_0_PORT_init(void);
 	void USART_0_CLOCK_init(void);
 	void USART_0_init(void);
-	void USART_0_example(void);
+	void USART_setup(void);
 
 #define CONF_DMAC_MAX_USED_DESC ( /*SERCOM0*/ 0 + /*ADC*/ 0 + /*GCLK*/ 0 + \
 	        /*DMAC*/ 0 + /*SYSCTRL*/ 0 + /*PM*/ 0 )

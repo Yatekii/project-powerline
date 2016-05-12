@@ -15,7 +15,6 @@
 #include <peripheral_gclk_config.h>
 #include <hal_usart_async.h>
 #include <helpers.h>
-#include <stdio.h>
 
 #if CONF_DMAC_MAX_USED_DESC > 0
 #endif
@@ -140,14 +139,6 @@ void PM_Handler(void)
  * Once transfer has been completed the tx_cb function will be called.
  */
 
-static uint8_t example_USART_0[14] = "Hello World!\r\n";
-char str_buf[20] = "FUUUUU\r\n";
-
-struct buffer_data{
-  char buffer[80];
-  uint8_t length;
-};
-
 static void tx_cb_USART_0(const struct usart_async_descriptor *const io_descr)
 {
 	/* Transfer completed */
@@ -163,56 +154,15 @@ static void err_cb(const struct usart_async_descriptor *const io_descr)
 	/* Error occurred */
 }
 
-int read_bytes_to_buffer(struct io_descriptor *io, struct buffer_data* buffer){
-  int n_read_bytes = io_read(io, buffer->buffer + buffer->length, 1);
-  if (n_read_bytes > 0) {
-    if (buffer->length >= 80) {
-      buffer->length = 0;
-    }
-    buffer->length += n_read_bytes;
-  }
-  return n_read_bytes;
-}
-
-void USART_0_example(void)
-{
-	struct io_descriptor *io;
-  struct buffer_data buffer;
-  uint16_t adc_value = 0;
-  buffer.length = 0;
-
-	usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, tx_cb_USART_0);
-	usart_async_register_callback(&USART_0, USART_ASYNC_RXC_CB, rx_cb);
-	usart_async_register_callback(&USART_0, USART_ASYNC_ERROR_CB, err_cb);
-	usart_async_get_io_descriptor(&USART_0, &io);
-	usart_async_enable(&USART_0);
-
-	adc_async_enable(&ADC_0);
-
-	io_write(io, example_USART_0, 14);
-  gpio_set_pin_level(LED_RED, false);
-  int bytes_to_read = 4;
-  while(1){
-    int res = read_bytes_to_buffer(io, &buffer);
-    if (res) {
-      io_write(io, buffer.buffer + buffer.length - res, res);
-      //snprintf(str_buf, 12, "yolo %d\r\n", buffer.length);
-      //io_write(io, (uint8_t*)str_buf, 10);
-      adc_async_start_conversion(&ADC_0);
-      while(!adc_async_is_conversion_complete(&ADC_0));
-      while(!adc_async_read(&ADC_0, (uint8_t*)(&adc_value), 1));
-
-      snprintf(str_buf, 20, "adc_value: %hd\r\n", adc_value);
-      io_write(io, (uint8_t*)str_buf, 20);
-    }
-  }
-
-  gpio_set_pin_level(LED_GREEN, false);
-}
-
 static void convert_cb_ADC_0(const struct adc_async_descriptor *const descr)
 {
 
+}
+
+void USART_setup(void){
+  usart_async_register_callback(&USART_0, USART_ASYNC_TXC_CB, tx_cb_USART_0);
+	usart_async_register_callback(&USART_0, USART_ASYNC_RXC_CB, rx_cb);
+	usart_async_register_callback(&USART_0, USART_ASYNC_ERROR_CB, err_cb);
 }
 
 /**

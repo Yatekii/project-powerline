@@ -1,527 +1,0 @@
-Title: * Z:\home\of-1\repository\education\FHNW\2016-01\local\pro4E\project-powerline\doc\simulations\module-72cells.asc
-Date: Wed May 11 16:38:44 2016
-Plotname: Operating Point
-Flags: real
-No. Variables: 508
-No. Points:            1
-Offset:   0.0000000000000000e+000
-Command: Linear Technology Corporation LTspice IV
-Variables:
-	0	V(n112)	voltage
-	1	V(n108)	voltage
-	2	V(n104)	voltage
-	3	V(n100)	voltage
-	4	V(n096)	voltage
-	5	V(n092)	voltage
-	6	V(n088)	voltage
-	7	V(n084)	voltage
-	8	V(n080)	voltage
-	9	V(n140)	voltage
-	10	V(n136)	voltage
-	11	V(n132)	voltage
-	12	V(n128)	voltage
-	13	V(n124)	voltage
-	14	V(n120)	voltage
-	15	V(n116)	voltage
-	16	V(n048)	voltage
-	17	V(n044)	voltage
-	18	V(n040)	voltage
-	19	V(n036)	voltage
-	20	V(n032)	voltage
-	21	V(n028)	voltage
-	22	V(n024)	voltage
-	23	V(n020)	voltage
-	24	V(n016)	voltage
-	25	V(n076)	voltage
-	26	V(n072)	voltage
-	27	V(n068)	voltage
-	28	V(n064)	voltage
-	29	V(n060)	voltage
-	30	V(n056)	voltage
-	31	V(n052)	voltage
-	32	V(n012)	voltage
-	33	V(n008)	voltage
-	34	V(n001)	voltage
-	35	V(n002)	voltage
-	36	V(n113)	voltage
-	37	V(n109)	voltage
-	38	V(n105)	voltage
-	39	V(n101)	voltage
-	40	V(n097)	voltage
-	41	V(n093)	voltage
-	42	V(n089)	voltage
-	43	V(n085)	voltage
-	44	V(n081)	voltage
-	45	V(n141)	voltage
-	46	V(n137)	voltage
-	47	V(n133)	voltage
-	48	V(n129)	voltage
-	49	V(n125)	voltage
-	50	V(n121)	voltage
-	51	V(n117)	voltage
-	52	V(n049)	voltage
-	53	V(n045)	voltage
-	54	V(n041)	voltage
-	55	V(n037)	voltage
-	56	V(n033)	voltage
-	57	V(n029)	voltage
-	58	V(n025)	voltage
-	59	V(n021)	voltage
-	60	V(n017)	voltage
-	61	V(n077)	voltage
-	62	V(n073)	voltage
-	63	V(n069)	voltage
-	64	V(n065)	voltage
-	65	V(n061)	voltage
-	66	V(n057)	voltage
-	67	V(n053)	voltage
-	68	V(n013)	voltage
-	69	V(n009)	voltage
-	70	V(n003)	voltage
-	71	V(n004)	voltage
-	72	V(n114)	voltage
-	73	V(n110)	voltage
-	74	V(n106)	voltage
-	75	V(n102)	voltage
-	76	V(n098)	voltage
-	77	V(n094)	voltage
-	78	V(n090)	voltage
-	79	V(n086)	voltage
-	80	V(n082)	voltage
-	81	V(n142)	voltage
-	82	V(n138)	voltage
-	83	V(n134)	voltage
-	84	V(n130)	voltage
-	85	V(n126)	voltage
-	86	V(n122)	voltage
-	87	V(n118)	voltage
-	88	V(n050)	voltage
-	89	V(n046)	voltage
-	90	V(n042)	voltage
-	91	V(n038)	voltage
-	92	V(n034)	voltage
-	93	V(n030)	voltage
-	94	V(n026)	voltage
-	95	V(n022)	voltage
-	96	V(n018)	voltage
-	97	V(n078)	voltage
-	98	V(n074)	voltage
-	99	V(n070)	voltage
-	100	V(n066)	voltage
-	101	V(n062)	voltage
-	102	V(n058)	voltage
-	103	V(n054)	voltage
-	104	V(n014)	voltage
-	105	V(n010)	voltage
-	106	V(n005)	voltage
-	107	V(n006)	voltage
-	108	V(n115)	voltage
-	109	V(n111)	voltage
-	110	V(n107)	voltage
-	111	V(n103)	voltage
-	112	V(n099)	voltage
-	113	V(n095)	voltage
-	114	V(n091)	voltage
-	115	V(n087)	voltage
-	116	V(n083)	voltage
-	117	V(n143)	voltage
-	118	V(n139)	voltage
-	119	V(n135)	voltage
-	120	V(n131)	voltage
-	121	V(n127)	voltage
-	122	V(n123)	voltage
-	123	V(n119)	voltage
-	124	V(n051)	voltage
-	125	V(n047)	voltage
-	126	V(n043)	voltage
-	127	V(n039)	voltage
-	128	V(n035)	voltage
-	129	V(n031)	voltage
-	130	V(n027)	voltage
-	131	V(n023)	voltage
-	132	V(n019)	voltage
-	133	V(n079)	voltage
-	134	V(n075)	voltage
-	135	V(n071)	voltage
-	136	V(n067)	voltage
-	137	V(n063)	voltage
-	138	V(n059)	voltage
-	139	V(n055)	voltage
-	140	V(n015)	voltage
-	141	V(n011)	voltage
-	142	V(n007)	voltage
-	143	V(n144)	voltage
-	144	Id(M1)	device_current
-	145	Ig(M1)	device_current
-	146	Is(M1)	device_current
-	147	I(C72)	device_current
-	148	I(C71)	device_current
-	149	I(C70)	device_current
-	150	I(C69)	device_current
-	151	I(C68)	device_current
-	152	I(C67)	device_current
-	153	I(C66)	device_current
-	154	I(C65)	device_current
-	155	I(C64)	device_current
-	156	I(C63)	device_current
-	157	I(C62)	device_current
-	158	I(C61)	device_current
-	159	I(C60)	device_current
-	160	I(C59)	device_current
-	161	I(C58)	device_current
-	162	I(C57)	device_current
-	163	I(C56)	device_current
-	164	I(C55)	device_current
-	165	I(C54)	device_current
-	166	I(C53)	device_current
-	167	I(C52)	device_current
-	168	I(C51)	device_current
-	169	I(C50)	device_current
-	170	I(C49)	device_current
-	171	I(C48)	device_current
-	172	I(C47)	device_current
-	173	I(C46)	device_current
-	174	I(C45)	device_current
-	175	I(C44)	device_current
-	176	I(C43)	device_current
-	177	I(C42)	device_current
-	178	I(C41)	device_current
-	179	I(C40)	device_current
-	180	I(C39)	device_current
-	181	I(C38)	device_current
-	182	I(C37)	device_current
-	183	I(C36)	device_current
-	184	I(C35)	device_current
-	185	I(C34)	device_current
-	186	I(C33)	device_current
-	187	I(C32)	device_current
-	188	I(C31)	device_current
-	189	I(C30)	device_current
-	190	I(C29)	device_current
-	191	I(C28)	device_current
-	192	I(C27)	device_current
-	193	I(C26)	device_current
-	194	I(C25)	device_current
-	195	I(C24)	device_current
-	196	I(C23)	device_current
-	197	I(C22)	device_current
-	198	I(C21)	device_current
-	199	I(C20)	device_current
-	200	I(C19)	device_current
-	201	I(C18)	device_current
-	202	I(C17)	device_current
-	203	I(C16)	device_current
-	204	I(C15)	device_current
-	205	I(C14)	device_current
-	206	I(C13)	device_current
-	207	I(C12)	device_current
-	208	I(C11)	device_current
-	209	I(C10)	device_current
-	210	I(C9)	device_current
-	211	I(C8)	device_current
-	212	I(C7)	device_current
-	213	I(C6)	device_current
-	214	I(C5)	device_current
-	215	I(C4)	device_current
-	216	I(C3)	device_current
-	217	I(C2)	device_current
-	218	I(C1)	device_current
-	219	I(D72)	device_current
-	220	I(D71)	device_current
-	221	I(D70)	device_current
-	222	I(D69)	device_current
-	223	I(D68)	device_current
-	224	I(D67)	device_current
-	225	I(D66)	device_current
-	226	I(D65)	device_current
-	227	I(D64)	device_current
-	228	I(D63)	device_current
-	229	I(D62)	device_current
-	230	I(D61)	device_current
-	231	I(D60)	device_current
-	232	I(D59)	device_current
-	233	I(D58)	device_current
-	234	I(D57)	device_current
-	235	I(D56)	device_current
-	236	I(D55)	device_current
-	237	I(D54)	device_current
-	238	I(D53)	device_current
-	239	I(D52)	device_current
-	240	I(D51)	device_current
-	241	I(D50)	device_current
-	242	I(D49)	device_current
-	243	I(D48)	device_current
-	244	I(D47)	device_current
-	245	I(D46)	device_current
-	246	I(D45)	device_current
-	247	I(D44)	device_current
-	248	I(D43)	device_current
-	249	I(D42)	device_current
-	250	I(D41)	device_current
-	251	I(D40)	device_current
-	252	I(D39)	device_current
-	253	I(D38)	device_current
-	254	I(D37)	device_current
-	255	I(D36)	device_current
-	256	I(D35)	device_current
-	257	I(D34)	device_current
-	258	I(D33)	device_current
-	259	I(D32)	device_current
-	260	I(D31)	device_current
-	261	I(D30)	device_current
-	262	I(D29)	device_current
-	263	I(D28)	device_current
-	264	I(D27)	device_current
-	265	I(D26)	device_current
-	266	I(D25)	device_current
-	267	I(D24)	device_current
-	268	I(D23)	device_current
-	269	I(D22)	device_current
-	270	I(D21)	device_current
-	271	I(D20)	device_current
-	272	I(D19)	device_current
-	273	I(D18)	device_current
-	274	I(D17)	device_current
-	275	I(D16)	device_current
-	276	I(D15)	device_current
-	277	I(D14)	device_current
-	278	I(D13)	device_current
-	279	I(D12)	device_current
-	280	I(D11)	device_current
-	281	I(D10)	device_current
-	282	I(D9)	device_current
-	283	I(D8)	device_current
-	284	I(D7)	device_current
-	285	I(D6)	device_current
-	286	I(D5)	device_current
-	287	I(D4)	device_current
-	288	I(D3)	device_current
-	289	I(D2)	device_current
-	290	I(D1)	device_current
-	291	I(I72)	device_current
-	292	I(I71)	device_current
-	293	I(I70)	device_current
-	294	I(I69)	device_current
-	295	I(I68)	device_current
-	296	I(I67)	device_current
-	297	I(I66)	device_current
-	298	I(I65)	device_current
-	299	I(I64)	device_current
-	300	I(I63)	device_current
-	301	I(I62)	device_current
-	302	I(I61)	device_current
-	303	I(I60)	device_current
-	304	I(I59)	device_current
-	305	I(I58)	device_current
-	306	I(I57)	device_current
-	307	I(I56)	device_current
-	308	I(I55)	device_current
-	309	I(I54)	device_current
-	310	I(I53)	device_current
-	311	I(I52)	device_current
-	312	I(I51)	device_current
-	313	I(I50)	device_current
-	314	I(I49)	device_current
-	315	I(I48)	device_current
-	316	I(I47)	device_current
-	317	I(I46)	device_current
-	318	I(I45)	device_current
-	319	I(I44)	device_current
-	320	I(I43)	device_current
-	321	I(I42)	device_current
-	322	I(I41)	device_current
-	323	I(I40)	device_current
-	324	I(I39)	device_current
-	325	I(I38)	device_current
-	326	I(I37)	device_current
-	327	I(I36)	device_current
-	328	I(I35)	device_current
-	329	I(I34)	device_current
-	330	I(I33)	device_current
-	331	I(I32)	device_current
-	332	I(I31)	device_current
-	333	I(I30)	device_current
-	334	I(I29)	device_current
-	335	I(I28)	device_current
-	336	I(I27)	device_current
-	337	I(I26)	device_current
-	338	I(I25)	device_current
-	339	I(I24)	device_current
-	340	I(I23)	device_current
-	341	I(I22)	device_current
-	342	I(I21)	device_current
-	343	I(I20)	device_current
-	344	I(I19)	device_current
-	345	I(I18)	device_current
-	346	I(I17)	device_current
-	347	I(I16)	device_current
-	348	I(I15)	device_current
-	349	I(I14)	device_current
-	350	I(I13)	device_current
-	351	I(I12)	device_current
-	352	I(I11)	device_current
-	353	I(I10)	device_current
-	354	I(I9)	device_current
-	355	I(I8)	device_current
-	356	I(I7)	device_current
-	357	I(I6)	device_current
-	358	I(I5)	device_current
-	359	I(I4)	device_current
-	360	I(I3)	device_current
-	361	I(I2)	device_current
-	362	I(I1)	device_current
-	363	I(R144)	device_current
-	364	I(R143)	device_current
-	365	I(R142)	device_current
-	366	I(R141)	device_current
-	367	I(R140)	device_current
-	368	I(R139)	device_current
-	369	I(R138)	device_current
-	370	I(R137)	device_current
-	371	I(R136)	device_current
-	372	I(R135)	device_current
-	373	I(R134)	device_current
-	374	I(R133)	device_current
-	375	I(R132)	device_current
-	376	I(R131)	device_current
-	377	I(R130)	device_current
-	378	I(R129)	device_current
-	379	I(R128)	device_current
-	380	I(R127)	device_current
-	381	I(R126)	device_current
-	382	I(R125)	device_current
-	383	I(R124)	device_current
-	384	I(R123)	device_current
-	385	I(R122)	device_current
-	386	I(R121)	device_current
-	387	I(R120)	device_current
-	388	I(R119)	device_current
-	389	I(R118)	device_current
-	390	I(R117)	device_current
-	391	I(R116)	device_current
-	392	I(R115)	device_current
-	393	I(R114)	device_current
-	394	I(R113)	device_current
-	395	I(R112)	device_current
-	396	I(R111)	device_current
-	397	I(R110)	device_current
-	398	I(R109)	device_current
-	399	I(R108)	device_current
-	400	I(R107)	device_current
-	401	I(R106)	device_current
-	402	I(R105)	device_current
-	403	I(R104)	device_current
-	404	I(R103)	device_current
-	405	I(R102)	device_current
-	406	I(R101)	device_current
-	407	I(R100)	device_current
-	408	I(R99)	device_current
-	409	I(R98)	device_current
-	410	I(R97)	device_current
-	411	I(R96)	device_current
-	412	I(R95)	device_current
-	413	I(R94)	device_current
-	414	I(R93)	device_current
-	415	I(R92)	device_current
-	416	I(R91)	device_current
-	417	I(R90)	device_current
-	418	I(R89)	device_current
-	419	I(R88)	device_current
-	420	I(R87)	device_current
-	421	I(R86)	device_current
-	422	I(R85)	device_current
-	423	I(R84)	device_current
-	424	I(R83)	device_current
-	425	I(R82)	device_current
-	426	I(R81)	device_current
-	427	I(R80)	device_current
-	428	I(R79)	device_current
-	429	I(R78)	device_current
-	430	I(R77)	device_current
-	431	I(R76)	device_current
-	432	I(R75)	device_current
-	433	I(R74)	device_current
-	434	I(R73)	device_current
-	435	I(R72)	device_current
-	436	I(R71)	device_current
-	437	I(R70)	device_current
-	438	I(R69)	device_current
-	439	I(R68)	device_current
-	440	I(R67)	device_current
-	441	I(R66)	device_current
-	442	I(R65)	device_current
-	443	I(R64)	device_current
-	444	I(R63)	device_current
-	445	I(R62)	device_current
-	446	I(R61)	device_current
-	447	I(R60)	device_current
-	448	I(R59)	device_current
-	449	I(R58)	device_current
-	450	I(R57)	device_current
-	451	I(R56)	device_current
-	452	I(R55)	device_current
-	453	I(R54)	device_current
-	454	I(R53)	device_current
-	455	I(R52)	device_current
-	456	I(R51)	device_current
-	457	I(R50)	device_current
-	458	I(R49)	device_current
-	459	I(R48)	device_current
-	460	I(R47)	device_current
-	461	I(R46)	device_current
-	462	I(R45)	device_current
-	463	I(R44)	device_current
-	464	I(R43)	device_current
-	465	I(R42)	device_current
-	466	I(R41)	device_current
-	467	I(R40)	device_current
-	468	I(R39)	device_current
-	469	I(R38)	device_current
-	470	I(R37)	device_current
-	471	I(R36)	device_current
-	472	I(R35)	device_current
-	473	I(R34)	device_current
-	474	I(R33)	device_current
-	475	I(R32)	device_current
-	476	I(R31)	device_current
-	477	I(R30)	device_current
-	478	I(R29)	device_current
-	479	I(R28)	device_current
-	480	I(R27)	device_current
-	481	I(R26)	device_current
-	482	I(R25)	device_current
-	483	I(R24)	device_current
-	484	I(R23)	device_current
-	485	I(R22)	device_current
-	486	I(R21)	device_current
-	487	I(R20)	device_current
-	488	I(R19)	device_current
-	489	I(R18)	device_current
-	490	I(R17)	device_current
-	491	I(R16)	device_current
-	492	I(R15)	device_current
-	493	I(R14)	device_current
-	494	I(R13)	device_current
-	495	I(R12)	device_current
-	496	I(R11)	device_current
-	497	I(R10)	device_current
-	498	I(R9)	device_current
-	499	I(R8)	device_current
-	500	I(R7)	device_current
-	501	I(R6)	device_current
-	502	I(R5)	device_current
-	503	I(R4)	device_current
-	504	I(R3)	device_current
-	505	I(R2)	device_current
-	506	I(R1)	device_current
-	507	I(V1)	device_current
-Binary:
-MzˆÏ¦K@„ô6@„ô6@Ò‹[@Ò‹[@€@€@6]’@6]’@6]?6]?6]’?6]’?Ò‹Û?Ò‹Û?6]@Ò‹Û@y×í@y×í@ A Ac7	Ac7	A6]A6]Aİ¨¤@İ¨¤@„ô¶@„ô¶@+@É@+@É@Ò‹Û@
-ƒA
-ƒAİ¨$Aİ¨$A+@IAşeRAşeRAÒ‹[AÒ‹[A¥±dA¥±dAy×mAy×mA±Î-A±Î-A„ô6A„ô6AX@AX@A+@IAc7‰AMÊAMÊA6]’A6]’A ğ–A ğ–A
-ƒ›A
-ƒ›ALıvALıvA€A€Ay¤„Ay¤„Ac7‰Aô Aô Aİ¨¤Aİ¨¤A6]@„ô6@„ô6@Ò‹[@Ò‹[@€@€@6]’@6]’@6]?6]?6]’?6]’?Ò‹Û?Ò‹Û?6]@Ò‹Û@y×í@y×í@ A Ac7	Ac7	A6]A6]Aİ¨¤@İ¨¤@„ô¶@„ô¶@+@É@+@É@Ò‹Û@
-ƒA
-ƒAİ¨$Aİ¨$A+@IAşeRAşeRAÒ‹[AÒ‹[A¥±dA¥±dAy×mAy×mA±Î-A±Î-A„ô6A„ô6AX@AX@A+@IAc7‰AMÊAMÊA6]’A6]’A ğ–A ğ–A
-ƒ›A
-ƒ›ALıvALıvA€A€Ay¤„Ay¤„Ac7‰Aô Aô Aİ¨¤A     PÜ.     PÜ®˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"˜ı"ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@ÈúŸ@   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @   @œj®˜ì3:œj®˜ì3:	ÄŒ®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:	Ä®˜ì3::$®˜ì3:	Ä®˜ì3:	Ä®˜ì3:&S®˜ì3:œj®˜ì3:°;®˜ì3:°;®˜ì3:	Ä®˜ì3:	Ä®˜ì3:œê­˜ì3:œê­˜ì3:œê­˜ì3:	®˜ì3::$®˜ì3:	Ä®˜ì3:œê­˜ì3:œê­˜ì3:Wö­˜ì3:Wö­˜ì3:Wö­˜ì3:Phó­˜ì3:	®˜ì3:	®˜ì3:œê­˜ì3:‰æ®˜ì3:œj®˜ì3:œj®˜ì3:	ÄŒ®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:œj®˜ì3:	Ä®˜ì3::$®˜ì3:	Ä®˜ì3:	Ä®˜ì3:&S®˜ì3:œj®˜ì3:°;®˜ì3:°;®˜ì3:	Ä®˜ì3:	Ä®˜ì3:œê­˜ì3:œê­˜ì3:œê­˜ì3:	®˜ì3::$®˜ì3:	Ä®˜ì3:œê­˜ì3:œê­˜ì3:Wö­˜ì3:Wö­˜ì3:Wö­˜ì3:Phó­˜ì3:	®˜ì3:	®˜ì3:œê­˜ì3:‰æ®˜ì3:    

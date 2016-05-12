@@ -1,29 +1,3 @@
-% Plot from tabular data
-%\begin{figure}
-%    \begin{tikzpicture}
-%       \begin{scope}[x={(0mm,0mm)},y={(170mm,\textwidth)}]
-%           \begin{axis}[%
-%                   xmode=log,
-%                   height=80mm,
-%                   width=\textwidth,
-%                   at={(0,80mm)},
-%                   %grid=both,
-%               ]
-%               \addplot[-,color=blue] table {data/measurement-inductor-1layer-inductance.dat};
-%               %\addplot[-,color=blue] table {data/fetsim.dat};
-%           \end{axis}
-%           %\begin{axis}[%
-%           %        height=80mm,
-%           %        width=\textwidth,
-%           %        at={(0,0mm)},
-%           %        %grid=both,
-%           %    ]
-%           %    \addplot[-,color=red] table {data/fetsim.dat};
-%           %\end{axis}
-%       \end{scope}
-%   \end{tikzpicture}
-%\end{figure}
-
 % **************************************************************************** %
 \chapter{Hardware}
 \label{chap:hardware}
@@ -187,11 +161,21 @@ eingesetzt~\cite{ref:ltspice}.
 
 
 % ---------------------------------------------------------------------------- %
-\subsubsection{Modellierung eines Solarmoduls}
+\subsubsection{Entwicklung einer Modellschaltung}
 \label{subsubsec:hw:ask:modell}
 % ---------------------------------------------------------------------------- %
 
-Als    Ausganspunkt    des    Modells    f\"ur    ein    Modul    dient    das
+Das  Ziel  ist,   das  Verhalten  eines  PV-Moduls  zu   simulieren,  wenn  es
+in  gesteuerten  Intervallen  in  der  Gr\"ossenordnung  von  einigen  hundert
+Mikrosekunden  kurzgeschlossen wird  (die Schaltfrequenz,  mit der  ein Signal
+in  dieser  L\"osungsvariante  \"ubertragen  w\"urde,  l\"age  ungef\"ahr  bei
+\SI{10}{\kilo\hertz}).
+
+Es wird  ein Modell f\"ur eine  einzelne Zelle entwickelt, auf  dem das Modell
+eines  Moduls  aufbauen  kann. Dieses Modul  wird  anschliessend  entsprechend
+dieser L\"osungsvariante beschaltet und diese Schaltung simuliert.
+
+Als    Ausganspunkt    des    Modells    f\"ur   eine    Zelle    dient    das
 Eindiodenmodell     \todo{Bindestrich     oder     ein     Wort?}     gem\"ass
 Abbildung~\ref{fig:circuit:solarCell}. Dabei    wird     dieses    um    einen
 Kondensator   der  Kapazit\"at   $C$   parallel   zur  Stromquelle   erg\"anzt
@@ -417,15 +401,136 @@ Bei der Modellierung eines Moduls stehen zwei Varianten zur Verf\"ugung:
 
 Die  verf\"ugbaren   Informationen  zum  Skalieren  eines   Zellenmodells  auf
 ein   Modul  bei   gleichbleibendem  Schaltschema   gen\"ugen  nicht   unseren
-Anspr\"uchen. Daher wird ein Modul gem\"ass Variante 2 simuliert.
+Anspr\"uchen. Daher wird  ein Modul  gem\"ass Variante  2 mit  72 Zellen  in 2
+parallelen Str\"angen mit je 36  Zellen in Serie simuliert.
+
+Das  gesteuerte Kurzschliessen  des Moduls  wird mit  einem MOSFET  umgesetzt,
+welcher  zwischen  Eingang  und  Ausgang des  Moduls  durchschalten  kann. Der
+Microcontroller  auf der  Sensorplatine  steuert  dabei den  MOSFET. Abbildung
+\ref{fig:module:mosfet:simple} zeigt diesen  Aufbau vereinfacht, die komplette
+Schaltung  ist im  Anhang in  Abbildung \ref{fig:ltspice:solarmodul:cellBased}
+auf Seite \pageref{fig:ltspice:solarmodul:cellBased} zu finden.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/moduleMOSFET.tex}
+    \caption{%
+        Gesteuerter     Kurzschluss     eines    Solarmoduls     mit     einem
+        microcontroller-gesteuerten MOSFET. Die  vollst\"andige zur Simulation
+        benutzte \code{LTspice}-Schaltung ist  in Anhang \ref{app:simu:module}
+        auf Seite \pageref{fig:ltspice:solarmodul:cellBased} dokumentiert.%
+    }
+    \label{fig:module:mosfet:simple}
+\end{figure}
 
 
-%\begin{figure}[h!tb]
-%    \centering
-%    \includegraphics[width=\textwidth]{images/ltspice/solarmodul-zellenbasiert.eps}
-%    \caption{Solarmodul, modelliert durch 2 parallele Strings mit je 36 Zellen in Serie}
-%    \label{fig:ltspice:solarmodul:cellBased}
-%\end{figure}
+% ---------------------------------------------------------------------------- %
+\subsubsection{Simulation und Resultate}
+\label{subsubsec:hw:ask:simu}
+% ---------------------------------------------------------------------------- %
+
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--0005u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--0005u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0005u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--0070u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--0070u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0070u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(220mm,\textwidth)}]
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,150mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--1000u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,80mm)},
+                   grid=both,
+               ]
+               \addplot[-,color=magenta] table {data/module-72cells--U-MOSFET--1000u.dat};
+           \end{axis}
+           \begin{axis}[%
+                   %xmode=log,
+                   height=65mm,
+                   width=\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--1000u.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+\end{figure}
 
 
 % ---------------------------------------------------------------------------- %

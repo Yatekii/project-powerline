@@ -1,4 +1,5 @@
 EESchema Schematic File Version 2
+LIBS:supervisor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -1087,7 +1088,7 @@ F 3 "" H 1850 9850 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RELAY_1_WECHSEL K2
+L RELAY_1_WECHSEL-RESCUE-supervisor K2
 U 1 1 5734C387
 P 3950 5500
 F 0 "K2" H 4200 5225 50  0000 C CNN
@@ -1098,7 +1099,7 @@ F 3 "" H 3950 5500 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L RELAY_1_WECHSEL K1
+L RELAY_1_WECHSEL-RESCUE-supervisor K1
 U 1 1 5734C426
 P 3950 4750
 F 0 "K1" H 4200 4475 50  0000 C CNN

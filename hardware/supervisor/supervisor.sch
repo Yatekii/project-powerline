@@ -1364,8 +1364,8 @@ $EndComp
 $Sheet
 S 900  9225 825  925 
 U 5733B22E
-F0 "FSK Module" 60
-F1 "fskmodule.sch" 60
+F0 "FSK Module 1" 60
+F1 "fskmodule_1.sch" 60
 F2 "coupling" I R 1725 9550 60 
 F3 "GND" I R 1725 10050 60 
 F4 "+3.3V" I R 1725 9925 60 
@@ -1375,24 +1375,13 @@ $EndSheet
 $Sheet
 S 4475 9225 825  925 
 U 573435AB
-F0 "FSK Module" 60
-F1 "fskmodule.sch" 60
+F0 "FSK Module 2" 60
+F1 "fskmodule_2.sch" 60
 F2 "coupling" I R 5300 9550 60 
 F3 "GND" I R 5300 10050 60 
 F4 "+3.3V" I R 5300 9925 60 
 F5 "outgoing" I R 5300 9400 60 
 F6 "incoming" I R 5300 9300 60 
-$EndSheet
-$Sheet
-S 8225 9250 825  925 
-U 57344B95
-F0 "FSK Module" 60
-F1 "fskmodule.sch" 60
-F2 "coupling" I R 9050 9575 60 
-F3 "GND" I R 9050 10075 60 
-F4 "+3.3V" I R 9050 9950 60 
-F5 "outgoing" I R 9050 9425 60 
-F6 "incoming" I R 9050 9325 60 
 $EndSheet
 NoConn ~ 3825 9425
 NoConn ~ 2425 9625
@@ -2262,4 +2251,15 @@ F 3 "" H 7375 5750 60  0000 C CNN
 	1    7375 6000
 	1    0    0    -1  
 $EndComp
+$Sheet
+S 8225 9250 825  925 
+U 5737632B
+F0 "FSK Module 3" 60
+F1 "fskmodule_3.sch" 60
+F2 "coupling" I R 9050 9575 60 
+F3 "GND" I R 9050 10075 60 
+F4 "+3.3V" I R 9050 9950 60 
+F5 "outgoing" I R 9050 9425 60 
+F6 "incoming" I R 9050 9325 60 
+$EndSheet
 $EndSCHEMATC

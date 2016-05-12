@@ -4,7 +4,7 @@ from transitions import Machine
 import sys
 from enum import Enum
 import time
-from ViewsGUI import GUI
+import GUI
 
 
 class State:

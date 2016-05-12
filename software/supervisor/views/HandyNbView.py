@@ -1,11 +1,9 @@
-import sys
-from PyQt5.QtWidgets import QWidget, QApplication, QPushButton, QLabel
 
-class HomeView():
+from PyQt5.QtWidgets import QWidget, QPushButton, QLabel, QGridLayout, QLineEdit
 
-    home_view = QWidget()
 
-    def __init__(self):
+class HandyNbView(QWidget):
+     def __init__(self):
         super().__init__()
 
         grid = QGridLayout()

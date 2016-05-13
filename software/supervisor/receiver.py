@@ -1,70 +1,81 @@
 # imports
 import time
-from database import insertp, inserts, db
-
+from database import Panels, Strings, session, panels, strings
 
 # todo While Schleife mit delay und Abfrage beim IC oder falls moeglich auf Meldung von IC warten ob neue Daten gekommen sind
 # todo ev. Interrupt um angekickt zu werden
 
-
 # todo Wenn Daten gekommen sind:
 # todo I^2C entschluesseln
 
-# todo CRC entschluesseln
-
+# todo CRC entschluesseln und kontrollieren => log verwerfen falls NG
 
 # todo wie stringnumber definieren? uebergabeparameter oder nicht?
 
-# definition of the datapackage
+# todo wie unterscheiden zwischen strommessung und datenpacket, wie damit umgehen?
+
+
+# definition of the datapackages
 class ModulePackage(object):
 
-    def __init__(self, stringnumber, serialnumber, voltage):
+    def __init__(self, serialnumber, voltage, stringnumber):
         self.serialnumber = serialnumber
         self.voltage = voltage
         self.stringnumber = stringnumber
         self.timestamp = time.time()
 
-# Creates the Object with all the data
-module = ModulePackage(5, 123456, 67.6)  # Creates the Datapackage (stringnumber, serialnumber, voltage)
 
-# Save the package into datebase
-# -----------------------------------------------------------------------------------------------------------
-# todo hier nur syntaxbeispiel
-insertp.execute(serialnumber=123456, voltage=30, stringnumber=3, timestamp=time.time(), flag_reported=1)
-insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=0)
-insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=1)
-insertp.execute(serialnumber=123456, voltage=30.5, stringnumber=4, timestamp=time.time(), flag_reported=0)
+class StringPackage(object):
 
-inserts.execute(stringnumber=1, stringcurrent=35, timestamp=time.time(), flag_watch=1)
-inserts.execute(stringnumber=2, stringcurrent=35, timestamp=time.time(), flag_watch=1)
-inserts.execute(stringnumber=3, stringcurrent=35, timestamp=time.time(), flag_watch=1)
-inserts.execute(stringnumber=4, stringcurrent=35, timestamp=time.time(), flag_watch=1)
-# ------------------------------------------------------------------------------------------------------------
+    def __init__(self, stringnumber, stringcurrent):
+        self.stringnumber = stringnumber
+        self.stringcurrent = stringcurrent
+        self.timestamp = time.time()
 
-# check if serial number already exists in the string and write their IDs into "select"
-pointers = db.execute('select id from panels where stringnumber = 5 and serialnumber = 123456;')  # todo serienummer automatisch übernehmen stringnummer?
-select = pointers.fetchall()
-print(select)
-# serial number does not exist in the string
-if len(select) == 0:
-    print('SN nicht in String vorhanden')
-    pointers2 = db.execute('select id from panels where stringnumber = 5 and flag_reported = 1;')
-    select2 = pointers2.fetchall()
-    print(select2)
-    # no module from this string is reported
-    if len(select2) == 0:
-        print('Kein defekt gemeldtes Modul')
-        insertp.execute(serialnumber=module.serialnumber, voltage=module.voltage,
-                        stringnumber=module.stringnumber, timestamp=time.time())
-    # Theres a reported module inside this string
-    else:
-        print('es existiert ein defekt gemeldetes Modul')
-        # todo ersetzen des gemeldeten Modules (loeschen des alten und speichern des neuen)
-# SN already exists in the sring
+
+# Creates the Object with all the data todo (gets data from receiver)
+
+modulepackage = ModulePackage(123459, 35.63, 30)  # Creates the Datapackage (serialnumber, voltage, stringnumber)
+stringpackage = StringPackage(3, 30)         # Creates the Datapackage (stringnumber, stringcurrent)
+
+# Defines the functions to creates the database items and save them into the database
+def insert_panel():
+    modulelog = Panels()
+    modulelog.serialnumber = modulepackage.serialnumber
+    modulelog.voltage = modulepackage.voltage
+    modulelog.stringnumber = modulepackage.stringnumber
+    modulelog.timestamp = modulepackage.timestamp
+    session.add(modulelog)
+    session.flush()
+
+
+def insert_string():
+    stringlog = Strings()
+    stringlog.stringnumber = stringpackage.stringnumber
+    stringlog.stringcurrent = stringpackage.stringcurrent
+    stringlog.timestamp = stringpackage.timestamp
+    session.add(stringlog)
+    session.flush()
+
+
+# checks if String already exists in the string
+# if yes: save the datalog
+# if no: check if theres a reported module in the string
+#        if no: save the datalog
+#        if yes: delete the reported logs and save the new one
+existinpanels = session.query(Panels).filter((panels.c.serialnumber == modulepackage.serialnumber) & (panels.c.stringnumber == modulepackage.stringnumber)).all()
+if len(existinpanels) != 0:
+    insert_panel()
 else:
-    print('SN schon in String vorhanden')
-    insertp.execute(serialnumber=module.serialnumber, voltage=module.voltage,
-                    stringnumber=module.stringnumber, timestamp=time.time())
+    reportedpanels = session.query(Panels).filter((panels.c.flag_reported == 1) & (panels.c.stringnumber == modulepackage.stringnumber)).all()
+    print(reportedpanels)
+    if len(reportedpanels) == 0:
+        insert_panel()
+    else:
+        for defectivpanels in reportedpanels:
+            session.delete(defectivpanels)
+        insert_panel()
 
+# todo das gleiche noch mit strings
 
 # todo Interrupt von statician ankicken

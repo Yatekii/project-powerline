@@ -1,7 +1,7 @@
 (export (version D)
   (design
     (source "/Users/Dominik 1/Documents/project-powerline/hardware/sensor/sensor.sch")
-    (date "Mittwoch, 11. Mai 2016 'u27' 09:27:08")
+    (date "Donnerstag, 12. Mai 2016 'u05' 18:05:43")
     (tool "Eeschema (2015-09-15 BZR 6201)-product")
     (sheet (number 1) (name /) (tstamps /)
       (title_block
@@ -17,7 +17,7 @@
   (components
     (comp (ref U3)
       (value CD74HC4046)
-      (footprint Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm)
+      (footprint Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm)
       (datasheet http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf)
       (libsource (lib pro4) (part CD74HC4046))
       (sheetpath (names /) (tstamps /))
@@ -248,13 +248,13 @@
       (tstamp 56E566D3))
     (comp (ref RV1)
       (value POT)
-      (footprint pro4:EVM-1USX30B14)
+      (footprint pro4:EVM-1USX30B14_poti)
       (libsource (lib device) (part POT))
       (sheetpath (names /) (tstamps /))
       (tstamp 56E59981))
     (comp (ref RV2)
       (value POT)
-      (footprint pro4:EVM-1USX30B14)
+      (footprint pro4:EVM-1USX30B14_poti)
       (libsource (lib device) (part POT))
       (sheetpath (names /) (tstamps /))
       (tstamp 56E5BDC0))
@@ -386,7 +386,7 @@
       (tstamp 5730FE6F))
     (comp (ref U4)
       (value CD74HC4046)
-      (footprint Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm)
+      (footprint Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm)
       (datasheet http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf)
       (libsource (lib pro4) (part CD74HC4046))
       (sheetpath (names /) (tstamps /))
@@ -404,65 +404,6 @@
       (sheetpath (names /) (tstamps /))
       (tstamp 5732EE80)))
   (libparts
-    (libpart (lib device) (part R)
-      (description Resistor)
-      (footprints
-        (fp R_*)
-        (fp Resistor_*))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib device) (part POT)
-      (description Potentionmetre)
-      (fields
-        (field (name Reference) RV)
-        (field (name Value) POT))
-      (pins
-        (pin (num 1) (name 1) (type passive))
-        (pin (num 2) (name 2) (type passive))
-        (pin (num 3) (name 3) (type passive))))
-    (libpart (lib device) (part Led_Small)
-      (description Led)
-      (footprints
-        (fp CP*)
-        (fp SM*))
-      (fields
-        (field (name Reference) D)
-        (field (name Value) Led_Small))
-      (pins
-        (pin (num 1) (name K) (type passive))
-        (pin (num 2) (name A) (type passive))))
-    (libpart (lib device) (part D_Schottky_Small)
-      (description "Diode Schottky")
-      (footprints
-        (fp Diode_*)
-        (fp D-Pak_TO252AA)
-        (fp *SingleDiode)
-        (fp *SingleDiode*)
-        (fp *_Diode_*))
-      (fields
-        (field (name Reference) D)
-        (field (name Value) D_Schottky_Small))
-      (pins
-        (pin (num 1) (name K) (type passive))
-        (pin (num 2) (name A) (type passive))))
-    (libpart (lib device) (part C_Small)
-      (description "Unpolarized capacitor")
-      (footprints
-        (fp C?)
-        (fp C_????_*)
-        (fp C_????)
-        (fp SMD*_c)
-        (fp Capacitor*))
-      (fields
-        (field (name Reference) C)
-        (field (name Value) C_Small))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
     (libpart (lib conn) (part CONN_01X02)
       (footprints
         (fp Pin_Header_Straight_1X02)
@@ -504,6 +445,95 @@
         (pin (num 3) (name P3) (type passive))
         (pin (num 4) (name P4) (type passive))
         (pin (num 5) (name P5) (type passive))))
+    (libpart (lib device) (part C_Small)
+      (description "Unpolarized capacitor")
+      (footprints
+        (fp C?)
+        (fp C_????_*)
+        (fp C_????)
+        (fp SMD*_c)
+        (fp Capacitor*))
+      (fields
+        (field (name Reference) C)
+        (field (name Value) C_Small))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part D_Schottky_Small)
+      (description "Diode Schottky")
+      (footprints
+        (fp Diode_*)
+        (fp D-Pak_TO252AA)
+        (fp *SingleDiode)
+        (fp *SingleDiode*)
+        (fp *_Diode_*))
+      (fields
+        (field (name Reference) D)
+        (field (name Value) D_Schottky_Small))
+      (pins
+        (pin (num 1) (name K) (type passive))
+        (pin (num 2) (name A) (type passive))))
+    (libpart (lib device) (part L_Small)
+      (description Inductor)
+      (footprints
+        (fp CP*)
+        (fp SM*))
+      (fields
+        (field (name Reference) L)
+        (field (name Value) L_Small))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part Led_Small)
+      (description Led)
+      (footprints
+        (fp CP*)
+        (fp SM*))
+      (fields
+        (field (name Reference) D)
+        (field (name Value) Led_Small))
+      (pins
+        (pin (num 1) (name K) (type passive))
+        (pin (num 2) (name A) (type passive))))
+    (libpart (lib device) (part POT)
+      (description Potentionmetre)
+      (fields
+        (field (name Reference) RV)
+        (field (name Value) POT))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))
+        (pin (num 3) (name 3) (type passive))))
+    (libpart (lib device) (part R)
+      (description Resistor)
+      (footprints
+        (fp R_*)
+        (fp Resistor_*))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part R_Small)
+      (description Resistor)
+      (footprints
+        (fp Resistor_*)
+        (fp R_*))
+      (fields
+        (field (name Reference) R)
+        (field (name Value) R_Small))
+      (pins
+        (pin (num 1) (name ~) (type passive))
+        (pin (num 2) (name ~) (type passive))))
+    (libpart (lib device) (part SW_PUSH)
+      (description Button)
+      (fields
+        (field (name Reference) SW)
+        (field (name Value) SW_PUSH))
+      (pins
+        (pin (num 1) (name 1) (type passive))
+        (pin (num 2) (name 2) (type passive))))
     (libpart (lib device) (part ZENER)
       (description "Diode zener")
       (footprints
@@ -516,68 +546,6 @@
       (pins
         (pin (num 1) (name K) (type passive))
         (pin (num 2) (name A) (type passive))))
-    (libpart (lib device) (part SW_PUSH)
-      (description Button)
-      (fields
-        (field (name Reference) SW)
-        (field (name Value) SW_PUSH))
-      (pins
-        (pin (num 1) (name 1) (type passive))
-        (pin (num 2) (name 2) (type passive))))
-    (libpart (lib device) (part R_Small)
-      (description Resistor)
-      (footprints
-        (fp Resistor_*)
-        (fp R_*))
-      (fields
-        (field (name Reference) R)
-        (field (name Value) R_Small))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib device) (part L_Small)
-      (description Inductor)
-      (footprints
-        (fp CP*)
-        (fp SM*))
-      (fields
-        (field (name Reference) L)
-        (field (name Value) L_Small))
-      (pins
-        (pin (num 1) (name ~) (type passive))
-        (pin (num 2) (name ~) (type passive))))
-    (libpart (lib pro4) (part DMP10H4D2s)
-      (fields
-        (field (name Reference) T)
-        (field (name Value) DMP10H4D2s))
-      (pins
-        (pin (num 1) (name Gate) (type input))
-        (pin (num 2) (name Source) (type input))
-        (pin (num 3) (name Drain) (type input))))
-    (libpart (lib pro4) (part LMR16006)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) LMR16006)
-        (field (name Footprint) TO_SOT_Packages_SMD:TSOT-6-MK06A)
-        (field (name Datasheet) http://www.ti.com/lit/ds/symlink/lmr16006.pdf))
-      (pins
-        (pin (num 1) (name CB) (type input))
-        (pin (num 2) (name GND) (type input))
-        (pin (num 3) (name FB) (type input))
-        (pin (num 4) (name ~SHDN) (type input))
-        (pin (num 5) (name VIN) (type input))
-        (pin (num 6) (name SW) (type input))))
-    (libpart (lib pro4) (part OPA376AIDCK)
-      (fields
-        (field (name Reference) U)
-        (field (name Value) OPA376AIDCK)
-        (field (name Footprint) SC70-5))
-      (pins
-        (pin (num 1) (name +) (type input))
-        (pin (num 2) (name V-) (type input))
-        (pin (num 3) (name -) (type input))
-        (pin (num 4) (name ~) (type output))
-        (pin (num 5) (name V+) (type input))))
     (libpart (lib pro4) (part Atmel_SAM_D09)
       (fields
         (field (name Reference) U)
@@ -632,7 +600,39 @@
         (pin (num 13) (name PC2out) (type output))
         (pin (num 14) (name SIGin) (type input))
         (pin (num 15) (name PC3out) (type output))
-        (pin (num 16) (name VCC) (type input)))))
+        (pin (num 16) (name VCC) (type input))))
+    (libpart (lib pro4) (part DMP10H4D2s)
+      (fields
+        (field (name Reference) T)
+        (field (name Value) DMP10H4D2s))
+      (pins
+        (pin (num 1) (name Gate) (type input))
+        (pin (num 2) (name Source) (type input))
+        (pin (num 3) (name Drain) (type input))))
+    (libpart (lib pro4) (part LMR16006)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) LMR16006)
+        (field (name Footprint) TO_SOT_Packages_SMD:TSOT-6-MK06A)
+        (field (name Datasheet) http://www.ti.com/lit/ds/symlink/lmr16006.pdf))
+      (pins
+        (pin (num 1) (name CB) (type input))
+        (pin (num 2) (name GND) (type input))
+        (pin (num 3) (name FB) (type input))
+        (pin (num 4) (name ~SHDN) (type input))
+        (pin (num 5) (name VIN) (type input))
+        (pin (num 6) (name SW) (type input))))
+    (libpart (lib pro4) (part OPA376AIDCK)
+      (fields
+        (field (name Reference) U)
+        (field (name Value) OPA376AIDCK)
+        (field (name Footprint) SC70-5))
+      (pins
+        (pin (num 1) (name +) (type input))
+        (pin (num 2) (name V-) (type input))
+        (pin (num 3) (name -) (type input))
+        (pin (num 4) (name ~) (type output))
+        (pin (num 5) (name V+) (type input)))))
   (libraries
     (library (logical device)
       (uri "/Library/Application Support/kicad/library/device.lib"))

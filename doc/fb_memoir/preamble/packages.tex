@@ -44,6 +44,7 @@
 \usepackage[light]{kpfonts}
 \usepackage{counttexruns}
 \usepackage[european,siunitx,cuteinductors]{circuitikz}
+%\usepackage{datetime2}
 
 
 % -------------------------------------------------------- %
@@ -70,6 +71,8 @@
 \usetikzlibrary{arrows}
 \usetikzlibrary{decorations.pathmorphing}
 \usepackage{pgfplots}
+%\usepgfplotslibrary{units}
+\usetikzlibrary{pgfplots.units}
 \pgfplotsset{compat=newest}
 \pgfplotsset{max space between ticks=80pt}
 \pgfplotsset{max space between ticks=80pt}
@@ -79,6 +82,9 @@
     label style={font=\small},
     legend style={font=\footnotesize}
 }
+\pgfplotsset{every axis plot/.append style={%
+    line width=0.5pt}}
+    %thick}}
 
 
 % -------------------------------------------------------- %

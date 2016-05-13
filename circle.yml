@@ -20,5 +20,5 @@ dependencies:
 test:
   pre:
     - cd software/sensor/ && make
-    - cd software/supervisor/ && pylint -E *.py
+    - cd software/supervisor/ && pylint3 -E *.py
     - cd software/supervisor/ && flake8 *.py

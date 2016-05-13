@@ -55,7 +55,7 @@ AR Path="/573435AB/57356CDA" Ref="U10"  Part="1"
 AR Path="/57344B95/57356CDA" Ref="U13"  Part="1" 
 F 0 "U7" H 2925 4325 60  0000 C CNN
 F 1 "CD74HC4046" H 3175 2725 60  0000 C CNN
-F 2 "Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm" H 4025 2625 60  0001 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 4025 2625 60  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf" H 4075 2725 60  0001 C CNN
 	1    3225 3625
 	1    0    0    -1  
@@ -960,7 +960,7 @@ AR Path="/573435AB/57356D42" Ref="U11"  Part="1"
 AR Path="/57344B95/57356D42" Ref="U14"  Part="1" 
 F 0 "U8" H 4150 6975 60  0000 C CNN
 F 1 "CD74HC4046" H 4400 5375 60  0000 C CNN
-F 2 "Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm" H 5250 5275 60  0001 C CNN
+F 2 "Housings_SOIC:SOIC-16_3.9x9.9mm_Pitch1.27mm" H 5250 5275 60  0001 C CNN
 F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf" H 5300 5375 60  0001 C CNN
 	1    4450 6275
 	1    0    0    -1  

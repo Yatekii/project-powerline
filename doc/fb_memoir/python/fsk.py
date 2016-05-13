@@ -53,6 +53,8 @@ ax1.plot([12*T, 12*T], [0,1], color='grey')
 ax1.plot([12*T, 16*T], [1,1], color='magenta')
 ax1.set_ylim([-0.1,1.1])
 ax1.set_title("Daten")
+ax1.set_ylabel('Symbol')
+ax1.set_xlabel('Zeit (s)')
 
 # Carrier Frequency
 # ax2 = fig1.add_subplot(312)
@@ -68,6 +70,8 @@ ax3.plot(t_lo_2, fsk_mod_lo_ld(t_lo_2), label=r"Tr\"agerfrequenz", color='blue')
 ax3.plot(t_hi_2, fsk_mod_hi_ld(t_hi_2), label=r"Tr\"agerfrequenz", color='magenta')
 ax3.set_ylim([-1.1 * A, 1.1 * A])
 ax3.set_title(r"Moduliertes Signal")
+ax3.set_ylabel('Spannung (V)')
+ax3.set_xlabel('Zeit (s)')
 
 # Modulated Signal + DC component
 #ax4 = fig1.add_subplot(414)
@@ -78,7 +82,7 @@ ax3.set_title(r"Moduliertes Signal")
 #ax4.plot([0,16*T],[0,0],color='white')
 #ax4.set_title(r"Moduliertes Signal auf Leitung mit DC-Anteil")
 
-fig1.subplots_adjust(bottom=0.05,top=0.95,left=0.05,right=0.95,hspace=0.5)
+fig1.subplots_adjust(bottom=0.15,top=0.95,left=0.15,right=0.95,hspace=0.65)
 #fig1.set_figwidth(5.314) # Textwidth
 fig1.set_figwidth(4.5)
 # fig1.set_figheight(6.5)

@@ -10,7 +10,7 @@ import time
 from sqlalchemy.orm import scoped_session
 from sqlalchemy.orm import sessionmaker
 
-
+# setup logging
 log = logging.getLogger("MasterLog")
 log.setLevel(logging.DEBUG)
 logQue = queue.Queue(-1)
@@ -30,17 +30,24 @@ logListener = logging.handlers.QueueListener(
 log.addHandler(logQueueHandler)
 logListener.start()
 
+# setup database
 dbSession_factory = sessionmaker(bind='sqlite:///powerline.db')
 dbScoped = scoped_session(dbSession_factory)
 
+# example thread
 semCtrlTest = threading.Semaphore()
 semCtrlTest2 = threading.Semaphore()
+
 tt = threadtest.powerline_prototype(dbScoped, semCtrlTest, semCtrlTest2)
 tt.setDaemon(True)
 tt.start()
+
+
+# test commands
 semCtrlTest.release()
 time.sleep(5)
 semCtrlTest.release()
 time.sleep(5)
 
+# clean up
 logListener.stop()

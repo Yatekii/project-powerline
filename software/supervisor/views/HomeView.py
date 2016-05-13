@@ -1,38 +1,51 @@
-
+"""
+hallo das ist ein Kommentar
+"""
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel
+from PyQt5.QtGui import QFont
 
 
 class HomeView(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent):
+        super(HomeView, self).__init__(parent)
 
-        current1 = 100
+        current1 = 100          #input argument
         current2 = 200
         current3 = 300
+        state = "kein Fehler"
 
-        hystoryBt = QPushButton("Hystory", self)
-        settingBt = QPushButton("Einstellungen", self)
-        currentTitle = QLabel("Strommessung", self)
-        current1Label = QLabel("String 1", self)
-        current2Label = QLabel("String 2", self)
-        current3Label = QLabel("String 3", self)
-        current1lb = QLabel(str(current1) + " A", self)
-        current2lb = QLabel(str(current2) + " A", self)
-        current3lb = QLabel(str(current3) + " A", self)
+        font_state = QFont()
+        font_state.setPointSize(12)
+        font_state.setBold(1)
 
-        hystoryBt.resize(145, 50)
-        hystoryBt.move(10, 10)
+        font_title = QFont()
+        font_title.setBold(1)
 
-        settingBt.resize(145, 50)
-        settingBt.move(165, 10)
+        self.test_error_bt = QPushButton('Error', self)         #comment for final use
+        self.test_error_bt.clicked.connect(self.parent().show_error_view)
+        self.test_error_bt.move(200, 40)
 
-        currentTitle.move(110, 100)
-        currentTitle.resize(100, 50)
-        current1Label.move(10, 150)
-        current1lb.move(100, 150)
-        current2Label.move(10, 175)
-        current2lb.move(100, 175)
-        current3Label.move(10, 200)
-        current3lb.move(100, 200)
+        self.history_bt = QPushButton("History", self)
+        self.history_bt.clicked.connect(self.parent().show_history_view)
+        self.history_bt.resize(140, 50)
+        self.history_bt.move(0, 160)
 
+        self.setting_bt = QPushButton("Einstellungen", self)
+        self.setting_bt.clicked.connect(self.parent().show_configuration_view)
+        self.setting_bt.resize(140, 50)
+        self.setting_bt.move(150, 160)
 
+        self.status_lb = QLabel("Anlagestatus: " + state, self)
+        self.status_lb.setFont(font_state)
+        self.status_lb.move(0,0)
+
+        self.current_title = QLabel("Strommessung:", self)
+        self.current_title.setFont(font_title)
+        self.current_title.move(0, 40)
+
+        self.current1_lb = QLabel("String 1:   " + str(current1) + " A", self)
+        self.current1_lb.move(0, 60)
+        self.current2_lb = QLabel("String 2:   " + str(current2) + " A", self)
+        self.current2_lb.move(0, 80)
+        self.current3_lb = QLabel("String 3:   " + str(current3) + " A", self)
+        self.current3_lb.move(0, 100)

@@ -2,10 +2,8 @@
 #include "atmel_start_pins.h"
 #include <stdio.h>
 
-static uint8_t example_USART_0[14] = "Hello World!\r\n";
-char str_buf[20] = "FUUUUU\r\n";
-char newline = '\n';
-char cmd[80] = "";
+char str_buf[20] = "Hello World\r\n";
+char cmd[20] = {0};
 char read_adc[8] = "read adc";
 
 int main(void)
@@ -28,7 +26,7 @@ int main(void)
 
 	adc_async_enable(&ADC_0);
 
-	io_write(io, example_USART_0, 14);
+	io_write(io, str_buf, 14);
   gpio_set_pin_level(LED_RED, false);
   int bytes_to_read = 4;
   while(1){
@@ -36,17 +34,19 @@ int main(void)
     if (res) {
       io_write(io, buffer.buffer + buffer.length - res, res);
       for(int i = 0; i < res; i++){
+
+        // If \r is caught, send it back and add \n.
+        // Also clear the buffer up until \r and evealuate the command.
         if(*(buffer.buffer + buffer.length - res + i) == '\r'){
-          io_write(io, &newline, 1);
+          io_write(io, "\n", 1);
 
-          int res2 = clear_buffer(&buffer, cmd, buffer.length - res + i);
-          //io_write(io, cmd, res2);
-          // Works up until here!
+          // extract the command sent
+          // res2 is length of extracted command + 1 (because \r is also there)
+          int res2 = clear_buffer(&buffer, cmd, buffer.length - res + i + 1);
 
-          res2 = strncmp(cmd, read_adc, 3);
-          //snprintf(str_buf, 12, "yolo %d\r\n", res2);
-          io_write(io, cmd, 12);
-          if(0 == strncmp(cmd, read_adc, 1)){
+          // compare strings
+          // do stuff if it matches
+          if(strncmp(cmd, read_adc, res2 - 1)){
             io_write(io, "38V\r\n", 7);
             gpio_set_pin_level(LED_GREEN, false);
           }

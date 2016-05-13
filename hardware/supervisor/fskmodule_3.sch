@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:supervisor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +35,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 4 4
+Sheet 3 4
 Title "powerline sensor"
 Date "10 mar 2016"
 Rev "1"

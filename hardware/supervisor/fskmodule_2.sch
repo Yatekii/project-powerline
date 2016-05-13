@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:supervisor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -36,7 +35,7 @@ EELAYER 25 0
 EELAYER END
 $Descr A4 11693 8268
 encoding utf-8
-Sheet 3 4
+Sheet 4 4
 Title "powerline sensor"
 Date "10 mar 2016"
 Rev "1"
@@ -994,9 +993,9 @@ Wire Notes Line
 Wire Notes Line
 	475  2475 11225 2475
 Text Label 2925 1000 0    60   ~ 0
-TX1_in
+TX2_in
 Text Label 2925 1100 0    60   ~ 0
-RX1_out
+RX2_out
 Text Label 2925 800  0    60   ~ 0
 coupling2
 Wire Wire Line

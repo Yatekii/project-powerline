@@ -39,6 +39,9 @@ plt.rc('axes', labelsize=9, titlesize=11)
 plt.rc('xtick', labelsize=9)
 plt.rc('ytick', labelsize=9)
 plt.rc('savefig', transparent=True)
+plt.rc('lines', linewidth=0.5)
+plt.rc('axes',linewidth=0.5)
+
 
 fig1 = plt.figure(num=1,figsize=(10,15))
 #fig1.suptitle(r'Frequenzanteile bei Intensit\"at einer Schwebung')

@@ -3,305 +3,127 @@
 \label{chap:simu}
 % **************************************************************************** %
 
-Verfolgte L\"osungsans\"atze \ldots sich daraus ergebende n\"otige Simulationen \ldots
+In  diesem Abschnitt  werden Schaltungen  f\"ur drei  L\"osungsans\"atze (zwei
+zur  FSK, eine  zur  ASK)  vorgestellt, mit  \code{LTspice  IV} simuliert  und
+beurteilt.\todo{LTspice: source}
 
-Im   Folgenden   werden    verschiedene   verfolgte   L\"osungsans\"atze   zur
-Kommunikation   zwischen   \Sensor    und   \Master   erl\"autert,   modelliert
-(\code{LTspice}) und anhand von Simulationen evaluiert.
+Es werden  jeweils die  Schaltung f\"ur  den Sender,  den Empf\"anger  und das
+Gesamtsystem untersucht.
 
 
 % ---------------------------------------------------------------------------- %
-\section{Kommunikation \"uber DC-Leitung}
-\label{sec:simu:dcLeitung}
+\section{Frequenzumtastung: Kapazitive Einkopplung}
+\label{sec:simu:fsk:capacitive}
 % ---------------------------------------------------------------------------- %
 
-\todo{Referenz auf Konzept aus obigem Kapitel}
-Es sind  zwei L\"osungsans\"atze untersucht  worden, um ein Signal  \"uber die
-Gleichstromleitung zu senden:
+% ---------------------------------------------------------------------------- %
+\subsection{Sender}
+\label{sec:simu:fsk:capacitive:transmitter}
+% ---------------------------------------------------------------------------- %
 
-\textbf{Frequency-shift keying}: Bei  der FSK (Frequenzumtastung  auf Deutsch)
-wird  dem in  der Leitung  fliessenden Gleichstrom  ein (verh\"altnism\"assig)
-kleines  Signal aufmoduliert,  welches  die  zu \"ubertragenden  Informationen
-enth\"alt. Die  Frequenz   des  aufmodulierten   Anteils  wird   in  diskreten
-Schritten variiert  und jeweils  einem Symbol zugeordnet. Bei  einer bin\"aren
-Umsetzung  werden  zwei  Frequenzen  benutzt; eine  f\"ur  \code{0}  und  eine
-f\"ur  \code{1}.   Das  Verfahren ist  schematisch  in  \fref{fig:fsk:concept}
-dargestellt.
+% ---------------------------------------------------------------------------- %
+\subsection{Empf\"anger}
+\label{sec:simu:fsk:capacitive:receiver}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\subsection{Gesamtsystem}
+\label{sec:simu:fsk:capacitive:system}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\section{Frequenzumtastung: Induktive Einkopplung}
+\label{sec:simu:fsk:inductive}
+% ---------------------------------------------------------------------------- %
+
+Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
+wird von der FSK-Schaltung das zu  \"ubertragende Signal gegeben und die Spule
+induziert in  der DC-Leitung  entsprechende Spannungs-Rippel, die  vom \Master
+ausgewertet werden k\"onnen. Der entsprechende  Schaltkreis ist schematisch in
+Abbildung \ref{fig:circ:coupling:inductive} dargestellt.
+
+Verglichen mit  Kondensatoren sind Spulen relativ  gross und teuer. Allerdings
+ist das Prinzip  der induktiven Einkopplung gut dokumentiert  und die Aussicht
+auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
 
 \begin{figure}[h!tb]
     \centering
-    \input{images/python/fsk.pgf}
-    \caption{%
-        \emph{Frequency-shift  keying}: Oben   sind  die   zu  \"ubertragenden
-        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
-        zugeh\"orige Verhalten des  modulierten Signals.%
-    }
-    \label{fig:fsk:concept}
+    \input{images/circuits/coupling-inductive.tex}
+    \caption{Induktive Einkopplung}
+    \label{fig:circ:coupling:inductive}
 \end{figure}
 
-
-\textbf{Amplitude-shift  keying}: Die  ASK (Amplitudenumtastung  auf  Deutsch)
-benutzt statt verschiedenen Frequenzen unterschiedliche Amplituden, um Symbole
-zu  codieren.  \fref{fig:ask:concept}  stellt  das  grundlegende  Konzept  des
-Verfahrens schematisch dar.
-
-Unsere Umsetzung w\"urde einen Transistor  benutzen, um jeweils ein Solarmodul
-bei  einer Tr\"agerfrequenz  von  etwa \SI{10}{\kilo\hertz}  kurzzuschliessen.
-Dadurch bricht die Spannung auf  einem Strang von seriell geschalteten Modulen
-kurz ein, was als Signal  codiert und ausgewertet werden kann. Grunds\"atzlich
-handelt  es sich  bei  diesem Prinzip  um  eine ASK  mit  den zwei  Amplituden
-\SI{0}{\volt} und  dem Betrag des Spannungsabfalls  durch Kurzschliessen eines
-Moduls.
-\todo{Zahlen in Ticks auf Achsen weglassen?}
-
-\begin{figure}[h!tb]
-    \centering
-    \input{images/python/ask.pgf}
-    \caption{%
-        \emph{Amplitude-shift  keying}: Oben   sind  die   zu  \"ubertragenden
-        digitalen  Daten als  \code{1} und  \code{0} abgebildet. Die  mittlere
-        Abbildung stellt eine typische Umsetzung des Konzepts mit harmonischer
-        Tr\"agerschwingung und zwei verschiedenen Amplituden dar.\protect\\
-        Das  unterste   Signal  ist  eine  vereinfachte   Darstellung  unserer
-        Variante.  Die  Gleichspannung an  der Leitung  ist etwas  weniger als
-        \SI{1}{\kilo\volt}; beim Kurzschluss eines Moduls erfolgt eine Abfolge
-        von Spannungseinbr\"uchen auf der Leitung, welche die Daten kodiert.%
-    }
-    \label{fig:ask:concept}
-\end{figure}
-
-
 % ---------------------------------------------------------------------------- %
-\clearpage
-\section{Modellierung eines PV-Moduls}
-\label{sec:simu:model:module}
-% ---------------------------------------------------------------------------- %
-
-Es wird  ein Modell f\"ur eine  einzelne Zelle entwickelt, auf  dem das Modell
-eines  Moduls  aufbauen  kann.
-
-Als   Grundlage   dient   das  Eindiodenmodell   einer   PV-Zelle,   erweitert
-um   eine  parallele   Kapazit\"at  $C$   (basierend  auf   Informationen  aus
-\cite{ref:solar:scofield}   und   \cite{ref:solar:friesen}),  dargestellt   in
-\fref{fig:circuit:solarCell}.
-
-\begin{figure}[h!tb]
-    \centering
-    \input{images/circuits/solarCell.tex}
-    \caption{%
-        Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
-        Eindiodenmodell mit zus\"atzlicher Kapazit\"at%
-    }
-    \label{fig:circuit:solarCell}
-\end{figure}
-
-In \cite{ref:solar:scofield} wurden $C$,  $R_{S}$ und $R_{P}$ einer Solarzelle
-der Gr\"osse \SI{0.43}{\centi\meter\squared} \"uber einen Frequenzbereicht von
-\SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die Resultate waren:
-
-\begin{alignat}{3}
-    \label{eq:scofield:C}
-    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \; & \text{bis} \; & \SI{20}{\nano\farad} \;  & = & \; \SI{14 \pm 6}{\nano\farad} \\
-    \label{eq:scofield:Rs}
-    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \; & \text{bis} \; & \SI{20}{\ohm}        \;  & = & \; \SI{10.1 \pm 9.9}{\ohm}     \\
-    \label{eq:scofield:Rp}
-    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; & \text{bis} \; & \SI{500}{\kilo\ohm}  \;  & = & \; \SI{250.25 \pm 249.75}{\kilo\ohm}
-\end{alignat}
-
-Um   die   obigen  Werte   f\"ur   unsere   Zwecke  verwenden   zu   k\"onnen,
-m\"ussen  sie  auf  eine  Zelle  der  Fl\"ache  \SI{240}{\centi\meter\squared}
-(zur  Herleitung  dieses  Werts  siehe  Anhang  \ref{app:sec:cell:surface}  ab
-Seite  \pageref{app:sec:cell:surface}) um  ungef\"ahr  einen Faktor  \num{600}
-hochskaliert werden.
-
-$R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
-zur   Zellfl\"ache,    wogegen   $C$   bei   gr\"osser    werdender   Fl\"ache
-ansteigt~\cite{ref:solar:scofield}. Das  schlimmstm\"ogliche   Szenario  f\"ur
-unseren   Fall  tritt   ein,  wenn   der  Ausgangsstrom   der  Zelle   maximal
-wird\todo{korrekt?}:
-
-\begin{symbols}
-    \firmlist
-    \item[$C$]
-        Beim Kurzschliessen der  Zelle treten Stromspitzen auf,  wenn sich der
-        Kondensator  $C$  entl\"adt. Je  gr\"osser  dessen  Kapazit\"at,  umso
-        h\"oher diese Stromspitzen.  Wir  nehmen also \SI{20}{\nano\farad} aus
-        Gleichung \ref{eq:scofield:C} als Ausgangswert.
-    \item[$R_{\mathrm{S}}$]
-        Der aus der Solarzelle fliessende Strom wird gr\"osser, je kleiner der
-        Seriewiderstand vor dem Ausgang ist. Es wird daher der niedrigere Wert
-        von \SI{0.2}{\ohm} aus Gleichung \ref{eq:scofield:Rs} gew\"ahlt.
-    \item[$R_{\mathrm{P}}$]
-        Je    gr\"osser   der    Parallelwiderstand   im    Verh\"altnis   zum
-        Seriewiderstand   ist,   um   so    mehr   Strom   fliesst   aus   dem
-        Ausgang  der  Zelle.    Es  wird  deshalb  der   Wert  H\"ochste  Wert
-        von   \SI{500}{\kilo\ohm}  aus   Gleichung  \ref{eq:scofield:Rp}   als
-        Ausgangswert verwendet.
-\end{symbols}
-
-Die skalierten Werte sind somit:
-\begin{alignat}{2}
-    C               &= C_{\mathrm{Messung}}    &\cdot 600 &= \SI{12}{\micro\farad} \\
-    R_{\mathrm{S,}} &= R_{\mathrm{S, Messung}} &\div  600 &= \SI{333}{\micro\ohm}    \\
-    R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} &\div  600 &= \SI{833}{\ohm}
-\end{alignat}
-
-Wie  in  Anhang  \ref{app:sec:cell:UI}  (ab  Seite  \pageref{app:sec:cell:UI})
-erw\"ahnt, gehen wir davon aus, dass ein Modul nicht mehr als \SI{10}{\ampere}
-abgibt. Abh\"angig davon, ob wir mehrere Str\"ange mit polykristallinen Zellen
-parallel schalten  oder ein  Modul haben, welches  lediglich aus  einem Strang
-monokristalliner  Zellen  besteht, wird  der  Strom  einer Zelle  entsprechend
-angepasst:
-
-\begin{align}
-    I_{\mathrm{SC, polykristallin}} & = \SI{5}{\ampere} \quad \text{(2 parallele Str\"ange)} \\
-    I_{\mathrm{SC, monokristallin}} & = \SI{10}{\ampere}
-\end{align}
-
-Die vom Modell zu erzielende Leerlaufspannung $V_{\mathrm{offen}}$ einer Zelle
-ist ebenfalls in Anhang \label{app:sec:cell:UI} hergeleitet:
-
-\begin{equation}
-    \label{eq:voffen}
-    V_{\mathrm{offen}} = \SI{600}{\milli\volt}
-\end{equation}
-
-
-Es bleiben noch die Parameter der Diode zu bestimmen. Ausganslage f\"ur das
-Diodenmodell ist die Diodengleichung:\todo{source?}
-
-\begin{equation}
-    \label{eq:diode}
-    I_{\mathrm{D}} = I_{\mathrm{S}} \cdot \left( \exp\left(\frac{q \cdot V}{n \cdot k \cdot T}\right) - 1 \right)
-\end{equation}
-
-\begin{conditions}
-    I_{\mathrm{D}} & Diodenstrom \\
-    I_{\mathrm{S}} & Reverse saturation current \\
-    q              & Elementarladung eines Elektrons (\SI{1.602e-19}{\coulomb}) \\
-    V              & Diodenspannung \\
-    n              & Idealit\"atsfaktor \\
-    k              & Boltzmannkonstante (\SI{1.38e-23}{\joule\per\kelvin}) \\
-    T              & Diodentemperatur \\
-\end{conditions}
-
-Der   Reverse   Saturation  Current   ist   der   Strom,  der   beim   Anlegen
-einer  negativen   Spannung  \"uber  die   Diode  fliesst,  bevor   die  Diode
-durchbricht~\cite{ref:solar:diodeCharacteristics}.    Er  liegt   bei  kleinen
-Dioden \"ublicherweise Bereich von Nano-Amp\`ere bis Femto-Amp\`ere\todo{F\"ur
-k\"aufliche Dioden, nicht  Solarzellen}, bei einer Solarzelle  wird er h\"oher
-liegen, da diese gr\"osser ist.
-
-Wie  man an  Gleichung \ref{eq:diode}  erkennen kann,  steigt der  Diodenstrom
-f\"ur eine gegebene Spannung, wenn der Reverse Saturation Current ansteigt.
-
-Der Idealit\"atsfaktor ist ein Indikator  f\"ur den Spannungsabfall \"uber der
-Diode in  Abh\"angigkeit des durchfliessenden Stromes  und liegt normalerweise
-zwischen  1  (ideale  Diode)   und  2. Je  gr\"osser  der  Idealit\"atsfaktor,
-umso  h\"oher  der Spannungsabfall  \"uber  der  Diode f\"ur  einen  gegebenen
-Strom  (bzw.  umso kleiner  der  Strom  bei einer  fixen  Spannung). Abbildung
-\ref{fig:diodeVI:IS} zeigt das Strom-Spannungsverhalten  einer Diode sowie den
-Einfluss von $I_{\mathrm{S}}$ und $n$ schematisch.
-
-\begin{figure}[h!tb]
-    \input{images/python/diodeVI.pgf}
-    \caption{%
-        Vereinfachte Strom-Spannungs-Kurve einer Diode. Der Reverse Saturation
-        Current   $I_{\mathrm{S}}$   tritt   im   \textcolor{magenta}{magenta}
-        eingef\"arbten Bereich auf. Der angegebene Zahlenwert bezieht sich auf
-        den  Bereich  der  Kurve,  in der  $I_{\mathrm{S}}$  relativ  konstant
-        ist.\protect\\
-        Die    \textcolor{blue}{blaue   Kurve}    dient   als    Referenz. Die
-        \textcolor{red}{rote  Kurve}  zeigt  den Einfluss  eines  ansteigenden
-        Idealit\"atsfaktors  (also  st\"arkeres  Abweichen von  einer  idealen
-        Diode) auf die IV-Kennlinie.\protect\\
-        Die \textcolor{green!50!black}{gr\"une Kurve} zeigt den Einfluss eines
-        ansteigenden  Reverse Saturation  Current: Der Diodenstrom  steigt bei
-        einer gegebenen Diodenspannung.\protect\\
-        Zur  Verbesserung  der  \"Ubersichtlichkeit  wurden  die  abweichenden
-        Kurven nur  im positiven Bereich geplottet,  nat\"urlich \"andert sich
-        auch das Verhalten im Reverse-Betrieb analog.%
-    }
-    \label{fig:diodeVI:IS}
-\end{figure}
-
-\todo{Reverse-Betrieb-Kurven: analog?}
-
-Zur  Simulation  in  \code{LTspice}  wird das  Diodenmodell  auf  den  Reverse
-Saturation  Current   und  den  Idealit\"atsfaktor  reduziert,   und  folgende
-gesch\"atzte Parameter als Ausgangslage f\"ur den Iterationsprozess benutzt:
-
-\begin{center}
-    \code{.model diode1 D(IS=1e-6 N=2)}
-\end{center}
-
-Es wird die Schaltung gem\"ass Abbildung \ref{fig:circuit:solarCell} von Seite
-\pageref{fig:circuit:solarCell} aufgebaut und die  oben bestimmten Werte f\"ur
-$R_{\mathrm{S}}$, $R_{\mathrm{P}}$ und $C$ eingesetzt.
-
-Mit einer  Transientensimulation (\code{.tran  1m}) wird die  Zelle simuliert,
-ihre  Leerlaufspannung  $V_{\mathrm{offen}}$  gemessen und  mit  dem  Zielwert
-aus   Gleichung~\ref{eq:voffen}  verglichen\todo{``wird''   nur  einmal   oder
-wiederholen?}.  Anschliessend  werden die  Werte f\"ur \code{IS}  und \code{N}
-angepasst, bis die gew\"unschte Leerlaufspannung erreicht wird.
-
-Nach einigen Iterationen liefert dieser Prozess\footnotemark:
-
-\footnotetext{%
-    Dies ist eine m\"ogliche L\"osung. Es gibt nat\"urlich noch beliebig viele
-    weitere  Kombinationen von  \code{IS} und  \code{N}, welche  die gegebenen
-    Bedingungen  erf\"ullen. Wir   sind  hier  lediglich  an   einer  L\"osung
-    interessiert, von  der wir zuversichtlich  sind, dass sie  ein hinreichend
-    gutes Modell liefert.%
-}
-
-\begin{align}
-    \label{eq:cell:diode:IS:N:result}
-    I_s &= \SI{4}{\micro\ampere} \\
-    N   &= 1.65
-\end{align}
-
-Somit ist  das Modell  einer einzelnen  Zelle bestimmt  und kann  dazu benutzt
-werden,  ein   Modul  zu  modellieren. Wie  in   Anhang  \ref{app:simu:module}
-ab  Seite   \pageref{app:simu:module}  erw\"ahnt,  werden   zwei  verschiedene
-Module   simuliert: Ein   Modul  mit   zwei   parallelen   Str\"angen  zu   je
-36  seriell   geschalteten  Zellen  (\fref{fig:ltspice:module:cellBased:36x2},
-Seite  \pageref{fig:ltspice:module:cellBased:36x2})  und   ein  Modul  mit  72
-in   Serie   geschalteten  Zellen   (\fref{fig:ltspice:module:cellBased:72x1},
-Seite     \pageref{fig:ltspice:module:cellBased:72x1}). Die     $36     \times
-2$-Konfiguration\todo{Bindestrich?}   hat   eine  h\"ohere   Kapazit\"at   als
-die   $72  \times   1$-Anordnung,   liefert  daf\"ur   aber   nur  die   halbe
-Ausgangsspannung. Der Ausgangsstrom  beider Module wurde  auf \SI{10}{\ampere}
-festgelegt,  die Stromquellen  im  $36 \times  2$-Modul  geben also  lediglich
-\SI{5}{\ampere}  ab. Basierend auf  Tabelle \ref{tab:moduleData:IU}  von Seite
-\pageref{tab:moduleData:IU}  mit Informationen  zu kommerziell  erh\"altlichen
-Solarmodulen scheint uns dieser Ansatz gerechtfertigt.
-
-\todo{Vereinfachtes Modell}
-\todo{Induktivit\"at}
-
-% ---------------------------------------------------------------------------- %
-\section{Frequenzumtastung}
-\label{sec:simu:fsk}
+\subsection{Sender}
+\label{sec:simu:fsk:inductive:transmitter}
 % ---------------------------------------------------------------------------- %
 
 % ---------------------------------------------------------------------------- %
-\subsection{Kapazitive Einkopplung}
-\label{subsec:simu:fsk:coupling:capac}
+\subsection{Empf\"anger}
+\label{sec:simu:fsk:inductive:receiver}
 % ---------------------------------------------------------------------------- %
 
 % ---------------------------------------------------------------------------- %
-\subsection{Induktive Einkopplung}
-\label{subsec:simu:fsk:coupling:induct}
+\subsection{Gesamtsystem}
+\label{sec:simu:fsk:inductive:inductive}
 % ---------------------------------------------------------------------------- %
+
 
 % ---------------------------------------------------------------------------- %
 \section{Amplitudenumtastung}
 \label{sec:simu:ask}
 % ---------------------------------------------------------------------------- %
 
+Wie in Abschnitt \todo{reference} erw\"ahnt, wird bei dieser L\"osungsvariante
+jeweils   ein   Modul   gesteuert   kurzgeschlossen. Dies   verursacht   kurze
+Spannungseinbr\"uche auf  der DC-Leitung,  welche vom  Empf\"anger ausgewertet
+werden k\"onnen, wie in Abbildung \todo{reference}vereinfact dargestellt.
+
+Potentielle Probleme sind bei  dieser L\"osungsvariante in folgenden Bereichen
+zu suchen:
+
+\begin{symbols}
+    \firmlist
+    \item[\textbf{Induktivit\"at der Leitung:}]
+        Der  Spannungsabfall   auf  der  DC-Leitung  wird   bei  geschlossenem
+        Stromkreis zu Strom\"anderungen auf der DC-Leitung f\"uhren. Dies wird
+        eine Spannungs\"anderung auf der DC-Leitung bewirken\footnotemark.
+        \footnotetext{%
+            Spannung in Abh\"angigkeit der Strom\"anderung:
+            $v = L \cdot \frac{\mathrm{d}i}{\mathrm{d}t}$%
+        }
+
+        Gem\"ass    Lenz'scher     Regel    \todo{reference}     wird    diese
+        Spannungs\"anderung  so gerichtet  sein,  dass  sich der  zugeh\"orige
+        Strom der aufgezwungenen \"Anderung widersetzt.
+
+        Es  kann also  sein, dass  die  Induktivit\"at der  DC-Leitung das  zu
+        \"ubertragende  Signal  so  stark  kompensiert,  dass  es  nicht  mehr
+        detektierbar  ist. Je   h\"oher  die  Frequenz,  mit   der  das  Modul
+        kurzgeschlossen  und  wieder  ge\"offnet   wird,  um  so  h\"oher  die
+        zugeh\"origen Strom\"anderungen
+        $\frac{\mathrm{d}i}{\mathrm{d}{t}}$
+        und somit Impedanz der Induktivit\"at (gem\"ass
+        $Z_L = j \omega L$).
+    \item[\textbf{Kapazit\"at des Solarmoduls:}]
+        Dem  Solarmodul   wird  bei   diesem  Vorgehen  das   Verhalten  einer
+        Wechselstromquelle   aufgezwungen. Besitzt  es   interne  parasit\"are
+        Kapazit\"aten,  k\"onnen  diese  bei  den  abrupten  \"Anderungen  der
+        Spannung hohe Str\"ome im  kurzgeschlossenen Pfad und seinen Bauteilen
+        verursachen.\footnotemark
+        \footnotetext{%
+            Strom\"anderung in Abh\"angigkeit der Spannungs\"anderung:
+            $I(t) = C \cdot \frac{\mathrm{V(t)}}{\mathrm{d}t}$%
+        }
+
+        Besitzen    diese   Bauteile    Ohm'sche   Widerst\"ande,    entstehen
+        entsprechende thermische  Verluste, welche die  Bauteile besch\"adigen
+        k\"onnen.
+\end{symbols}
+
+
 % ---------------------------------------------------------------------------- %
-\subsection{Sensor (Sender)}
+\subsection{Sender}
 \label{subsec:simu:ask:sensor}
 % ---------------------------------------------------------------------------- %
 
@@ -322,6 +144,7 @@ zeigt diesen Aufbau schematisch.
     \label{fig:module:mosfet:simple}
 \end{figure}
 
+%TODO: line width
 \begin{figure}
     \begin{tikzpicture}
        \begin{scope}[x={(0mm,0mm)},y={(120mm,\textwidth)}]
@@ -334,6 +157,8 @@ zeigt diesen Aufbau schematisch.
                    ylabel=Strom (\si{\ampere}),
                    %x unit=u,
                    change x base=true,
+                   %line width = 1pt,
+                   thick,
                    x SI prefix=micro,
                ]
                \addplot[-,color=blue] table {data/module-72cells--I-MOSFET--0005u.dat};
@@ -461,28 +286,23 @@ inklusive Durchschnittswerte f\"ur Strom und Leistung.
         auf      Seite      \pageref{app:sec:simu:complementary:36x2}      und
         Anhang      \ref{app:sec:simu:complementary:72x1}       auf      Seite
         \pageref{app:sec:simu:complementary:72x1}).\protect\\
-        Die  Intervalle   \SI{2}{\micro\second}  und  \SI{1.78}{\micro\second}
-        entsprechen  der L\"ange  einer  Spitze in  der Leistungskurve  (siehe
-        unterste  Plots  in   den  Abbildungen  \ref{fig:simu:results:36x2:3u}
-        respektive \ref{fig:simu:results:72x1:3u}).%
+        Die     Dauer      der     Spitze     ist     beim      $36     \times
+        2$-Modul     \SI{2}{\micro\second}    und     \SI{1.78}{\micro\second}
+        beim    $72    \times    1$-Modul    (siehe    unterste    Plots    in
+        den     Abbildungen      \ref{fig:simu:results:36x2:3u}     respektive
+        \ref{fig:simu:results:72x1:3u}).%
     }
     \label{tab:36x2:heat}
     \begin{tabular}{lrr}
 
     \toprule
-    Modul \\
+    Kriterium                                      & $36 \times 2$-Modul & $72 \times 1$-Modul \\
     \midrule
-    $36 \times 2$ & Spitzenwert Strom:                            & \SI{32}{\ampere} \\
-                  & Spitzenwert Leistung:                         & \SI{310}{\watt}  \\
-                  & $\overline{P}$ f\"ur \SI{2}{\micro\second}    & \SI{158.77}{\watt} \\
-                  & $\overline{P}$ f\"ur \SI{1}{\milli\second}    & \SI{4.312}{\watt}  \\
-                  & $\overline{P}$ f\"ur \SI{1}{\second}          & \SI{4.3047}{\watt} \\
-    \midrule
-    $72 \times 1$ & Spitzenwert Strom:                            & \SI{24}{\ampere} \\
-                  & Spitzenwert Leistung:                         & \SI{535}{\watt}  \\
-                  & $\overline{P}$ f\"ur \SI{1.78}{\micro\second} & \SI{267.46}{\watt} \\
-                  & $\overline{P}$ f\"ur \SI{1}{\milli\second}    & \SI{6.0577}{\watt}  \\
-                  & $\overline{P}$ f\"ur \SI{1}{\second}          & \SI{6.0433}{\watt} \\
+     Spitzenwert Strom:                            & \SI{32}{\ampere}    & \SI{24}{\ampere}    \\
+     Spitzenwert Leistung:                         & \SI{310}{\watt}     & \SI{535}{\watt}     \\
+     $\overline{P}$ f\"ur Dauer der Spitze         & \SI{158.77}{\watt}  & \SI{267.46}{\watt}  \\
+     $\overline{P}$ f\"ur \SI{1}{\milli\second}    & \SI{4.312}{\watt}   & \SI{6.0577}{\watt}  \\
+     $\overline{P}$ f\"ur \SI{1}{\second}          & \SI{4.3047}{\watt}  & \SI{6.0433}{\watt}  \\
     \bottomrule
     \end{tabular}
 \end{table}
@@ -507,6 +327,7 @@ folgende  Schlussfolgerungen:
         Pflichtenheft angestrebten Wert von \SI{100}{\milli\watt}.
 \end{enumerate}
 \todo{korrekte Schlussfolgerungen?}
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage

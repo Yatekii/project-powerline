@@ -32,12 +32,12 @@ vi_rev_lambd2  = sp.lambdify(U,vi_rev_2,modules=['numpy'])
 lower        = -0.9
 upper        =  0.9
 u_pos        = np.linspace(0,upper,300)
-u_pos_actual = np.linspace(0.4,upper,300)
+u_pos_actual = np.linspace(0.3,upper,300)
 u_rev        = np.linspace(lower,0,300)
 u_rev_actual = np.linspace(lower,-0.4,300)
 u            = np.linspace(-0.4,0.4,300)
-u_rev_fill   = np.linspace(-0.5,0,500)
-u_rev_fill_2 = np.linspace(-0.57,-0.4995,500)
+u_rev_fill   = np.linspace(-0.2,0.005,500)
+u_rev_fill_2 = np.linspace(-0.57,-0.1998,500)
 
 plt.rc('text',usetex=True)
 plt.rc('font',family='serif',size=11)

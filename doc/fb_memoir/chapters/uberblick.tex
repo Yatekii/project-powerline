@@ -27,13 +27,16 @@ integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
 
 
 % ---------------------------------------------------------------------------- %
-\section{Kernproblem: Kommunikation \"uber DC-Leitung}
+\clearpage
+\section{Kommunikation \"uber DC-Leitung}
 \label{sec:commDCLine}
 % ---------------------------------------------------------------------------- %
 
-\todo{Referenz auf Konzept aus obigem Kapitel}
-Es sind  zwei L\"osungsans\"atze untersucht  worden, um ein Signal  \"uber die
-Gleichstromleitung zu senden:
+Die Kommunikation zwischen  \Sensor und \Master \"uber die  DC-Leitung ist das
+Herzst\"uck des Systems und das zu l\"osende Kernproblem des Projekts. Es sind
+im Rahmen  des Projekts  zwei grunds\"atzliche  Ans\"atze verfolgt  worden, um
+Daten  zwischen  \Sensor und  \Master  \"uber  die  DC-Leitung zu  senden  und
+empfangen.
 
 \textbf{Frequency-shift keying}: Bei  der FSK (Frequenzumtastung  auf Deutsch)
 wird  dem in  der Leitung  fliessenden Gleichstrom  ein (verh\"altnism\"assig)
@@ -61,13 +64,16 @@ benutzt statt verschiedenen Frequenzen unterschiedliche Amplituden, um Symbole
 zu  codieren.  \fref{fig:ask:concept}  stellt  das  grundlegende  Konzept  des
 Verfahrens schematisch dar.
 
-Unsere Umsetzung w\"urde einen Transistor  benutzen, um jeweils ein Solarmodul
-bei  einer Tr\"agerfrequenz  von  etwa \SI{10}{\kilo\hertz}  kurzzuschliessen.
-Dadurch bricht die Spannung auf  einem Strang von seriell geschalteten Modulen
-kurz ein, was als Signal  codiert und ausgewertet werden kann. Grunds\"atzlich
-handelt  es sich  bei  diesem Prinzip  um  eine ASK  mit  den zwei  Amplituden
-\SI{0}{\volt} und  dem Betrag des Spannungsabfalls  durch Kurzschliessen eines
-Moduls.
+Unsere  Umsetzung unterscheidet  sich  von  einer <<normalen>> \todo{<<text>> oder ``text'' ?}  Implementation
+(mittlere   Graphik  in   \fref{fig:ask:concept})  dadurch,   dass  nicht   im
+eigentlichen Sinne  ein zus\"atzliches  Signal auf den  DC-Anteil aufmoduliert
+wird. Stattdessen   wird  ein   Solarmodul  mit   einer  bestimmten   Frequenz
+kurzgeschlossen,  was die  Spannung auf  einem Strang  von Modulen  kurzzeitig
+in  Intervallen  einbrechen  l\"asst. Diese  Spannungseinbr\"uche  werden  zur
+Datencodierung  benutzt   (unterster  Plot   in  \fref{fig:ask:concept}). Dies
+entspricht  im  Prinzip  einer  ASK  mit Amplituden  null  und  dem  Wert  des
+Spannungseinbruchs mit einem Offset des halben Spannungseinbruchs.
+
 \todo{Zahlen in Ticks auf Achsen weglassen?}
 
 \begin{figure}[h!tb]
@@ -86,3 +92,7 @@ Moduls.
     \label{fig:ask:concept}
 \end{figure}
 
+
+Sowohl  FSK wie  auch  unsere  Variante der  ASK  haben  ihre jeweiligen  Vor-
+und  Nachteile,  auf  welche im  Kapitel  \emph{\titleref{chap:simu}}  genauer
+eingegangen wird.

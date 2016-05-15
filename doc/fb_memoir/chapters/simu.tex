@@ -121,6 +121,9 @@ zu suchen:
         k\"onnen.
 \end{symbols}
 
+Die    Tr\"agerfrequenz    in    den    folgenden    Simulationen    betr\"agt
+\SI{10}{\kilo\hertz}.
+
 
 % ---------------------------------------------------------------------------- %
 \subsection{Sender}
@@ -131,6 +134,10 @@ Das  gesteuerte Kurzschliessen  des Moduls  wird mit  einem MOSFET  umgesetzt,
 welcher zwischen  Eingang und  Ausgang des Moduls  durchschalten kann  und vom
 Microcontroller auf dem Sensor gesteuert wird. \fref{fig:module:mosfet:simple}
 zeigt diesen Aufbau schematisch.
+
+Die  Ansteuerung des  Transistors  erfolgt mit  \SI{3.3}{\volt},  da dies  die
+maximale Spannung  ist, welche der  auf dem Sensor  platzierte Microcontroller
+ausgeben kann.
 
 \begin{figure}[h!tb]
     \centering
@@ -196,9 +203,7 @@ zeigt diesen Aufbau schematisch.
        bei   einer   Schaltfrequenz   von   \SI{10}{\kilo\hertz}   bei   einer
        Modulkonfiguration    von    $36     \times    2$    Zellen    gem\"ass
        Schema    in    \fref{fig:ltspice:module:cellBased:36x2}   auf    Seite
-       \ref{fig:ltspice:module:cellBased:36x2}. Der    MOSFET     wurde    mit
-       \SI{3.3}{\volt} angesteuert, da dies  die gr\"osste vom Microcontroller
-       zur Verf\"ugung stehende Spannung ist.\
+       \ref{fig:ltspice:module:cellBased:36x2}.\protect\\
        Anhang       \ref{app:sec:simu:complementary:36x2}      auf       Seite
        \pageref{app:sec:simu:complementary:36x2} beinhaltet zum Vergleich noch
        Simulationen f\"ur den Zeitraum von einer Millisekunde.%
@@ -255,9 +260,7 @@ zeigt diesen Aufbau schematisch.
        bei   einer   Schaltfrequenz   von   \SI{10}{\kilo\hertz}   bei   einer
        Modulkonfiguration    von    $72     \times    1$    Zellen    gem\"ass
        Schema    in    \fref{fig:ltspice:module:cellBased:36x2}   auf    Seite
-       \ref{fig:ltspice:module:cellBased:72x1}. Der    MOSFET     wurde    mit
-       \SI{3.3}{\volt} angesteuert, da dies  die gr\"osste vom Microcontroller
-       zur Verf\"ugung stehende Spannung ist.\protect\\
+       \ref{fig:ltspice:module:cellBased:72x1}. \protect\\
        Anhang     \ref{app:sec:simu:complementary:72x1}     auf     Seite
        \pageref{app:sec:simu:complementary:72x1} beinhaltet zum Vergleich noch
        Simulationen f\"ur den Zeitraum von einer Millisekunde.%
@@ -265,12 +268,12 @@ zeigt diesen Aufbau schematisch.
    \label{fig:simu:results:72x1:3u}
 \end{figure}
 
-Die    Resultate   der    Simulation   f\"ir    ein   $36    \times   2$-Modul
-sind   in   \fref{fig:simu:results:36x2:3u}   f\"r   einen   Zeitbereich   von
+Die    Resultate   der    Simulation   f\"ur    ein   $36    \times   2$-Modul
+sind   in   \fref{fig:simu:results:36x2:3u}   f\"ur  einen   Zeitbereich   von
 \SI{3}{\micro\second}  dargestellt,  die  Ergebnisse   f\"ur  das  $72  \times
-1$-Modul  in  \fref{fig:simu:results:72x1:3u}.   Tabellen  \ref{tab:36x2:heat}
-\ref{tab:72x1:heat} fassen die wichtigsten Eckdaten der Simulationen zusammen,
-inklusive Durchschnittswerte f\"ur Strom und Leistung.
+1$-Modul in \fref{fig:simu:results:72x1:3u}.  Tabelle \ref{tab:36x2:72x1:heat}
+fasst   die  wichtigsten   Eckdaten  der   Simulationen  zusammen,   inklusive
+Durchschnittswerte f\"ur Strom und Leistung.
 
 \begin{table}[h!tb]
     \centering
@@ -292,7 +295,7 @@ inklusive Durchschnittswerte f\"ur Strom und Leistung.
         den     Abbildungen      \ref{fig:simu:results:36x2:3u}     respektive
         \ref{fig:simu:results:72x1:3u}).%
     }
-    \label{tab:36x2:heat}
+    \label{tab:36x2:72x1:heat}
     \begin{tabular}{lrr}
 
     \toprule
@@ -307,8 +310,8 @@ inklusive Durchschnittswerte f\"ur Strom und Leistung.
     \end{tabular}
 \end{table}
 
-Aus  \fref{fig:simu:results:36x2:5u}   und  \tref{tab:36x2:heat}   ziehen  wir
-folgende  Schlussfolgerungen:
+Aus \fref{fig:simu:results:36x2:5u}  und \tref{tab:36x2:72x1:heat}  ziehen wir
+folgende Schlussfolgerungen:
 
 \begin{enumerate}
     \firmlist

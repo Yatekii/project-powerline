@@ -370,95 +370,119 @@ shunt widerstand: widerstand einer zelle / anzahl zellen \\
 IS: IS einzelzelle * anzahl zellen (0.288m) -> anpassen, bis frequenzgang und zeitplot passend \\
 N: N einzelzelle * anzahl zellen \\
 Shockley diode model \\
+\todo{Einheiten achsen, auflistung parameter, schaltkreise zu plots, LTspice diagramme}
 
 Vereinfachtes  \code{LTspice}-Modell,  Verifikation anhand  von  verschiedenen
 Plots.
 
 \begin{figure}
     \begin{tikzpicture}
-       \begin{scope}[x={(0mm,0mm)},y={(140mm,\textwidth)}]
+       \begin{scope}[x={(0mm,0mm)},y={(90mm,0.9\textwidth)}]
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
-                   at={(0,80mm)},
+                   height=45mm,
+                   width=0.9\textwidth,
+                   at={(0,45mm)},
                    grid=both,
                ]
-               \addplot[-,color=magenta] table {data/module-simple--frequency-response--mag.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-mosfet-no-load--I--magn.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sqeep-over-mosfet-no-load--I--magn.dat};
            \end{axis}
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
+                   height=45mm,
+                   width=0.9\textwidth,
                    at={(0,0)},
                    grid=both,
                ]
-               \addplot[-,color=red] table {data/module-simple--frequency-response--phase.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-mosfet-no-load--I--phase.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sqeep-over-mosfet-no-load--I--phase.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-   \caption{Frequenzgang f\"ur den Strom durch den MOSFET des vereinfachten Modells f\"ur ein Modul.}
-   \label{fig:freqresponse:module:simple}
+    \caption{Frequenzgang des Stroms durch den MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+   %\label{fig:freqresponse:module:simple}
 \end{figure}
 
 \begin{figure}
     \begin{tikzpicture}
-       \begin{scope}[x={(0mm,0mm)},y={(140mm,\textwidth)}]
+       \begin{scope}[x={(0mm,0mm)},y={(90mm,0.9\textwidth)}]
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
-                   at={(0,80mm)},
+                   height=45mm,
+                   width=0.9\textwidth,
+                   at={(0,45mm)},
                    grid=both,
                ]
-               \addplot[-,color=magenta] table {data/module-72cells--frequency-response--mag.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-mosfet-no-load--U--magn.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sweep-over-mosfet-no-load--U--magn.dat};
            \end{axis}
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
+                   height=45mm,
+                   width=0.9\textwidth,
                    at={(0,0)},
                    grid=both,
                ]
-               \addplot[-,color=magenta] table {data/module-72cells--frequency-response--phase.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-mosfet-no-load--U--phase.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sweep-over-mosfet-no-load--U--phase.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-   \caption{Frequenzgang f\"ur den Strom durch den MOSFET des Modells f\"ur ein Modul mit 72 Zellen}
-   \label{fig:freqresponse:module:72cell}
+    \caption{Frequenzgang der Spannung \"uber dem MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+   %\label{fig:freqresponse:module:simple}
 \end{figure}
 
 \begin{figure}
     \begin{tikzpicture}
-       \begin{scope}[x={(0mm,0mm)},y={(140mm,\textwidth)}]
+       \begin{scope}[x={(0mm,0mm)},y={(90mm,0.9\textwidth)}]
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
-                   at={(0,80mm)},
+                   height=45mm,
+                   width=0.9\textwidth,
+                   at={(0,45mm)},
                    grid=both,
                ]
-               \addplot[-,color=magenta] table {data/module-simple--frequency-response--mag.dat};
-               \addplot[-,color=blue] table {data/module-72cells--frequency-response--mag.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-Rload--100ohm-100uF--I--magn.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sweep-over-Rload--100ohm-100uF--I--magn.dat};
            \end{axis}
            \begin{axis}[%
                    xmode=log,
-                   height=65mm,
-                   width=\textwidth,
+                   height=45mm,
+                   width=0.9\textwidth,
                    at={(0,0)},
                    grid=both,
                ]
-               \addplot[-,color=magenta] table {data/module-simple--frequency-response--phase.dat};
-               \addplot[-,color=blue] table {data/module-72cells--frequency-response--phase.dat};
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--freq-sweep-over-Rload--100ohm-100uF--I--phase.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--freq-sweep-over-Rload--100ohm-100uF--I--phase.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-   \caption{Frequenzgang f\"ur den Strom durch den MOSFET des vereinfachten Modells f\"ur ein Modul.}
-   \label{fig:freqresponse:module:simple}
+   \caption{Frequenzgang des Stroms durch den Lastwiderstand bei einer Last von \SI{100}{\ohm} parallel zu \SI{100}{\micro\farad}}
+   %\label{fig:freqresponse:module:simple}
 \end{figure}
 
+
+\begin{figure}
+    \begin{tikzpicture}
+       \begin{scope}[x={(0mm,0mm)},y={(60mm,0.9\textwidth)}]
+           \begin{axis}[%
+                   height=60mm,
+                   width=0.9\textwidth,
+                   at={(0,0)},
+                   grid=both,
+               ]
+                \addplot[color=blue] table {data/simple-model-verification/module-72cells-series--reference--time-domain-over-mosfet-10kHz--I.dat};
+                \addplot[color=magenta] table {data/simple-model-verification/module-simple-72x1--time-domain-over-mosfet--10kHz--I.dat};
+           \end{axis}
+       \end{scope}
+   \end{tikzpicture}
+    \caption{Zeitlicher Verlauf des Stroms durch den MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+   %\label{fig:freqresponse:module:simple}
+\end{figure}
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \section{DC-Leitung}
 \label{app:models:develop:DCLine}
 % ---------------------------------------------------------------------------- %

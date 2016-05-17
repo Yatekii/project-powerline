@@ -30,7 +30,7 @@ Ziel ist, eine Zelle zu modellieren, welche folgende Eigenschaften erf\"ullt:
 \end{align}
 
 Die Herleitung  dieser Werte ist  in Anhang \ref{app:subsec:cell:UI}  ab Seite
-\pageref{app:subsec:cell:UI}  zu finden  und  basiert auf  den Modulen,  deren
+\pageref{app:subsec:cell:UI} zu  finden und basiert auf  den PV-Modulen, deren
 Daten in Tabelle \ref{tab:moduleData:IU} auf Seite \pageref{tab:moduleData:IU}
 aufgelistet  sind.   Es  werden  zwei  Zielwerte  f\"ur  den  Kurzschlussstrom
 angegeben;  einer f\"ur  monokristalline Zellen,  einer f\"ur  polykristalline
@@ -38,8 +38,8 @@ Zellen.
 
 Als  Grundlage f\"ur  das  Modell dient  das  Eindiodenmodell einer  PV-Zelle,
 erweitert  um  eine parallele  Kapazit\"at  $C$  (basierend auf  Informationen
-aus  \cite{ref:solar:scofield} und  \cite{ref:solar:friesen}), dargestellt  in
-\fref{fig:circuit:solarCell}.
+aus \cite{ref:solar:scofield} und \cite{ref:solar:friesen}). Die resultierende
+Schaltung ist dargestellt in \fref{fig:circuit:solarCell}.
 
 \clearpage
 \begin{figure}[h!tb]
@@ -83,17 +83,19 @@ Resultate waren:
     R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; & \text{bis} \; & \SI{500}{\kilo\ohm}  \;  & = & \; \SI{250.25 \pm 249.75}{\kilo\ohm}
 \end{alignat}
 
-Um   die   obigen  Werte   f\"ur   unsere   Zwecke  verwenden   zu   k\"onnen,
-m\"ussen  sie  auf  eine  Zelle  der  Fl\"ache  \SI{240}{\centi\meter\squared}
-(zur  Herleitung  dieses  Werts  siehe  Anhang  \ref{app:sec:cell:surface}  ab
-Seite  \pageref{app:sec:cell:surface}) um  ungef\"ahr  einen Faktor  \num{600}
-hochskaliert werden.
+Um die  obigen Werte f\"ur unsere  Zwecke verwenden zu k\"onnen,  m\"ussen sie
+auf eine Zelle der Fl\"ache \SI{240}{\centi\meter\squared} um ungef\"ahr einen
+Faktor \num{600} hochskaliert werden (zur Herleitung dieses Werts siehe Anhang
+\ref{app:subsec:cell:surface} ab Seite \pageref{app:subsec:cell:surface})
 
 $R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
 zur   Zellfl\"ache,    wogegen   $C$   bei   gr\"osser    werdender   Fl\"ache
-ansteigt~\cite{ref:solar:scofield}. Das  schlimmstm\"ogliche   Szenario  f\"ur
-unseren   Fall  tritt   ein,  wenn   der  Ausgangsstrom   der  Zelle   maximal
-wird\todo{korrekt?}. Folgende Werte werden deshalb gew\"ahlt:
+ansteigt~\cite{ref:solar:scofield}. Bei    der   ASK-Implementation    mittels
+gesteuertem   Kurzschluss    (siehe   Abbildung    \ref{fig:ask:concept}   auf
+Seite    \pageref{fig:ask:concept}     und    Simulationen     in    Abschnitt
+\ref{subsec:simu:ask:sensor})  nehmen   die  Schwierigkeiten   mit  steigendem
+Ausgangsstrom   der  Zelle   zu. Das   Modell  wird   deshalb  auf   maximalen
+Ausgangsstrom getrimmt:
 
 \begin{symbols}
     \firmlist
@@ -457,7 +459,7 @@ ausgeben kann.
                    change x base=true,
                    x SI prefix=micro,
                ]
-               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0005u.dat};
+               \addplot[-,color=teal] table {data/module-72cells--P-MOSFET--0005u.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}
@@ -514,7 +516,7 @@ ausgeben kann.
                    change x base=true,
                    x SI prefix=micro,
                ]
-               \addplot[-,color=red] table {data/module-72cells-series--P-MOSFET--0003u.dat};
+               \addplot[-,color=teal] table {data/module-72cells-series--P-MOSFET--0003u.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}

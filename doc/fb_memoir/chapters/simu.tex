@@ -16,15 +16,32 @@ Gesamtsystem untersucht.
 
 
 % ---------------------------------------------------------------------------- %
-\section{Modellierung einew PV-Zelle}
+\section{Modellierung einer PV-Zelle}
 \label{sec:simu:model:cell}
 % ---------------------------------------------------------------------------- %
 
-Als   Grundlage   dient   das  Eindiodenmodell   einer   PV-Zelle,   erweitert
-um   eine  parallele   Kapazit\"at  $C$   (basierend  auf   Informationen  aus
-\cite{ref:solar:scofield}   und   \cite{ref:solar:friesen}),  dargestellt   in
+
+Ziel ist, eine Zelle zu modellieren, welche folgende Eigenschaften erf\"ullt:
+
+\begin{align}
+    U_{\mathrm{Leerlauf}}                    &= \SI{600}{\milli\volt} \\
+    I_{\mathrm{Kurzschluss, polykristallin}} &=  \SI{5}{\ampere}      \\
+    I_{\mathrm{Kurzschluss, monokristallin}} &= \SI{10}{\ampere}
+\end{align}
+
+Die Herleitung  dieser Werte ist  in Anhang \ref{app:subsec:cell:UI}  ab Seite
+\pageref{app:subsec:cell:UI}  zu finden  und  basiert auf  den Modulen,  deren
+Daten in Tabelle \ref{tab:moduleData:IU} auf Seite \pageref{tab:moduleData:IU}
+aufgelistet  sind.   Es  werden  zwei  Zielwerte  f\"ur  den  Kurzschlussstrom
+angegeben;  einer f\"ur  monokristalline Zellen,  einer f\"ur  polykristalline
+Zellen.
+
+Als  Grundlage f\"ur  das  Modell dient  das  Eindiodenmodell einer  PV-Zelle,
+erweitert  um  eine parallele  Kapazit\"at  $C$  (basierend auf  Informationen
+aus  \cite{ref:solar:scofield} und  \cite{ref:solar:friesen}), dargestellt  in
 \fref{fig:circuit:solarCell}.
 
+\clearpage
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/solarCell.tex}
@@ -35,9 +52,27 @@ um   eine  parallele   Kapazit\"at  $C$   (basierend  auf   Informationen  aus
     \label{fig:circuit:solarCell}
 \end{figure}
 
-In \cite{ref:solar:scofield} wurden $C$,  $R_{S}$ und $R_{P}$ einer Solarzelle
-der Gr\"osse \SI{0.43}{\centi\meter\squared} \"uber einen Frequenzbereicht von
-\SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die Resultate waren:
+Bei diesem Modell sind insgesamt f\"unf Parameter zu bestimmen:
+
+\begin{itemize}
+    \firmlist
+    \item
+        Seriewiderstand $R_{\mathrm{S}}$
+    \item
+        Shunt-Widerstand $R_{\mathrm{P}}$
+    \item
+        Parasit\"are Kapazit\"at $C$
+    \item
+        Diode   $D$: Reverse    Saturation   Current    $I_{\mathrm{S}}$   und
+        Idealit\"atsfaktor $n$
+\end{itemize}
+
+Es werden zuerst die Kapazit\"at und die Widerst\"ande bestimmt.
+
+In \cite{ref:solar:scofield} wurden $C$, $R_{\mathrm{S}}$ und $R_{\mathrm{P}}$
+einer  Solarzelle der  Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber  einen
+Frequenzbereicht von \SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die
+Resultate waren:
 
 \begin{alignat}{3}
     \label{eq:scofield:C}
@@ -58,7 +93,7 @@ $R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
 zur   Zellfl\"ache,    wogegen   $C$   bei   gr\"osser    werdender   Fl\"ache
 ansteigt~\cite{ref:solar:scofield}. Das  schlimmstm\"ogliche   Szenario  f\"ur
 unseren   Fall  tritt   ein,  wenn   der  Ausgangsstrom   der  Zelle   maximal
-wird\todo{korrekt?}:
+wird\todo{korrekt?}. Folgende Werte werden deshalb gew\"ahlt:
 
 \begin{symbols}
     \firmlist
@@ -73,10 +108,9 @@ wird\todo{korrekt?}:
         von \SI{0.2}{\ohm} aus Gleichung \ref{eq:scofield:Rs} gew\"ahlt.
     \item[$R_{\mathrm{P}}$]
         Je    gr\"osser   der    Parallelwiderstand   im    Verh\"altnis   zum
-        Seriewiderstand   ist,   um   so    mehr   Strom   fliesst   aus   dem
-        Ausgang  der  Zelle.    Es  wird  deshalb  der   Wert  H\"ochste  Wert
-        von   \SI{500}{\kilo\ohm}  aus   Gleichung  \ref{eq:scofield:Rp}   als
-        Ausgangswert verwendet.
+        Seriewiderstand  ist, um  so mehr  Strom fliesst  aus dem  Ausgang der
+        Zelle.  Es wird deshalb der h\"ochste Wert von \SI{500}{\kilo\ohm} aus
+        Gleichung \ref{eq:scofield:Rp} als Ausgangswert verwendet.
 \end{symbols}
 
 Die skalierten Werte sind somit:
@@ -86,25 +120,6 @@ Die skalierten Werte sind somit:
     R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} &\div  600 &= \SI{833}{\ohm}
 \end{alignat}
 
-Wie  in  Anhang  \ref{app:sec:cell:UI}  (ab  Seite  \pageref{app:sec:cell:UI})
-erw\"ahnt, gehen wir davon aus, dass ein Modul nicht mehr als \SI{10}{\ampere}
-abgibt. Abh\"angig davon, ob wir mehrere Str\"ange mit polykristallinen Zellen
-parallel schalten  oder ein  Modul haben, welches  lediglich aus  einem Strang
-monokristalliner  Zellen  besteht, wird  der  Strom  einer Zelle  entsprechend
-angepasst:
-
-\begin{align}
-    I_{\mathrm{SC, polykristallin}} & = \SI{5}{\ampere} \quad \text{(2 parallele Str\"ange)} \\
-    I_{\mathrm{SC, monokristallin}} & = \SI{10}{\ampere}
-\end{align}
-
-Die vom Modell zu erzielende Leerlaufspannung $V_{\mathrm{offen}}$ einer Zelle
-ist ebenfalls in Anhang \label{app:sec:cell:UI} hergeleitet:
-
-\begin{equation}
-    \label{eq:voffen}
-    V_{\mathrm{offen}} = \SI{600}{\milli\volt}
-\end{equation}
 
 
 Es bleiben noch die Parameter der Diode zu bestimmen. Ausganslage f\"ur das

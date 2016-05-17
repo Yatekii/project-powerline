@@ -3,12 +3,243 @@
 \label{chap:simu}
 % **************************************************************************** %
 
+Bevor  simuliert  werden  kann,  m\"ussen  die  daf\"ur  ben\"otigten  Modelle
+vorhanden sein. Es  wird zuerst ein  Modell f\"ur eine  Solarzelle entwickelt.
+Anschliessend wird dieses Zellenmodell benutzt, um ein Modul aufzubauen.
+
 In  diesem Abschnitt  werden Schaltungen  f\"ur drei  L\"osungsans\"atze (zwei
 zur  FSK, eine  zur  ASK)  vorgestellt, mit  \code{LTspice  IV} simuliert  und
 beurteilt.\todo{LTspice: source}
 
 Es werden  jeweils die  Schaltung f\"ur  den Sender,  den Empf\"anger  und das
 Gesamtsystem untersucht.
+
+
+% ---------------------------------------------------------------------------- %
+\section{Modellierung einer PV-Zelle}
+\label{sec:simu:model:cell}
+% ---------------------------------------------------------------------------- %
+
+
+Ziel ist, eine Zelle zu modellieren, welche folgende Kriterien erf\"ullt:
+
+\begin{align}
+    \label{eq:diode:ULeerlauf}
+    U_{\mathrm{Leerlauf}}                    &= \SI{600}{\milli\volt} \\
+    \label{eq:diode:IKurzschluss:polyk}
+    I_{\mathrm{Kurzschluss, polykristallin}} &=  \SI{5}{\ampere}      \\
+    \label{eq:diode:IKurzschluss:monok}
+    I_{\mathrm{Kurzschluss, monokristallin}} &= \SI{10}{\ampere}
+\end{align}
+
+Die Herleitung  dieser Werte ist  in Anhang \ref{app:subsec:cell:UI}  ab Seite
+\pageref{app:subsec:cell:UI} zu  finden und basiert auf  den PV-Modulen, deren
+Daten in Tabelle \ref{tab:moduleData:IU} auf Seite \pageref{tab:moduleData:IU}
+aufgelistet  sind.   Es  werden  zwei  Zielwerte  f\"ur  den  Kurzschlussstrom
+angegeben;  einer f\"ur  monokristalline Zellen,  einer f\"ur  polykristalline
+Zellen.
+
+Als  Grundlage f\"ur  das  Modell dient  das  Eindiodenmodell einer  PV-Zelle,
+erweitert  um  eine parallele  Kapazit\"at  $C$  (basierend auf  Informationen
+aus \cite{ref:solar:scofield} und \cite{ref:solar:friesen}). Die resultierende
+Schaltung ist dargestellt in \fref{fig:circuit:solarCell}.
+
+\clearpage
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/solarCell.tex}
+    \caption{%
+        Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
+        Eindiodenmodell mit zus\"atzlicher Kapazit\"at%
+    }
+    \label{fig:circuit:solarCell}
+\end{figure}
+
+Bei diesem Modell sind insgesamt f\"unf Parameter zu bestimmen:
+
+\begin{itemize}
+    \firmlist
+    \item
+        Seriewiderstand $R_{\mathrm{S}}$
+    \item
+        Shunt-Widerstand $R_{\mathrm{P}}$
+    \item
+        Parasit\"are Kapazit\"at $C$
+    \item
+        Diode   $D$: Reverse    Saturation   Current    $I_{\mathrm{S}}$   und
+        Idealit\"atsfaktor $n$
+\end{itemize}
+
+Es werden zuerst die Kapazit\"at und die Widerst\"ande bestimmt.
+
+\myfancybreak
+
+In \cite{ref:solar:scofield} wurden $C$, $R_{\mathrm{S}}$ und $R_{\mathrm{P}}$
+einer  Solarzelle der  Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber  einen
+Frequenzbereicht von \SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die
+Resultate waren:
+
+\begin{alignat}{3}
+    \label{eq:scofield:C}
+    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \; & \text{bis} \; & \SI{20}{\nano\farad} \;  & = & \; \SI{14 \pm 6}{\nano\farad} \\
+    \label{eq:scofield:Rs}
+    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \; & \text{bis} \; & \SI{20}{\ohm}        \;  & = & \; \SI{10.1 \pm 9.9}{\ohm}     \\
+    \label{eq:scofield:Rp}
+    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; & \text{bis} \; & \SI{500}{\kilo\ohm}  \;  & = & \; \SI{250.25 \pm 249.75}{\kilo\ohm}
+\end{alignat}
+
+Um die  obigen Werte f\"ur unsere  Zwecke verwenden zu k\"onnen,  m\"ussen sie
+auf eine Zelle der Fl\"ache \SI{240}{\centi\meter\squared} um ungef\"ahr einen
+Faktor \num{600} hochskaliert werden (zur Herleitung dieses Werts siehe Anhang
+\ref{app:subsec:cell:surface} ab Seite \pageref{app:subsec:cell:surface})
+
+$R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
+zur   Zellfl\"ache,    wogegen   $C$   bei   gr\"osser    werdender   Fl\"ache
+ansteigt~\cite{ref:solar:scofield}. Bei    der   ASK-Implementation    mittels
+gesteuertem   Kurzschluss    (siehe   Abbildung    \ref{fig:ask:concept}   auf
+Seite    \pageref{fig:ask:concept}     und    Simulationen     in    Abschnitt
+\ref{subsec:simu:ask:sensor})  nehmen   die  Schwierigkeiten   mit  steigendem
+Ausgangsstrom   der  Zelle   zu. Das   Modell  wird   deshalb  auf   maximalen
+Ausgangsstrom getrimmt:
+
+\begin{symbols}
+    \firmlist
+    \item[$C$]
+        Beim Kurzschliessen der  Zelle treten Stromspitzen auf,  wenn sich der
+        Kondensator  $C$  entl\"adt. Je  gr\"osser  dessen  Kapazit\"at,  umso
+        h\"oher diese Stromspitzen.  Wir  nehmen also \SI{20}{\nano\farad} aus
+        Gleichung \ref{eq:scofield:C} als Ausgangswert.
+    \item[$R_{\mathrm{S}}$]
+        Der aus der Solarzelle fliessende Strom wird gr\"osser, je kleiner der
+        Seriewiderstand vor dem Ausgang ist. Es wird daher der niedrigere Wert
+        von \SI{0.2}{\ohm} aus Gleichung \ref{eq:scofield:Rs} gew\"ahlt.
+    \item[$R_{\mathrm{P}}$]
+        Je    gr\"osser   der    Parallelwiderstand   im    Verh\"altnis   zum
+        Seriewiderstand  ist, um  so mehr  Strom fliesst  aus dem  Ausgang der
+        Zelle.  Es wird deshalb der h\"ochste Wert von \SI{500}{\kilo\ohm} aus
+        Gleichung \ref{eq:scofield:Rp} als Ausgangswert verwendet.
+\end{symbols}
+
+Die skalierten Werte sind somit:
+\begin{alignat}{2}
+    C               &= C_{\mathrm{Messung}}    &\cdot 600 &= \SI{12}{\micro\farad} \\
+    R_{\mathrm{S,}} &= R_{\mathrm{S, Messung}} &\div  600 &= \SI{333}{\micro\ohm}    \\
+    R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} &\div  600 &= \SI{833}{\ohm}
+\end{alignat}
+
+\myfancybreak
+
+Es   bleiben  noch   die  Parameter   $I_{\mathrm{S}}$  und   $n$  der   Diode
+zu   bestimmen. Erkl\"arungen   zu   diesen    Parametern   sind   in   Anhang
+\ref{app:sec:cell:diodeInfo}  ab   Seite  \pageref{app:sec:cell:diodeInfo}  zu
+finden.
+
+Zur   Simulation  in   \code{LTspice}  wird   ein  simples   Diodenmodell  mit
+$I_{\mathrm{S}}$   und   $n$  benutzt\footnotemark. Es   werden   Anfangswerte
+gesch\"atzt, um  die Parameter  anschliessend mittels Iteration  und Vergleich
+mit den Sollwerten (siehe Beginn dieses Abschnitts) zu optimieren.
+
+\footnotetext{\code{LTspice}-Direktive: \code{.model diode1 D(IS=1e-6 N=2)}}
+
+Mit   einer    Transientensimulation   wird   die   Zelle    simuliert,   ihre
+Leerlaufspannung  $V_{\mathrm{offen}}$  gemessen  und  mit  dem  Zielwert  aus
+Gleichung   \ref{eq:diode:ULeerlauf}    (Seite   \pageref{eq:diode:ULeerlauf})
+verglichen \todo{``wird'' nur einmal oder wiederholen?}.  Anschliessend werden
+die  Werte  f\"ur  \code{IS}  und \code{N}  angepasst,  bis  die  gew\"unschte
+Leerlaufspannung  erreicht  ist.   Nach  einigen  Iterationen  liefert  dieser
+Prozess\footnotemark:
+
+\footnotetext{%
+    Dies ist eine m\"ogliche L\"osung. Es gibt nat\"urlich noch beliebig viele
+    weitere  Kombinationen von  \code{IS} und  \code{N}, welche  die gegebenen
+    Bedingungen  erf\"ullen. Wir   sind  hier  lediglich  an   einer  L\"osung
+    interessiert, von  der wir zuversichtlich  sind, dass sie  ein hinreichend
+    gutes Modell liefert.%
+}
+
+\begin{align}
+    \label{eq:cell:diode:IS:N:result}
+    I_{\mathrm{S}} &= \SI{4}{\micro\ampere} \\
+    N              &= 1.65
+\end{align}
+
+Somit ist  das Modell  einer einzelnen  Zelle bestimmt:
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/solarCellParams.tex}
+    \caption{%
+        Schaltschema   zur  Modellierung   einer   Solarzelle  mit   numerisch
+        bestimmten Elementen
+    }
+    \label{fig:circuit:solarCell}
+\end{figure}
+
+%\begin{align}
+%    R_{\mathrm{S}} &= \SI{333}{\micro\ohm}   \\
+%    R_{\mathrm{P}} &= \SI{833}{\ohm}         \\
+%    C              &= \SI{12}{\micro\farad}  \\
+%    I_{\mathrm{S}} &= \SI{4}{\micro\ampere}            \\
+%    N              &= 1.65
+%\end{align}
+
+Im folgenden Abschnitt wird dieses Zellenmodell nun dazu benutzt, ein Modul
+aufzubauen.
+
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Modellierung eines PV-Moduls}
+\label{sec:simu:model:module}
+% ---------------------------------------------------------------------------- %
+
+\todo{referenz auf vereinfachtes Modell}
+
+Wie  in   Anhang  \ref{app:simu:module}  ab   Seite  \pageref{app:simu:module}
+erw\"ahnt,     werden     zwei      verschiedene     Module     simuliert: Ein
+Modul    mit    zwei    parallelen     Str\"angen    zu    je    36    seriell
+geschalteten    Zellen     (\fref{fig:ltspice:module:cellBased:36x2},    Seite
+\pageref{fig:ltspice:module:cellBased:36x2})    und   ein    Modul   mit    72
+in   Serie   geschalteten  Zellen   (\fref{fig:ltspice:module:cellBased:72x1},
+Seite     \pageref{fig:ltspice:module:cellBased:72x1}). Die     $36     \times
+2$-Konfiguration\todo{Bindestrich?}   hat   eine  h\"ohere   Kapazit\"at   als
+die   $72  \times   1$-Anordnung,   liefert  daf\"ur   aber   nur  die   halbe
+Ausgangsspannung. Der Ausgangsstrom  beider Module wurde  auf \SI{10}{\ampere}
+festgelegt,  die Stromquellen  im  $36 \times  2$-Modul  geben also  lediglich
+\SI{5}{\ampere}  ab. Basierend auf  Tabelle \ref{tab:moduleData:IU}  von Seite
+\pageref{tab:moduleData:IU}  mit Informationen  zu kommerziell  erh\"altlichen
+Solarmodulen scheint uns dieser Ansatz gerechtfertigt.
+
+\fref{fig:ltspice:solarCell}   zeigt   die  Implementation   unseres   Modells
+einer     Solarzelle      gem\"ass     \fref{fig:circuit:solarCell}     (Seite
+\pageref{fig:circuit:solarCell} in Abschnitt \ref{subsubsec:hw:ask:modell}) in
+\code{LTspice}.
+
+Ein MOSFET  wird benutzt, um  die Zelle  gesteuert (in unserer  Simulation bei
+einer Tr\"agerfrequenz von \SI{10}{\kilo\hertz}) kurzschliessen zu k\"onnen.
+
+Es    soll   das    f\"ur   den    MOSFET   schlimmere    Szenario   evaluiert
+werden   (mehr    Strom/Leistung   durch    den   MOSFET\todo{Korrekt?}). Dazu
+werden   aus  72   Zellen  zwei   verschiedene  Module   aufgebaut: Ein  Modul
+\"ahnlich    zum    Sunset   Solargenerator    AS150    \cite{ref:solar:as150}
+mit    ca. \SI{10}{\ampere}   Kurzschlussstrom    und   etwa    \SI{22}{\volt}
+Leerlaufspannung  (\fref{fig:ltspice:module:cellBased:36x2}),  und  ein  Modul
+\"ahnlich  zum Sunmodule  Pro-Series  XL SWB320  \cite{ref:solar:sunmodulePro}
+mit   \SI{10}{\ampere}   Kurzschlussstrom    und   ungef\"ahr   \SI{45}{\volt}
+Leerlaufspannung (\fref{fig:ltspice:module:cellBased:72x1}).
+
+Weil die gesamte Kapazit\"at bei in Serie geschalteten Kondensatoren sinkt und
+bei  paralleler  Anordnung steigt,  hat  die  $2 \times  36$-Parallelschaltung
+\todo{Bindestrich und Spaces?} etwa die doppelte Kapazit\"at des Einzelstrangs
+aus 72 Zellen. Der  durch den MOSFET fliessende Stroms, die  \"uber den MOSFET
+abfallende Spannung und die im  MOSFET dissipierte Leistung beim Durchschalten
+des Transistors sollen zwischen den beiden Szenarien verglichen werden.
+
+Die zu  diesen Schaltungen geh\"orenden \code{.asc}-Dateien  sind elektronisch
+verf\"ugbar  (Datentr\"ager  siehe Anhang  \ref{app:electronicStorage},  Seite
+\pageref{app:electronicStorage}).
+
+\todo{kleines Bild der gesamten Schaltung?}
 
 
 % ---------------------------------------------------------------------------- %
@@ -194,7 +425,7 @@ ausgeben kann.
                    change x base=true,
                    x SI prefix=micro,
                ]
-               \addplot[-,color=red] table {data/module-72cells--P-MOSFET--0005u.dat};
+               \addplot[-,color=teal] table {data/module-72cells--P-MOSFET--0005u.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}
@@ -251,7 +482,7 @@ ausgeben kann.
                    change x base=true,
                    x SI prefix=micro,
                ]
-               \addplot[-,color=red] table {data/module-72cells-series--P-MOSFET--0003u.dat};
+               \addplot[-,color=teal] table {data/module-72cells-series--P-MOSFET--0003u.dat};
            \end{axis}
        \end{scope}
    \end{tikzpicture}

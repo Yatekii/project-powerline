@@ -1,0 +1,42 @@
+% **************************************************************************** %
+\chapter{\code{LTspice}-Schaltungen}
+\label{app:ltspice}
+% **************************************************************************** %
+
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=\textwidth]{images/ltspice/singlecell.eps}
+    \caption{%
+        Schaltung        zur         Simulation        einer        Solarzelle
+        gem\"ass        Abbildung       \ref{fig:circuit:solarCell}        von
+        Seite     \pageref{fig:circuit:solarCell}. Die     Solarmodule     aus
+        den     Abbildungen    \ref{fig:ltspice:module:cellBased:36x2}     und
+        \ref{fig:ltspice:module:cellBased:72x1}  basieren auf  Zellen gem\"ass
+        diesem Schaltschema.%
+    }
+    \label{fig:ltspice:solarCell}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=\textwidth]{images/ltspice/module-72cells.eps}
+    \caption{%
+        Solarmodul     \"ahnlich     zu    Sunset     Solargenerator     AS150
+        \cite{ref:solar:as150}, modelliert durch 2  parallele Str\"ange mit je
+        36 Zellen gem\"ass Abbildung \ref{fig:ltspice:solarCell} in Serie.%
+    }
+    \label{fig:ltspice:module:cellBased:36x2}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=\textwidth]{images/ltspice/module-72cells-series.eps}
+    \caption{%
+        Solarmodul   \"ahnlich   zu   Sunmodule  Pro-Series   XL   SW320   aus
+        \cite{ref:solar:sunmodulePro},  modelliert durch  einen Strang  mit 72
+        Zellen gem\"ass Abbildung \ref{fig:ltspice:solarCell} in Serie.%
+    }
+    \label{fig:ltspice:module:cellBased:72x1}
+\end{figure}
+\todo{Transistoren aus Schaltbildern entfernen, IN/OUT benennen, Abbildung sollte nur Modul sein}

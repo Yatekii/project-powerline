@@ -21,11 +21,14 @@ Gesamtsystem untersucht.
 % ---------------------------------------------------------------------------- %
 
 
-Ziel ist, eine Zelle zu modellieren, welche folgende Eigenschaften erf\"ullt:
+Ziel ist, eine Zelle zu modellieren, welche folgende Kriterien erf\"ullt:
 
 \begin{align}
+    \label{eq:diode:ULeerlauf}
     U_{\mathrm{Leerlauf}}                    &= \SI{600}{\milli\volt} \\
+    \label{eq:diode:IKurzschluss:polyk}
     I_{\mathrm{Kurzschluss, polykristallin}} &=  \SI{5}{\ampere}      \\
+    \label{eq:diode:IKurzschluss:monok}
     I_{\mathrm{Kurzschluss, monokristallin}} &= \SI{10}{\ampere}
 \end{align}
 
@@ -68,6 +71,8 @@ Bei diesem Modell sind insgesamt f\"unf Parameter zu bestimmen:
 \end{itemize}
 
 Es werden zuerst die Kapazit\"at und die Widerst\"ande bestimmt.
+
+\myfancybreak
 
 In \cite{ref:solar:scofield} wurden $C$, $R_{\mathrm{S}}$ und $R_{\mathrm{P}}$
 einer  Solarzelle der  Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber  einen
@@ -122,87 +127,27 @@ Die skalierten Werte sind somit:
     R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} &\div  600 &= \SI{833}{\ohm}
 \end{alignat}
 
+\myfancybreak
 
+Es   bleiben  noch   die  Parameter   $I_{\mathrm{S}}$  und   $n$  der   Diode
+zu   bestimmen. Erkl\"arungen   zu   diesen    Parametern   sind   in   Anhang
+\ref{app:sec:cell:diodeInfo}  ab   Seite  \pageref{app:sec:cell:diodeInfo}  zu
+finden.
 
-Es bleiben noch die Parameter der Diode zu bestimmen. Ausganslage f\"ur das
-Diodenmodell ist die Shockley-Diodengleichung:\todo{source?}
+Zur   Simulation  in   \code{LTspice}  wird   ein  simples   Diodenmodell  mit
+$I_{\mathrm{S}}$   und   $n$  benutzt\footnotemark. Es   werden   Anfangswerte
+gesch\"atzt, um  die Parameter  anschliessend mittels Iteration  und Vergleich
+mit den Sollwerten (siehe Beginn dieses Abschnitts) zu optimieren.
 
-\begin{equation}
-    \label{eq:diode}
-    I_{\mathrm{D}} = I_{\mathrm{S}} \cdot \left( \exp\left(\frac{q \cdot V}{n \cdot k \cdot T}\right) - 1 \right)
-\end{equation}
+\footnotetext{\code{LTspice}-Direktive: \code{.model diode1 D(IS=1e-6 N=2)}}
 
-\begin{conditions}
-    I_{\mathrm{D}} & Diodenstrom \\
-    I_{\mathrm{S}} & Reverse saturation current \\
-    q              & Elementarladung eines Elektrons (\SI{1.602e-19}{\coulomb}) \\
-    V              & Diodenspannung \\
-    n              & Idealit\"atsfaktor \\
-    k              & Boltzmannkonstante (\SI{1.38e-23}{\joule\per\kelvin}) \\
-    T              & Diodentemperatur \\
-\end{conditions}
-
-Der   Reverse   Saturation  Current   ist   der   Strom,  der   beim   Anlegen
-einer  negativen   Spannung  \"uber  die   Diode  fliesst,  bevor   die  Diode
-durchbricht~\cite{ref:solar:diodeCharacteristics}.    Er  liegt   bei  kleinen
-Dioden \"ublicherweise Bereich von Nano-Amp\`ere bis Femto-Amp\`ere\todo{F\"ur
-k\"aufliche Dioden, nicht  Solarzellen}, bei einer Solarzelle  wird er h\"oher
-liegen, da diese gr\"osser ist.
-
-Wie  man an  Gleichung \ref{eq:diode}  erkennen kann,  steigt der  Diodenstrom
-f\"ur eine gegebene Spannung, wenn der Reverse Saturation Current ansteigt.
-
-Der Idealit\"atsfaktor ist ein Indikator  f\"ur den Spannungsabfall \"uber der
-Diode in  Abh\"angigkeit des durchfliessenden Stromes  und liegt normalerweise
-zwischen  1  (ideale  Diode)   und  2. Je  gr\"osser  der  Idealit\"atsfaktor,
-umso  h\"oher  der Spannungsabfall  \"uber  der  Diode f\"ur  einen  gegebenen
-Strom  (bzw.  umso kleiner  der  Strom  bei einer  fixen  Spannung). Abbildung
-\ref{fig:diodeVI:IS} zeigt das Strom-Spannungsverhalten  einer Diode sowie den
-Einfluss von $I_{\mathrm{S}}$ und $n$ schematisch.
-
-\begin{figure}[h!tb]
-    \input{images/python/diodeVI.pgf}
-    \caption{%
-        Vereinfachte Strom-Spannungs-Kurve einer Diode. Der Reverse Saturation
-        Current   $I_{\mathrm{S}}$   tritt   im   \textcolor{magenta}{magenta}
-        eingef\"arbten Bereich auf. Der angegebene Zahlenwert bezieht sich auf
-        den  Bereich  der  Kurve,  in der  $I_{\mathrm{S}}$  relativ  konstant
-        ist.\protect\\
-        Die    \textcolor{blue}{blaue   Kurve}    dient   als    Referenz. Die
-        \textcolor{red}{rote  Kurve}  zeigt  den Einfluss  eines  ansteigenden
-        Idealit\"atsfaktors  (also  st\"arkeres  Abweichen von  einer  idealen
-        Diode) auf die IV-Kennlinie.\protect\\
-        Die \textcolor{green!50!black}{gr\"une Kurve} zeigt den Einfluss eines
-        ansteigenden  Reverse Saturation  Current: Der Diodenstrom  steigt bei
-        einer gegebenen Diodenspannung.\protect\\
-        Zur  Verbesserung  der  \"Ubersichtlichkeit  wurden  die  abweichenden
-        Kurven nur  im positiven Bereich geplottet,  nat\"urlich \"andert sich
-        auch das Verhalten im Reverse-Betrieb analog.%
-    }
-    \label{fig:diodeVI:IS}
-\end{figure}
-
-\todo{Reverse-Betrieb-Kurven: analog?}
-
-Zur  Simulation  in  \code{LTspice}  wird das  Diodenmodell  auf  den  Reverse
-Saturation  Current   und  den  Idealit\"atsfaktor  reduziert,   und  folgende
-gesch\"atzte Parameter als Ausgangslage f\"ur den Iterationsprozess benutzt:
-
-\begin{center}
-    \code{.model diode1 D(IS=1e-6 N=2)}
-\end{center}
-
-Es wird die Schaltung gem\"ass Abbildung \ref{fig:circuit:solarCell} von Seite
-\pageref{fig:circuit:solarCell} aufgebaut und die  oben bestimmten Werte f\"ur
-$R_{\mathrm{S}}$, $R_{\mathrm{P}}$ und $C$ eingesetzt.
-
-Mit einer  Transientensimulation (\code{.tran  1m}) wird die  Zelle simuliert,
-ihre  Leerlaufspannung  $V_{\mathrm{offen}}$  gemessen und  mit  dem  Zielwert
-aus   Gleichung~\ref{eq:voffen}  verglichen\todo{``wird''   nur  einmal   oder
-wiederholen?}.  Anschliessend  werden die  Werte f\"ur \code{IS}  und \code{N}
-angepasst, bis die gew\"unschte Leerlaufspannung erreicht ist.
-
-Nach einigen Iterationen liefert dieser Prozess\footnotemark:
+Mit   einer    Transientensimulation   wird   die   Zelle    simuliert,   ihre
+Leerlaufspannung  $V_{\mathrm{offen}}$  gemessen  und  mit  dem  Zielwert  aus
+Gleichung   \ref{eq:diode:ULeerlauf}    (Seite   \pageref{eq:diode:ULeerlauf})
+verglichen \todo{``wird'' nur einmal oder wiederholen?}.  Anschliessend werden
+die  Werte  f\"ur  \code{IS}  und \code{N}  angepasst,  bis  die  gew\"unschte
+Leerlaufspannung  erreicht  ist.   Nach  einigen  Iterationen  liefert  dieser
+Prozess\footnotemark:
 
 \footnotetext{%
     Dies ist eine m\"ogliche L\"osung. Es gibt nat\"urlich noch beliebig viele
@@ -214,15 +159,36 @@ Nach einigen Iterationen liefert dieser Prozess\footnotemark:
 
 \begin{align}
     \label{eq:cell:diode:IS:N:result}
-    I_s &= \SI{4}{\micro\ampere} \\
-    N   &= 1.65
+    I_{\mathrm{S}} &= \SI{4}{\micro\ampere} \\
+    N              &= 1.65
 \end{align}
 
-Somit ist  das Modell  einer einzelnen  Zelle bestimmt  und kann  dazu benutzt
-werden,  ein   Modul  aufzubauen.
+Somit ist  das Modell  einer einzelnen  Zelle bestimmt:
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/solarCellParams.tex}
+    \caption{%
+        Schaltschema   zur  Modellierung   einer   Solarzelle  mit   numerisch
+        bestimmten Elementen
+    }
+    \label{fig:circuit:solarCell}
+\end{figure}
+
+%\begin{align}
+%    R_{\mathrm{S}} &= \SI{333}{\micro\ohm}   \\
+%    R_{\mathrm{P}} &= \SI{833}{\ohm}         \\
+%    C              &= \SI{12}{\micro\farad}  \\
+%    I_{\mathrm{S}} &= \SI{4}{\micro\ampere}            \\
+%    N              &= 1.65
+%\end{align}
+
+Im folgenden Abschnitt wird dieses Zellenmodell nun dazu benutzt, ein Modul
+aufzubauen.
 
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \section{Modellierung eines PV-Moduls}
 \label{sec:simu:model:module}
 % ---------------------------------------------------------------------------- %

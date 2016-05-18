@@ -15,6 +15,7 @@ vereinfachten Modells zufriedenstellend \"ubereinstimmen.
 Das Vorgehen ist dabei wie folgt: \todo{Eigentliche Werte}
 
 \begin{itemize}
+    \firmlist
     \item
         Die parasit\"are  Kapazit\"at des  Moduls wird angepasst  gem\"ass dem
         Gesetz zur Serieschaltung von Kapazit\"aten:
@@ -31,13 +32,8 @@ Das Vorgehen ist dabei wie folgt: \todo{Eigentliche Werte}
         Moduls abh\"angig und  wird als Startwert vorerst  gem\"ass der Anzahl
         Module hochgerechnet.
     \item
-        Der  Idealit\"atsfaktor ist  ein Indikator  f\"ur den  Spannungsabfall
-        \"uber   einer   Diode   bei   einem   bestimmten   Strom   \todo{ref:
-        abbildung}. Bei  einer Serieschaltung  von Dioden  sollte entsprechend
-        mehr   Spannung    \"uber   dem   gesamten   Strang    abfallen   (bei
-        gleichbleibendem  Strom). Der Startwert  f\"ur den  Idealit\"atsfaktor
-        des vereinfachten Modells wird  deshalb entsprechend der Anzahl Zellen
-        im Modul skaliert.
+        Der  Idealit\"atsfaktor   wird  vorerst  unver\"andert   belassen  und
+        anschliessend iterativ angepasst.
 \end{itemize}
 
 Gem\"ass dieser Methodik werden die Startwerte festgelegt auf:
@@ -58,8 +54,7 @@ Gem\"ass dieser Methodik werden die Startwerte festgelegt auf:
 
 Mit diesen  Werten werden verschiedene  Szenarien simuliert und  die Resultate
 mit den  Ergebnissen des komplexeren Modells  verglichen. Durch Iteration wird
-$I_{\mathrm{S}}$ schlussendlich  auf \SI{2.88}{\micro\ampere}  festgelegt, was
-kurioserweise kleiner ist als der Wert einer einzelnen Diode.
+$I_{\mathrm{S}}$ schlussendlich  auf \SI{2.88}{\micro\ampere}  festgelegt.
 
 Abbildungen
 \ref{fig:model:simpel:verif:current:mosfet:freq},
@@ -68,7 +63,14 @@ Abbildungen
 \ref{fig:model:simpel:verif:current:mosfet:time} stellen die Resultate
 verschiedener Simulationen mit und ohne Last f\"ur das vereinfachte Modell und
 das zellenbasierte  Modell graphisch dar.   Wie zu erkennen ist,  besteht eine
-gute \"Ubereinstimmung.
+gute \"Ubereinstimmung. Es sind jeweils  die Kurve des komplexen Modul-Modells
+(\textbf{\textcolor{magenta}{magenta}}) sowie die Kurve f\"ur das vereinfachte
+Modell dargestellt (\textbf{\textcolor{blue}{blau}}).
+
+Die   f\"ur    die   Simulationen    benutzten   Beschaltungen    der   Zellen
+sind    in    den   Abbildungen    \ref{fig:model:simple:verif:circuit:noLoad}
+und         \ref{fig:model:simple:verif:circuit:Load}        auf         Seite
+\pageref{fig:model:simple:verif:circuit:Load} dargestellt.
 
 %Parasit\"are Kapazit\"at: Kapazit\"at einer Zelle / anzahl Zellen \\
 %Serie widerstand: widerstand einzelzelle * anzahl zellen \\
@@ -76,7 +78,7 @@ gute \"Ubereinstimmung.
 %IS: IS einzelzelle * anzahl zellen (0.288m) -> anpassen, bis frequenzgang und zeitplot passend \\
 %N: N einzelzelle * anzahl zellen \\
 %Shockley diode model \\
-\todo{Einheiten achsen, auflistung parameter, schaltkreise zu plots, LTspice diagramme}
+\todo{Einheiten achsen, auflistung parameter}
 
 
 \begin{figure}
@@ -108,7 +110,13 @@ gute \"Ubereinstimmung.
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-    \caption{Frequenzgang des Stroms durch den MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+    \caption{%
+        Frequenzgang       des       Stroms       durch       den       MOSFET
+        bei      einer      Beschaltung      ohne      zus\"atzliche      Last
+        gem\"ass     Abbildung    \ref{fig:model:simple:verif:circuit:noLoad}.
+        \textbf{\textcolor{magenta}{magenta}}:         einfaches        Modell
+        \textbf{\textcolor{blue}{blau}}: komplexes Modell%
+    }
     \label{fig:model:simpel:verif:current:mosfet:freq}
 \end{figure}
 
@@ -141,7 +149,13 @@ gute \"Ubereinstimmung.
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-    \caption{Frequenzgang der Spannung \"uber dem MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+    \caption{%
+        Frequenzgang      der       Spannung      \"uber       dem      MOSFET
+        bei      einer      Beschaltung      ohne      zus\"atzliche      Last
+        gem\"ass     Abbildung    \ref{fig:model:simple:verif:circuit:noLoad}.
+        \textbf{\textcolor{magenta}{magenta}}:         einfaches        Modell
+        \textbf{\textcolor{blue}{blau}}: komplexes Modell%
+    }
     \label{fig:model:simpel:verif:voltage:mosfet:freq}
 \end{figure}
 
@@ -174,11 +188,15 @@ gute \"Ubereinstimmung.
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-   \caption{Frequenzgang des Stroms durch den Lastwiderstand bei einer Last von \SI{100}{\ohm} parallel zu \SI{100}{\micro\farad}}
+   \caption{%
+       Frequenzgang   des   Stroms   durch  den   Lastwiderstand   bei   einer
+       Last    von   \SI{100}{\ohm}    parallel   zu    \SI{100}{\micro\farad}
+       gem\"ass      Abbildung      \ref{fig:model:simple:verif:circuit:Load}.
+       \textbf{\textcolor{magenta}{magenta}}:         einfaches         Modell
+       \textbf{\textcolor{blue}{blau}}: komplexes Modell%
+    }
     \label{fig:model:simpel:verif:current:RL:freq}
-   %\label{fig:freqresponse:module:simple}
 \end{figure}
-
 
 \begin{figure}
     \begin{tikzpicture}
@@ -196,6 +214,57 @@ gute \"Ubereinstimmung.
            \end{axis}
        \end{scope}
    \end{tikzpicture}
-    \caption{Zeitlicher Verlauf des Stroms durch den MOSFET bei einer Beschaltung ohne zus\"atzliche Last}
+    \caption{%
+        Zeitlicher     Verlauf     des     Stroms     durch     den     MOSFET
+       bei      einer      Beschaltung       ohne      zus\"atzliche      Last
+       gem\"ass     Abbildung     \ref{fig:model:simple:verif:circuit:noLoad}.
+       \textbf{\textcolor{magenta}{magenta}}:         einfaches         Modell
+       \textbf{\textcolor{blue}{blau}}: komplexes Modell%
+    }
     \label{fig:model:simpel:verif:current:mosfet:time}
 \end{figure}
+
+\begin{figure}[h!tb]
+    {\centering
+    \adjustbox{valign=b}{%
+        \begin{minipage}{0.475\textwidth}
+            \includegraphics[width=\textwidth]{images/ltspice/module-test-circuit-without-load.eps}
+            \caption{%
+                Schaltung         zur         Simulation         ohne         Last
+                (Abbildungen     \ref{fig:model:simpel:verif:current:mosfet:freq},
+                \ref{fig:model:simpel:verif:voltage:mosfet:freq}               und
+                \ref{fig:model:simpel:verif:current:mosfet:time}). Die  Zelle wird
+                mit einem Transistor  kurzgeschlossen.  Die \textbf{\code{IN}} und
+                \textbf{\code{OUT}}-Terminals  entsprechen  den Anschl\"ussen  des
+                Solarmoduls  in  Abbildung \ref{fig:ltspice:module:simple}  (Seite
+                \pageref{fig:ltspice:module:simple}) f\"ur das vereinfachte Modell
+                und   Abbildung   \ref{fig:ltspice:module:cellBased:72x1}   (Seite
+                \pageref{fig:ltspice:module:cellBased:72x1})  f\"ur  das  komplexe
+                Modell mit 72 Zellen in Serie.%
+            }
+            \label{fig:model:simple:verif:circuit:noLoad}
+        \end{minipage}%
+    }\hspace*{0.05\textwidth}\adjustbox{valign=b}{%
+        \begin{minipage}{0.475\textwidth}
+            \includegraphics[width=\textwidth]{images/ltspice/module-test-circuit-with-load.eps}
+            \caption{%
+                Schaltung   zur   Simulation   mit   resistiver/kapazitiver   Last
+                (Abbildung   \ref{fig:model:simpel:verif:current:RL:freq}).    Die
+                Zelle     wird    mit     einem    Transistor     kurzgeschlossen.
+                Die    \textbf{\code{IN}}     und    \textbf{\code{OUT}}-Terminals
+                entsprechen      den       Anschl\"ussen      des      Solarmoduls
+                in      Abbildung      \ref{fig:ltspice:module:simple}      (Seite
+                \pageref{fig:ltspice:module:simple}) f\"ur das vereinfachte Modell
+                und   Abbildung   \ref{fig:ltspice:module:cellBased:72x1}   (Seite
+                \pageref{fig:ltspice:module:cellBased:72x1})  f\"ur  das  komplexe
+                Modell mit 72 Zellen in Serie.%
+            }
+            \label{fig:model:simple:verif:circuit:Load}
+        \end{minipage}%
+    }}
+    \vspace*{1em}
+    Das benutzte \code{LTspice}-Modell f\"ur den MOSFET ist:\\
+    \code{.model  mos1   VDMOS(Rg=3  Vto=1.7  Rd=8m  Rs=6m   Rb=10m  Kp=70
+    Cgdmax=2.5n Cgdmin=.4n Cgs=2n Cjo=1n Is=80p Vds=100 Ron=20m Qg=40n)}%
+\end{figure}
+

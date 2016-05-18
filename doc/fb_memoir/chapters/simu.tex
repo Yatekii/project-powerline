@@ -193,53 +193,40 @@ aufzubauen.
 \label{sec:simu:model:module}
 % ---------------------------------------------------------------------------- %
 
-\todo{referenz auf vereinfachtes Modell}
+Es sollen zwei verschiedene Module  simuliert werden: Beide sind aus 72 Zellen
+aufgebaut,  jedoch  sind  die  Zellen  beim einen  Modul  in  zwei  parallelen
+Str\"angen zu  je 36  seriell geschalteten  Zellen und  beim anderen  Modul in
+einem einzigen Strang aus 72 in Serie geschalteten Zellen aufgebaut.
 
-Wie  in   Anhang  \ref{app:simu:module}  ab   Seite  \pageref{app:simu:module}
-erw\"ahnt,     werden     zwei      verschiedene     Module     simuliert: Ein
-Modul    mit    zwei    parallelen     Str\"angen    zu    je    36    seriell
-geschalteten    Zellen     (\fref{fig:ltspice:module:cellBased:36x2},    Seite
-\pageref{fig:ltspice:module:cellBased:36x2})    und   ein    Modul   mit    72
-in   Serie   geschalteten  Zellen   (\fref{fig:ltspice:module:cellBased:72x1},
-Seite     \pageref{fig:ltspice:module:cellBased:72x1}). Die     $36     \times
-2$-Konfiguration\todo{Bindestrich?}   hat   eine  h\"ohere   Kapazit\"at   als
-die   $72  \times   1$-Anordnung,   liefert  daf\"ur   aber   nur  die   halbe
-Ausgangsspannung. Der Ausgangsstrom  beider Module wurde  auf \SI{10}{\ampere}
-festgelegt,  die Stromquellen  im  $36 \times  2$-Modul  geben also  lediglich
-\SI{5}{\ampere}  ab. Basierend auf  Tabelle \ref{tab:moduleData:IU}  von Seite
-\pageref{tab:moduleData:IU}  mit Informationen  zu kommerziell  erh\"altlichen
-Solarmodulen scheint uns dieser Ansatz gerechtfertigt.
+Mit  diesen  beiden  Modellen  kann  jeweils  ein  typisches  monokristallines
+($72  \times 1$)  und ein  polykristallines  Modul ($36  \times 2$)  simuliert
+werden. Tabelle \ref{tab:moduleData:UI}  auf Seite \pageref{tab:moduleData:UI}
+in Anhang \ref{app:models:develop:cell}  enth\"alt als exemplarische Beispiele
+die Daten einiger  Module, die auf dem Markt  erh\"altlich sind. Basierend auf
+diesen Informationen wird  der Kurzschlussstrom f\"ur ein  $36 \times 2$-Modul
+auf \SI{5}{\ampere} festgelegt; der  Kurzschlusstrom des $72 \times 1$-Modells
+auf \SI{10}{\ampere}.
 
-\fref{fig:ltspice:solarCell}   zeigt   die  Implementation   unseres   Modells
-einer     Solarzelle      gem\"ass     \fref{fig:circuit:solarCell}     (Seite
-\pageref{fig:circuit:solarCell} in Abschnitt \ref{subsubsec:hw:ask:modell}) in
-\code{LTspice}.
+Abgesehen  vom  Strom liegt  ein  weiterer  f\"ur unsere  Szenarien  wichtiger
+Unterschied in der Gesamtkapazit\"at eines  Moduls: Das Modul mit 72 Zellen in
+Serie hat die  halbe Kapazit\"at wie das Modul mit  zwei parallelen Str\"angen
+von je 36 Modulen.
 
-Ein MOSFET  wird benutzt, um  die Zelle  gesteuert (in unserer  Simulation bei
-einer Tr\"agerfrequenz von \SI{10}{\kilo\hertz}) kurzschliessen zu k\"onnen.
+F\"ur  das  $72  \times  1$-Modul wird  zus\"atzlich  noch  ein  vereinfachtes
+Modell entwickelt, um  den Rechenaufwand bei aus  mehreren Modulen aufgebauten
+Schaltungen   zu  reduzierten. Anhang   \ref{app:models:develop:module:simple}
+enth\"alt    ab     Seite    \pageref{app:models:develop:module:simple}    die
+zugeh\"origen Hintergrundinformationen.
 
-Es    soll   das    f\"ur   den    MOSFET   schlimmere    Szenario   evaluiert
-werden   (mehr    Strom/Leistung   durch    den   MOSFET\todo{Korrekt?}). Dazu
-werden   aus  72   Zellen  zwei   verschiedene  Module   aufgebaut: Ein  Modul
-\"ahnlich    zum    Sunset   Solargenerator    AS150    \cite{ref:solar:as150}
-mit    ca. \SI{10}{\ampere}   Kurzschlussstrom    und   etwa    \SI{22}{\volt}
-Leerlaufspannung  (\fref{fig:ltspice:module:cellBased:36x2}),  und  ein  Modul
-\"ahnlich  zum Sunmodule  Pro-Series  XL SWB320  \cite{ref:solar:sunmodulePro}
-mit   \SI{10}{\ampere}   Kurzschlussstrom    und   ungef\"ahr   \SI{45}{\volt}
-Leerlaufspannung (\fref{fig:ltspice:module:cellBased:72x1}).
-
-Weil die gesamte Kapazit\"at bei in Serie geschalteten Kondensatoren sinkt und
-bei  paralleler  Anordnung steigt,  hat  die  $2 \times  36$-Parallelschaltung
-\todo{Bindestrich und Spaces?} etwa die doppelte Kapazit\"at des Einzelstrangs
-aus 72 Zellen. Der  durch den MOSFET fliessende Stroms, die  \"uber den MOSFET
-abfallende Spannung und die im  MOSFET dissipierte Leistung beim Durchschalten
-des Transistors sollen zwischen den beiden Szenarien verglichen werden.
-
-Die zu  diesen Schaltungen geh\"orenden \code{.asc}-Dateien  sind elektronisch
-verf\"ugbar  (Datentr\"ager  siehe Anhang  \ref{app:electronicStorage},  Seite
-\pageref{app:electronicStorage}).
+Die zugeh\"origen \code{LTspice}-Schaltungen  sind in Anhang \ref{app:ltspice}
+ab Seite \pageref{app:ltspice} zu finden.
 
 \todo{kleines Bild der gesamten Schaltung?}
+
+\begin{figure}[h!tb]
+    \input{images/circuits/module36x2-simplified.tex}
+    \input{images/circuits/module72x1-simplified.tex}
+\end{figure}
 
 
 % ---------------------------------------------------------------------------- %

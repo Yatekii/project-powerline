@@ -3,11 +3,15 @@
 \label{app:ltspice}
 % **************************************************************************** %
 
+Dieses Kapitel  beinhaltet \code{LTspice}-Schaltungen, welche  zu Simulationen
+benutzt worden sind. Erkl\"arungen  zu den jeweiligen Schaltungen  sind in den
+Kapiteln  zu finden,  welche auf  sie verweisen. S\"amtliche  Schaltungen sind
+auch elektronisch als \code{.asc}-Datei verf\"ugbar.
 
-\begin{figure}[h!tb]
+\noindent\begin{minipage}{\textwidth}
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/singlecell.eps}
-    \caption{%
+    \includegraphics[width=0.9\textwidth]{images/ltspice/singlecell.eps}
+    \figcaption{%
         Schaltung        zur         Simulation        einer        Solarzelle
         gem\"ass        Abbildung       \ref{fig:circuit:solarCell}        von
         Seite     \pageref{fig:circuit:solarCell}. Die     Solarmodule     aus
@@ -16,11 +20,20 @@
         diesem Schaltschema.%
     }
     \label{fig:ltspice:solarCell}
-\end{figure}
+    \includegraphics[width=0.9\textwidth]{images/ltspice/module-simple-72x1.eps}
+    \figcaption{%
+        Vereinfachte    Schaltung     zur    Simulation     eines    PV-Moduls
+        mit      72      Zellen      in     Serie      gem\"ass      Abbildung
+        \ref{fig:ltspice:module:cellBased:72x1}. Dieses Modell dient dazu, den
+        Rechenaufwand bei  der Simulation  von Schaltungen mehrerer  Module in
+        einem vern\"unftigen Rahmen zu halten.%
+    }
+    \label{fig:ltspice:module:simple}
+\end{minipage}
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/module-72cells.eps}
+    \includegraphics[width=\textwidth]{images/ltspice/module-72cells--36x2.eps}
     \caption{%
         Solarmodul     \"ahnlich     zu    Sunset     Solargenerator     AS150
         \cite{ref:solar:as150}, modelliert durch 2  parallele Str\"ange mit je
@@ -31,7 +44,7 @@
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/module-72cells-series.eps}
+    \includegraphics[width=\textwidth]{images/ltspice/module-72cells--72x1.eps}
     \caption{%
         Solarmodul   \"ahnlich   zu   Sunmodule  Pro-Series   XL   SW320   aus
         \cite{ref:solar:sunmodulePro},  modelliert durch  einen Strang  mit 72
@@ -39,4 +52,3 @@
     }
     \label{fig:ltspice:module:cellBased:72x1}
 \end{figure}
-\todo{Transistoren aus Schaltbildern entfernen, IN/OUT benennen, Abbildung sollte nur Modul sein}

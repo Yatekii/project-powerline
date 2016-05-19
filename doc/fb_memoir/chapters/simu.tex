@@ -76,7 +76,7 @@ Es werden zuerst die Kapazit\"at und die Widerst\"ande bestimmt.
 
 In \cite{ref:solar:scofield} wurden $C$, $R_{\mathrm{S}}$ und $R_{\mathrm{P}}$
 einer  Solarzelle der  Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber  einen
-Frequenzbereicht von \SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die
+Frequenzbereich  von \SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die
 Resultate waren:
 
 \begin{alignat}{3}
@@ -105,9 +105,9 @@ Ausgangsstrom getrimmt:
 \begin{symbols}
     \firmlist
     \item[$C$]
-        Beim Kurzschliessen der  Zelle treten Stromspitzen auf,  wenn sich der
-        Kondensator  $C$  entl\"adt. Je  gr\"osser  dessen  Kapazit\"at,  umso
-        h\"oher diese Stromspitzen.  Wir  nehmen also \SI{20}{\nano\farad} aus
+        Beim Kurzschliessen der  Zelle treten Stromspitzen auf,  wenn sich die
+        Kapazit\"at $C$ entl\"adt. Je gr\"osser  die Kapazit\"at, umso h\"oher
+        werden diese  Stromspitzen.  Wir nehmen also  \SI{20}{\nano\farad} aus
         Gleichung \ref{eq:scofield:C} als Ausgangswert.
     \item[$R_{\mathrm{S}}$]
         Der aus der Solarzelle fliessende Strom wird gr\"osser, je kleiner der
@@ -193,14 +193,16 @@ aufzubauen.
 \label{sec:simu:model:module}
 % ---------------------------------------------------------------------------- %
 
-Es sollen zwei verschiedene Module  simuliert werden: Beide sind aus 72 Zellen
-aufgebaut,  jedoch  sind  die  Zellen  beim einen  Modul  in  zwei  parallelen
-Str\"angen zu  je 36  seriell geschalteten  Zellen und  beim anderen  Modul in
-einem einzigen Strang aus 72 in Serie geschalteten Zellen aufgebaut.
+Es  sollen   zwei  verschiedene   Module  simuliert  werden: Beide   sind  aus
+72   Zellen   aufgebaut,   jedoch   sind   die   Zellen   beim   einen   Modul
+in   zwei    parallelen   Str\"angen    zu   je   36    seriell   geschalteten
+Zellen   (\fref{fig:circuit:36x2:simplified})    und   beim    anderen   Modul
+in   einem   einzigen   Strang   aus   72   in   Serie   geschalteten   Zellen
+aufgebaut(\fref{fig:circuit:72x1:simplified}).
 
 Mit  diesen  beiden  Modellen  kann  jeweils  ein  typisches  monokristallines
 ($72  \times 1$)  und ein  polykristallines  Modul ($36  \times 2$)  simuliert
-werden. Tabelle \ref{tab:moduleData:UI}  auf Seite \pageref{tab:moduleData:UI}
+werden. Tabelle \ref{tab:moduleData:IU}  auf Seite \pageref{tab:moduleData:IU}
 in Anhang \ref{app:models:develop:cell}  enth\"alt als exemplarische Beispiele
 die Daten einiger  Module, die auf dem Markt  erh\"altlich sind. Basierend auf
 diesen Informationen wird  der Kurzschlussstrom f\"ur ein  $36 \times 2$-Modul
@@ -212,11 +214,14 @@ Unterschied in der Gesamtkapazit\"at eines  Moduls: Das Modul mit 72 Zellen in
 Serie hat die  halbe Kapazit\"at wie das Modul mit  zwei parallelen Str\"angen
 von je 36 Modulen.
 
-F\"ur  das  $72  \times  1$-Modul wird  zus\"atzlich  noch  ein  vereinfachtes
-Modell entwickelt, um  den Rechenaufwand bei aus  mehreren Modulen aufgebauten
-Schaltungen   zu  reduzierten. Anhang   \ref{app:models:develop:module:simple}
-enth\"alt    ab     Seite    \pageref{app:models:develop:module:simple}    die
-zugeh\"origen Hintergrundinformationen.
+F\"ur     das    $72     \times     1$-Modul     wird    zus\"atzlich     noch
+ein     vereinfachtes    Modell     entwickelt,    um     den    Rechenaufwand
+bei      aus     mehreren      Modulen     aufgebauten      Schaltungen     zu
+reduzierten. Anhang   \ref{app:models:develop:module:simple}    enth\"alt   ab
+Seite     \pageref{app:models:develop:module:simple}     die     zugeh\"origen
+Hintergrundinformationen,  Abbildung  \ref{fig:circuit:moduleSimplifiedParams}
+ist eine schematische Darstellung des vereinfachten Modells mit den bestimmten
+Parametern.
 
 Die zugeh\"origen \code{LTspice}-Schaltungen  sind in Anhang \ref{app:ltspice}
 ab Seite \pageref{app:ltspice} zu finden.
@@ -224,10 +229,43 @@ ab Seite \pageref{app:ltspice} zu finden.
 \todo{kleines Bild der gesamten Schaltung?}
 
 \begin{figure}[h!tb]
-    \input{images/circuits/module36x2-simplified.tex}
-    \input{images/circuits/module72x1-simplified.tex}
+    \centering
+    \adjustbox{valign=t}{%
+    \begin{minipage}{0.475\textwidth}
+        \centering
+        \input{images/circuits/module36x2-simplified.tex}
+        \figcaption{%
+            Vereinfachtes   Schema  f\"ur   das   $36  \times   2$-Modul: Zwei
+            parallele    Str\"ange    mit    je    36    Zellen    in    Serie
+            geschaltet. Die  vollst\"andige  \code{LTspice}-Schaltung  ist  in
+            Abbildung   \ref{fig:ltspice:module:cellBased:36x2}    auf   Seite
+            \pageref{fig:ltspice:module:cellBased:36x2} dargestellt.%
+        }
+        \label{fig:circuit:36x2:simplified}
+    \end{minipage}}\hspace*{0.05\textwidth}\adjustbox{valign=t}{%
+    \begin{minipage}{0.475\textwidth}
+        \centering
+        \input{images/circuits/module72x1-simplified.tex}
+        \figcaption{%
+            Vereinfachtes      Schema      f\"ur      das      $72      \times
+            1$-Modul: Ein     Strang    mit     72     Zellen     in     Serie
+            geschaltet. Die  vollst\"andige  \code{LTspice}-Schaltung  ist  in
+            Abbildung   \ref{fig:ltspice:module:cellBased:72x1}    auf   Seite
+            \pageref{fig:ltspice:module:cellBased:72x1} dargestellt.%
+        }
+        \label{fig:circuit:72x1:simplified}
+    \end{minipage}}
 \end{figure}
 
+\begin{figure}[h!tb]
+    \input{images/circuits/moduleSimplififedParams.tex}
+    \caption{%
+        Vereinfachtes  Modell eines  PV-Moduls mit  Parametern. Die Herleitung
+        und Verifikation sind in Anhang \ref{app:models:develop:module:simple}
+        ab Seite \pageref{app:models:develop:module:simple} dokumentiert.%
+    }
+    \label{fig:circuit:moduleSimplifiedParams}
+\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \section{Frequenzumtastung: Kapazitive Einkopplung}

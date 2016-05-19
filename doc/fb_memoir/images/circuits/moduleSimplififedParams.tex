@@ -22,7 +22,7 @@
     \ctikzset{label/align = rotate}
     \draw
     % Source to top terminal
-    (0,0) to[current source,i=$\SI{10}{\ampere}{,}~\SI{5}{\ampere}$] (0,3) -- (6,3) to[R,l^=\SI{333}{\micro\ohm}] (10,3) node[ocirc] {}
+    (0,0) to[current source,i=$\SI{10}{\ampere}$] (0,3) -- (6,3) to[R,l^=\SI{12}{\milli\ohm}] (10,3) node[ocirc] {}
 
     % Open terminal at bottom
     (10,0) node[ocirc] {} -- (0,0)
@@ -33,8 +33,8 @@
 
     % Parallel elements
     %(1.5,3) to[empty diode,*-*,l_=$I_{\mathrm{S}} = \SI{4}{\micro\ampere}, n = 1.65$] (1.5,0)
-    (2,0) to[empty diode,*-*,l_={$\SI{4}{\micro\ampere}{,}~~1.65$}] (2,3)
-    (4,0) to[C,*-*,l_=\SI{12}{\micro\farad}] (4,3)
-    (6,0) to[R,*-*,l_=$\SI{833}{\ohm}$] (6,3)
+    (2,0) to[empty diode,*-*,l_={$\SI{2.88}{\micro\ampere}{,}~~118$}] (2,3)
+    (4,0) to[C,*-*,l_=\SI{167}{\nano\farad}] (4,3)
+    (6,0) to[R,*-*,l_=\SI{60}{\kilo\ohm}] (6,3)
     ;
 \end{circuitikz}

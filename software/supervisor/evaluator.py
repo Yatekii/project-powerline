@@ -10,6 +10,3 @@
 # todo Meldebedingungen prüfen (2 von 3 flags gesetzt oder whatever)
 
 # todo Falls nötig Melder Callback ankicken
-
-
-# todo Interrupt

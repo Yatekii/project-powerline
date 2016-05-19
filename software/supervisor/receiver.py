@@ -10,10 +10,6 @@ from database import Panels, Strings, session, panels, strings
 
 # todo CRC entschluesseln und kontrollieren => log verwerfen falls NG
 
-# todo wie stringnumber definieren? uebergabeparameter oder nicht?
-
-# todo wie unterscheiden zwischen strommessung und datenpacket, wie damit umgehen?
-
 
 # definition of the datapackages
 class ModulePackage(object):
@@ -35,8 +31,9 @@ class StringPackage(object):
 
 # Creates the Object with all the data todo (gets data from receiver)
 
-modulepackage = ModulePackage(123459, 35.63, 30)  # Creates the Datapackage (serialnumber, voltage, stringnumber)
-stringpackage = StringPackage(3, 30)         # Creates the Datapackage (stringnumber, stringcurrent)
+modulepackage = ModulePackage(2973881934, 19.732, 2)  # Creates the Datapackage (serialnumber, voltage, stringnumber)
+stringpackage = StringPackage(1, 30.432)         # Creates the Datapackage (stringnumber, stringcurrent)
+
 
 # Defines the functions to creates the database items and save them into the database
 def insert_panel():
@@ -58,7 +55,7 @@ def insert_string():
     session.flush()
 
 
-# checks if String already exists in the string
+# checks if module already exists in the string
 # if yes: save the datalog
 # if no: check if theres a reported module in the string
 #        if no: save the datalog
@@ -68,7 +65,6 @@ if len(existinpanels) != 0:
     insert_panel()
 else:
     reportedpanels = session.query(Panels).filter((panels.c.flag_reported == 1) & (panels.c.stringnumber == modulepackage.stringnumber)).all()
-    print(reportedpanels)
     if len(reportedpanels) == 0:
         insert_panel()
     else:
@@ -76,6 +72,8 @@ else:
             session.delete(defectivpanels)
         insert_panel()
 
-# todo das gleiche noch mit strings
+# todo strings abfragen und speichern
+# saves the string datalog into the database
+# insert_string()
 
 # todo Interrupt von statician ankicken

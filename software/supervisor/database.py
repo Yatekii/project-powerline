@@ -54,3 +54,4 @@ stringmapper = mapper(Strings, strings)
 
 # creates the session
 session = create_session()
+

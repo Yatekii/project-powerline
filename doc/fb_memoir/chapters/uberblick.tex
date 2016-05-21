@@ -40,39 +40,39 @@ integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
 %http://tex.stackexchange.com/questions/185488/pgfplots-read-data-calculate-diagram#186016
 % ---------------------------------------------------------------------------- %
 
-\pgfplotstableread{data/iv-curves/module-72cells-series--reference--all-ok.dat}\cellsAllOK;
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--all-ok.dat}\cellsAllOK
 \pgfplotstableset{
     create on use/power output/.style={
         create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
     }
 }
-\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-5A.dat}\cellsFiveA;
-\pgfplotstableset{
-    create on use/power output/.style={
-        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
-    }
-}
-
-\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-1A.dat}\cellsOneA;
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-5A.dat}\cellsFiveA
 \pgfplotstableset{
     create on use/power output/.style={
         create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
     }
 }
 
-\pgfplotstableread{data/iv-curves/module-string-complete--all-ok.dat}\moduleAllOK;
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-1A.dat}\cellsOneA
 \pgfplotstableset{
     create on use/power output/.style={
         create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
     }
 }
-\pgfplotstableread{data/iv-curves/module-string-complete--ifail-5A.dat}\moduleFiveA;
+
+\pgfplotstableread{data/iv-curves/module-string-complete--all-ok.dat}\moduleAllOK
 \pgfplotstableset{
     create on use/power output/.style={
         create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
     }
 }
-\pgfplotstableread{data/iv-curves/module-string-complete--ifail-1A.dat}\moduleOneA;
+\pgfplotstableread{data/iv-curves/module-string-complete--ifail-5A.dat}\moduleFiveA
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+\pgfplotstableread{data/iv-curves/module-string-complete--ifail-1A.dat}\moduleOneA
 \pgfplotstableset{
     create on use/power output/.style={
         create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
@@ -121,26 +121,25 @@ integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
             \end{axis}
         \end{scope}
     \end{tikzpicture}
-   \caption{%
-       Simulierte  Strom-Spannungs-Kurve eines  Moduls mit  einer degradierten
-       Zelle.%    Oberes   Diagramm: Simulierte  Strom-Spannungs-Kurve   eines
-       Moduls  aus 72  Zellen  (in Serie  geschaltet)  mit einer  degradierten
-       Zelle\protect\\
-       \textbf{\textcolor{blue}{blau}}: Alle   Zellen  geben   volle  Leistung
+    \caption{%
+        Oberes Diagramm: Simulierte  Strom-Spannungs-Kurve eines Moduls  aus 72
+        Zellen (in Serie geschaltet) mit einer degradierten Zelle\protect\\
+        Unteres Diagramm: Die zum oberen Diagramm geh\"orenden Leistungskurven.
+        Gut erkennbar  ist, dass  selbst bei nur  einer degradierten  Zelle die
+        verf\"ugbare Leistung des gesamten Moduls stark abnimmt.\protect\\
+        \textbf{\textcolor{blue}{blau}}: Alle   Zellen  geben   volle  Leistung
         ab.\protect\\
-       \textbf{\textcolor{teal}{blaugr\"un}}: Eine Zelle  von 72 gibt  nur den
-       halben Strom ab.\protect\\
-       \textbf{\textcolor{magenta}{magenta}}: Eine  Zelle  gibt nur  10\%  des
-       vollen Stromes ab.\protect\\
-       Unteres Diagramm: Die zum oberen Diagramm geh\"orenden Leistungskurven,
-       selbe  Farbzuordnung. Gut  erkennbar ist,  dass  selbst  bei nur  einer
-       degradierten  Zelle  die  gesamte verf\"ugbare  Leistung  des  gesamten
-       Moduls massiv abnimmt.\protect\\
-       Die       zuge\"orige       \code{LTspice}-Schaltung       ist       in
-       Abbildung    \ref{fig:ltspice:vicurvesimulator:modules}    auf    Seite
-       \pageref{fig:ltspice:vicurvesimulator:modules} im Anhang zu finden.%
-   }
-   \label{fig:ivcurve:cells}
+        \textbf{\textcolor{teal}{blaugr\"un}}: Eine Zelle  von 72 gibt  nur den
+        halben Strom ab.\protect\\
+        \textbf{\textcolor{magenta}{magenta}}: Eine  Zelle  gibt nur  10\%  des
+        vollen Stromes ab.\protect\\
+        Die zuge\"orige \code{LTspice}-Schaltung basiert  auf dem Modell eines
+        Moduls aus Abbildung \ref{fig:ltspice:module:cellBased:72x1} auf Seite
+        \pageref{fig:ltspice:module:cellBased:72x1} im Anhang. Dabei wurde die
+        Stromquelle  in  einer  Zelle  variiert  (100\%,  50\%  bzw. 10\%  der
+        restlichen Quellen).%
+    }
+    \label{fig:ivcurve:cells}
 \end{figure}
 \begin{figure}[h!tb]
     \begin{tikzpicture}
@@ -184,21 +183,20 @@ integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
     \end{tikzpicture}
    \caption{%
        Oberes  Diagramm: Simulierte  Strom-Spannungs-Kurve eines  Strangs  von
-       Modulen mit einem degradierten Modul.\protect\\
-       \textbf{\textcolor{blue}{blau}}: Alle   Module  geben   volle  Leistung
-        ab.\protect\\
+       Modulen mit  einem degradierten Modul.\protect\\  Unteres Diagramm: Die
+       zum oberen Diagramm geh\"orenden Leistungskurven.  Selbst ein einzelnes
+       degradiertes  Modul  f\"uhrt  zu  einem  bedeutenden  Leistungseinbruch
+       des  gesamten  Modulstrangs.   Verkn\"upft  man  diese  Erkenntnis  mit
+       den Informationen  aus Abbildung \ref{fig:ivcurve:cells},  l\"asst sich
+       folgern, dass  lediglich eine  einzelne degradierte Zelle  von mehreren
+       hundert in  einem Modulstrang  vorhandenen Zellen  die gesamte  auf dem
+       Strang verf\"ugbare Leistung massiv senken kann.\protect\\
+       \textbf{\textcolor{blue}{blau}}: Alle   Module   geben   vollen   Strom
+       ab.\protect\\
        \textbf{\textcolor{teal}{blaugr\"un}}: Ein Modul  von zwanzig  gibt nur
-        den halben Strom ab.\protect\\
+       den halben Strom ab.\protect\\
        \textbf{\textcolor{magenta}{magenta}}: Ein  Modul  gibt  nur  10\%  des
-        vollen Stromes ab.\protect\\
-       Unteres Diagramm: Die  zum oberen Diagramm  geh\"orende Leistungskurve,
-       selbe  Farbzuordnung. Gut  erkennbar ist,  dass  selbst  bei nur  einem
-       degradierten  Modul  die  gesamte verf\"ugbare  Leistung  des  gesamten
-       Strangs  massiv  abnimmt. Verkn\"upft  man  diese  Erkenntnis  mit  den
-       Informationen  aus  Abbildung   \ref{fig:ivcurve:cells},  l\"asst  sich
-       folgern,  dass lediglich  eine einzelne  degradierte Zelle  von mehreen
-       hundert die gesamte auf  einem Modulstrang verf\"ugbare Leistung massiv
-       reduzieren kann.\protect\\
+       vollen Stromes ab.\protect\\
        Die       zuge\"orige       \code{LTspice}-Schaltung       ist       in
        Abbildung    \ref{fig:ltspice:vicurvesimulator:modules}    auf    Seite
        \pageref{fig:ltspice:vicurvesimulator:modules} im Anhang zu finden.%

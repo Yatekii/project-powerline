@@ -56,8 +56,6 @@ F 3 "" H 2850 1250 50  0000 C CNN
 	1    2850 2200
 	1    0    0    -1  
 $EndComp
-Text Label 2250 1250 0    60   ~ 0
-+3V3
 Text Label 3100 1250 0    60   ~ 0
 +5V
 Text Label 3100 1350 0    60   ~ 0
@@ -116,8 +114,6 @@ Text Label 2400 2250 0    60   ~ 0
 IO09
 Text Label 2400 2150 0    60   ~ 0
 IO10
-Text Label 2400 2050 0    60   ~ 0
-+3V3
 Text Label 2400 1950 0    60   ~ 0
 IO22
 Text Label 2400 1850 0    60   ~ 0
@@ -214,17 +210,6 @@ F 3 "" H 3350 1200 50  0000 C CNN
 	1    0    0    -1  
 $EndComp
 $Comp
-L +3V3 #PWR04
-U 1 1 56F3EC61
-P 2200 1200
-F 0 "#PWR04" H 2200 1050 50  0001 C CNN
-F 1 "+3V3" H 2200 1340 50  0000 C CNN
-F 2 "" H 2200 1200 50  0000 C CNN
-F 3 "" H 2200 1200 50  0000 C CNN
-	1    2200 1200
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR05
 U 1 1 56F3F1A8
 P 3775 3250
@@ -235,17 +220,6 @@ F 3 "" H 3775 3250 50  0000 C CNN
 	1    3775 3250
 	1    0    0    -1  
 $EndComp
-$Comp
-L +3V3 #PWR06
-U 1 1 56F3F27A
-P 1925 1925
-F 0 "#PWR06" H 1925 1775 50  0001 C CNN
-F 1 "+3V3" H 1925 2065 50  0000 C CNN
-F 2 "" H 1925 1925 50  0000 C CNN
-F 3 "" H 1925 1925 50  0000 C CNN
-	1    1925 1925
-	1    0    0    -1  
-$EndComp
 Text GLabel 3400 2550 2    60   Input ~ 0
 SCL
 Text GLabel 2275 2550 0    60   Input ~ 0
@@ -254,17 +228,6 @@ Text GLabel 3400 1550 2    60   Input ~ 0
 TXD
 Text GLabel 3400 1650 2    60   Input ~ 0
 RXD
-$Comp
-L SW_PUSH SW2
-U 1 1 56F40A36
-P 2150 5500
-F 0 "SW2" H 2300 5610 50  0000 C CNN
-F 1 "SW_PUSH" H 2150 5420 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 2150 5500 50  0001 C CNN
-F 3 "" H 2150 5500 50  0000 C CNN
-	1    2150 5500
-	1    0    0    -1  
-$EndComp
 $Comp
 L SW_PUSH SW1
 U 1 1 56F40AEB
@@ -340,12 +303,8 @@ Text GLabel 8100 2550 2    60   Input ~ 0
 isense0
 Text GLabel 1700 5250 0    60   Input ~ 0
 BT0
-Text GLabel 1700 5500 0    60   Input ~ 0
-BT1
 Text GLabel 3400 3150 2    60   Input ~ 0
 BT0
-Text GLabel 3400 3050 2    60   Input ~ 0
-BT1
 $Comp
 L CONN_01X06 P4
 U 1 1 56F496B6
@@ -1367,15 +1326,11 @@ Wire Wire Line
 Wire Wire Line
 	3100 3150 3400 3150
 Wire Wire Line
-	2200 1250 2600 1250
-Wire Wire Line
 	2275 1550 2600 1550
 Wire Wire Line
 	2350 1850 2600 1850
 Wire Wire Line
 	2350 1950 2600 1950
-Wire Wire Line
-	1925 2050 2600 2050
 Wire Wire Line
 	2350 2150 2600 2150
 Wire Wire Line
@@ -1408,10 +1363,6 @@ Wire Wire Line
 	3350 1200 3350 1350
 Connection ~ 3350 1250
 Wire Wire Line
-	2200 1250 2200 1200
-Wire Wire Line
-	1925 2050 1925 1925
-Wire Wire Line
 	6900 2400 7050 2400
 Wire Wire Line
 	7050 2500 7000 2500
@@ -1443,13 +1394,9 @@ Connection ~ 8600 2400
 Wire Wire Line
 	8100 2550 8000 2550
 Wire Wire Line
-	2550 5500 2450 5500
-Wire Wire Line
 	2450 5250 2550 5250
 Wire Wire Line
 	1850 5250 1700 5250
-Wire Wire Line
-	1850 5500 1700 5500
 Wire Wire Line
 	4950 5050 4750 5050
 Wire Wire Line
@@ -1751,7 +1698,6 @@ Wire Wire Line
 	12100 3550 11950 3550
 Wire Wire Line
 	12100 3650 11950 3650
-Connection ~ 2550 5500
 Wire Wire Line
 	2550 5250 2550 5650
 Wire Wire Line
@@ -2261,4 +2207,50 @@ Text GLabel 3400 2250 2    60   Input ~ 0
 ENSK0
 Text GLabel 3400 2450 2    60   Input ~ 0
 ENSK1
+Connection ~ 2550 5500
+Wire Wire Line
+	2550 5500 2450 5500
+$Comp
+L SW_PUSH SW2
+U 1 1 56F40A36
+P 2150 5500
+F 0 "SW2" H 2300 5610 50  0000 C CNN
+F 1 "SW_PUSH" H 2150 5420 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 2150 5500 50  0001 C CNN
+F 3 "" H 2150 5500 50  0000 C CNN
+	1    2150 5500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 5500 1700 5500
+Text GLabel 1700 5500 0    60   Input ~ 0
+BT1
+Text GLabel 3400 3050 2    60   Input ~ 0
+BT1
+$Comp
+L CONN_01X02 P?
+U 1 1 5747F8D5
+P 4825 1200
+F 0 "P?" H 4825 1350 50  0000 C CNN
+F 1 "230V_IN" V 4925 1200 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 4825 1200 50  0001 C CNN
+F 3 "" H 4825 1200 50  0000 C CNN
+	1    4825 1200
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X02 P?
+U 1 1 5747FA32
+P 5275 1200
+F 0 "P?" H 5275 1350 50  0000 C CNN
+F 1 "230V_OUT" V 5375 1200 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 5275 1200 50  0001 C CNN
+F 3 "" H 5275 1200 50  0000 C CNN
+	1    5275 1200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	5075 1150 5025 1150
+Wire Wire Line
+	5025 1250 5075 1250
 $EndSCHEMATC

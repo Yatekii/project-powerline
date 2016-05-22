@@ -4,15 +4,15 @@
 % **************************************************************************** %
 
 Bevor  simuliert  werden  kann,  m\"ussen  die  daf\"ur  ben\"otigten  Modelle
-vorhanden sein. Es  wird zuerst ein  Modell f\"ur eine  Solarzelle entwickelt.
-Anschliessend wird dieses Zellenmodell benutzt, um ein Modul aufzubauen.
+vorhanden  sein. In  diesem  Abschnitt  wird  zuerst  ein  Modell  f\"ur  eine
+Solarzelle bestimmt. Dieses  wird anschliessend  benutzt, um ein  Modell eines
+Solarmoduls  zu  konstruieren,  und  auf  dem  Modell  f\"ur  ein  Modul  wird
+anschliessend  das  Modell  eines   kompletten  Modulstrangs  aus  20  Modulen
+aufgebaut und simuliert.
 
-In  diesem Abschnitt  werden Schaltungen  f\"ur drei  L\"osungsans\"atze (zwei
-zur  FSK, eine  zur  ASK)  vorgestellt, mit  \code{LTspice  IV} simuliert  und
-beurteilt.\todo{LTspice: source}
-
-Es werden  jeweils die  Schaltung f\"ur  den Sender,  den Empf\"anger  und das
-Gesamtsystem untersucht.
+Es werden  Schaltungen f\"ur drei  L\"osungsans\"atze (zwei zur FSK,  eine zur
+ASK) vorgestellt, mit \code{LTspice IV} simuliert und beurteilt.\todo{LTspice:
+source}
 
 
 % ---------------------------------------------------------------------------- %
@@ -21,170 +21,15 @@ Gesamtsystem untersucht.
 % ---------------------------------------------------------------------------- %
 
 
-Ziel ist, eine Zelle zu modellieren, welche folgende Kriterien erf\"ullt:
-
-\begin{align}
-    \label{eq:diode:ULeerlauf}
-    U_{\mathrm{Leerlauf}}                    &= \SI{600}{\milli\volt} \\
-    \label{eq:diode:IKurzschluss:polyk}
-    I_{\mathrm{Kurzschluss, polykristallin}} &=  \SI{5}{\ampere}      \\
-    \label{eq:diode:IKurzschluss:monok}
-    I_{\mathrm{Kurzschluss, monokristallin}} &= \SI{10}{\ampere}
-\end{align}
-
-Die Herleitung  dieser Werte ist  in Anhang \ref{app:subsec:cell:UI}  ab Seite
-\pageref{app:subsec:cell:UI} zu  finden und basiert auf  den PV-Modulen, deren
-Daten in Tabelle \ref{tab:moduleData:IU} auf Seite \pageref{tab:moduleData:IU}
-aufgelistet  sind.   Es  werden  zwei  Zielwerte  f\"ur  den  Kurzschlussstrom
-angegeben;  einer f\"ur  monokristalline Zellen,  einer f\"ur  polykristalline
-Zellen.
-
-Als  Grundlage f\"ur  das  Modell dient  das  Eindiodenmodell einer  PV-Zelle,
-erweitert  um  eine parallele  Kapazit\"at  $C$  (basierend auf  Informationen
-aus \cite{ref:solar:scofield} und \cite{ref:solar:friesen}). Die resultierende
-Schaltung ist dargestellt in \fref{fig:circuit:solarCell}.
-
-\clearpage
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/solarCell.tex}
     \caption{%
         Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
-        Eindiodenmodell mit zus\"atzlicher Kapazit\"at%
+        Zweidiodenmodell mit zus\"atzlicher Kapazit\"at%
     }
     \label{fig:circuit:solarCell}
 \end{figure}
-
-Bei diesem Modell sind insgesamt f\"unf Parameter zu bestimmen:
-
-\begin{itemize}
-    \firmlist
-    \item
-        Seriewiderstand $R_{\mathrm{S}}$
-    \item
-        Shunt-Widerstand $R_{\mathrm{P}}$
-    \item
-        Parasit\"are Kapazit\"at $C$
-    \item
-        Diode   $D$: Reverse    Saturation   Current    $I_{\mathrm{S}}$   und
-        Idealit\"atsfaktor $n$
-\end{itemize}
-
-Es werden zuerst die Kapazit\"at und die Widerst\"ande bestimmt.
-
-\myfancybreak
-
-In \cite{ref:solar:scofield} wurden $C$, $R_{\mathrm{S}}$ und $R_{\mathrm{P}}$
-einer  Solarzelle der  Gr\"osse  \SI{0.43}{\centi\meter\squared} \"uber  einen
-Frequenzbereich  von \SI{1}{\kilo\hertz} bis \SI{1}{\mega\hertz} gemessen. Die
-Resultate waren:
-
-\begin{alignat}{3}
-    \label{eq:scofield:C}
-    C_{\mathrm{Messung}}    &= \SI{8}{\nano\farad} \; & \text{bis} \; & \SI{20}{\nano\farad} \;  & = & \; \SI{14 \pm 6}{\nano\farad} \\
-    \label{eq:scofield:Rs}
-    R_{\mathrm{S, Messung}} &= \SI{0.2}{\ohm}      \; & \text{bis} \; & \SI{20}{\ohm}        \;  & = & \; \SI{10.1 \pm 9.9}{\ohm}     \\
-    \label{eq:scofield:Rp}
-    R_{\mathrm{P, Messung}} &= \SI{0.5}{\kilo\ohm} \; & \text{bis} \; & \SI{500}{\kilo\ohm}  \;  & = & \; \SI{250.25 \pm 249.75}{\kilo\ohm}
-\end{alignat}
-
-Um die  obigen Werte f\"ur unsere  Zwecke verwenden zu k\"onnen,  m\"ussen sie
-auf eine Zelle der Fl\"ache \SI{240}{\centi\meter\squared} um ungef\"ahr einen
-Faktor \num{600} hochskaliert werden (zur Herleitung dieses Werts siehe Anhang
-\ref{app:subsec:cell:surface} ab Seite \pageref{app:subsec:cell:surface})
-
-$R_{\mathrm{P}}$   und  $R_{\mathrm{S}}$   skalieren  umgekehrt   proportional
-zur   Zellfl\"ache,    wogegen   $C$   bei   gr\"osser    werdender   Fl\"ache
-ansteigt~\cite{ref:solar:scofield}. Bei    der   ASK-Implementation    mittels
-gesteuertem   Kurzschluss    (siehe   Abbildung    \ref{fig:ask:concept}   auf
-Seite    \pageref{fig:ask:concept}     und    Simulationen     in    Abschnitt
-\ref{subsec:simu:ask:sensor})  nehmen   die  Schwierigkeiten   mit  steigendem
-Ausgangsstrom   der  Zelle   zu. Das   Modell  wird   deshalb  auf   maximalen
-Ausgangsstrom getrimmt:
-
-\begin{symbols}
-    \firmlist
-    \item[$C$]
-        Beim Kurzschliessen der  Zelle treten Stromspitzen auf,  wenn sich die
-        Kapazit\"at $C$ entl\"adt. Je gr\"osser  die Kapazit\"at, umso h\"oher
-        werden diese  Stromspitzen.  Wir nehmen also  \SI{20}{\nano\farad} aus
-        Gleichung \ref{eq:scofield:C} als Ausgangswert.
-    \item[$R_{\mathrm{S}}$]
-        Der aus der Solarzelle fliessende Strom wird gr\"osser, je kleiner der
-        Seriewiderstand vor dem Ausgang ist. Es wird daher der niedrigere Wert
-        von \SI{0.2}{\ohm} aus Gleichung \ref{eq:scofield:Rs} gew\"ahlt.
-    \item[$R_{\mathrm{P}}$]
-        Je    gr\"osser   der    Parallelwiderstand   im    Verh\"altnis   zum
-        Seriewiderstand  ist, um  so mehr  Strom fliesst  aus dem  Ausgang der
-        Zelle.  Es wird deshalb der h\"ochste Wert von \SI{500}{\kilo\ohm} aus
-        Gleichung \ref{eq:scofield:Rp} als Ausgangswert verwendet.
-\end{symbols}
-
-Die skalierten Werte sind somit:
-\begin{alignat}{2}
-    C               &= C_{\mathrm{Messung}}    &\cdot 600 &= \SI{12}{\micro\farad} \\
-    R_{\mathrm{S,}} &= R_{\mathrm{S, Messung}} &\div  600 &= \SI{333}{\micro\ohm}    \\
-    R_{\mathrm{P,}} &= R_{\mathrm{P, Messung}} &\div  600 &= \SI{833}{\ohm}
-\end{alignat}
-
-\myfancybreak
-
-Es   bleiben  noch   die  Parameter   $I_{\mathrm{S}}$  und   $n$  der   Diode
-zu   bestimmen. Erkl\"arungen   zu   diesen    Parametern   sind   in   Anhang
-\ref{app:sec:cell:diodeInfo}  ab   Seite  \pageref{app:sec:cell:diodeInfo}  zu
-finden.
-
-Zur   Simulation  in   \code{LTspice}  wird   ein  simples   Diodenmodell  mit
-$I_{\mathrm{S}}$   und   $n$  benutzt\footnotemark. Es   werden   Anfangswerte
-gesch\"atzt, um  die Parameter  anschliessend mittels Iteration  und Vergleich
-mit den Sollwerten (siehe Beginn dieses Abschnitts) zu optimieren.
-
-\footnotetext{\code{LTspice}-Direktive: \code{.model diode1 D(IS=1e-6 N=2)}}
-
-Mit   einer    Transientensimulation   wird   die   Zelle    simuliert,   ihre
-Leerlaufspannung  $V_{\mathrm{offen}}$  gemessen  und  mit  dem  Zielwert  aus
-Gleichung   \ref{eq:diode:ULeerlauf}    (Seite   \pageref{eq:diode:ULeerlauf})
-verglichen \todo{``wird'' nur einmal oder wiederholen?}.  Anschliessend werden
-die  Werte  f\"ur  \code{IS}  und \code{N}  angepasst,  bis  die  gew\"unschte
-Leerlaufspannung  erreicht  ist.   Nach  einigen  Iterationen  liefert  dieser
-Prozess\footnotemark:
-
-\footnotetext{%
-    Dies ist eine m\"ogliche L\"osung. Es gibt nat\"urlich noch beliebig viele
-    weitere  Kombinationen von  \code{IS} und  \code{N}, welche  die gegebenen
-    Bedingungen  erf\"ullen. Wir   sind  hier  lediglich  an   einer  L\"osung
-    interessiert, von  der wir zuversichtlich  sind, dass sie  ein hinreichend
-    gutes Modell liefert.%
-}
-
-\begin{align}
-    \label{eq:cell:diode:IS:N:result}
-    I_{\mathrm{S}} &= \SI{4}{\micro\ampere} \\
-    N              &= 1.65
-\end{align}
-
-Somit ist  das Modell  einer einzelnen  Zelle bestimmt:
-
-\begin{figure}[h!tb]
-    \centering
-    \input{images/circuits/solarCellParams.tex}
-    \caption{%
-        Schaltschema   zur  Modellierung   einer   Solarzelle  mit   numerisch
-        bestimmten Elementen
-    }
-    \label{fig:circuit:solarCell}
-\end{figure}
-
-%\begin{align}
-%    R_{\mathrm{S}} &= \SI{333}{\micro\ohm}   \\
-%    R_{\mathrm{P}} &= \SI{833}{\ohm}         \\
-%    C              &= \SI{12}{\micro\farad}  \\
-%    I_{\mathrm{S}} &= \SI{4}{\micro\ampere}            \\
-%    N              &= 1.65
-%\end{align}
-
-Im folgenden Abschnitt wird dieses Zellenmodell nun dazu benutzt, ein Modul
-aufzubauen.
 
 
 % ---------------------------------------------------------------------------- %
@@ -193,79 +38,26 @@ aufzubauen.
 \label{sec:simu:model:module}
 % ---------------------------------------------------------------------------- %
 
-Es  sollen   zwei  verschiedene   Module  simuliert  werden: Beide   sind  aus
-72   Zellen   aufgebaut,   jedoch   sind   die   Zellen   beim   einen   Modul
-in   zwei    parallelen   Str\"angen    zu   je   36    seriell   geschalteten
-Zellen   (\fref{fig:circuit:36x2:simplified})    und   beim    anderen   Modul
-in   einem   einzigen   Strang   aus   72   in   Serie   geschalteten   Zellen
-aufgebaut(\fref{fig:circuit:72x1:simplified}).
-
-Mit  diesen  beiden  Modellen  kann  jeweils  ein  typisches  monokristallines
-($72  \times 1$)  und ein  polykristallines  Modul ($36  \times 2$)  simuliert
-werden. Tabelle \ref{tab:moduleData:IU}  auf Seite \pageref{tab:moduleData:IU}
-in Anhang \ref{app:models:develop:cell}  enth\"alt als exemplarische Beispiele
-die Daten einiger  Module, die auf dem Markt  erh\"altlich sind. Basierend auf
-diesen Informationen wird  der Kurzschlussstrom f\"ur ein  $36 \times 2$-Modul
-auf \SI{5}{\ampere} festgelegt; der  Kurzschlusstrom des $72 \times 1$-Modells
-auf \SI{10}{\ampere}.
-
-Abgesehen  vom  Strom liegt  ein  weiterer  f\"ur unsere  Szenarien  wichtiger
-Unterschied in der Gesamtkapazit\"at eines  Moduls: Das Modul mit 72 Zellen in
-Serie hat die  halbe Kapazit\"at wie das Modul mit  zwei parallelen Str\"angen
-von je 36 Modulen.
-
-F\"ur     das    $72     \times     1$-Modul     wird    zus\"atzlich     noch
-ein     vereinfachtes    Modell     entwickelt,    um     den    Rechenaufwand
-bei      aus     mehreren      Modulen     aufgebauten      Schaltungen     zu
-reduzierten. Anhang   \ref{app:models:develop:module:simple}    enth\"alt   ab
-Seite     \pageref{app:models:develop:module:simple}     die     zugeh\"origen
-Hintergrundinformationen,  Abbildung  \ref{fig:circuit:moduleSimplifiedParams}
-ist eine schematische Darstellung des vereinfachten Modells mit den bestimmten
-Parametern.
-
-Die zugeh\"origen \code{LTspice}-Schaltungen  sind in Anhang \ref{app:ltspice}
-ab Seite \pageref{app:ltspice} zu finden.
-
-\todo{kleines Bild der gesamten Schaltung?}
 
 \begin{figure}[h!tb]
     \centering
-    \adjustbox{valign=t}{%
-    \begin{minipage}{0.475\textwidth}
-        \centering
-        \input{images/circuits/module36x2-simplified.tex}
-        \figcaption{%
-            Vereinfachtes   Schema  f\"ur   das   $36  \times   2$-Modul: Zwei
-            parallele    Str\"ange    mit    je    36    Zellen    in    Serie
-            geschaltet. Die  vollst\"andige  \code{LTspice}-Schaltung  ist  in
-            Abbildung   \ref{fig:ltspice:module:cellBased:36x2}    auf   Seite
-            \pageref{fig:ltspice:module:cellBased:36x2} dargestellt.%
-        }
-        \label{fig:circuit:36x2:simplified}
-    \end{minipage}}\hspace*{0.05\textwidth}\adjustbox{valign=t}{%
-    \begin{minipage}{0.475\textwidth}
-        \centering
-        \input{images/circuits/module72x1-simplified.tex}
-        \figcaption{%
-            Vereinfachtes      Schema      f\"ur      das      $72      \times
-            1$-Modul: Ein     Strang    mit     72     Zellen     in     Serie
-            geschaltet. Die  vollst\"andige  \code{LTspice}-Schaltung  ist  in
-            Abbildung   \ref{fig:ltspice:module:cellBased:72x1}    auf   Seite
-            \pageref{fig:ltspice:module:cellBased:72x1} dargestellt.%
-        }
-        \label{fig:circuit:72x1:simplified}
-    \end{minipage}}
+    \input{images/circuits/module72x1-simplified.tex}
+    \caption{%
+        Vereinfachtes      Schema      f\"ur      das      $72      \times
+        1$-Modul: Ein     Strang    mit     72     Zellen     in     Serie
+        geschaltet. Die  vollst\"andige  \code{LTspice}-Schaltung  ist  in
+        Abbildung   \ref{fig:ltspice:module:cellBased:72x1}    auf   Seite
+        \pageref{fig:ltspice:module:cellBased:72x1} dargestellt.%
+    }
+    \label{fig:circuit:72x1:simplified}
 \end{figure}
 
-\begin{figure}[h!tb]
-    \input{images/circuits/moduleSimplififedParams.tex}
-    \caption{%
-        Vereinfachtes  Modell eines  PV-Moduls mit  Parametern. Die Herleitung
-        und Verifikation sind in Anhang \ref{app:models:develop:module:simple}
-        ab Seite \pageref{app:models:develop:module:simple} dokumentiert.%
-    }
-    \label{fig:circuit:moduleSimplifiedParams}
-\end{figure}
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Modellierung eines Modulstrangs}
+\label{sec:simu:model:module:string}
+% ---------------------------------------------------------------------------- %
 
 % ---------------------------------------------------------------------------- %
 \section{Frequenzumtastung: Kapazitive Einkopplung}

@@ -1,5 +1,4 @@
 EESchema Schematic File Version 2
-LIBS:supervisor-rescue
 LIBS:power
 LIBS:device
 LIBS:transistors
@@ -277,17 +276,17 @@ F 3 "" H 2150 5250 50  0000 C CNN
 	1    2150 5250
 	1    0    0    -1  
 $EndComp
-Text GLabel 7200 1000 0    60   Input ~ 0
-string_out0
-Text GLabel 7200 1400 0    60   Input ~ 0
-string_out1
-Text GLabel 7200 1850 0    60   Input ~ 0
-string_out2
 Text GLabel 7900 1000 2    60   Input ~ 0
+string_out0
+Text GLabel 7900 1425 2    60   Input ~ 0
+string_out1
+Text GLabel 7900 1875 2    60   Input ~ 0
+string_out2
+Text GLabel 7900 750  2    60   Input ~ 0
 string_in0
-Text GLabel 7900 1400 2    60   Input ~ 0
+Text GLabel 7900 1175 2    60   Input ~ 0
 string_in1
-Text GLabel 7900 1850 2    60   Input ~ 0
+Text GLabel 7900 1625 2    60   Input ~ 0
 string_in2
 $Comp
 L ACS723 IC4
@@ -1033,39 +1032,6 @@ F 3 "" H 9675 6250 50  0000 C CNN
 	0    1    1    0   
 $EndComp
 $Comp
-L CONN_02X01 P6
-U 1 1 56F5E028
-P 7550 1000
-F 0 "P6" H 7550 1100 50  0000 C CNN
-F 1 "string0" H 7550 900 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 -200 50  0001 C CNN
-F 3 "" H 7550 -200 50  0000 C CNN
-	1    7550 1000
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_02X01 P7
-U 1 1 56F5E0FA
-P 7550 1400
-F 0 "P7" H 7550 1500 50  0000 C CNN
-F 1 "string1" H 7550 1300 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 200 50  0001 C CNN
-F 3 "" H 7550 200 50  0000 C CNN
-	1    7550 1400
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_02X01 P8
-U 1 1 56F5E18C
-P 7550 1850
-F 0 "P8" H 7550 1950 50  0000 C CNN
-F 1 "string2" H 7550 1750 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 7550 650 50  0001 C CNN
-F 3 "" H 7550 650 50  0000 C CNN
-	1    7550 1850
-	1    0    0    -1  
-$EndComp
-$Comp
 L GND #PWR040
 U 1 1 570DCAAB
 P 1850 10150
@@ -1273,72 +1239,6 @@ Text GLabel 7725 9750 2    60   Input ~ 0
 IRQ1
 Text GLabel 4050 9725 2    60   Input ~ 0
 IRQ2
-$Comp
-L CONN_01X02 P9
-U 1 1 5736733F
-P 9375 10475
-F 0 "P9" H 9375 10625 50  0000 C CNN
-F 1 "CONN_01X02" V 9475 10475 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 9375 10475 50  0001 C CNN
-F 3 "" H 9375 10475 50  0000 C CNN
-	1    9375 10475
-	0    1    1    0   
-$EndComp
-$Comp
-L GND #PWR053
-U 1 1 57367A7B
-P 9600 10275
-F 0 "#PWR053" H 9600 10025 50  0001 C CNN
-F 1 "GND" H 9600 10125 50  0000 C CNN
-F 2 "" H 9600 10275 50  0000 C CNN
-F 3 "" H 9600 10275 50  0000 C CNN
-	1    9600 10275
-	1    0    0    -1  
-$EndComp
-$Comp
-L CONN_01X02 P5
-U 1 1 573683A8
-P 5600 10425
-F 0 "P5" H 5600 10575 50  0000 C CNN
-F 1 "CONN_01X02" V 5700 10425 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 5600 10425 50  0001 C CNN
-F 3 "" H 5600 10425 50  0000 C CNN
-	1    5600 10425
-	0    1    1    0   
-$EndComp
-$Comp
-L CONN_01X02 P1
-U 1 1 573687FD
-P 2075 10325
-F 0 "P1" H 2075 10475 50  0000 C CNN
-F 1 "CONN_01X02" V 2175 10325 50  0000 C CNN
-F 2 "Pin_Headers:Pin_Header_Straight_2x01" H 2075 10325 50  0001 C CNN
-F 3 "" H 2075 10325 50  0000 C CNN
-	1    2075 10325
-	0    1    1    0   
-$EndComp
-$Comp
-L GND #PWR054
-U 1 1 57368B24
-P 5825 10225
-F 0 "#PWR054" H 5825 9975 50  0001 C CNN
-F 1 "GND" H 5825 10075 50  0000 C CNN
-F 2 "" H 5825 10225 50  0000 C CNN
-F 3 "" H 5825 10225 50  0000 C CNN
-	1    5825 10225
-	1    0    0    -1  
-$EndComp
-$Comp
-L GND #PWR055
-U 1 1 57368C16
-P 2225 10075
-F 0 "#PWR055" H 2225 9825 50  0001 C CNN
-F 1 "GND" H 2225 9925 50  0000 C CNN
-F 2 "" H 2225 10075 50  0000 C CNN
-F 3 "" H 2225 10075 50  0000 C CNN
-	1    2225 10075
-	1    0    0    -1  
-$EndComp
 $Sheet
 S 900  9225 825  925 
 U 5733B22E
@@ -1346,9 +1246,11 @@ F0 "FSK Module 1" 60
 F1 "fskmodule_1.sch" 60
 F2 "GND" I R 1725 10050 60 
 F3 "+3.3V" I R 1725 9925 60 
-F4 "coupling1" I R 1725 9550 60 
-F5 "outgoing1" I R 1725 9400 60 
-F6 "incoming1" I R 1725 9300 60 
+F4 "outgoing1" I R 1725 9400 60 
+F5 "incoming1" I R 1725 9300 60 
+F6 "PGND1" I L 900 10050 60 
+F7 "string1" I L 900 9925 60 
+F8 "INH-Tx1" I L 900 9525 60 
 $EndSheet
 NoConn ~ 3825 9425
 NoConn ~ 2425 9625
@@ -1445,17 +1347,17 @@ Wire Wire Line
 Wire Wire Line
 	3775 2150 3100 2150
 Wire Wire Line
-	3100 2250 3300 2250
+	3100 2250 3400 2250
 Wire Wire Line
 	3100 2350 3350 2350
 Wire Wire Line
-	3100 2450 3300 2450
+	3100 2450 3400 2450
 Wire Wire Line
 	3100 2550 3400 2550
 Wire Wire Line
 	3775 2650 3100 2650
 Wire Wire Line
-	3100 2750 3300 2750
+	3100 2750 3400 2750
 Wire Wire Line
 	3775 2850 3100 2850
 Wire Wire Line
@@ -1966,18 +1868,6 @@ Wire Wire Line
 Wire Wire Line
 	9675 6250 9625 6250
 Wire Wire Line
-	7200 1850 7300 1850
-Wire Wire Line
-	7200 1400 7300 1400
-Wire Wire Line
-	7200 1000 7300 1000
-Wire Wire Line
-	7800 1000 7900 1000
-Wire Wire Line
-	7800 1400 7900 1400
-Wire Wire Line
-	7800 1850 7900 1850
-Wire Wire Line
 	1725 10050 1850 10050
 Wire Wire Line
 	1725 9925 1850 9925
@@ -2055,36 +1945,6 @@ Wire Wire Line
 	5625 9550 6050 9550
 Wire Wire Line
 	9375 9575 9700 9575
-Wire Wire Line
-	9325 9575 9325 10275
-Wire Wire Line
-	9050 9575 9325 9575
-Wire Wire Line
-	9600 10275 9600 10200
-Wire Wire Line
-	9600 10200 9425 10200
-Wire Wire Line
-	9425 10200 9425 10275
-Wire Wire Line
-	5550 9550 5550 10225
-Wire Wire Line
-	5300 9550 5550 9550
-Wire Wire Line
-	2225 10075 2225 10050
-Wire Wire Line
-	2225 10050 2125 10050
-Wire Wire Line
-	2125 10050 2125 10125
-Wire Wire Line
-	5650 10225 5650 10150
-Wire Wire Line
-	5650 10150 5825 10150
-Wire Wire Line
-	5825 10150 5825 10225
-Wire Wire Line
-	2025 10125 2025 9550
-Wire Wire Line
-	2025 9550 1725 9550
 Wire Wire Line
 	2125 9425 2125 9300
 Wire Wire Line
@@ -2218,17 +2078,6 @@ F 3 "" H 7375 5750 60  0000 C CNN
 	1    7375 6000
 	1    0    0    -1  
 $EndComp
-$Sheet
-S 8225 9250 825  925 
-U 5737632B
-F0 "FSK Module 3" 60
-F1 "fskmodule_3.sch" 60
-F2 "GND" I R 9050 10075 60 
-F3 "+3.3V" I R 9050 9950 60 
-F4 "coupling3" I R 9050 9575 60 
-F5 "outgoing3" I R 9050 9425 60 
-F6 "incoming3" I R 9050 9325 60 
-$EndSheet
 $Comp
 L RELAY K2
 U 1 1 573A4512
@@ -2258,8 +2107,158 @@ F0 "FSK Module 2" 60
 F1 "fskmodule_2.sch" 60
 F2 "GND" I R 5300 10050 60 
 F3 "+3.3V" I R 5300 9925 60 
-F4 "coupling2" I R 5300 9550 60 
-F5 "outgoing2" I R 5300 9400 60 
-F6 "incoming2" I R 5300 9300 60 
+F4 "outgoing2" I R 5300 9400 60 
+F5 "incoming2" I R 5300 9300 60 
+F6 "PGND2" I L 4475 10050 60 
+F7 "string2" I L 4475 9900 60 
+F8 "INH-Tx2" I L 4475 9500 60 
 $EndSheet
+$Sheet
+S 8225 9250 825  925 
+U 5737632B
+F0 "FSK Module 3" 60
+F1 "fskmodule_3.sch" 60
+F2 "GND" I R 9050 10075 60 
+F3 "+3.3V" I R 9050 9950 60 
+F4 "outgoing3" I R 9050 9425 60 
+F5 "incoming3" I R 9050 9325 60 
+F6 "PGND3" I L 8225 10075 60 
+F7 "string3" I L 8225 9950 60 
+F8 "INH-Tx3" I L 8225 9525 60 
+$EndSheet
+Text GLabel 800  9925 0    60   Input ~ 0
+string_in2
+Text GLabel 4325 9900 0    60   Input ~ 0
+string_in1
+Text GLabel 8100 9950 0    60   Input ~ 0
+string_in0
+Wire Wire Line
+	8225 9950 8100 9950
+Wire Wire Line
+	4475 9900 4325 9900
+Wire Wire Line
+	800  9925 900  9925
+Text GLabel 7900 1300 2    60   Input ~ 0
+PGND1
+Text GLabel 7900 1750 2    60   Input ~ 0
+PGND2
+Text GLabel 7900 875  2    60   Input ~ 0
+PGND0
+$Comp
+L CONN_01X03 P?
+U 1 1 57462E11
+P 7225 875
+F 0 "P?" H 7225 1075 50  0000 C CNN
+F 1 "CONN_01X03" V 7325 875 50  0000 C CNN
+F 2 "" H 7225 875 50  0000 C CNN
+F 3 "" H 7225 875 50  0000 C CNN
+	1    7225 875 
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X03 P?
+U 1 1 57462F56
+P 7250 1300
+F 0 "P?" H 7250 1500 50  0000 C CNN
+F 1 "CONN_01X03" V 7350 1300 50  0000 C CNN
+F 2 "" H 7250 1300 50  0000 C CNN
+F 3 "" H 7250 1300 50  0000 C CNN
+	1    7250 1300
+	-1   0    0    1   
+$EndComp
+$Comp
+L CONN_01X03 P?
+U 1 1 5746307F
+P 7250 1750
+F 0 "P?" H 7250 1950 50  0000 C CNN
+F 1 "CONN_01X03" V 7350 1750 50  0000 C CNN
+F 2 "" H 7250 1750 50  0000 C CNN
+F 3 "" H 7250 1750 50  0000 C CNN
+	1    7250 1750
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7900 1875 7700 1875
+Wire Wire Line
+	7700 1875 7700 1850
+Wire Wire Line
+	7700 1850 7450 1850
+Wire Wire Line
+	7900 1750 7450 1750
+Wire Wire Line
+	7900 1625 7700 1625
+Wire Wire Line
+	7700 1625 7700 1650
+Wire Wire Line
+	7700 1650 7450 1650
+Wire Wire Line
+	7900 1425 7700 1425
+Wire Wire Line
+	7700 1425 7700 1400
+Wire Wire Line
+	7700 1400 7450 1400
+Wire Wire Line
+	7450 1300 7900 1300
+Wire Wire Line
+	7900 1175 7700 1175
+Wire Wire Line
+	7700 1175 7700 1200
+Wire Wire Line
+	7700 1200 7450 1200
+Wire Wire Line
+	7900 750  7700 750 
+Wire Wire Line
+	7700 750  7700 775 
+Wire Wire Line
+	7700 775  7425 775 
+Wire Wire Line
+	7425 875  7900 875 
+Wire Wire Line
+	7900 1000 7700 1000
+Wire Wire Line
+	7700 1000 7700 975 
+Wire Wire Line
+	7700 975  7425 975 
+Text GLabel 8100 10075 0    60   Input ~ 0
+PGND0
+Wire Wire Line
+	8225 10075 8100 10075
+Text GLabel 4325 10050 0    60   Input ~ 0
+PGND1
+Wire Wire Line
+	4475 10050 4325 10050
+Text GLabel 800  10050 0    60   Input ~ 0
+PGND2
+Wire Wire Line
+	800  10050 900  10050
+Text GLabel 8125 9300 0    60   Input ~ 0
+ENSK0
+Wire Wire Line
+	8225 9525 8175 9525
+Wire Wire Line
+	8175 9525 8175 9300
+Wire Wire Line
+	8175 9300 8125 9300
+Text GLabel 4375 9100 0    60   Input ~ 0
+ENSK1
+Wire Wire Line
+	4375 9100 4425 9100
+Wire Wire Line
+	4425 9100 4425 9500
+Wire Wire Line
+	4425 9500 4475 9500
+Text GLabel 725  9050 0    60   Input ~ 0
+ENSK2
+Wire Wire Line
+	900  9525 825  9525
+Wire Wire Line
+	825  9525 825  9050
+Wire Wire Line
+	825  9050 725  9050
+Text GLabel 3400 2750 2    60   Input ~ 0
+ENSK2
+Text GLabel 3400 2250 2    60   Input ~ 0
+ENSK0
+Text GLabel 3400 2450 2    60   Input ~ 0
+ENSK1
 $EndSCHEMATC

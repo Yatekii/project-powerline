@@ -1,0 +1,45 @@
+% ---------------------------------------------------------------------------- %
+% Performance Calculations
+%
+% Based on:
+%http://tex.stackexchange.com/questions/185488/pgfplots-read-data-calculate-diagram#186016
+% ---------------------------------------------------------------------------- %
+
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--all-ok.dat}\cellsAllOK
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-5A.dat}\cellsFiveA
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+
+\pgfplotstableread{data/iv-curves/module-72cells-series--reference--ifail-1A.dat}\cellsOneA
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+
+\pgfplotstableread{data/iv-curves/module-string-complete--all-ok.dat}\moduleAllOK
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+\pgfplotstableread{data/iv-curves/module-string-complete--ifail-5A.dat}\moduleFiveA
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}
+\pgfplotstableread{data/iv-curves/module-string-complete--ifail-1A.dat}\moduleOneA
+\pgfplotstableset{
+    create on use/power output/.style={
+        create col/expr={\thisrow{V(out)} * \thisrow{I(R_load)}}
+    }
+}

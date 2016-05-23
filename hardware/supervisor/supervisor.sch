@@ -699,7 +699,7 @@ U 1 1 56F81ED5
 P 3725 6950
 F 0 "C1" H 3735 7020 50  0000 L CNN
 F 1 "CP_Small" H 3275 6950 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603_HandSoldering" H 3725 6950 50  0001 C CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D7.5_L11.2_P2.5" H 3725 6950 50  0001 C CNN
 F 3 "" H 3725 6950 50  0000 C CNN
 	1    3725 6950
 	1    0    0    -1  
@@ -798,7 +798,7 @@ U 1 1 56F8709C
 P 4125 7600
 F 0 "D5" H 4125 7700 50  0000 C CNN
 F 1 "ZENERsmall" H 4175 7500 50  0000 C CNN
-F 2 "Diodes_SMD:SMA_Handsoldering" H 4125 7600 50  0001 C CNN
+F 2 "Diodes_SMD:SMB-SMC_Universal_Handsoldering" H 4125 7600 50  0001 C CNN
 F 3 "" H 4125 7600 50  0000 C CNN
 	1    4125 7600
 	0    1    1    0   
@@ -809,20 +809,9 @@ U 1 1 56F8725D
 P 4575 7400
 F 0 "L1" H 4575 7500 50  0000 C CNN
 F 1 "INDUCTOR_Small" H 4575 7350 50  0000 C CNN
-F 2 "Inductors_NEOSID:Neosid_Inductor_SM1206" H 4575 7400 50  0001 C CNN
+F 2 "pro4:HC9-large" H 4575 7400 50  0001 C CNN
 F 3 "" H 4575 7400 50  0000 C CNN
 	1    4575 7400
-	1    0    0    -1  
-$EndComp
-$Comp
-L C_Small C2
-U 1 1 56F87444
-P 4975 7600
-F 0 "C2" H 4985 7670 50  0000 L CNN
-F 1 "C_Small" H 4985 7520 50  0000 L CNN
-F 2 "Capacitors_SMD:C_0603_HandSoldering" H 4975 7600 50  0001 C CNN
-F 3 "" H 4975 7600 50  0000 C CNN
-	1    4975 7600
 	1    0    0    -1  
 $EndComp
 $Comp
@@ -2121,12 +2110,6 @@ Wire Wire Line
 Wire Wire Line
 	7900 1750 7450 1750
 Wire Wire Line
-	7900 1625 7700 1625
-Wire Wire Line
-	7700 1625 7700 1650
-Wire Wire Line
-	7700 1650 7450 1650
-Wire Wire Line
 	7900 1425 7700 1425
 Wire Wire Line
 	7700 1425 7700 1400
@@ -2134,18 +2117,6 @@ Wire Wire Line
 	7700 1400 7450 1400
 Wire Wire Line
 	7450 1300 7900 1300
-Wire Wire Line
-	7900 1175 7700 1175
-Wire Wire Line
-	7700 1175 7700 1200
-Wire Wire Line
-	7700 1200 7450 1200
-Wire Wire Line
-	7900 750  7700 750 
-Wire Wire Line
-	7700 750  7700 775 
-Wire Wire Line
-	7700 775  7425 775 
 Wire Wire Line
 	7425 875  7900 875 
 Wire Wire Line
@@ -2264,4 +2235,66 @@ F 3 "" H 5150 5350 50  0000 C CNN
 	1    5150 5350
 	1    0    0    -1  
 $EndComp
+$Comp
+L CP_Small C2
+U 1 1 574ABFB2
+P 4975 7600
+F 0 "C2" H 4985 7670 50  0000 L CNN
+F 1 "CP_Small" H 4525 7600 50  0000 L CNN
+F 2 "Capacitors_ThroughHole:C_Radial_D7.5_L11.2_P2.5" H 4975 7600 50  0001 C CNN
+F 3 "" H 4975 7600 50  0000 C CNN
+	1    4975 7600
+	1    0    0    -1  
+$EndComp
+$Comp
+L CONN_01X02 P13
+U 1 1 574AF9AE
+P 7675 550
+F 0 "P13" H 7675 700 50  0000 C CNN
+F 1 "230V_OUT" V 7775 550 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 7675 550 50  0001 C CNN
+F 3 "" H 7675 550 50  0000 C CNN
+	1    7675 550 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CONN_01X02 P14
+U 1 1 574AFAF6
+P 7675 975
+F 0 "P14" H 7675 1125 50  0000 C CNN
+F 1 "230V_OUT" V 7775 975 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 7675 975 50  0001 C CNN
+F 3 "" H 7675 975 50  0000 C CNN
+	1    7675 975 
+	0    -1   -1   0   
+$EndComp
+$Comp
+L CONN_01X02 P15
+U 1 1 574AFC39
+P 7700 1425
+F 0 "P15" H 7700 1575 50  0000 C CNN
+F 1 "230V_OUT" V 7800 1425 50  0000 C CNN
+F 2 "Pin_Headers:Pin_Header_Straight_1x02" H 7700 1425 50  0001 C CNN
+F 3 "" H 7700 1425 50  0000 C CNN
+	1    7700 1425
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	7725 750  7900 750 
+Wire Wire Line
+	7625 750  7625 775 
+Wire Wire Line
+	7625 775  7425 775 
+Wire Wire Line
+	7625 1200 7450 1200
+Wire Wire Line
+	7650 1625 7650 1650
+Wire Wire Line
+	7650 1650 7450 1650
+Wire Wire Line
+	7750 1625 7900 1625
+Wire Wire Line
+	7900 1175 7725 1175
+Wire Wire Line
+	7625 1200 7625 1175
 $EndSCHEMATC

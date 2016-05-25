@@ -19,33 +19,132 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 \anweisung Bilder, Diagramme, Formeln etc.
 
 
+{\begin{a3pages}
 % ---------------------------------------------------------------------------- %
 \clearpage
 \section{Sensorplatine}
 \label{sec:hw:sensorplatine}
 % ---------------------------------------------------------------------------- %
+    \newlength{\parindentbak}
+    \setlength{\parindentbak}{\parindent}
 
-Was  ist der  Zweck  der Sensorplatine? Welche  Aufgaben  muss sie  erf\"ullen
-k\"onnen? Wie ist sie aufgebaut? PCB-Layout? Energieversorgung?
+    \noindent\adjustbox{valign=t}{\begin{minipage}{135mm}
+        asdf   aweiufh  we   aluwesikfhalweifuawheilf   aweif  alwieuhfi   waf
+        aliwuhefla2983a haewfhua alwifeuhal23  ahwfi awiuehf afshi wfhiuwaejhf
+        aasd   sdf   we    aluwesikfhalweifuawheilf   aweif   alwieuhfi   waff
+        aaliwuhefla2983a haewfhua alwifeuhal23 ahwfi awiuehf afshi wfhiuwaejhf
+        aasd  sdf  aweiufh we  aweif  alwieuhfi  waf aliwuhefla2983a  haewfhua
+        aalwifeuhal23  ahwfi  awiuehf afshi  wfhiuwaejh  asdf  sdf aweiufh  we
+        aaluwesikfhalweifuawheilf  waf  haewfhua  alwifeuhal23  ahwfi  awiuehf
+        aafshi wfhiuwaejh asdf sdf aweiufh  we aweif waf haewfhua alwifeuhal23
+        aawiuehf afshi wfhiuwaejh asdf sdf aweiufh we aluwesikfhalweifuawheilf
+        aaweif alwieuhfi  aliwuhefla2983a haewfhua alwifeuhal23  ahwfi awiuehf
+        aafshi wfhiuwaejh asdf sdf we aweif alwieuhfi aliwuhefla2983a haewfhua
+        aalwifeuhal23  ahwfi  awiuehf  afshi  wfhiuwaejh  asdf  sdf  we  aweif
+        aalwieuhfi  waf  haewfhua  ahwfi  awiuehf  afshi  wfhiuwaejh  sdf  sdf
+        aaweiufh we aweif alwieuhfi  waf aliwuhefla2983a haewfhua alwifeuhal23
+        aahwfi  awiuehf  afshi  wfhiuwaejh asdf  sdf  aluwesikfhalweifuawheilf
+        aaweif  alwieuhfi  waf  aliwuhefla2983a  haewfhua  alwifeuhal23  ahwfi
+        aawiuehf afshi wfhiuwaejh asdf sdf aweiufh we aluwesikfhalweifuawheilf
+        aaweif  alwieuhfi waf  haewfhua  ahwfi awiuehf  afshi wfhiuwaejh  asdf
+        asdf  aweiufh we  aweif  alwieuhfi waf  haewfhua  ahwfi awiuehf  afshi
+        awfhiuwaejh  asdf   sdf  aweiufh  we   aluwesikfhalweifuawheilf  aweif
+        aalwieuhfi  haewfhua  afshi  wfhiuwaejh  asdf  sdf  aweiufh  we  aweif
+        aalwieuhfi  waf  aliwuhefla2983a  haewfhua  alwifeuhal23  ahwfi  afshi
+        awfhiuwaejh  asdf   sdf  aweiufh  we   aluwesikfhalweifuawheilf  aweif
+        aalwieuhfi waf aliwuhefla2983a ahwfi wfhiuwaejh asdf
 
-\anweisung Dimensionierung der Bauteile: Berechnungen
+        \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth]{images/sensor-pcb/sensor-3d-front.png}
+            \figcaption{PCB, Vorderseite}
+            \label{fig:sensor:pcb:front}
+        \end{minipage}}
+        \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth]{images/sensor-pcb/sensor-3d-back.png}
+            \figcaption{PCB, R\"uckseite}
+            \label{fig:sensor:pcb:back}
+        \end{minipage}}
+    \end{minipage}}
+    \hspace*{15mm}
+    \adjustbox{valign=t}{\begin{minipage}{195mm}
+        \centering
+        \includegraphics[width=\textwidth]{images/sensor-sch/sensor--sch--highlights.eps}%
+        \figcaption{%
+            Schema   des   \Sensor   s. Eine  Grossversion   ist   in   Anhang
+            \label{app:chap:schemas}  zu  finden,   die  einzelnen  Baugruppen
+            sind  in  den  folgenden  Abschnitten  beschrieben  und  gr\"osser
+            abgebildet.%
+        }
+        \label{fig:sensor:schema:highlights}
+    \end{minipage}}
+\end{a3pages}}
 
 
 % ---------------------------------------------------------------------------- %
-\subsection{Energieversorgung}
-\label{subsec:sensor:pcb}
+\subsection{Speisung}
+\label{subsec:hw:sensor:supply}
 % ---------------------------------------------------------------------------- %
 
-Energiebezug,  Leistungsanforderungen, Standby,  Verhalten bei  ungen\"ugender
-Leistungszufuhr, ...
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--supply.eps}
+    \caption{Speisung Sensor}
+\end{figure}
 
 
 % ---------------------------------------------------------------------------- %
-\subsection{PCB}
-\label{subsec:sensor:pcb}
+\subsection{Transmitter}
+\label{subsec:hw:sensor:transmitter}
 % ---------------------------------------------------------------------------- %
 
-Wie sieht das PCB aus, und weshalb?
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
+    \caption{Transmitter Sensor}
+\end{figure}
+
+% ---------------------------------------------------------------------------- %
+\subsection{Microcontroller}
+\label{subsec:hw:sensor:mcu}
+% ---------------------------------------------------------------------------- %
+
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--mcu.eps}
+    \caption{Microcontroller Sensor}
+\end{figure}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Spannungsmessung}
+\label{subsec:hw:sensor:voltageSense}
+% ---------------------------------------------------------------------------- %
+
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--sensor.eps}
+    \caption{Spannungsmessung Sensor}
+\end{figure}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Interface}
+\label{subsec:hw:sensor:interface}
+% ---------------------------------------------------------------------------- %
+
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--interface.eps}
+    \caption{Spannungsmessung Sensor}
+\end{figure}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Empf\"anger}
+\label{subsec:hw:sensor:receiver}
+% ---------------------------------------------------------------------------- %
+
+\begin{figure}[h!t]
+    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--receiver.eps}
+    \caption{Empf\"anger Sensor}
+\end{figure}
 
 
 {\begin{a3pages}
@@ -55,7 +154,6 @@ Wie sieht das PCB aus, und weshalb?
 % ---------------------------------------------------------------------------- %
     % \parindent is set to 0 inside of minipages. Back up its value and access
     % it inside the minipage.
-    \newlength{\parindentbak}
     \setlength{\parindentbak}{\parindent}
 
     \noindent\adjustbox{valign=t}{\begin{minipage}{135mm}

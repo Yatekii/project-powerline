@@ -9,25 +9,120 @@ wie es zu bedienen ist.
 
 
 % ---------------------------------------------------------------------------- %
-\section{Aufbau einer Solaranlage}
+\section{Aufbau einer Photovoltaikanlage}
 \label{sec:solaranlage:aufbau}
 % ---------------------------------------------------------------------------- %
 
-Grunds\"atzlicher Aufbau einer Solaranlage: Zelle -> Modul -> Strings -> Anlage
+\begin{wrapfigure}{r}{0.4\textwidth}
+    \centering
+    \includegraphics[width=0.35\textwidth]{images/solar-facility/cell--400px.png}
+    \caption{Solarzelle, Frontalansicht \cite{ref:pvcell:wikipedia}}
+    \label{fig:pvcell:front}
+\end{wrapfigure}
+
+Die   Grundbausteine    einer   Photovoltaikanlage   legen    die   PV-Zellen,
+welche   aus   verschiedenen   Halbleitermaterialien   bestehen. Die   meisten
+heutzutage  verwendeten  Zellen  werden aus  dem  Halbleitermaterial  Silizium
+hergestellt. Siliziumzellen  sind in  verschiedenen Formfaktoren  verf\"ugbar;
+g\"angige   Gr\"ossen    haben   ca.   zwischen    \SI{10}{\centi\meter}   und
+\SI{15}{\centi\meter}  Kantenl\"ange.   Zum  mechanischen  Schutz  der  Zellen
+sind  diese mit  einer durchsichtigen  Antireflexschicht \"uberzogen.   Die an
+der  PV-Zelle  abgreifbare  Spannung betr\"agt  zwischen  \SI{0.5}{\volt}  und
+\SI{0.8}{\volt} DC,  wobei die  Klemmenspannung einer  voll funktionsf\"ahigen
+Zelle nur schwach von  der Lichteinstrahlung abh\"angig ist. Die Stromst\"arke
+hingegen   ist  sehr   stark  von   der  Beleuchtungsst\"arke   abh\"angig. Je
+nach    Sonneneinstrahlung   erreicht    eine   \SI{100}{\centi\meter\squared}
+grosse   Siliziumzelle  eine   Stromst\"arke   von   bis  zu   \SI{2}{\ampere}
+\cite{ref:pv:gesellschaftFuerSonnenenergie}. \fref{fig:pvcell:front} zeigt die
+Frontansicht einer PV-Zelle.
+
+\clearpage
+\begin{wrapfigure}{l}{0.3\textwidth}
+    \centering
+    \includegraphics[width=0.25\textwidth]{images/solar-facility/pvmodule.jpeg}
+    \caption{
+        Solarmodul,  zusammengesetzt  aus  72 Solarzellen  gem\"ass  Abbildung
+        \ref{fig:pvcell:front}%
+    }
+    \label{fig:pvmodule}
+\end{wrapfigure}
 
 
-% ---------------------------------------------------------------------------- %
-\section{Einbettung in Umwelt}
-\label{sec:einbettung}
-% ---------------------------------------------------------------------------- %
+Um die  Ausgangsspannung bzw. den Ausgangsstrom  zu erh\"ohen und um  diese in
+der  Praxis  besser  einsetzen  zu k\"onnen,  werden  mehrere  solcher  Zellen
+miteinander zu  einem PV-Modul  verschaltet. Die Parallelschaltung  der Zellen
+erzeugt  eine Addition  des Ausgangsstromes,  die Serieschaltung  erzeugt eine
+Addition  der  Ausgangsspannung. In  der   Praxis  \"ublich  sind  Module  mit
+36,  72  oder  144  Zellen   und  einer  Ausgangsspannung  von  \SI{12}{\volt}
+bis  \SI{60}{\volt}. In Photovoltaikanlagen  werden nur  solche ganzen  Module
+eingesetzt,   wobei  die   einzelnen   Zellen  f\"ur   eine  Reparatur   nicht
+mehr  zug\"anglich  sind. Die  elektrischen   Anschl\"usse  befinden  sich  in
+Kunststoffdosen auf der R\"uckseite der Module \cite{ref:pv:baunetz}.
 
-Hier  wird  beschrieben,  wie  unser System  physisch  mit  einer  Solaranlage
-integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
-\todo{kein eigener Abschnitt mehr n\"otig}
+%@electronic{ref:gak:gantner,
+
+Mehrere Module,  welche gleiche Bedingungen aufweisen,  werden \"ublicherweise
+mittels Reihenschaltung  zu einem  Modulstring verschaltet. Dadurch  wird eine
+h\"ohere Ausgangsspannung  erzeugt, was  die Umwandlung  und den  Transport in
+unsere Netzspannung erleichtert. Die  Ausgangsspannung eines Modulstrings darf
+gem\"ass Vorschrift \SI{1000}{\volt} DC  nicht \"uberschreiten. Somit darf die
+Anzahl in einem Modulstring h\"ochstens 16 Module betragen\todo{Abh\"angigkeit
+von  Modulausgangsspannung?}. Module, die  an unterschiedlichen  Dachneigungen
+montiert sind  oder die unterschiedliche  Ausrichtungen haben, sollten  nie zu
+einem Modulstring  zusammengeschaltet werden. Ein einzelnes  beschattetes oder
+nicht  einwandfrei  funktionierendes Modul  hat  zur  Folge, dass  dieses  den
+gesamten Modulstring leistungsm\"assig nach unten zieht.
+
+\begin{figure}[h!t]
+    \centering
+    \begin{tikzpicture}
+        \begin{scope}[x={(0mm,\textwidth)},y={(0mm,-70mm)}]
+            \node[inner sep=0pt,anchor=north west] at (0mm,0mm) {%
+                \includegraphics[width=\textwidth]{images/solar-facility/pvarray.jpeg}%
+            };
+            \node at (132mm,-55mm) {\small{GAK}};
+            \node at (120mm,0mm) {\small{Wechselrichter}};
+            \node at (55mm,-5mm) {\small{Modulstrang}};
+        \end{scope}
+    \end{tikzpicture}
+    \caption{%
+        Modulstrang aus 16 Modulen  gem\"ass Abbildung \ref{fig:pvmodule}, GAK
+        und  Wechselrichter. Quelle Bild  GAK: \cite{ref:gak:gantner},  Quelle
+        Bild Wechselrichter: \cite{ref:inverter:sunnyboy}.%
+    }
+    \label{fig:pvarray:gak:inverter}
+\end{figure}
+
+Die    Umwandlung    der    Gleichspannung    in    Wechselspannung    erfolgt
+mittels  Wechselrichter. Je  nach  Anwendungsbereich  werden  unterschiedliche
+Wechselrichter eingesetzt:
+
+\begin{itemize}
+    \firmlist
+    \item
+        Modulwechselrichter
+    \item
+        Stringwechselrichter
+    \item
+        Multistringwechselrichter
+    \item
+        Zentralwechselrichter
+\end{itemize}
+
+Letzterer  setzt  man haupts\"achlich  in  Grossanlagen  ein, bei  denen  alle
+Strings  die  gleiche Neigung  aufweisen  und  auch gleich  ausgerichtet  sind
+\cite{ref:pv:ratgeber}.
+
+Als Leitungsschutz gegen \"Uberstrom und Kurzschluss befindet sich unmittelbar
+vor  dem   Wechselrichter  im  Gleichstromnetz   ein  Generatoranschlusskasten
+(GAK). Dieser   dient   auch   zur    Trennung   der   gesamten   Anlage   vom
+Netz. \"Ublicherweise  werden  GAK  und   Wechselrichter  am  selben  Standort
+platziert.
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage
-\section{Abgeschattete Solarzellen}
+\section{Leistungseinbr\"uche}
 \label{sec:shadedCells}
 % ---------------------------------------------------------------------------- %
 
@@ -82,6 +177,69 @@ integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
     }
     \label{fig:ivcurve:modules}
 \end{figure}
+
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Unser System}
+\label{sec:ourSystem}
+% ---------------------------------------------------------------------------- %
+
+Unser   System  bietet   neben   einer   benutzerfreundlichen  Bedienung   und
+Inbetriebnahme,  so wie  einer  einfachen Integration  in bestehende  Anlagen,
+ebenfalls  eine  kosteng\"unstige  und energieeffiziente  L\"osung  f\"ur  die
+\"Uberwachung von Photovoltaikanlagen. Das System setzt sich zusammen aus zwei
+Hauptkomponenten, dem Master-Ger\"at und den jeweiligen Sensoren.
+
+Die Installation  des Master-Ger\"ates erfolgt im  zugeh\"origen Schaltschrank
+des  Wechselrichters. Das  schlichte  Hutschienengeh\"ause  erm\"oglicht  eine
+einfache   Installation   in   bestehende  oder   neue   Schaltschr\"anke. Die
+Energieversorgung,  wie  auch  die  Ankopplung  an  die  DC-Leitungen  erfolgt
+intern   des   Schaltschrankes   und  wird   von   einem   Elektroinstallateur
+ausgef\"uhrt. Neben dem  Klemmenanschluss f\"ur die Energieversorgung  und den
+zwei Relaisausg\"angen  f\"ur externe Alarmger\"ate, sieht  das Master-Ger\"at
+die  Ankopplung  der  DC-Leitungen  von  bis  zu  drei  Modulstrings  vor. Ein
+internes 3.5“ Touch-Display erm\"oglicht eine einfache Inbetriebnahme und eine
+benutzerfreundliche  Bedienung des  Systems. Alle  Messresultate der  Sensoren
+werden  vom Master-Ger\"at  ausgewertet  und dem  Kunden  in einer  grafischen
+Benutzeroberfl\"ache  dargestellt. Tritt ein  Fehler an  der Anlage  auf, wird
+eine entsprechende Meldung auf dem Display angezeigt, die beiden Relais werden
+bet\"atigt  und  eine  Nachricht  mittels  SMS  wird  versendet. Dadurch  wird
+sichergestellt, dass der Kunde m\"oglichst schnell \"uber defekte PV-Module in
+Kenntnis gesetzt wird.
+
+Als Fehler werden folgende Ereignisse definiert:
+\begin{itemize}
+    \firmlist
+    \item
+        Eine defekte Zelle
+    \item
+        Eine dauerhaft verschmutzte Zelle
+    \item
+        Eine defekte Leitung
+\end{itemize}
+
+Kein Fehler soll in folgenden Situationen ausgel\"ost werden.
+\begin{itemize}
+    \firmlist
+    \item
+        Kurzzeitige Abschattungen (z.B. Vogel auf Zelle)
+    \item
+        Regelm\"assige Abschattungen,  die zu den  Umweltbedingungen geh\"oren
+        (z.B. Baum, der t\"aglich abschattet)
+    \item
+        Nacht-/Schlechtwetter
+    \item
+        Anlage absichtlich ausser Betrieb genommen (z.B. Unterhaltsarbeiten)
+\end{itemize}
+
+F\"ur  die  Spannungsmessung  und  die \"Ubertragung  der  Messresultate  sind
+die  Sensoren  zust\"andig. Die  Installation  der  Sensoren  erfolgt  in  den
+Anschlussdosen  auf der  R\"uckseite der  PV-Module. F\"ur jedes  PV-Modul ist
+jeweils  ein  Sensor  zu  installieren. Eine  zweiadrige  Verbindung  von  der
+Sensorplatine  zu den  Klemmen  der Anschlussdose  ist  zust\"andig f\"ur  die
+Energieversorgung des Sensors und die  Ankopplung an die DC-Leitung, f\"ur die
+\"Ubertragung der Messresultate an das Master-Ger\"at.
 
 % ---------------------------------------------------------------------------- %
 \clearpage

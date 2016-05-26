@@ -1,0 +1,874 @@
+EESchema Schematic File Version 2
+LIBS:power
+LIBS:device
+LIBS:transistors
+LIBS:conn
+LIBS:linear
+LIBS:regul
+LIBS:74xx
+LIBS:cmos4000
+LIBS:adc-dac
+LIBS:memory
+LIBS:xilinx
+LIBS:microcontrollers
+LIBS:dsp
+LIBS:microchip
+LIBS:analog_switches
+LIBS:motorola
+LIBS:texas
+LIBS:intel
+LIBS:audio
+LIBS:interface
+LIBS:digital-audio
+LIBS:philips
+LIBS:display
+LIBS:cypress
+LIBS:siliconi
+LIBS:opto
+LIBS:atmel
+LIBS:contrib
+LIBS:valves
+LIBS:pro4
+LIBS:sensor-cache
+EELAYER 25 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 2 2
+Title "powerline sensor"
+Date "10 mar 2016"
+Rev "1"
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L CD74HC4046 U?
+U 1 1 5733AFCA
+P 3225 3625
+F 0 "U?" H 2925 4325 60  0000 C CNN
+F 1 "CD74HC4046" H 3175 2725 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm" H 4025 2625 60  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf" H 4075 2725 60  0001 C CNN
+	1    3225 3625
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3775 3475
+NoConn ~ 3775 3175
+NoConn ~ 3775 3275
+NoConn ~ 3775 3375
+$Comp
+L C_Small C?
+U 1 1 5733AFCC
+P 3775 4275
+F 0 "C?" H 3785 4345 50  0000 L CNN
+F 1 "C_Small" H 3785 4195 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 3775 4275 50  0001 C CNN
+F 3 "" H 3775 4275 50  0000 C CNN
+	1    3775 4275
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3775 3925
+$Comp
+L C_Small C?
+U 1 1 5733AFCD
+P 1550 4050
+F 0 "C?" H 1560 4120 50  0000 L CNN
+F 1 "C_Small" H 1560 3970 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 1550 4050 50  0001 C CNN
+F 3 "" H 1550 4050 50  0000 C CNN
+	1    1550 4050
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFCE
+P 1350 3875
+F 0 "R?" V 1425 3800 50  0000 L CNN
+F 1 "10k" V 1275 3800 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 1350 3875 50  0001 C CNN
+F 3 "" H 1350 3875 50  0000 C CNN
+	1    1350 3875
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFCF
+P 2475 4025
+F 0 "R?" V 2550 3950 50  0000 L CNN
+F 1 "R_Small" V 2400 3950 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2475 4025 50  0001 C CNN
+F 3 "" H 2475 4025 50  0000 C CNN
+	1    2475 4025
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD0
+P 2475 4225
+F 0 "R?" V 2550 4150 50  0000 L CNN
+F 1 "R_Small" V 2400 4150 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2475 4225 50  0001 C CNN
+F 3 "" H 2475 4225 50  0000 C CNN
+	1    2475 4225
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD1
+P 2575 3775
+F 0 "R?" H 2625 3725 50  0000 L CNN
+F 1 "10k" H 2625 3800 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2575 3775 50  0001 C CNN
+F 3 "" H 2575 3775 50  0000 C CNN
+	1    2575 3775
+	0    -1   -1   0   
+$EndComp
+$Comp
+L +3V3 #PWR?
+U 1 1 5733AFD2
+P 2550 3000
+F 0 "#PWR?" H 2550 2850 50  0001 C CNN
+F 1 "+3V3" H 2550 3140 50  0000 C CNN
+F 2 "" H 2550 3000 50  0000 C CNN
+F 3 "" H 2550 3000 50  0000 C CNN
+	1    2550 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD3
+P 5600 7000
+F 0 "R?" H 5630 7020 50  0000 L CNN
+F 1 "50k" H 5630 6960 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 5600 7000 50  0001 C CNN
+F 3 "" H 5600 7000 50  0000 C CNN
+	1    5600 7000
+	-1   0    0    1   
+$EndComp
+$Comp
+L R_Small JP3.?
+U 1 1 5733AFD4
+P 5375 5600
+F 0 "JP3.?" H 5125 5650 50  0000 L CNN
+F 1 "R_Small" H 5025 5575 50  0001 L CNN
+F 2 "Resistors_SMD:R_0603" H 5375 5600 50  0001 C CNN
+F 3 "" H 5375 5600 50  0000 C CNN
+	1    5375 5600
+	-1   0    0    1   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD5
+P 3350 6425
+F 0 "R?" H 3380 6445 50  0000 L CNN
+F 1 "10k" H 3380 6385 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 3350 6425 50  0001 C CNN
+F 3 "" H 3350 6425 50  0000 C CNN
+	1    3350 6425
+	0    -1   -1   0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD6
+P 3700 6675
+F 0 "R?" V 3775 6600 50  0000 L CNN
+F 1 "R_Small" V 3625 6600 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 3700 6675 50  0001 C CNN
+F 3 "" H 3700 6675 50  0000 C CNN
+	1    3700 6675
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD7
+P 3700 6875
+F 0 "R?" V 3775 6800 50  0000 L CNN
+F 1 "R_Small" V 3625 6800 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 3700 6875 50  0001 C CNN
+F 3 "" H 3700 6875 50  0000 C CNN
+	1    3700 6875
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733AFD8
+P 5000 6925
+F 0 "C?" H 5025 6850 50  0000 L CNN
+F 1 "C_Small" H 5025 7000 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 5000 6925 50  0001 C CNN
+F 3 "" H 5000 6925 50  0000 C CNN
+	1    5000 6925
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733AFD9
+P 2600 6525
+F 0 "R?" V 2525 6375 50  0000 L CNN
+F 1 "R_Small" V 2675 6300 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2600 6525 50  0001 C CNN
+F 3 "" H 2600 6525 50  0000 C CNN
+	1    2600 6525
+	0    -1   -1   0   
+$EndComp
+Text Label 2500 6525 2    60   ~ 0
+VCOin
+Text Label 5375 5350 2    60   ~ 0
+VCOin
+Text Label 5775 6425 2    60   ~ 0
+JP2
+Text Label 3900 6025 2    60   ~ 0
+JP2
+$Comp
+L R_Small JP3.?
+U 1 1 5733AFDA
+P 5750 5600
+F 0 "JP3.?" H 5800 5550 50  0000 L CNN
+F 1 "R_Small" H 5800 5625 50  0001 L CNN
+F 2 "Resistors_SMD:R_0603" H 5750 5600 50  0001 C CNN
+F 3 "" H 5750 5600 50  0000 C CNN
+	1    5750 5600
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small JP3.?
+U 1 1 5733AFDB
+P 6125 5600
+F 0 "JP3.?" H 6175 5550 50  0000 L CNN
+F 1 "R_Small" H 6175 5625 50  0001 L CNN
+F 2 "Resistors_SMD:R_0603" H 6125 5600 50  0001 C CNN
+F 3 "" H 6125 5600 50  0000 C CNN
+	1    6125 5600
+	1    0    0    -1  
+$EndComp
+NoConn ~ 5000 6125
+$Comp
+L C_Small C?
+U 1 1 5733AFDC
+P 2800 6775
+F 0 "C?" H 2825 6700 50  0000 L CNN
+F 1 "C_Small" H 2825 6850 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2800 6775 50  0001 C CNN
+F 3 "" H 2800 6775 50  0000 C CNN
+	1    2800 6775
+	1    0    0    -1  
+$EndComp
+Text Notes 4775 4750 0    60   ~ 0
+Transmitter
+Text Notes 6550 7775 0    60   ~ 0
+Reciever
+Text Label 950  3875 0    60   ~ 0
+TX1_in
+Text Label 1150 6150 0    60   ~ 0
+coupling
+Text Label 3775 3775 0    60   ~ 0
+coupling
+$Comp
+L POT RV?
+U 1 1 5733AFF9
+P 2025 4475
+F 0 "RV?" H 2025 4375 50  0000 C CNN
+F 1 "POT" H 2025 4475 50  0000 C CNN
+F 2 "pro4:EVM-1USX30B14" H 2025 4475 50  0001 C CNN
+F 3 "" H 2025 4475 50  0000 C CNN
+	1    2025 4475
+	0    -1   -1   0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733AFFA
+P 1875 4475
+F 0 "#PWR?" H 1875 4225 50  0001 C CNN
+F 1 "GND" H 1875 4325 50  0000 C CNN
+F 2 "" H 1875 4475 50  0000 C CNN
+F 3 "" H 1875 4475 50  0000 C CNN
+	1    1875 4475
+	1    0    0    -1  
+$EndComp
+NoConn ~ 2025 4725
+$Comp
+L POT RV?
+U 1 1 5733AFFB
+P 3200 7125
+F 0 "RV?" H 3200 7025 50  0000 C CNN
+F 1 "POT" H 3200 7125 50  0000 C CNN
+F 2 "pro4:EVM-1USX30B14" H 3200 7125 50  0001 C CNN
+F 3 "" H 3200 7125 50  0000 C CNN
+	1    3200 7125
+	0    -1   1    0   
+$EndComp
+Text Label 5450 6575 0    60   ~ 0
+RX1_out
+Text Notes 4650 2375 0    60   ~ 0
+Interface
+$Comp
+L OPA376AIDCK U?
+U 1 1 5733B001
+P 2475 5625
+F 0 "U?" H 2475 5825 50  0000 C CNN
+F 1 "OPA376AIDCK" H 2675 5425 50  0001 C CNN
+F 2 "TO_SOT_Packages_SMD:SC-70-6" H 2425 5325 50  0001 L CNN
+F 3 "" H 2525 5825 50  0000 C CNN
+	1    2475 5625
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B002
+P 2200 5150
+F 0 "C?" V 2325 5125 50  0000 L CNN
+F 1 "0.1u" V 2100 5050 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2200 5150 50  0001 C CNN
+F 3 "" H 2200 5150 50  0000 C CNN
+	1    2200 5150
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B003
+P 2550 5150
+F 0 "C?" V 2675 5125 50  0000 L CNN
+F 1 "1u" V 2450 5100 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2550 5150 50  0001 C CNN
+F 3 "" H 2550 5150 50  0000 C CNN
+	1    2550 5150
+	0    1    1    0   
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B004
+P 1450 5525
+F 0 "C?" V 1400 5550 50  0000 L CNN
+F 1 "C_Small" V 1500 5200 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 1450 5525 50  0001 C CNN
+F 3 "" H 1450 5525 50  0000 C CNN
+	1    1450 5525
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B005
+P 2100 5275
+F 0 "#PWR?" H 2100 5025 50  0001 C CNN
+F 1 "GND" H 2100 5125 50  0000 C CNN
+F 2 "" H 2100 5275 50  0000 C CNN
+F 3 "" H 2100 5275 50  0000 C CNN
+	1    2100 5275
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B006
+P 2650 5275
+F 0 "#PWR?" H 2650 5025 50  0001 C CNN
+F 1 "GND" H 2650 5125 50  0000 C CNN
+F 2 "" H 2650 5275 50  0000 C CNN
+F 3 "" H 2650 5275 50  0000 C CNN
+	1    2650 5275
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733B007
+P 1675 5225
+F 0 "R?" H 1550 5250 50  0000 L CNN
+F 1 "100k" H 1450 5175 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 1675 5225 50  0001 C CNN
+F 3 "" H 1675 5225 50  0000 C CNN
+	1    1675 5225
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733B008
+P 1675 5825
+F 0 "R?" H 1550 5850 50  0000 L CNN
+F 1 "100k" H 1450 5775 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 1675 5825 50  0001 C CNN
+F 3 "" H 1675 5825 50  0000 C CNN
+	1    1675 5825
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B009
+P 3225 5625
+F 0 "C?" V 3175 5675 50  0000 L CNN
+F 1 "C_Small" V 3175 5300 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 3225 5625 50  0001 C CNN
+F 3 "" H 3225 5625 50  0000 C CNN
+	1    3225 5625
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733B00A
+P 2750 6125
+F 0 "R?" V 2825 6050 50  0000 L CNN
+F 1 "R_Small" V 2675 6050 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2750 6125 50  0001 C CNN
+F 3 "" H 2750 6125 50  0000 C CNN
+	1    2750 6125
+	0    1    1    0   
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733B00B
+P 2000 6250
+F 0 "R?" H 2030 6270 50  0000 L CNN
+F 1 "R_Small" H 2030 6210 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 2000 6250 50  0001 C CNN
+F 3 "" H 2000 6250 50  0000 C CNN
+	1    2000 6250
+	-1   0    0    1   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B00C
+P 1675 5925
+F 0 "#PWR?" H 1675 5675 50  0001 C CNN
+F 1 "GND" H 1675 5775 50  0000 C CNN
+F 2 "" H 1675 5925 50  0000 C CNN
+F 3 "" H 1675 5925 50  0000 C CNN
+	1    1675 5925
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3V3 #PWR?
+U 1 1 5733B00D
+P 2375 5000
+F 0 "#PWR?" H 2375 4850 50  0001 C CNN
+F 1 "+3V3" H 2375 5140 50  0000 C CNN
+F 2 "" H 2375 5000 50  0000 C CNN
+F 3 "" H 2375 5000 50  0000 C CNN
+	1    2375 5000
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B00E
+P 2375 5925
+F 0 "#PWR?" H 2375 5675 50  0001 C CNN
+F 1 "GND" H 2375 5775 50  0000 C CNN
+F 2 "" H 2375 5925 50  0000 C CNN
+F 3 "" H 2375 5925 50  0000 C CNN
+	1    2375 5925
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B00F
+P 2000 6750
+F 0 "#PWR?" H 2000 6500 50  0001 C CNN
+F 1 "GND" H 2000 6600 50  0000 C CNN
+F 2 "" H 2000 6750 50  0000 C CNN
+F 3 "" H 2000 6750 50  0000 C CNN
+	1    2000 6750
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B010
+P 2000 6550
+F 0 "C?" H 2010 6620 50  0000 L CNN
+F 1 "C_Small" H 2010 6470 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2000 6550 50  0001 C CNN
+F 3 "" H 2000 6550 50  0000 C CNN
+	1    2000 6550
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B011
+P 1050 5525
+F 0 "#PWR?" H 1050 5275 50  0001 C CNN
+F 1 "GND" H 1050 5375 50  0000 C CNN
+F 2 "" H 1050 5525 50  0000 C CNN
+F 3 "" H 1050 5525 50  0000 C CNN
+	1    1050 5525
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B016
+P 5600 7325
+F 0 "#PWR?" H 5600 7075 50  0001 C CNN
+F 1 "GND" H 5600 7175 50  0000 C CNN
+F 2 "" H 5600 7325 50  0000 C CNN
+F 3 "" H 5600 7325 50  0000 C CNN
+	1    5600 7325
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B017
+P 2800 7125
+F 0 "#PWR?" H 2800 6875 50  0001 C CNN
+F 1 "GND" H 2800 6975 50  0000 C CNN
+F 2 "" H 2800 7125 50  0000 C CNN
+F 3 "" H 2800 7125 50  0000 C CNN
+	1    2800 7125
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B018
+P 1550 4150
+F 0 "#PWR?" H 1550 3900 50  0001 C CNN
+F 1 "GND" H 1550 4000 50  0000 C CNN
+F 2 "" H 1550 4150 50  0000 C CNN
+F 3 "" H 1550 4150 50  0000 C CNN
+	1    1550 4150
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B019
+P 2025 4025
+F 0 "#PWR?" H 2025 3775 50  0001 C CNN
+F 1 "GND" H 2025 3875 50  0000 C CNN
+F 2 "" H 2025 4025 50  0000 C CNN
+F 3 "" H 2025 4025 50  0000 C CNN
+	1    2025 4025
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B01E
+P 2675 3475
+F 0 "#PWR?" H 2675 3225 50  0001 C CNN
+F 1 "GND" H 2675 3325 50  0000 C CNN
+F 2 "" H 2675 3475 50  0000 C CNN
+F 3 "" H 2675 3475 50  0000 C CNN
+	1    2675 3475
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B022
+P 2550 3175
+F 0 "C?" H 2560 3245 50  0000 L CNN
+F 1 "100n" H 2560 3095 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 2550 3175 60  0001 C CNN
+F 3 "" H 2550 3175 60  0000 C CNN
+	1    2550 3175
+	1    0    0    -1  
+$EndComp
+$Comp
+L C_Small C?
+U 1 1 5733B023
+P 3700 5725
+F 0 "C?" H 3710 5795 50  0000 L CNN
+F 1 "100n" H 3710 5645 50  0000 L CNN
+F 2 "Capacitors_SMD:C_0603" H 3700 5725 60  0001 C CNN
+F 3 "" H 3700 5725 60  0000 C CNN
+	1    3700 5725
+	0    1    1    0   
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B024
+P 3600 5725
+F 0 "#PWR?" H 3600 5475 50  0001 C CNN
+F 1 "GND" H 3600 5575 50  0000 C CNN
+F 2 "" H 3600 5725 60  0000 C CNN
+F 3 "" H 3600 5725 60  0000 C CNN
+	1    3600 5725
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B028
+P 2275 4375
+F 0 "#PWR?" H 2275 4125 50  0001 C CNN
+F 1 "GND" H 2275 4225 50  0000 C CNN
+F 2 "" H 2275 4375 50  0000 C CNN
+F 3 "" H 2275 4375 50  0000 C CNN
+	1    2275 4375
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small R?
+U 1 1 5733B029
+P 1550 3575
+F 0 "R?" H 1580 3595 50  0000 L CNN
+F 1 "100k" H 1580 3535 50  0000 L CNN
+F 2 "Resistors_SMD:R_0603" H 1550 3575 50  0001 C CNN
+F 3 "" H 1550 3575 50  0000 C CNN
+	1    1550 3575
+	1    0    0    -1  
+$EndComp
+$Comp
+L +3.3V #PWR?
+U 1 1 5733B02A
+P 1550 3475
+F 0 "#PWR?" H 1550 3325 50  0001 C CNN
+F 1 "+3.3V" H 1550 3615 50  0000 C CNN
+F 2 "" H 1550 3475 50  0000 C CNN
+F 3 "" H 1550 3475 50  0000 C CNN
+	1    1550 3475
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B02B
+P 3525 7025
+F 0 "#PWR?" H 3525 6775 50  0001 C CNN
+F 1 "GND" H 3525 6875 50  0000 C CNN
+F 2 "" H 3525 7025 50  0000 C CNN
+F 3 "" H 3525 7025 50  0000 C CNN
+	1    3525 7025
+	1    0    0    -1  
+$EndComp
+$Comp
+L GND #PWR?
+U 1 1 5733B02C
+P 3250 6700
+F 0 "#PWR?" H 3250 6450 50  0001 C CNN
+F 1 "GND" H 3250 6550 50  0000 C CNN
+F 2 "" H 3250 6700 50  0000 C CNN
+F 3 "" H 3250 6700 50  0000 C CNN
+	1    3250 6700
+	1    0    0    -1  
+$EndComp
+NoConn ~ 3200 7375
+$Comp
+L +3V3 #PWR?
+U 1 1 5733B02D
+P 3850 5650
+F 0 "#PWR?" H 3850 5500 50  0001 C CNN
+F 1 "+3V3" H 3850 5790 50  0000 C CNN
+F 2 "" H 3850 5650 50  0000 C CNN
+F 3 "" H 3850 5650 50  0000 C CNN
+	1    3850 5650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	2775 5625 3125 5625
+Connection ~ 1675 5525
+Wire Wire Line
+	1675 5325 1675 5725
+Wire Wire Line
+	2650 5150 2650 5275
+Connection ~ 2375 5150
+Wire Wire Line
+	2300 5150 2450 5150
+Wire Wire Line
+	2100 5150 2100 5275
+Wire Wire Line
+	1350 5525 1050 5525
+Wire Wire Line
+	3375 5625 3375 6125
+Wire Wire Line
+	3375 6125 3900 6125
+Wire Wire Line
+	3775 3775 4125 3775
+Wire Wire Line
+	1450 3875 2675 3875
+Wire Wire Line
+	2025 4025 2375 4025
+Wire Wire Line
+	2025 4225 2375 4225
+Wire Wire Line
+	2275 4375 2675 4375
+Wire Wire Line
+	1550 3675 1550 3950
+Connection ~ 1550 3875
+Wire Wire Line
+	950  3875 1250 3875
+Wire Wire Line
+	2675 4025 2575 4025
+Wire Wire Line
+	2575 4225 2675 4225
+Wire Wire Line
+	5600 7100 5600 7325
+Wire Wire Line
+	3900 6425 3450 6425
+Wire Wire Line
+	5000 6575 5750 6575
+Wire Wire Line
+	5600 6575 5600 6900
+Connection ~ 5600 6575
+Wire Wire Line
+	3900 6675 3800 6675
+Wire Wire Line
+	3800 6875 3900 6875
+Wire Wire Line
+	3250 6675 3600 6675
+Wire Wire Line
+	3200 6875 3600 6875
+Wire Wire Line
+	5200 6425 5775 6425
+Wire Wire Line
+	5375 5350 5375 5500
+Wire Wire Line
+	5375 5700 5375 5825
+Wire Wire Line
+	5375 5825 5000 5825
+Wire Wire Line
+	5750 5700 5750 6025
+Wire Wire Line
+	5750 6025 5000 6025
+Wire Wire Line
+	6125 5700 6125 5925
+Wire Wire Line
+	6125 5925 5000 5925
+Wire Wire Line
+	2700 6525 3900 6525
+Wire Wire Line
+	5375 5425 6125 5425
+Wire Wire Line
+	6125 5425 6125 5500
+Connection ~ 5375 5425
+Wire Wire Line
+	5750 5500 5750 5425
+Connection ~ 5750 5425
+Wire Wire Line
+	2800 6675 2800 6525
+Connection ~ 2800 6525
+Wire Wire Line
+	3375 5625 3325 5625
+Wire Wire Line
+	2850 6125 3050 6125
+Wire Wire Line
+	3050 6125 3050 5625
+Connection ~ 3050 5625
+Wire Wire Line
+	2650 6125 2000 6125
+Wire Wire Line
+	2000 5725 2000 6150
+Wire Wire Line
+	2175 5725 2000 5725
+Connection ~ 2000 6125
+Wire Wire Line
+	1850 6150 1150 6150
+Wire Wire Line
+	1550 5525 2175 5525
+Connection ~ 1850 5525
+Wire Wire Line
+	1850 5525 1850 6150
+Wire Wire Line
+	2000 6350 2000 6450
+Wire Wire Line
+	2000 6650 2000 6750
+Wire Wire Line
+	2375 5000 2375 5325
+Wire Wire Line
+	1675 5000 1675 5125
+Connection ~ 2375 5000
+Wire Wire Line
+	2550 3000 2550 3075
+Wire Wire Line
+	2550 3075 2675 3075
+Wire Wire Line
+	2550 3275 2550 3475
+Wire Wire Line
+	2550 3475 2675 3475
+Connection ~ 2550 3075
+Connection ~ 2675 3475
+Wire Wire Line
+	2675 3475 2675 3375
+Wire Wire Line
+	2475 3775 2025 3775
+Wire Wire Line
+	2025 3775 2025 4025
+Connection ~ 2025 4025
+Wire Wire Line
+	3800 5725 3900 5725
+Wire Wire Line
+	2375 5000 1675 5000
+Wire Wire Line
+	3900 7025 3525 7025
+Wire Wire Line
+	3050 7125 2800 7125
+Wire Wire Line
+	2800 7125 2800 6875
+Wire Wire Line
+	3250 6425 3250 6700
+Connection ~ 3250 6675
+Wire Wire Line
+	3850 5650 3850 5725
+Connection ~ 3850 5725
+Connection ~ 2800 7125
+$Comp
+L CD74HC4046 U?
+U 1 1 5733B02E
+P 4450 6275
+F 0 "U?" H 4150 6975 60  0000 C CNN
+F 1 "CD74HC4046" H 4400 5375 60  0000 C CNN
+F 2 "Housings_SOIC:SOIC-16_7.5x10.3mm_Pitch1.27mm" H 5250 5275 60  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/cd74hc4046a.pdf" H 5300 5375 60  0001 C CNN
+	1    4450 6275
+	1    0    0    -1  
+$EndComp
+$Comp
+L R_Small JP3.?
+U 1 1 5733B02F
+P 5100 6425
+F 0 "JP3.?" H 4850 6475 50  0000 L CNN
+F 1 "R_Small" H 4750 6400 50  0001 L CNN
+F 2 "Resistors_SMD:R_0603" H 5100 6425 50  0001 C CNN
+F 3 "" H 5100 6425 50  0000 C CNN
+	1    5100 6425
+	0    -1   -1   0   
+$EndComp
+Text HLabel 3400 800  2    60   Input ~ 0
+coupling
+Text HLabel 3450 1500 2    60   Input ~ 0
+GND
+Text HLabel 3450 1350 2    60   Input ~ 0
++3.3V
+Text HLabel 3400 1000 2    60   Input ~ 0
+outgoing
+Text HLabel 3400 1100 2    60   Input ~ 0
+incoming
+Wire Notes Line
+	475  4800 11225 4800
+Wire Notes Line
+	475  2475 11225 2475
+Text Label 2925 1000 0    60   ~ 0
+TX1_in
+Text Label 2925 1100 0    60   ~ 0
+RX1_out
+Text Label 2925 800  0    60   ~ 0
+coupling
+Wire Wire Line
+	2925 800  3400 800 
+Wire Wire Line
+	2925 1000 3400 1000
+Wire Wire Line
+	3400 1100 2925 1100
+$Comp
+L +3V3 #PWR?
+U 1 1 5734646A
+P 3300 1300
+F 0 "#PWR?" H 3300 1150 50  0001 C CNN
+F 1 "+3V3" H 3300 1440 50  0000 C CNN
+F 2 "" H 3300 1300 50  0000 C CNN
+F 3 "" H 3300 1300 50  0000 C CNN
+	1    3300 1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 1350 3300 1350
+Wire Wire Line
+	3300 1350 3300 1300
+$Comp
+L GND #PWR?
+U 1 1 5734653D
+P 3300 1550
+F 0 "#PWR?" H 3300 1300 50  0001 C CNN
+F 1 "GND" H 3300 1400 50  0000 C CNN
+F 2 "" H 3300 1550 50  0000 C CNN
+F 3 "" H 3300 1550 50  0000 C CNN
+	1    3300 1550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3450 1500 3300 1500
+Wire Wire Line
+	3300 1500 3300 1550
+$EndSCHEMATC

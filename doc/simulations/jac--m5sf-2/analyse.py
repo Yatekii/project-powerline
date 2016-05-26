@@ -24,7 +24,7 @@ ys -= ys.min()
 # Create x values
 xs = np.linspace(0,0.64,ys.shape[0])
 #print(xs)
-print(ys)
+#print(ys)
 
 # Create plot of both
 # read and filtered image and

@@ -1,0 +1,8 @@
+*.aux
+*.log
+*.toc
+bibliography/ieee/
+resources
+main.pdf
+copy-to-dropbox
+resources

@@ -1,0 +1,155 @@
+% **************************************************************************** %
+\chapter{\"Uberblick}
+\label{chap:uberblick}
+% **************************************************************************** %
+Dieses Kapitel  beschreibt zuerst die grobe  Idee unsers L\"osungskonzepts. Es
+wird  dargelegt, wie  unser System  in  eine Solaranlage  (bestehend oder  neu
+aufgebaut) integriert wird, wie das System mit seiner Umgebung interagiert und
+wie es zu bedienen ist.
+
+
+% ---------------------------------------------------------------------------- %
+\section{Aufbau einer Solaranlage}
+\label{sec:solaranlage:aufbau}
+% ---------------------------------------------------------------------------- %
+
+Grunds\"atzlicher Aufbau einer Solaranlage: Zelle -> Modul -> Strings -> Anlage
+
+
+% ---------------------------------------------------------------------------- %
+\section{Einbettung in Umwelt}
+\label{sec:einbettung}
+% ---------------------------------------------------------------------------- %
+
+Hier  wird  beschrieben,  wie  unser System  physisch  mit  einer  Solaranlage
+integriert wird und welche Schnittstellen es zu welchem Zweck zur Anlage hat.
+\todo{kein eigener Abschnitt mehr n\"otig}
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Abgeschattete Solarzellen}
+\label{sec:shadedCells}
+% ---------------------------------------------------------------------------- %
+
+\todo{Referenzen auf Simu-Circuits}
+
+\input{data/iv-curves/calculations.tex}
+
+\begin{figure}[h!tb]
+    \input{images/iv-curves/module.tex}
+    \caption{%
+        Oberes Diagramm: Simulierte  Strom-Spannungs-Kurve eines Moduls  aus 72
+        Zellen (in Serie geschaltet) mit einer degradierten Zelle\protect\\
+        Unteres Diagramm: Die zum oberen Diagramm geh\"orenden Leistungskurven.
+        Gut erkennbar  ist, dass  selbst bei nur  einer degradierten  Zelle die
+        verf\"ugbare Leistung des gesamten Moduls stark abnimmt.\protect\\
+        \textbf{\textcolor{blue}{blau}}: Alle   Zellen  geben   volle  Leistung
+        ab.\protect\\
+        \textbf{\textcolor{teal}{blaugr\"un}}: Eine Zelle  von 72 gibt  nur den
+        halben Strom ab.\protect\\
+        \textbf{\textcolor{magenta}{magenta}}: Eine  Zelle  gibt nur  10\%  des
+        vollen Stromes ab.\protect\\
+        Die zuge\"orige \code{LTspice}-Schaltung basiert  auf dem Modell eines
+        Moduls aus Abbildung \ref{fig:ltspice:module:cellBased:72x1} auf Seite
+        \pageref{fig:ltspice:module:cellBased:72x1} im Anhang. Dabei wurde die
+        Stromquelle  in  einer  Zelle  variiert  (100\%,  50\%  bzw. 10\%  der
+        restlichen Quellen).%
+    }
+    \label{fig:ivcurve:cells}
+\end{figure}
+\begin{figure}[h!tb]
+    \input{images/iv-curves/array.tex}
+    \caption{%
+        Oberes   Diagramm: Simulierte   Strom-Spannungs-Kurve  eines   Strangs
+        von   Modulen   mit   einem  degradierten   Modul.\protect\\   Unteres
+        Diagramm: Die  zum   oberen  Diagramm   geh\"orenden  Leistungskurven.
+        Selbst   ein   einzelnes   degradiertes   Modul   f\"uhrt   zu   einem
+        bedeutenden Leistungseinbruch des  gesamten Modulstrangs.  Verkn\"upft
+        man   diese   Erkenntnis   mit   den   Informationen   aus   Abbildung
+        \ref{fig:ivcurve:cells},  l\"asst sich  folgern,  dass lediglich  eine
+        einzelne degradierte  Zelle von mehreren hundert  in einem Modulstrang
+        vorhandenen Zellen  die gesamte  auf dem Strang  verf\"ugbare Leistung
+        massiv senken kann.\protect\\
+        \textbf{\textcolor{blue}{blau}}: Alle   Module   geben  vollen   Strom
+        ab.\protect\\
+        \textbf{\textcolor{teal}{blaugr\"un}}: Ein Modul von  zwanzig gibt nur
+        den halben Strom ab.\protect\\
+        \textbf{\textcolor{magenta}{magenta}}: Ein  Modul  gibt nur  10\%  des
+        vollen Stromes ab.\protect\\
+        Die       zuge\"orige       \code{LTspice}-Schaltung      ist       in
+        Abbildung    \ref{fig:ltspice:vicurvesimulator:modules}   auf    Seite
+        \pageref{fig:ltspice:vicurvesimulator:modules} im Anhang zu finden.%
+    }
+    \label{fig:ivcurve:modules}
+\end{figure}
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Kommunikation \"uber DC-Leitung}
+\label{sec:commDCLine}
+% ---------------------------------------------------------------------------- %
+
+Die Kommunikation zwischen  \Sensor und \Master \"uber die  DC-Leitung ist das
+Herzst\"uck des Systems und das zu l\"osende Kernproblem des Projekts. Es sind
+im Rahmen  des Projekts  zwei grunds\"atzliche  Ans\"atze verfolgt  worden, um
+Daten  zwischen  \Sensor und  \Master  \"uber  die  DC-Leitung zu  senden  und
+empfangen.
+
+\textbf{Frequency-shift keying}: Bei  der FSK (Frequenzumtastung  auf Deutsch)
+wird  dem in  der Leitung  fliessenden Gleichstrom  ein (verh\"altnism\"assig)
+kleines  Signal aufmoduliert,  welches  die  zu \"ubertragenden  Informationen
+enth\"alt. Die  Frequenz   des  aufmodulierten   Anteils  wird   in  diskreten
+Schritten variiert  und jeweils  einem Symbol zugeordnet. Bei  einer bin\"aren
+Umsetzung  werden  zwei  Frequenzen  benutzt; eine  f\"ur  \code{0}  und  eine
+f\"ur  \code{1}.   Das  Verfahren ist  schematisch  in  \fref{fig:fsk:concept}
+dargestellt.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/fsk.pgf}
+    \caption{%
+        \emph{Frequency-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
+        zugeh\"orige Verhalten des  modulierten Signals.%
+    }
+    \label{fig:fsk:concept}
+\end{figure}
+
+
+\textbf{Amplitude-shift  keying}: Die  ASK (Amplitudenumtastung  auf  Deutsch)
+benutzt statt verschiedenen Frequenzen unterschiedliche Amplituden, um Symbole
+zu  codieren.  \fref{fig:ask:concept}  stellt  das  grundlegende  Konzept  des
+Verfahrens schematisch dar.
+
+Unsere  Umsetzung unterscheidet  sich  von  einer <<normalen>> \todo{<<text>> oder ``text'' ?}  Implementation
+(mittlere   Graphik  in   \fref{fig:ask:concept})  dadurch,   dass  nicht   im
+eigentlichen Sinne  ein zus\"atzliches  Signal auf den  DC-Anteil aufmoduliert
+wird. Stattdessen   wird  ein   Solarmodul  mit   einer  bestimmten   Frequenz
+kurzgeschlossen,  was die  Spannung auf  einem Strang  von Modulen  kurzzeitig
+in  Intervallen  einbrechen  l\"asst. Diese  Spannungseinbr\"uche  werden  zur
+Datencodierung  benutzt   (unterster  Plot   in  \fref{fig:ask:concept}). Dies
+entspricht  im  Prinzip  einer  ASK  mit Amplituden  null  und  dem  Wert  des
+Spannungseinbruchs mit einem Offset des halben Spannungseinbruchs.
+
+\todo{Zahlen in Ticks auf Achsen weglassen?}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/python/ask.pgf}
+    \caption{%
+        \emph{Amplitude-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+        digitalen  Daten als  \code{1} und  \code{0} abgebildet. Die  mittlere
+        Abbildung stellt eine typische Umsetzung des Konzepts mit harmonischer
+        Tr\"agerschwingung und zwei verschiedenen Amplituden dar.\protect\\
+        Das  unterste   Signal  ist  eine  vereinfachte   Darstellung  unserer
+        Variante.  Die  Gleichspannung an  der Leitung  ist etwas  weniger als
+        \SI{1}{\kilo\volt}; beim Kurzschluss eines Moduls erfolgt eine Abfolge
+        von Spannungseinbr\"uchen auf der Leitung, welche die Daten kodiert.%
+    }
+    \label{fig:ask:concept}
+\end{figure}
+
+
+Sowohl  FSK wie  auch  unsere  Variante der  ASK  haben  ihre jeweiligen  Vor-
+und  Nachteile,  auf  welche im  Kapitel  \emph{\titleref{chap:simu}}  genauer
+eingegangen wird.

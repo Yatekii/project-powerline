@@ -42,3 +42,9 @@
 
 # Linker
 *.map
+
+# Python specific
+*.pyc
+
+# Sqlite databases
+*.db

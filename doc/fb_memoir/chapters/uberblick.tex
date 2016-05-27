@@ -2,6 +2,7 @@
 \chapter{\"Uberblick}
 \label{chap:uberblick}
 % **************************************************************************** %
+
 Dieses Kapitel  beschreibt zuerst die grobe  Idee unsers L\"osungskonzepts. Es
 wird  dargelegt, wie  unser System  in  eine Solaranlage  (bestehend oder  neu
 aufgebaut) integriert wird, wie das System mit seiner Umgebung interagiert und
@@ -13,9 +14,9 @@ wie es zu bedienen ist.
 \label{sec:solaranlage:aufbau}
 % ---------------------------------------------------------------------------- %
 
-\begin{wrapfigure}{r}{0.4\textwidth}
+\begin{wrapfigure}{r}{0.45\textwidth}
     \centering
-    \includegraphics[width=0.35\textwidth]{images/solar-facility/cell--400px.png}
+    \includegraphics[width=0.4\textwidth]{images/solar-facility/cell--400px.png}
     \caption{Solarzelle, Frontalansicht \cite{ref:pvcell:wikipedia}}
     \label{fig:pvcell:front}
 \end{wrapfigure}
@@ -37,9 +38,9 @@ grosse   Siliziumzelle  eine   Stromst\"arke   von   bis  zu   \SI{2}{\ampere}
 Frontansicht einer PV-Zelle.
 
 \clearpage
-\begin{wrapfigure}{l}{0.3\textwidth}
+\begin{wrapfigure}{l}{0.45\textwidth}
     \centering
-    \includegraphics[width=0.25\textwidth]{images/solar-facility/pvmodule.jpeg}
+    \includegraphics[width=0.4\textwidth]{images/solar-facility/pvmodule.jpeg}
     \caption{
         Solarmodul,  zusammengesetzt  aus  72 Solarzellen  gem\"ass  Abbildung
         \ref{fig:pvcell:front}%
@@ -48,30 +49,51 @@ Frontansicht einer PV-Zelle.
 \end{wrapfigure}
 
 
-Um die  Ausgangsspannung bzw. den Ausgangsstrom  zu erh\"ohen und um  diese in
-der  Praxis  besser  einsetzen  zu k\"onnen,  werden  mehrere  solcher  Zellen
-miteinander zu  einem PV-Modul  verschaltet. Die Parallelschaltung  der Zellen
-erzeugt  eine Addition  des Ausgangsstromes,  die Serieschaltung  erzeugt eine
-Addition  der  Ausgangsspannung. In  der   Praxis  \"ublich  sind  Module  mit
-36,  72  oder  144  Zellen   und  einer  Ausgangsspannung  von  \SI{12}{\volt}
-bis  \SI{60}{\volt}. In Photovoltaikanlagen  werden nur  solche ganzen  Module
-eingesetzt,   wobei  die   einzelnen   Zellen  f\"ur   eine  Reparatur   nicht
-mehr  zug\"anglich  sind. Die  elektrischen   Anschl\"usse  befinden  sich  in
-Kunststoffdosen auf der R\"uckseite der Module \cite{ref:pv:baunetz}.
+Die  in der  Praxis  \"ubliche  Baugruppe ist  nicht  die Solarzelle,  sondern
+das  Photovoltaikmodul.  Um  die Ausgangsspannung  und/oder den  Ausgangsstrom
+zu  erh\"ohen  und um  diese  in  der  Praxis  besser einsetzen  zu  k\"onnen,
+werden mehrere  Zellen in  verschiedenen Konfigurationen miteinander  zu einem
+PV-Modul  verschaltet. Das Konzept  ist schematisch  dargestellt in  Abbildung
+\ref{fig:pvmodule}, die Eckdaten einiger PV-Module  sind als Beispiele sind in
+Anhang \ref{app:commercial:modules}  ab Seite \pageref{app:commercial:modules}
+aufgef\"uhrt.
 
-%@electronic{ref:gak:gantner,
+Zur  Erh\"ohung  des Ausgangsstroms  werden  Zellen  parallel geschaltet,  zur
+Erh\"ohung  der  Ausgangsspannung werden  sie  in  Serie verbunden.   Je  nach
+gew\"unschten Spezifikationen eines Moduls werden diese Ans\"atze einzeln oder
+kombiniert angewandt.  In der Praxis \"ublich  sind Module mit 36, 72 oder 144
+Zellen und  einer Ausgangsspannung  von \SI{12}{\volt}  bis \SI{60}{\volt}. In
+Photovoltaikanlagen werden nur solche  ganzen Module eingesetzt; die einzelnen
+Zellen  sind  f\"ur  Reparaturen  nicht  mehr  zug\"anglich. Die  elektrischen
+Anschl\"usse befinden sich in kleinen  Kunststoffdosen auf der R\"uckseite der
+Module (Beispiel in Abbildung \ref{fig:pvJunctionBox}) \cite{ref:pv:baunetz}.
 
-Mehrere Module,  welche gleiche Bedingungen aufweisen,  werden \"ublicherweise
-mittels Reihenschaltung  zu einem  Modulstring verschaltet. Dadurch  wird eine
-h\"ohere Ausgangsspannung  erzeugt, was  die Umwandlung  und den  Transport in
-unsere Netzspannung erleichtert. Die  Ausgangsspannung eines Modulstrings darf
-gem\"ass Vorschrift \SI{1000}{\volt} DC  nicht \"uberschreiten. Somit darf die
-Anzahl in einem Modulstring h\"ochstens 16 Module betragen\todo{Abh\"angigkeit
-von  Modulausgangsspannung?}. Module, die  an unterschiedlichen  Dachneigungen
-montiert sind  oder die unterschiedliche  Ausrichtungen haben, sollten  nie zu
-einem Modulstring  zusammengeschaltet werden. Ein einzelnes  beschattetes oder
-nicht  einwandfrei  funktionierendes Modul  hat  zur  Folge, dass  dieses  den
-gesamten Modulstring leistungsm\"assig nach unten zieht.
+
+Mehrere  identische  Module  werden  \"ublicherweise  mittels  Reihenschaltung
+zu\hfill  einem\hfill  Modulstrang\hfill verschaltet\hfill  (vereinfacht\hfill
+dargestellt\hfill in\hfill Abbildung\hfill \ref{fig:pvarray:gak:inverter}).
+
+\begin{wrapfigure}{r}{0.35\textwidth}
+    \centering
+    \includegraphics[width=0.3\textwidth]{images/solar-facility/pvJunctionBox.jpeg}
+    \caption{
+        Anschlussbox f\"ur Solarmodul, wird  normalerweise auf der R\"uckseite
+        des Moduls montiert. \cite{ref:junctionBox}%
+    }
+    \label{fig:pvJunctionBox}
+\end{wrapfigure}
+
+\noindent  Dadurch  wird  eine  h\"ohere  Ausgangsspannung  erzeugt,  was  die
+Umwandlung  des  Gleichstroms  in  Wechselstrom  und  dessen  Einspeisung  ins
+Wechselstromnetz  erleichtert. Die  Ausgangsspannung eines  Modulstrangs  darf
+gem\"ass Vorschrift \SI{1000}{\volt} DC  nicht \"uberschreiten, was die Anzahl
+der in  einem Strang in  Serie geschalteten Module beschr\"ankt.   Module, die
+an  unterschiedlichen Dachneigungen  montiert sind  oder die  unterschiedliche
+Ausrichtungen  haben,  sollten  nie zu  einem  Modulstrang  zusammengeschaltet
+werden, da sie nicht den gleichen  Strom produzieren werden, was die Effizienz
+des Strangs stark reduziert. Ein einzelnes beschattetes oder nicht einwandfrei
+funktionierendes   Modul  beeintr\"achtigt   die   vom  gesamten   Modulstrang
+abgegebene Leistung stark (siehe auch n\"achster Abschnitt).
 
 \begin{figure}[h!t]
     \centering
@@ -87,31 +109,34 @@ gesamten Modulstring leistungsm\"assig nach unten zieht.
     \end{tikzpicture}
     \caption{%
         Modulstrang aus 16 Modulen  gem\"ass Abbildung \ref{fig:pvmodule}, GAK
-        und  Wechselrichter. Quelle Bild  GAK: \cite{ref:gak:gantner},  Quelle
-        Bild Wechselrichter: \cite{ref:inverter:sunnyboy}.%
+        und Wechselrichter. Bild des GAK  von \cite{ref:gak:gantner}, Bild des
+        Wechselrichters von \cite{ref:inverter:sunnyboy}.%
     }
     \label{fig:pvarray:gak:inverter}
 \end{figure}
 
 Die    Umwandlung    der    Gleichspannung    in    Wechselspannung    erfolgt
-mittels  Wechselrichter. Je  nach  Anwendungsbereich  werden  unterschiedliche
-Wechselrichter eingesetzt:
+mittels    Wechselrichter   (dargestellt    auf   der    rechten   Seite    in
+Abbildung    \ref{fig:pvarray:gak:inverter}). Je     nach    Anwendungsbereich
+werden  unterschiedliche  Wechselrichter  eingesetzt:\todo{Anwendungsbereiche,
+Vor-Nachteile spezifizieren}
 
-\begin{itemize}
+\begin{symbols}
     \firmlist
-    \item
-        Modulwechselrichter
-    \item
-        Stringwechselrichter
-    \item
-        Multistringwechselrichter
-    \item
-        Zentralwechselrichter
-\end{itemize}
-
-Letzterer  setzt  man haupts\"achlich  in  Grossanlagen  ein, bei  denen  alle
-Strings  die  gleiche Neigung  aufweisen  und  auch gleich  ausgerichtet  sind
-\cite{ref:pv:ratgeber}.
+    \item[\textbf{Modulwechselrichter}:]
+        Ein  Wechselrichter,  welcher  den  Strom eines  einzelnen  Moduls  in
+        Wechselstrom konvertiert.
+    \item[\textbf{Strangwechselrichter}:]
+        Konvertiert den Strom eines Modulstrangs zu Wechselstrom.
+    \item[\textbf{Multistrangwechselrichter}:]
+        Fasst   die   Gleichstr\"ome   mehrer  Modulstr\"ange   zusammen   und
+        konvertiert diese zu Wechselstrom.
+    \item[\textbf{Zentralwechselrichter}:]
+        Ein  einzelner Wechselrichter,  welcher den  Gleichstrom einer  ganzen
+        Photovoltaikanlage in Wechselstrom umwandelt. Kommt haupts\"achlich in
+        Grossanlagen zum Einsatz, bei denen alle Str\"ange die gleiche Neigung
+        aufweisen und gleich ausgerichtet sind \cite{ref:pv:ratgeber}.
+\end{symbols}
 
 Als Leitungsschutz gegen \"Uberstrom und Kurzschluss befindet sich unmittelbar
 vor  dem   Wechselrichter  im  Gleichstromnetz   ein  Generatoranschlusskasten
@@ -198,7 +223,7 @@ Energieversorgung,  wie  auch  die  Ankopplung  an  die  DC-Leitungen  erfolgt
 intern   des   Schaltschrankes   und  wird   von   einem   Elektroinstallateur
 ausgef\"uhrt. Neben dem  Klemmenanschluss f\"ur die Energieversorgung  und den
 zwei Relaisausg\"angen  f\"ur externe Alarmger\"ate, sieht  das Master-Ger\"at
-die  Ankopplung  der  DC-Leitungen  von  bis  zu  drei  Modulstrings  vor. Ein
+die  Ankopplung  der  DC-Leitungen  von  bis  zu  drei  Modulstrangs  vor. Ein
 internes 3.5“ Touch-Display erm\"oglicht eine einfache Inbetriebnahme und eine
 benutzerfreundliche  Bedienung des  Systems. Alle  Messresultate der  Sensoren
 werden  vom Master-Ger\"at  ausgewertet  und dem  Kunden  in einer  grafischen

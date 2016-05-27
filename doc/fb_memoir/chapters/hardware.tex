@@ -93,6 +93,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Speisung Sensor}
 \end{figure}
 
+\todo{R24, C1, R14, U1, C8, D1, R\_FB1, R\_FB2, C11, C12, R4, D2, DMP1CH4D2s}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Transmitter}
@@ -104,6 +105,9 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Transmitter Sensor}
 \end{figure}
 
+\todo{R1, R21, RV1, R7, R8, C10, C15}
+
+
 % ---------------------------------------------------------------------------- %
 \subsection{Microcontroller}
 \label{subsec:hw:sensor:mcu}
@@ -114,6 +118,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Microcontroller Sensor}
 \end{figure}
 
+\todo{R15, C14, Atmel Chip}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Spannungsmessung}
@@ -125,6 +130,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Spannungsmessung Sensor}
 \end{figure}
 
+\todo{R16, R17, C18}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Interface}
@@ -136,6 +142,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Spannungsmessung Sensor}
 \end{figure}
 
+\todo{C17, R18, R19, R20}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Empf\"anger}
@@ -147,6 +154,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \caption{Empf\"anger Sensor}
 \end{figure}
 
+\todo{R5, D3, C5, R3, R2, R10, C4, U2}
 
 {\begin{a3pages}
 % ---------------------------------------------------------------------------- %
@@ -268,10 +276,27 @@ zur\"uckliefert.
 
 F\"ur   Bauteile,  welche   \SI{3.3}{\volt}  Versorgungsspannung   ben\"otigen
 (GSM-Modem,  \ldots),  ist  eine   Spannungswandlung  mit  einem  Schaltregler
-implementiert  (\code{IC2} und  zugeh\"orige Komponenten,  unten in  Abbildung
-\ref{fig:sch:master:supply}).
+implementiert   (\code{IC2}   und   zugeh\"orige  Komponenten   in   Abbildung
+\ref{fig:sch:master:supply}). Der Schaltregler  ist das \SI{3.3}{\volt}-Modell
+des LM2596 von \emph{Texas Instruments}.
 
-\todo{3.3V for GSM, Schaltregler}
+Hauptverbraucher   auf   der   \SI{3.3}{\volt}-Schiene   ist   das   GSM-Modem
+(siehe     Abschnitt     \ref{subsec:hw:master:gsm}),     welches     gem\"ass
+Datenblatt~\cite{ref:sim900:1}~bis   zu    \SI{2}{\ampere}   bezieht. Es   ist
+daher  wichtig,  dass   die  Spannungsversorgung  der  \SI{3.3}{\volt}-Schiene
+gen\"ugend  Strom  liefern  kann. Der  ausgew\"ahlte  Regler  kann  bei  einer
+Versorgungsspanunung   von  \SI{5}{\volt}   und  einer   Ausgangsspannung  von
+\SI{3.3}{\volt} bis  zu \SI{3}{\ampere} liefern,  was f\"ur das Modem  und die
+restlichen Kompomenten auf  der \SI{3.3}{\volt}-Linie\todo{welche?}~ausreichen
+sollte.
+
+Die Beschaltung  des Reglers ist ausgelegt  gem\"ass Herstellerspezifikationen
+aus dem Datenblatt \cite{ref:lm2596} f\"ur unsere Konfiguration.\todo{C1, C2, D5, L1}
+$L1 = \SI{22}{\micro\henry}$, $C_2: output capacitor$
+
+$C_1$: input bypass capacitor.
+
+\todo{external power brick}
 
 
 % ---------------------------------------------------------------------------- %
@@ -286,6 +311,8 @@ implementiert  (\code{IC2} und  zugeh\"orige Komponenten,  unten in  Abbildung
     \caption{GPIO \Master}
     \label{fig:sch:master:gpio}
 \end{figure}
+
+\todo{Wahl Darlington-Array, Relay, Stromkonsum}
 
 Das  \Master   besitzt  verschiedene  Ein-  und   Ausg\"ange. Kernst\"uck  des
 GPIO-Blocks  ist  ein Darlington  Transistor  Array  (\code{IC1} in  Abbildung
@@ -324,6 +351,8 @@ der  Prototypenkonfiguration  ist   ein  Schalter  angeschlossen. Der  Stecker
     \caption{Kommunikation zu \Sensor auf \Master}
     \label{fig:sch:master:comms}
 \end{figure}
+
+\todo{Genauere Erkl\"arung fskmodule.sch in Sensor-Abschnitt, Selektion U1}
 
 Abbildung  \ref{fig:sch:master:comms}   zeigt  das   Schema  einer   der  drei
 Schaltungen,  welche  zur Kommunikation  mit  dem  Sensor benutzt  werden. Zur
@@ -384,6 +413,8 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
     \label{fig:sch:master:current}
 \end{figure}
 
+\todo{Auswahl IC4, IC5, IC6, IC3, IC7, Gr\"osse C3, C4, C5}
+
 Der  Strom jedes  Modulstrangs  wird separat  \"uberwacht;  die dazu  benutzte
 Schaltung   ist   in   Abbildung   \ref{fig:sch:master:current}   dargestellt.
 \code{IC4},  \code{IC5}  und  \code{IC6} sind  die  Strommessungssensoren. Sie
@@ -411,6 +442,8 @@ Eing\"ange des \Raspi~auf \SI{3.3}{\volt} laufen.
     \caption{GSM-Modem Schaltung}
     \label{fig:sch:master:gsm}
 \end{figure}
+
+\todo{Auswahl IC8, Auswahl Modem, Gr\"osse C6, C7, R5, R6, R7}
 
 Das GSM-Modem  ist ein  integrierter Baustein,  der alle  n\"otigen Funktionen
 bereitstellt.    Er  ist   zusammen  mit   seiner  Beschaltung   in  Abbildung

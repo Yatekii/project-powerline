@@ -20,6 +20,63 @@ source}
 \label{sec:simu:model:cell}
 % ---------------------------------------------------------------------------- %
 
+\begin{wrapfigure}{r}{65mm}
+    \centering
+    \input{images/circuits/solarCell-1d.tex}
+    \caption{%
+        Eindiodenmodell  einer  PV-Zelle  mit  Stromquelle  $I_{\mathrm{Ph}}$,
+        Diode  $D$,  Shunt-Widerstand $R_{\mathrm{Sh}}$~  und  Seriewiderstand
+        $R_{\mathrm{S}}$.%
+    }
+    \label{fig:pvcell:1diode}
+\end{wrapfigure}
+
+Eine   Solarzelle  wird   h\"aufig   durch  eine   Stromquelle  mit   parallel
+geschalteter  Diode,  wie  in Abbildung  \ref{fig:pvcell:1diode}  dargestellt,
+modelliert. Je   nach  Modell   kommen   zus\"atzlich   noch  ein   paralleler
+Shunt-Widerstand $R_{\mathrm{Sh}}$,  ein Seriewiderstand  $R_{\mathrm{S}}$ und
+eine zweite Diode hinzu. Das  Eindiodenmodell ist gem\"ass \cite{pvcell:phang}
+bei  niedrigen  Beleuchtungsgraden  ziemlich  ungenau, weshalb  wir  hier  ein
+Zweidiodenmodell benutzen werden. Eine der  beiden Dioden modelliert dabei den
+S\"attigungsstrom, welcher von Diffusionsprozessen verursacht wird, die zweite
+Diode  modelliert den  S\"attigungsstrom,  welcher von  Rekombinationseffekten
+verursacht wird \cite{pvcell:masmoudi}.
+
+
+Zur  Herleitung der  Modellparamater  existieren verschiedene  Verfahren. Eine
+M\"oglichkeit  ist das  experimentelle Ausmessen  verschiedener Aspekte  einer
+PV-Zelle und  das Herleiten der Modellparameter  aus den Messergebnissen. Dies
+ist  jedoch  nicht  immer  praktisch  realisierbar,  da  man  allenfalls  kein
+Testexemplar   zur   Verf\"ugung   hat.    Sollen   bei   der   Messung   noch
+Fertigungstoleranzen  der   PV-Zellen  ber\"ucksichtigt  werden,   steigt  der
+experimentelle  (und   finanzielle)  Aufwand  zus\"atzlich,  da   man  mehrere
+Exemplare   kaufen  und   ausmessen  muss. Auch   die  Auswertung   wird  mehr
+Arbeit  erfordern,  wenn  man mittels  statistischer  Methoden  verl\"assliche
+Schlussfolgerungen ziehen k\"onnen will.
+
+Alternativ   kann   man   auch   versuchen,  die   Modellparameter   aus   dem
+Datenblatt  einer  PV-Zelle  herzuleiten. Dies  bietet  zwei  haupts\"achliche
+Vorteile: Einerseits  entfallen  aufw\"andige  Messungen   und  der  Kauf  von
+Testexemplaren,  andererseits  ist  davon   auszugehen,  dass  der  Hersteller
+mehrere Exemplare ausgemessen  hat und typische Angaben  in den Datenbl\"atten
+gemacht werden. Nat\"urlich setzt dies  voraus, dass man den Herstellerangaben
+einigermassen  vertraut;  Sicherheit  ist  nur durch  eigene  Verifikation  zu
+erlangen.
+
+Das Herleiten der Modellparameter aus den Herstellerangaben ist nicht trivial;
+es wird deshalb  an dieser Stelle ein Modell als  Grundlage verwendet, welches
+in \cite{pvcell:masmoudi} hergeleitet und verifiziert worden ist.
+
+\"Ublicherweise wird  bei PV-Zellen  nur das  Gleichstromverhalten untersucht;
+das Verhalten  unter Wechselstrom interessiert meistens  nicht. Da das Signal,
+welches  in  diesem  Projekt  auf die  DC-Leitung  aufmoduliert  wird,  jedoch
+Wechselstrom ist,  sollte das  Wechselstromverhalten von PV-Zellen  in unseren
+Simulationen ber\"ucksichtigt werden.
+
+Das  Zweidiodenmodell  aus  \cite{pvcell:masmoudi}  wird  deshalb  in  unseren
+Simulationen noch  durch eine  parallele Kapazit\"at erg\"anzt,  basierend auf
+\cite{ref:solar:scofield}. Dies  liefert das  Modell  einer PV-Zelle  gem\"ass
+Abbildung \ref{fig:circuit:solarCell}.
 
 \begin{figure}[h!tb]
     \centering

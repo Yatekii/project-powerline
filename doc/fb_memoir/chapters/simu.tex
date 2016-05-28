@@ -4,15 +4,10 @@
 % **************************************************************************** %
 
 Bevor  simuliert  werden  kann,  m\"ussen  die  daf\"ur  ben\"otigten  Modelle
-vorhanden  sein. In  diesem  Abschnitt  wird  zuerst  ein  Modell  f\"ur  eine
-Solarzelle bestimmt. Dieses  wird anschliessend  benutzt, um ein  Modell eines
-Solarmoduls  zu  konstruieren,  und  auf  dem  Modell  f\"ur  ein  Modul  wird
-anschliessend  das  Modell  eines   kompletten  Modulstrangs  aus  20  Modulen
-aufgebaut und simuliert.
-
-Es werden  Schaltungen f\"ur drei  L\"osungsans\"atze (zwei zur FSK,  eine zur
-ASK) vorgestellt, mit \code{LTspice IV} simuliert und beurteilt.\todo{LTspice:
-source}
+vorhanden sein. In diesem Abschnitt wird zuerst ein Modell f\"ur eine PV-Zelle
+bestimmt und  anschliessend benutzt,  um ein  PV-Modul aufzubauen.   Es werden
+verschiedene L\"osungsans\"atze  pr\"asentiert, mit den  entwickelten Modellen
+simuliert und die Resultate beurteilt.
 
 
 % ---------------------------------------------------------------------------- %
@@ -31,41 +26,44 @@ source}
     \label{fig:pvcell:1diode}
 \end{wrapfigure}
 
-Eine   Solarzelle  wird   h\"aufig   durch  eine   Stromquelle  mit   parallel
-geschalteter  Diode,  wie  in Abbildung  \ref{fig:pvcell:1diode}  dargestellt,
-modelliert. Je   nach  Modell   kommen   zus\"atzlich   noch  ein   paralleler
-Shunt-Widerstand $R_{\mathrm{Sh}}$,  ein Seriewiderstand  $R_{\mathrm{S}}$ und
-eine zweite Diode hinzu. Das  Eindiodenmodell ist gem\"ass \cite{pvcell:phang}
-bei  niedrigen  Beleuchtungsgraden  ziemlich  ungenau, weshalb  wir  hier  ein
-Zweidiodenmodell benutzen werden. Eine der  beiden Dioden modelliert dabei den
-S\"attigungsstrom, welcher von Diffusionsprozessen verursacht wird, die zweite
-Diode  modelliert den  S\"attigungsstrom,  welcher von  Rekombinationseffekten
-verursacht wird \cite{pvcell:masmoudi}.
+Das Modell  einer idealien  Photovoltaikzelle ist  eine Stromquelle  mit einer
+parallel geschalteten Diode. Da PV-Zellen in Realit\"at nicht ideal sind, wird
+das einfachste Ersatzschaltbild einer PV-Zelle \"ublicherweise durch einen zur
+Stromquelle parallel geschalteten Shunt-Widerstand $R_{\mathrm{Sh}}$ und einen
+Seriewiderstand $R_{\mathrm{S}}$ erg\"anzt; das resultierende Ersatzschaltbild
+ist in Abbildung \ref{fig:pvcell:1diode} dargestellt.
 
+Die Genauigkeit  dieses Eindiodenmodells  ist jedoch h\"aufig  nicht besonders
+gut  \cite{pvcell:phang}  \cite{pvcell:masmoudi}   (besonders  bei  niederigen
+Beleuchtungsgraden),   weshalb   wir   hier  ein   Zweidiodenmodell   benutzen
+werden. Eine  der  beiden  Dioden   modelliert  dabei  den  S\"attigungsstrom,
+welcher von  Diffusionsprozessen verursacht wird, die  zweite Diode modelliert
+den  S\"attigungsstrom,  welcher  von Rekombinationseffekten  verursacht  wird
+\cite{pvcell:masmoudi}.
 
-Zur  Herleitung der  Modellparamater  existieren verschiedene  Verfahren. Eine
-M\"oglichkeit  ist das  experimentelle Ausmessen  verschiedener Aspekte  einer
-PV-Zelle und  das Herleiten der Modellparameter  aus den Messergebnissen. Dies
-ist  jedoch  nicht  immer  praktisch  realisierbar,  da  man  allenfalls  kein
-Testexemplar   zur   Verf\"ugung   hat.    Sollen   bei   der   Messung   noch
-Fertigungstoleranzen  der   PV-Zellen  ber\"ucksichtigt  werden,   steigt  der
-experimentelle  (und   finanzielle)  Aufwand  zus\"atzlich,  da   man  mehrere
-Exemplare   kaufen  und   ausmessen  muss. Auch   die  Auswertung   wird  mehr
-Arbeit  erfordern,  wenn  man mittels  statistischer  Methoden  verl\"assliche
+Zur Herleitung der Modellparamater existieren verschiedene Verfahren. Man kann
+beispielsweise eine  PV-Zelle im Labor  ausmessen und die  Modellparameter aus
+diesen  Messergebnissen  ableiten.   Dies  ist jedoch  nicht  immer  praktisch
+realisierbar, da man allenfalls kein Testexemplar zur Verf\"ugung hat.  Sollen
+bei  der  Messung  noch Fertigungstoleranzen  der  PV-Zellen  ber\"ucksichtigt
+werden,  steigt der  experimentelle  (und  finanzielle) Aufwand  zus\"atzlich,
+da  man  mehrere Exemplare  kaufen  und  ausmessen muss. Auch  die  Auswertung
+erfordert mehr Arbeit, wenn  man mittels statistischer Methoden verl\"assliche
 Schlussfolgerungen ziehen k\"onnen will.
 
 Alternativ   kann   man   auch   versuchen,  die   Modellparameter   aus   dem
 Datenblatt  einer  PV-Zelle  herzuleiten. Dies  bietet  zwei  haupts\"achliche
 Vorteile: Einerseits  entfallen  aufw\"andige  Messungen   und  der  Kauf  von
-Testexemplaren,  andererseits  ist  davon   auszugehen,  dass  der  Hersteller
-mehrere Exemplare ausgemessen  hat und typische Angaben  in den Datenbl\"atten
-gemacht werden. Nat\"urlich setzt dies  voraus, dass man den Herstellerangaben
-einigermassen  vertraut;  Sicherheit  ist  nur durch  eigene  Verifikation  zu
+Testexemplaren, andererseits ist davon auszugehen, dass der Hersteller mehrere
+Exemplare ausgemessen hat  und typische Angaben in  den Datenbl\"atten gemacht
+werden.  Es setzt jedoch voraus,  dass man den Herstellerangaben einigermassen
+vertraut;  Sicherheit  ist  letztendlich  nur  durch  eigene  Verifikation  zu
 erlangen.
 
 Das Herleiten der Modellparameter aus den Herstellerangaben ist nicht trivial;
-es wird deshalb  an dieser Stelle ein Modell als  Grundlage verwendet, welches
-in \cite{pvcell:masmoudi} hergeleitet und verifiziert worden ist.
+es wird deshalb  an dieser Stelle ein Modell  einer kommerziell erh\"altlichen
+PV-Zelle  \todo{Hersteller   nennen}  als  Grundlage  verwendet,   welches  in
+\cite{pvcell:masmoudi} hergeleitet und verifiziert worden ist.
 
 \"Ublicherweise wird  bei PV-Zellen  nur das  Gleichstromverhalten untersucht;
 das Verhalten  unter Wechselstrom interessiert meistens  nicht. Da das Signal,

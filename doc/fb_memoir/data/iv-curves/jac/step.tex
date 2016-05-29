@@ -1,0 +1,52 @@
+\documentclass[a4paper]{article}
+\usepackage{siunitx}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.12}
+\begin{document}
+\begin{tikzpicture}
+   \begin{scope}[x={(0mm,0mm)},y={(100mm,140mm)}]
+        \begin{axis}[
+            colormap/cool,
+            height=100mm,
+            width=140mm,
+            width=\textwidth,
+            grid=both,
+            zmin=0,
+            thick,
+            xlabel=Spannung,
+            ylabel=Strom,
+            zlabel=Leistung,
+            legend style={at={(0,-0.15)},anchor=north west},
+            legend cell align=left,
+        ]
+            % 10A
+            \addplot3[
+                %draw=blue,
+                draw=blue,
+                scatter src = \thisrow{I(R3)},
+            ] table[y expr=5.889] {ivmax.dat};
+            \addplot3[
+                %draw=blue,
+                draw=blue,
+                scatter src = \thisrow{power},
+            ] table[x expr=46.1] {ivmax.dat};
+            \addplot3[
+                %draw=blue,
+                draw=blue,
+                scatter src = \thisrow{power},
+            ] table[x expr=0] {ivmax.dat};
+            \addplot3[
+                %draw=blue,
+                draw=blue,
+                scatter src = \thisrow{I(R3)},
+            ] table[z expr=0] {ivmax.dat};
+            \addplot3[
+                surf,
+                shader=interp,
+                draw=magenta,
+                very thick,
+            ] table {ivstep.dat};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}
+\end{document}

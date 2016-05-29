@@ -1,12 +1,13 @@
 \documentclass[a4paper]{article}
 \usepackage{siunitx}
 \usepackage{pgfplots}
+%\usepgfplotslibrary{external}%\tikzexternalize
 \pgfplotsset{compat=1.12}
 \begin{document}
 \begin{tikzpicture}
    \begin{scope}[x={(0mm,0mm)},y={(100mm,140mm)}]
         \begin{axis}[
-            colormap/cool,
+            colormap/hot2,
             height=100mm,
             width=140mm,
             width=\textwidth,
@@ -43,7 +44,9 @@
             \addplot3[
                 surf,
                 shader=interp,
-                draw=magenta,
+            ] table {ivstep.dat};
+            \addplot3[
+                draw=blue,
                 very thick,
             ] table {ivstep.dat};
         \end{axis}

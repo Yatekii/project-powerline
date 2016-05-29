@@ -32,9 +32,12 @@
                %thick,
                %x SI prefix=micro,
            ]
-            \addplot [blue] table [y=power output] {\cellsAllOK} node {};
-            \addplot [teal] table [y=power output] {\cellsFiveA} node {};
-            \addplot [magenta] table [y=power output] {\cellsOneA} node {};
+%            \addplot [blue] table [y=power output] {\cellsAllOK} node {};
+%            \addplot [teal] table [y=power output] {\cellsFiveA} node {};
+%            \addplot [magenta] table [y=power output] {\cellsOneA} node {};
+            \addplot[-,color=blue] table {data/iv-curves/module-72cells-series--reference--all-ok--power.dat};
+            \addplot[-,color=teal] table {data/iv-curves/module-72cells-series--reference--ifail-5A--power.dat};
+            \addplot[-,color=magenta] table {data/iv-curves/module-72cells-series--reference--ifail-1A--power.dat};
         \end{axis}
     \end{scope}
 \end{tikzpicture}

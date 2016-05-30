@@ -1,0 +1,46 @@
+\begin{tikzpicture}
+   \begin{scope}[x={(0mm,0mm)},y={(90mm,0.9\textwidth)}]
+       \begin{axis}[%
+               height=50mm,
+               width=\textwidth,
+               at={(0,50mm)},
+               grid=both,
+               xlabel=Spannung (\si{\volt}),
+               ylabel=Strom (\si{\ampere}),
+               colormap/hot2,
+               %axis y line*=left,
+               %x unit=u,
+               %change x base=true,
+               %line width = 1pt,
+               %thick,
+               %x SI prefix=micro,
+           ]
+           \addplot[-,purple]  table[x=V(out), y=I(R3)] {data/iv-curves/generic-array/iv-generic--1a.dat};
+           \addplot[-,teal]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-array/iv-generic--4a.dat};
+           \addplot[-,magenta] table[x=V(out), y=I(R3)] {data/iv-curves/generic-array/iv-generic--7a.dat};
+           \addplot[-,blue]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-array/iv-generic--9a.dat};
+            %\addplot[-,color=blue] table {data/iv-curves/module-72cells-series--reference--all-ok.dat};
+            %\addplot[-,color=teal] table {data/iv-curves/module-72cells-series--reference--ifail-5A.dat};
+            %\addplot[-,color=magenta] table {data/iv-curves/module-72cells-series--reference--ifail-1A.dat};
+        \end{axis}
+        \begin{axis}[%
+               height=50mm,
+               width=\textwidth,
+               at={(0,0)},
+               grid=both,
+               xlabel=Spannung (\si{\volt}),
+               ylabel=Leistung (\si{\watt}),
+               %axis y line*=left,
+               %x unit=u,
+               %change x base=true,
+               %line width = 1pt,
+               %thick,
+               %x SI prefix=micro,
+           ]
+           \addplot[-,purple]  table[x=V(out), y=power] {data/iv-curves/generic-array/iv-generic--1a.dat};
+           \addplot[-,teal]    table[x=V(out), y=power] {data/iv-curves/generic-array/iv-generic--4a.dat};
+           \addplot[-,magenta] table[x=V(out), y=power] {data/iv-curves/generic-array/iv-generic--7a.dat};
+           \addplot[-,blue]    table[x=V(out), y=power] {data/iv-curves/generic-array/iv-generic--9a.dat};
+        \end{axis}
+    \end{scope}
+\end{tikzpicture}

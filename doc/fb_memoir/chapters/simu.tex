@@ -161,7 +161,7 @@ zugeh\"origen Anmerkungen.
         \pageref{eq:rosa:a1}).%
     }
     \label{fig:pvmodule:wiring}
-    \vspace*{-4em}
+    \vspace*{-3em}
 \end{wrapfigure}
 
 Der  Pfad, den  der Strom  in  einem Modul  zur\"ucklegt, kann  je nach  Modul
@@ -172,14 +172,14 @@ die Zellen werden  von Kante zu Kante verbunden), aber  da der Strompfad durch
 die ganze Zelle geht, wird der gesamte Strompfad in underem Modell vereinfacht
 als eine lange Leitung dargestellt.
 
-Zwischen    den   parallelen    Leiterbahnen    ergeben   sich    parasit\"are
+Zwischen   diesen   parallelen    Leiterbahnen   ergeben   sich   parasit\"are
 Induktivit\"aten, die  im Folgenden  bestimmt und  in unser  Modell integriert
 werden.  Die  angenommene Form und  die Abmessungen der  internen Stromleitung
 sind  in  Abbildung   \ref{fig:pvmodule:wiring}  dargestellt. Die  Abmessungen
 basieren auf folgenden Annahmen:
 
 \begin{itemize}
-    \firmlist
+    \tightlist
     \item
         Kantenl\"ange eines Moduls: \SI{125}{\milli\meter}
     \item
@@ -200,19 +200,20 @@ Mutual  Inductances  of Linear  Conductors}  von  Edward B. Rosa  herangezogen
 \cite{ref:inductance:rosa}. Darin  wird   unter  anderem   die  Induktivit\"at
 einer   Leiterkonfiguration  wie   sie  in   unserem  Modul   angenommen  wird
 (Abbildung  \ref{fig:pvmodule:wiring}) bestimmt. Die  zugeh\"orige Formel  ist
-in  Gleichung  \ref{eq:rosa:snake}  gegeben\footnotemark. Der Wert  f\"ur  die
-Selbstinduktivit\"at der verschiedenen Dr\"ahte ist nicht identisch; dies wird
-im  Summand $A_{\mathrm{i}}$  ber\"ucksichtigt, der  abh\"angt von  der Anzahl
-paralleler Leiterbahnen  und ihrer  Lage innerhalb  der Leiteranordnung. F\"ur
-\num{6}  parallele  Leiterbahnen  ergeben   sich  die  Werte  aus  Gleichungen
-\ref{eq:rosa:a1}, \ref{eq:rosa:a2} und \ref{eq:rosa:a3}.
-
+in  Gleichung  \ref{eq:rosa:snake}  gegeben\footnotemark.
 \footnotetext{%
     Die  Formeln  in   \cite{ref:inductance:rosa}  sind  im  \emph{CKG}-System
     (Centimeter,    Kilogramm,    Sekunden)     notiert,    f\"ur    Gleichung
     \ref{eq:rosa:snake} ist die Gleichung von  Rosa auf das SI-System normiert
     worden.%
 }
+
+\noindent Der  Wert f\"ur die Selbstinduktivit\"at  der verschiedenen Dr\"ahte
+ist nicht  identisch; dies wird im  Summand $A_{\mathrm{i}}$ ber\"ucksichtigt,
+der abh\"angt von der Anzahl  paralleler Leiterbahnen und ihrer Lage innerhalb
+der  Leiteranordnung. F\"ur \num{6}  parallele Leiterbahnen  ergeben sich  die
+Werte aus Gleichungen \ref{eq:rosa:a1}, \ref{eq:rosa:a2} und \ref{eq:rosa:a3}.
+
 
 \begin{alignat}{2}
     \label{eq:rosa:snake}
@@ -449,10 +450,10 @@ Leiterimpedanzen. Dieses  und  die  vorangegangenen   Modelle  werden  nun  in
 % ---------------------------------------------------------------------------- %
 
 Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
-wird von der FSK-Schaltung das zu  \"ubertragende Signal gegeben und die Spule
-induziert in  der DC-Leitung  entsprechende Spannungs-Rippel, die  vom \Master
-ausgewertet werden k\"onnen. Der entsprechende  Schaltkreis ist schematisch in
-Abbildung \ref{fig:circ:coupling:inductive} dargestellt.
+wird vom Sensor  das zu \"ubertragende Signal gegeben und  die Spule induziert
+in der DC-Leitung entsprechende  Spannungs-Rippel, die vom \Master ausgewertet
+werden k\"onnen. Der  entsprechende Schaltkreis  ist schematisch  in Abbildung
+\ref{fig:circ:coupling:inductive} dargestellt.
 
 Verglichen mit  Kondensatoren sind Spulen relativ  gross und teuer. Allerdings
 ist das Prinzip  der induktiven Einkopplung gut dokumentiert  und die Aussicht
@@ -465,12 +466,61 @@ auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
     \label{fig:circ:coupling:inductive}
 \end{figure}
 
+Zur  Modellierung  dieses Vorgangs  ben\"otigt  man  ein Modell  der  Kopplung
+zwischen Spule und DC-Leitung.
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \section{Kapazitive Einkopplung}
 \label{sec:simu:coupling:capacitive}
 % ---------------------------------------------------------------------------- %
 
+Bei der kapazitiven Einkopplung wird eine Signalquelle via Kondensator mit der
+DC-Leitung  verbunden. Bei  jedem  Modul  und am  Ende  des  Modulstrangs  ist
+dabei eine  Einkopplung vorgesehen. Das  Prinzip ist schematisch  in Abbildung
+\ref{fig:circ:coupling:capacitive} dargestellt.
+
+Sowohl \Master ~wie auch \Sensor~ k\"onnen dabei Signale senden und empfangen;
+das Verfahren ist bidirektional.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/coupling-capacitive.tex}
+    \caption{%
+        Vereinfachte Darstellung  der kapazitiven  Einkopplung mit  Sender auf
+        der linken  Seite und  Empf\"anger auf der  rechten Seite. Prinzipiell
+        ist das Verfahren jedoch bidirektional.%
+    }
+    \label{fig:circ:coupling:capacitive}
+\end{figure}
+
+Zur   Simulation   in  \code{LTspice}   wird   die   Schaltung  in   Abbildung
+\ref{fig:ltspice:capacitive:string} benutzt. Sie basiert  auf dem Modell eines
+Modulstrangs von Abbildung  \ref{fig:pvstring} (Seite \pageref{fig:pvstring}),
+erg\"anzt  um  die  Ein-  und  Auskopplungsschaltung. Zus\"atzlich  wurde  ein
+Lastwiderstand von eingebaut.
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/ltspice/jac/inductive.eps}
+    \caption{%
+        Simulationsschaltung  eines Modulstrangs  mit kapazitiver  Einkopplung
+        eines  Signals. Jedes  Modul-Symbol  repr\"asentiert dabei  ein  Modul
+        gem\"ass  Abbildung \ref{fig:ltspice:jac:Module}  im Anhang  auf Seite
+        \pageref{fig:ltspice:jac:Module}  mit Freilaufdiode  und parasit\"aren
+        Leitungsimpedanzen.\protect\\
+        In   diesem   Beispiel   sendet   der   \Sensor~   beim   Modul   (die
+        Sinus-Spannungsquelle)   und   das   \Master~   empf\"angt   am   Port
+        \code{receiver} (rechte Seite).%
+    }
+    \label{fig:ltspice:capacitive:string}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \input{images/simu-capacitive/tran.tex}
+    \caption{Transientensimulation Kapazitive Einkopplung}
+    \label{fig:simu:capacitive:tran}
+\end{figure}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Sender}

@@ -499,75 +499,47 @@ das Verfahren ist bidirektional.
 Zur   Simulation   in  \code{LTspice}   wird   die   Schaltung  in   Abbildung
 \ref{fig:ltspice:capacitive:string} benutzt. Sie basiert  auf dem Modell eines
 Modulstrangs von Abbildung  \ref{fig:pvstring} (Seite \pageref{fig:pvstring}),
-erg\"anzt  um  die  Ein-  und  Auskopplungsschaltung. Zus\"atzlich  wurde  ein
-Lastwiderstand von eingebaut.
+erg\"anzt  um  die  Ein-  und  Auskopplungsschaltung. Zus\"atzlich  wurde  eine
+komplexe Lastimpedanz eingebaut.
+
+Es werden der Signalpegel am Empf\"anger bei zwei verschiedenen Senderpositionen
+untersucht: Eine zu Beginn des Strangs, eine am Ende des Strangs. Ist der Sender
+am Anfang des Strangs positioniert, muss das Signal durch alle restlichen Module,
+um an den Empf\"anger zu gelangen; es ist hier allenfalls mit Verzerrungen und/oder
+Abschw\"achungen des Signals zu rechnen.
+
 
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.75\textwidth]{images/ltspice/jac/capacitive.eps}
     \caption{%
         Simulationsschaltung  eines Modulstrangs  mit kapazitiver  Einkopplung
-        eines  Signals. Jedes  Modul-Symbol  repr\"asentiert dabei  ein  Modul
+        eines  Signals. Jedes   Modulsymbol  repr\"asentiert dabei  ein  Modul
         gem\"ass  Abbildung \ref{fig:ltspice:jac:Module}  im Anhang  auf Seite
         \pageref{fig:ltspice:jac:Module}  mit Freilaufdiode  und parasit\"aren
         Leitungsimpedanzen.\protect\\
-        In   diesem   Beispiel   sendet   der   \Sensor~   beim   Modul   (die
-        Sinus-Spannungsquelle)   und   das   \Master~   empf\"angt   am   Port
-        \code{receiver} rechts.%
+        Die  Sender  werden  durch  Sinus-Spannungsquellen  simuliert. Es  ist
+        jeweils  nur ein  Sender  aktiv  in der  Simulation,  der andere  wird
+        abgeh\"angt.%
     }
     \label{fig:ltspice:capacitive:string}
 \end{figure}
 
+Die    in    \code{LTspice}    benutzte    Schaltung    ist    in    Abbildung
+\ref{fig:ltspice:capacitive:string}      gezeigt.       Die      zugeh\"origen
+Simulationsresultate   sind    in   Abbildung   \ref{fig:simu:capacitive:tran}
+zu sehen.%
+
 \begin{figure}[h!tb]
     \input{images/simu-capacitive/tran.tex}
     \caption{%
-        Transientensimulation  der kapazitiven  Einkopplung mit  verschiedenen
-        Ohm'schen     Lasten    im     Bereich     von    \SI{1}{\ohm}     bis
-        \SI{1}{\kilo\ohm}. Die   angegebene    Spannung   ist    jeweils   die
-        Spannung   am  Empf\"anger   (Knoten  \code{receiever}   in  Abbildung
-        \ref{fig:ltspice:capacitive:string}).   Es ist  zu erkennen,  dass bei
-        sehr kleinen Lasten das Signal am Empf\"anger ziemlich klein wird.%
+        Transientensimulation  der  kapazitiven   Einkopplung  am  Anfang  des
+        Modulstrangs und  am Ende des  Modulstrangs. Ist der Sender  am Anfang
+        des Strangs, wird das Signal merklich abgeschw\"acht und verzerrt, ist
+        aber  noch  als  Signal  am  Empf\"anger  (Knoten  \code{receiver}  in
+        Abbildung \ref{fig:ltspice:capacitive:string}) erkennbar.%
     }
     \label{fig:simu:capacitive:tran}
-\end{figure}
-
-Besitzt die  angeschlossene Last  zus\"atzlich noch  parasit\"are Kapazit\"at, wie
-in Abbildung \ref{fig:ltspice:capacitive:string:Cload} gezeigt, \"andert sich das
-Signal am Empf\"anger recht betr\"achtlich.
-
-\begin{figure}[h!tb]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/capacitive-Cload.eps}
-    \caption{%
-        Simulationsschaltung  eines Modulstrangs  mit kapazitiver  Einkopplung
-        eines  Signals. Jedes  Modul-Symbol  repr\"asentiert dabei  ein  Modul
-        gem\"ass  Abbildung \ref{fig:ltspice:jac:Module}  im Anhang  auf Seite
-        \pageref{fig:ltspice:jac:Module}  mit Freilaufdiode  und parasit\"aren
-        Leitungsimpedanzen.\protect\\
-        In   diesem   Beispiel   sendet   der   \Sensor~   beim   Modul   (die
-        Sinus-Spannungsquelle)   und   das   \Master~   empf\"angt   am   Port
-        \code{receiver} rechts.%
-    }
-    \label{fig:ltspice:capacitive:string:Cload}
-\end{figure}
-
-Die    Resultate   f\"ur    eine   Lastimpedanz    von   \SI{100}{\ohm}    und
-\SI{100}{\micro\farad} sind  in Abbildung \ref{fig:simu:capacitive:tran:Cload}
-zu sehen. Das  Signal am Empf\"anger  wird bedeutend verzerrt.   Die Schaltung
-braucht etwa \SI{50}{\micro\second}, bis sie  sich eingependelt hat (bei einer
-Frequenz von \SI{1}{\mega\hertz}). Zudem wird die Amplitude des am Empf\"anger
-ankommenden Signals sehr klein.
-
-\begin{figure}[h!tb]
-    \input{images/simu-capacitive/tran-Cload.tex}
-    \caption{%
-        Transientensimulation   der   kapazitiven    Einkopplung   mit   einer
-        Lastimpedanz    von    \SI{100}{\ohm}   und    \SI{100}{\micro\farad}.
-        Die     angegebene    Spannung     ist     jeweils    die     Spannung
-        am     Empf\"anger    (Knoten     \code{receiever}    in     Abbildung
-        \ref{fig:ltspice:capacitive:string:Cload}).%
-    }
-    \label{fig:simu:capacitive:tran:Cload}
 \end{figure}
 
 
@@ -715,4 +687,4 @@ Zusammenfassung f\"ur die simulierten Konfigurationen.
 % ---------------------------------------------------------------------------- %
 \subsection{Gesamtsystem}
 \label{subsec:simu:ask:total}
-% ---------------------------------------------------------------------------- %
+k ---------------------------------------------------------------------------- %

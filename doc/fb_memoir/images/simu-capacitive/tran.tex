@@ -1,60 +1,27 @@
 \begin{tikzpicture}
     %\begin{scope}[x={(0mm,0mm)},y={(175mm,\textwidth)}] % for four plots
-    \begin{scope}[x={(0mm,0mm)},y={(90mm,\textwidth)}]
+    \begin{scope}[x={(0mm,0mm)},y={(50mm,\textwidth)}]
         \begin{axis}[%
-                title=$R_{\mathrm{Last}} {=} \SI{1}{\ohm}$,
+                title=Signalpegel am Empf\"anger,
                 %title=$R_{\mathrm{Last}}$
-                height=45mm,
-                width=\textwidth,
-                at={(0,50mm)},
-                grid=both,
-                xlabel=Zeit (\si{\micro\second}),
-                ylabel=Spannung (\si{\milli\volt}),
-                change x base=true,
-                change y base=true,
-                x SI prefix=micro,
-                y SI prefix=milli,
-           ]
-           \addplot[-,blue] table {data/capacitive/capacitive--rload-0001.dat};
-        \end{axis}
-        %\begin{axis}[%
-        %        title=$R_{\mathrm{Last}} {=} \SI{10}{\ohm}$,
-        %        height=40mm,
-        %        width=\textwidth,
-        %        at={(0,90mm)},
-        %        grid=both,
-        %        xlabel=Zeit (\si{\micro\second}),
-        %        ylabel=Spannung (\si{\volt}),
-        %        change x base=true,
-        %        x SI prefix=micro,
-        %   ]
-        %   \addplot[-,blue] table {data/capacitive/capacitive--rload-0010.dat};
-        %\end{axis}
-        %\begin{axis}[%
-        %        title=$R_{\mathrm{Last}} {=} \SI{100}{\ohm}$,
-        %        height=40mm,
-        %        width=\textwidth,
-        %        at={(0,45mm)},
-        %        grid=both,
-        %        xlabel=Zeit (\si{\micro\second}),
-        %        ylabel=Spannung (\si{\volt}),
-        %        change x base=true,
-        %        x SI prefix=micro,
-        %   ]
-        %   \addplot[-,blue] table {data/capacitive/capacitive--rload-0100.dat};
-        %\end{axis}
-        \begin{axis}[%
-                title=$R_{\mathrm{Last}} {=} \SI{1}{\kilo\ohm}$,
-                height=45mm,
+                height=50mm,
                 width=\textwidth,
                 at={(0,0)},
                 grid=both,
                 xlabel=Zeit (\si{\micro\second}),
                 ylabel=Spannung (\si{\volt}),
                 change x base=true,
+                %change y base=true,
                 x SI prefix=micro,
+                %y SI prefix=milli,
+                xmin = 0,
+                xmax = 10e-6,
+                legend cell align = left,
+                legend style={at={(125mm,-10mm)},anchor=north east},
            ]
-           \addplot[-,blue] table {data/capacitive/capacitive--rload-1000.dat};
+           \addplot[-,blue] table {data/capacitive/capacitive-stringStart.dat};
+           \addplot[-,teal] table {data/capacitive/capacitive-stringEnd.dat};
+           \legend{Sender am Anfang des Strangs,Sender am Ende des Strangs};
         \end{axis}
    \end{scope}
 \end{tikzpicture}

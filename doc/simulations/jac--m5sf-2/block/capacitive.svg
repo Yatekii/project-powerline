@@ -13,7 +13,10 @@
    id="svg3355"
    inkscape:version="0.91 r13725"
    viewBox="0 0 37.472015 17.624918"
-   sodipodi:docname="capacitive.svg">
+   sodipodi:docname="capacitive.svg"
+   inkscape:export-filename="/home/of-1/git/project-powerline/doc/simulations/jac--m5sf-2/block/capacitive.svg.png"
+   inkscape:export-xdpi="813.40997"
+   inkscape:export-ydpi="813.40997">
   <metadata
      id="metadata4804">
     <rdf:RDF>
@@ -35,16 +38,16 @@
      guidetolerance="10"
      inkscape:pageopacity="0"
      inkscape:pageshadow="2"
-     inkscape:window-width="2156"
-     inkscape:window-height="1278"
+     inkscape:window-width="1916"
+     inkscape:window-height="1130"
      id="namedview4802"
      inkscape:document-units="mm"
      showgrid="false"
-     inkscape:zoom="5.6568543"
-     inkscape:cx="63.302237"
-     inkscape:cy="22.443737"
+     inkscape:zoom="8"
+     inkscape:cx="63.149168"
+     inkscape:cy="33.357607"
      inkscape:window-x="0"
-     inkscape:window-y="46"
+     inkscape:window-y="45"
      inkscape:window-maximized="0"
      inkscape:current-layer="layer1"
      fit-margin-top="0"
@@ -64,7 +67,8 @@
   <g
      inkscape:groupmode="layer"
      id="layer1"
-     inkscape:label="stuff">
+     inkscape:label="stuff"
+     style="display:inline">
     <path
        style="fill:none;stroke:#00007f;stroke-width:0.01763889px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        d="m 34.828111,9.0752081 0,0.811389"
@@ -590,7 +594,7 @@
            id="tspan3574">L1</tspan></tspan><tspan
          sodipodi:role="line"
          x="29.077833"
-         y="6.528955"
+         y="6.5289555"
          id="tspan3576"><tspan
            dx="0"
            dy="0"
@@ -633,7 +637,7 @@
            id="tspan3592">C2</tspan></tspan><tspan
          sodipodi:role="line"
          x="30.319567"
-         y="15.912846"
+         y="15.912845"
          id="tspan3594"><tspan
            dx="0"
            dy="0"
@@ -1402,7 +1406,7 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#00007f;stroke-width:0.01763889px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 2.2843617,4.365625 0.052917,-0.035278"
+       d="M 2.2843617,4.365625 2.3372787,4.330347"
        id="path3906"
        inkscape:connector-curvature="0" />
     <path
@@ -1642,7 +1646,7 @@
        inkscape:connector-curvature="0" />
     <path
        style="fill:none;stroke:#00007f;stroke-width:0.01763889px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 8.4226951,7.064375 -0.052917,0.035278"
+       d="M 8.4226951,7.064375 8.3697781,7.099653"
        id="path4002"
        inkscape:connector-curvature="0" />
     <path
@@ -3137,7 +3141,7 @@
            id="tspan4598">C5</tspan></tspan><tspan
          sodipodi:role="line"
          x="22.329149"
-         y="1.8017331"
+         y="1.8017333"
          id="tspan4600"><tspan
            dx="0"
            dy="0"
@@ -3211,20 +3215,20 @@
            style="font-style:normal;font-variant:normal;font-weight:700;font-size:0.4586111px;font-family:'Courier New';fill:#000000"
            id="tspan4628">SINE(0 3.3 1e6 0)</tspan></tspan></text>
     <path
-       style="fill:none;stroke:#0000ff;stroke-width:0.01763889px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 33.417,14.843125 2.063891,0 0.229165,0.211667 -0.229165,0.229305 -2.063891,0 0,-0.440972"
+       style="fill:none;stroke:#0000ff;stroke-width:0.02549397px;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 33.420971,14.706011 2.533052,0 0.28126,0.360271 -0.28126,0.390291 -2.533052,0 0,-0.750562"
        id="path4630"
        inkscape:connector-curvature="0" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:700;font-size:0.4586111px;line-height:125%;font-family:'Courier New';text-align:start;letter-spacing:0px;word-spacing:0px;text-anchor:start;fill:#000000;fill-opacity:1;stroke:none"
-       x="33.505196"
-       y="15.242567"
+       x="33.646305"
+       y="15.242568"
        id="text4632"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
-         x="33.505196"
-         y="15.242567"
+         x="33.646305"
+         y="15.242568"
          id="tspan4634"><tspan
            dx="0"
            dy="0"
@@ -3639,9 +3643,9 @@
        id="path4800"
        inkscape:connector-curvature="0" />
     <path
-       style="fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.01477578;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 29.682676,4.7189369 c -1.00445,0.034036 -0.681429,1.1209082 0.38147,0.7205281 -1.385085,-0.4173455 -1.288908,1.3053648 -0.0165,0.8637961 -0.718993,-0.339545 -1.593136,0.5610527 -0.378638,0.7564883"
-       id="path4852"
+       style="display:inline;fill:none;fill-rule:evenodd;stroke:#0000ff;stroke-width:0.01763889;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       d="m 29.63743,4.7194876 c -0.869298,0.1403441 -0.637612,0.7505068 0.484594,0.7496528 -1.235787,0.011231 -1.403708,0.8272915 -0.01764,0.8437701 -1.261173,0.0019 -1.172236,0.7516836 -0.449013,0.7595422"
+       id="path7230"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccc" />
   </g>

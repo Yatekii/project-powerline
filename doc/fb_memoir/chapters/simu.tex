@@ -579,7 +579,13 @@ zeigt diesen Aufbau schematisch.
 
 Die  Ansteuerung des  Transistors  erfolgt mit  \SI{3.3}{\volt},  da dies  die
 maximale Spannung  ist, welche der  auf dem Sensor  platzierte Microcontroller
-ausgeben kann.
+ausgeben kann. Es muss  dabei beachtet werden, dass  der gew\"ahlte Transistor
+vollst\"andig durchschaltet und in S\"attigung betrieben wird, damit der Strom
+m\"oglichst ungehindert am kurzgeschlossenen Modul vorbeifliessen kann.
+
+Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder  sontwo  im
+Stromkreis) vorhandenen Kapazit\"aten nicht  zu starken Stromspitzen f\"uhren,
+welche den Transistor besch\"adigen.
 
 \begin{figure}[h!tb]
     \centering
@@ -600,81 +606,36 @@ kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/shortcircuit-single.eps}
+    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/shortcircuit-transmitter.eps}
     \caption{
         Simulationsschema  f\"ur  ein  einzelnes Modul  mit  kurzschliessendem
         Transistor und angeschlossener Last von \SI{1}{\kilo\ohm}.%
     }
-    \label{fig:ltspice:shortCircuit:simple}
+    \label{fig:ltspice:shortCircuit:transmitter}
 \end{figure}
 
 \begin{figure}[h!tb]
-    \input{images/simu-short/short-simple.tex}
+    \input{images/simu-short/short-transmitter.tex}
     \caption{%
         Transientensimulation    f\"ur     einen    gesteuerten    Kurzschluss
-        \"uber    ein   Solarmodul    mit    einer    rein   Ohm'schen    Last
-        von   \SI{1}{\kilo\ohm}   gem\"ass    der   Schaltung   in   Abbildung
-        \ref{fig:ltspice:shortCircuit:simple}.%
+        \"uber     ein     Solarmodul     mit     einer     rein     Ohm'schen
+        Last      von      \SI{100}{\ohm}     gem\"ass      der      Schaltung
+        in   Abbildung   \ref{fig:ltspice:shortCircuit:transmitter}. Positives
+        Vorzeichen bedeutet aufgenommene Leistung (also thermische Verluste).%
     }
-    \label{fig:simu:shortCircuit:simple:tran}
+    \label{fig:simu:shortCircuit:transmitter}
 \end{figure}
 
-Wie in  Abbildung \ref{fig:simu:shortCircuit:simple:tran} zu  erkennen, kommen
-die  theoretisch erwarteten  Spannungseinbr\"uche nur  sehr schwach  und stark
-verzerrt  auf der  Leitung durch. Die  im System  vorhandenen Induktivit\"aten
-scheinen zu starken Widerstand zu leisten,  um noch ein n\"utzliches Signal zu
-erhalten.
 
-Im  durchgeschalteten Fall  des Transistors  w\"urde man  allenfalls erwarten,
-dass  der gesamte  vom Modul  abgegebene Strom  (oder zumindest  ein Grossteil
-davon) durch den  Transistor fliesst anstatt durch den  Widerstand. Wie an der
-unteren  Kurve  in Abbildung  \ref{fig:simu:shortCircuit:simple:tran}  gesehen
-werden kann, ist dies aber nicht der  Fall; der Strom durch den Transistor ist
-verschwindend klein.
-
-Es   sei   an   dieser   Stelle   noch   angemerkt,   dass   nicht   nur   die
-angegebene    Schaltung   simuliert    worden   ist. Es    sind   verschiedene
-Lasten,  Transistoren  und   Transistorsteuersignale  ausprobiert  worden. Das
-Ergebniss  war   in  keinem  evaluierten  Szenario   positiv. Die  Kurven  aus
-Abbildung  \ref{fig:simu:shortCircuit:simple:tran} sind  eine repr\"asentative
-Zusammenfassung f\"ur die simulierten Konfigurationen.
-
-%TODO: line width
-
-%\begin{table}[h!tb]
-%    \centering
-%    \caption{%
-%        Eckdaten zur Simulation des Kurzschlussverfahrens f\"ur ein Solarpanel
-%        mit  $36   \times  2$  Zellen  und   ein  Panel  mit  $72   \times  1$
-%        Zellen.\protect\\
-%        Bei     den     Durchschnittswerten     sind     sowohl     Ergebnisse
-%        f\"ur      \SI{1}{\milli\second}     wie      auch     \SI{1}{\second}
-%        angegeben,    um   zu    zeigen,   dass    sich   die    Konfiguration
-%        bereits    bei    einer    Millisekunde   stabilisiert    hat    (auch
-%        zu     sehen    in     Anhang    \ref{app:sec:simu:complementary:36x2}
-%        auf      Seite      \pageref{app:sec:simu:complementary:36x2}      und
-%        Anhang      \ref{app:sec:simu:complementary:72x1}       auf      Seite
-%        \pageref{app:sec:simu:complementary:72x1}).\protect\\
-%        Die     Dauer      der     Spitze     ist     beim      $36     \times
-%        2$-Modul     \SI{2}{\micro\second}    und     \SI{1.78}{\micro\second}
-%        beim    $72    \times    1$-Modul    (siehe    unterste    Plots    in
-%        den     Abbildungen      \ref{fig:simu:results:36x2:3u}     respektive
-%        \ref{fig:simu:results:72x1:3u}).%
-%    }
-%    \label{tab:36x2:72x1:heat}
-%    \begin{tabular}{lrr}
-%
-%    \toprule
-%    Kriterium                                      & $36 \times 2$-Modul & $72 \times 1$-Modul \\
-%    \midrule
-%     Spitzenwert Strom:                            & \SI{32}{\ampere}    & \SI{24}{\ampere}    \\
-%     Spitzenwert Leistung:                         & \SI{310}{\watt}     & \SI{535}{\watt}     \\
-%     $\overline{P}$ f\"ur Dauer der Spitze         & \SI{158.77}{\watt}  & \SI{267.46}{\watt}  \\
-%     $\overline{P}$ f\"ur \SI{1}{\milli\second}    & \SI{4.312}{\watt}   & \SI{6.0577}{\watt}  \\
-%     $\overline{P}$ f\"ur \SI{1}{\second}          & \SI{4.3047}{\watt}  & \SI{6.0433}{\watt}  \\
-%    \bottomrule
-%    \end{tabular}
-%\end{table}
+Wie  in Abbildung  \ref{fig:simu:shortCircuit:transmitter} sichtbar,  kommt am
+Knoten \code{MEASURE} ein  recht klares Signal an. Der Strom  durch den MOSFET
+oszilliert bei durchgeschaltetem  Transistor ungef\"hart um den  im Mittel vom
+Modul angegebenen Strom. Auffallend sind  die Spannungs- und Leistungsspitzen,
+welche beim Deaktivieren des  Transistors auftreteten. Das PV-Modul gibt f\"ur
+kurze  Zeit  sogar  beinahe  \SI{600}{\watt}  ab  und  der  MOSFET  absorbiert
+mehr  als \SI{400}{\watt},  allerdings sind  diese Spitzen  sehr kurz  und die
+thermischen Verluste im  Transistor sind im Mittel bei  einem Sendevorgang von
+\SI{1}{\milli\second} lediglich etwa \SI{1}{\watt}.
 
 
 % ---------------------------------------------------------------------------- %
@@ -683,8 +644,157 @@ Zusammenfassung f\"ur die simulierten Konfigurationen.
 \label{subsec:simu:ask:recv}
 % ---------------------------------------------------------------------------- %
 
+Die  Empf\"angerschaltung basiert  auf  dem  Prinzip der  Klemmenschaltung. Es
+existieren verschiedene Implementationen; die  hier gew\"ahlte ist schematisch
+in Abbildung \ref{fig:circuit:clamper} dargestellt. Der Zweck dieser Schaltung
+ist, den DC-Anteil  aus dem ankommenden Signal auszukoppeln und  den Pegel des
+verbleibenden  AC-Signals in  definierte  Grenzen zu  konvertieren, sodass  es
+anschliessend  in die  Empf\"angerschaltung weitergeleitet  werden kann,  ohne
+diese zu besch\"adigen.
+
+Im vorliegenden Fall  muss die Klemmenschaltung die  Spannungsabf\"alle in der
+Gr\"ossenordnung  von  einigen  Dutzend  Volt  (ein  kurzschliessendes  Modul)
+ausfiltern  und  anschliessend  auf  ein  Signal  zwischen  \SI{0}{\volt}  und
+\SI{3.3}{\volt}  konvertieren, welches  dann vom  Empf\"anger ohne  Gefahr von
+Sch\"aden ausgewertet werden kann.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/clamper.tex}
+    \caption{Die hier verwendete Klemmenschaltung}
+    \label{fig:circuit:clamper}
+\end{figure}
+
+Das Funktionsprinzip ist dabei wie folgt:
+
+\begin{itemize}
+    \firmlist
+    \item
+        $\mathrm{C_{in}}$ koppelt das AC-Signal aus  der Leitung aus (ist also
+        ein sehr einfacher Hochpassfilter).
+    \item
+        $\mathrm{R_{in}}$ begrenzt den Strom,  welcher in die Klemmenschaltung
+        fliesst,  \item $\mathrm{R_{out}}$  begrenzt analog  den abfliessenden
+        Strom. Beide Widerst\"ande sollten hochohmig sein.
+    \item
+        $\mathrm{R_{pull-up}}$  und  $\mathrm{R_{pull-down}}$ sorgen  daf\"ur,
+        dass  die   Spannung  auf  dem  mittleren   Schaltungsabschnitt  immer
+        definiert ist.
+    \item
+        $\mathrm{V_{high}}$  und  $\mathrm{V_{low}}$  sind  die  gew\"unschten
+        obere  respektive untere  Pegelgrenze des  Ausgangssignals. In unserem
+        Fall sind dies \SI{3.3}{\volt} und \SI{0}{\volt} bzw. \code{Ground}.
+    \item
+        Die   beiden  Dioden   D1   und  D2   sind  Zener-Dioden. Steigt   die
+        Spannung  am Ausgang  auf einen  Wert, der  \"uber $\mathrm{V_{low}  +
+        V_{breakdown,D2}}$ liegt, wird die Diode D2 durchbrechen. Somit steigt
+        die Spannung nicht \"uber den durch die untere Klemmenspannung und die
+        Durchbruchspannung  der  Diode  definierten Wert. Sinkt  die  Spannung
+        zwischen  am  Ausgang  unter $\mathrm{V_{high}  -  V_{breakdown,D1}}$,
+        bricht die obere Diode durch, womit ein Minimalwert f\"ur die Spannung
+        am Ausgang definiert ist.
+\end{itemize}
+
+Zur   Simulation  wird   in   \code{LTspice}  die   Schaltung  aus   Abbildung
+\ref{fig:ltspice:shortCircuit:receiver}  benutzt. Einige Simulationsergebnisse
+sind in  Abbildung \ref{fig:simu:short:recv} dargestellt. Es wird  sowohl ohne
+Last  wie auch  mit  Ohm'sch-kapazitiver  Last simuliert. Eine  abgesch\"atzte
+Leitungsimpedanz von  \SI{100}{\micro\henry} ist  ebenfalls in  die Simulation
+integriert.
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/shortcircuit-recv.png}
+    \caption{
+        Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger. Das
+        ankommende  Signal  wird  durch   einen  negativen  Spannungspuls  von
+        \SI{-45}{\volt}   am   Eingang   simuliert   (Leerlaufspannung   eines
+        PV-Moduls),  welche  die  ankommende DC-Spannung  von  \SI{900}{\volt}
+        einbrechen   l\"asst. Hier    ebenfalls   noch   gezeigt    ist   eine
+        parasit\"are    Leitungsinduktivit\"at   von    \SI{100}{\micro\henry}
+        und   eine   Ohm'sch-kapazitive    Last   von   \SI{1}{\kilo\ohm}   ||
+        \SI{100}{\micro\farad}. Auf  der  rechten   Seite  ist  ein  Pull-down
+        Widerstand eingebaut, um einen definierten Signalpegel zu haben.%
+    }
+    \label{fig:ltspice:shortCircuit:receiver}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/simu-short/short-recv.tex}
+    \caption{%
+        Simulation   Empf\"anger. Die   obere   Kurve  ist   das   Signal   am
+        Empf\"anger  ohne  angeschlossene Last. Der  \"Ubertragungsvorgang  im
+        unteren  Bild beginnt  bei einer  Sekunde. Die Schaltungsfrequenz  ist
+        \SI{10}{\kilo\hertz}%
+    }
+    \label{fig:simu:short:recv}
+\end{figure}
+
+In Abbildung  \ref{fig:simu:short:recv} sind Simulationsergebnisse  f\"ur zwei
+F\"alle  dargestellt: Ein  Durchlauf  ohne   angeschlossene  Last  sowie  eine
+Simulation mit  Ohm'sch-kapazitiver Last. Bei der Simulation  mit Last beginnt
+der  \"Ubertragungsvorgang  bei einer  Sekunde. Wie  leicht  zu erkennen  ist,
+hat  die Art  der  angeschlossenen Last  einen  betr\"achtlichen Einfluss  auf
+das  Signal am  Ausgang. Bei  einer  Implementierung dieses  Funktionsprinzips
+m\"ussten  somit sicherlich  noch weitere  Untersuchungen gemacht  werden. Wir
+werden  uns aber  an dieser  Stelle  auf diese  zwei exemplarischen  Beispiele
+beschr\"anken.
+
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Gesamtsystem}
 \label{subsec:simu:ask:total}
-k ---------------------------------------------------------------------------- %
+% ---------------------------------------------------------------------------- %
+
+
+Im  Folgenden   werden  der  oben  untersuchte   Transmitter  und  Empf\"anger
+in  den  bereits  in  Abschnitt  \ref{sec:simu:model:module:string}  ab  Seite
+\pageref{sec:simu:model:module:string}   vorgestellten   Modulstrang  aus   20
+Modulen  mit  einer  \SI{20}{\meter} langen  Anschlussleitung  (pro  Richtung)
+eingebaut und das Verhalten des Gesamtsystems untersucht.
+
+Die zugeh\"orige  Simulationsschaltung f\"ur  \code{LTspice} ist  in Abbildung
+\ref{fig:ltspice:shortcircuit:complete} dargestellt.
+
+\begin{figure}[h!tb]
+    \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit.png}
+    \caption{Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode}
+    \label{fig:ltspice:shortcircuit:complete}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/simu-short/complete-Load-steps.tex}
+    \caption{%
+        Simulationsergebnisse  f\"ur  das  Signal  am  Knoten  \code{RECEIVER}
+        aus  Abbildung  \ref{fig:ltspice:shortcircuit:complete}  f\"ur  Lasten
+        mit   verschiedenen    kapazitiven   Anteilen    \code{Cload}   (obere
+        Plots)  und  resistiven   Anteilen  \code{Rload}  (untere  Plots). Die
+        \"Ubertragungsfrequenz betr\"agt \SI{10}{\kilo\hertz}.%
+    }
+    \label{fig:simu:short:complete}
+\end{figure}
+
+Wie   in   Abbildung   \ref{fig:simu:short:complete}   zu   sehen,   hat   die
+angeschlossene   Last  einen   betr\"achtlichen  Einfluss   auf  das   Signal,
+welches  beim  Empf\"anger  ankommt. Bei einem  Ohm'schen  Lastwiderstand  von
+\SI{1}{\kilo\ohm} und einer  Lastkapazit\"at von bereits \SI{100}{\nano\farad}
+kommt  anstatt eines  Rechteckpulses  eine  Doppelschwingung beim  Empf\"anger
+an;  steigt   die  Gr\"osse   der  parasit\"aren   Komponente  der   Last  auf
+\SI{1}{\milli\farad},  ist vom  Signal  am Empf\"anger  bei der  eingestellten
+Frequenz nicht mehr viel zu sehen.
+
+Auch die  Ohm'sche Komponente der  Last hat  bedeutenden Einfluss; ist  sie zu
+klein, sinkt die Signalamplitude am  Empf\"anger stark (blaue Kurve im unteren
+Plot von Abbildung \ref{fig:simu:short:complete}).
+
+Die  Gesamtbeurteilung  dieses   Ansatzes  ist  gemischt: Prinzipiell  scheint
+es    m\"oglich   zu    sein,   eine    funktionierende   Implementation    zu
+entwickeln. Allerdings   gibt   es   wichtige  Faktoren,   welche   erhebliche
+Auswirkungen auf die Erfolgschancen aus\"uben k\"onnen, und auf die wir keinen
+Einfluss haben. Wir sind daher der Meinung, dass die Erfolgsaussichten, diesen
+Ansatz im Rahmen eines  Semsterprojekts zu implementieren, gering sind. W\"are
+die zur  Verf\"ugung stehende  Zeit l\"anger, w\"are  es unserer  Ansicht nach
+aber ein sehr interessanter Ansatz.

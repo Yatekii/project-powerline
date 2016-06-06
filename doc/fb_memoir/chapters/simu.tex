@@ -453,21 +453,197 @@ Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
 wird vom Sensor  das zu \"ubertragende Signal gegeben und  die Spule induziert
 in der DC-Leitung entsprechende  Spannungs-Rippel, die vom \Master ausgewertet
 werden k\"onnen. Der  entsprechende Schaltkreis  ist schematisch  in Abbildung
-\ref{fig:circ:coupling:inductive} dargestellt.
+\ref{fig:circuit:coupling:inductive} dargestellt.
 
-Verglichen mit  Kondensatoren sind Spulen relativ  gross und teuer. Allerdings
-ist das Prinzip  der induktiven Einkopplung gut dokumentiert  und die Aussicht
-auf Erfolg (bei vern\"unftigem Aufwand) somit gut.
+\code{LTspice}    modelliert   diese    Situation   als    gekoppelte   Spulen
+mit    je     einer    Induktivit\"at     (L1    und    L2     in    Abbildung
+\ref{fig:circuit:coupling:inductive)}und  einem   Kopplungsfaktor  K. Es  gilt
+also, diese drei Parameter zu bestimmen.
 
+Wir  werden   f\"ur  unsere   Simulationen  von  einer   Toroidspule  gem\"ass
+Abbildung  \ref{fig:toroid:geometry}  mit   20  Prim\"arwicklungen  und  einer
+Sekund\"arwindung (die DC-Leitung) ausgehen.  Die relative Permeabilit\"at von
+ferromagnetischen Materialien  kann enorm  stark variieren; Werte  von einigen
+Dutzend bis zu  mehreren Tausend k\"onnen auftreten. Wir  werden f\"ur unseren
+Kern eine Permeabilit\"atszahl $\mu_{\mathrm{r}} = 400$ annehmen.
+
+\clearpage
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/coupling-inductive.tex}
     \caption{Induktive Einkopplung}
-    \label{fig:circ:coupling:inductive}
+    \label{fig:circuit:coupling:inductive}
 \end{figure}
 
-Zur  Modellierung  dieses Vorgangs  ben\"otigt  man  ein Modell  der  Kopplung
-zwischen Spule und DC-Leitung.
+
+Die Selbstinduktivit\"at unserer Toroidspule errechnet sich gem\"ass:
+
+\begin{equation}
+    \label{eq:selfInductance:toroid:primary}
+    L_{\mathrm{1}} = \frac{\mu_{0} \mu_{\mathrm{r}} r^2 N_1^2}{2 R} \approx \SI{200}{\micro\henry}
+\end{equation}
+
+%\begin{figure}[h!tb]
+\marginpar{%
+    \input{images/inductive/toroid.tex}
+    \figcaption{\protect\raggedright Geometrie der Spule}
+    \label{fig:toroid:geometry}%
+}
+%\end{figure}
+
+\begin{conditions}
+    \mu_0 = 4 \cdot \pi \cdot 10^{-7} & magnetische Permeabilit\"at des Vakuums               \\
+    \mu_{\mathrm{r}} = 400 & angenommene relative magnetische Permeabilit\"at des Kerns       \\
+    r = \SI{4}{\milli\meter} & Radius des Kernquerschnitts (Abb. \ref{fig:toroid:geometry})  \\
+    R = \SI{8}{\milli\meter} & mittlerer Radius des Toroids (Abb. \ref{fig:toroid:geometry}) \\
+    N_1 = 20 & Anzahl Windungen \\
+\end{conditions}
+
+Die Induktivit\"at der sekund\"aren Seite berechnet sich gem\"ass:
+
+\begin{equation}
+    \label{eq:selfInductance:toroid:secondary}
+    L_{\mathrm{2}} = L_{1} \cdot \frac{N_2^2 }{N_1^2} \approx \SI{500}{\nano\henry}
+\end{equation}
+
+\begin{conditions}
+    L_{\mathrm{1}} = \SI{200}{\micro\henry}
+    & Selbstinduktivit\"at der Prim\"arseite (Gl. \ref{eq:selfInductance:toroid:primary})\\
+
+    N_1 = 20 & Windungsn Prim\"arseite (Transmitter/Receiver) \\
+    N_2 = 1  & Windungen Sekund\"arseite (DC-Leitung) \\
+\end{conditions}
+
+Der Kopplungsfaktor beschreibt, wie gross  der Anteil des magnetischen Flusses
+ist, welcher beide Spulen durchfliesst. Ein Kopplungsfaktor von null bedeutet,
+dass die  beiden Spulen  v\"ollig entkoppelt sind,  ein Kopplungsfaktor  von 1
+heisst, dass der gesamte Fluss, welcher  die eine Spule durchfliesst, auch die
+andere Spule durchfliesst.  Es wird  hier ein Streuverlust von 5\% angenommen,
+was einen Kopplungsfaktor von 0.95 ergibt.
+
+Es  wird   zuerst  eine  vereinfachte  Schaltung   untersucht,  bestehend  aus
+einem  Modul,  dem  Sender  und  dem  Empf\"anger,  dargestellt  in  Abbildung
+\ref{fig:ltspice:inductive:singleModule}.
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=0.67\textwidth]{images/ltspice/jac/inductive-singleModule.eps}
+    \caption{Inductive Simple}
+    \label{fig:ltspice:inductive:singleModule}
+\end{figure}
+
+Abbildung  \ref{fig:simu:inductive:singleModule}  zeigt  den  Spannungsverlauf
+am      Empf\"anger      f\"ur      die      Schaltung      aus      Abbildung
+\ref{fig:ltspice:inductive:singleModule}. Das Signal kommt sauber an, ist aber
+nicht sehr stark.
+
+\begin{figure}[h!tb]
+    \input{images/simu-inductive/singleModule.tex}
+    \caption{%
+        Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
+        \label{fig:ltspice:inductive:singleModule}%
+    }
+    \label{fig:simu:inductive:singleModule}
+\end{figure}
+
+Zur  Simulation eines  ganzen Modulstrangs  wird die  Schaltung aus  Abbildung
+\ref{fig:ltspice:inductive:complete}  benutzt; der  Modulstrang basiert  dabei
+auf den Herleitungen aus Abschnitt \ref{Modellierung eines Modulstrangs}.
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=0.95\textwidth]{images/ltspice/jac/inductive.eps}
+    \caption{%
+        Schaltung  zur   Simulation  eines  Modulstranges   mit  parasit\"aren
+        Impedanzen in der Zuleitung und komplexer Lastimpedanz.%
+    }
+    \label{fig:ltspice:inductive:complete}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \input{images/simu-inductive/stepping.tex}
+    \caption{%
+        Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
+        \ref{fig:ltspice:inductive:complete}%
+    }
+    \label{fig:simu:inductive:stepping}
+\end{figure}
+
+Abbildung  \ref{fig:simu:inductive:stepping}  enth\"alt  Simulationsergebnisse
+f\"ur    verschiedene   Lastimpedanzen    bei    einer   Senderfrequenz    von
+\SI{1}{\mega\hertz}.   Die zugeh\"origen Impedanzkombinationen sind in Tabelle
+\ref{tab:inductive:stepping:params}  aufgelistet. Simulationen  mit  h\"oheren
+resistiven  Anteilen w\"aren  interessant, allerdings  hat \code{LTspice}  bei
+weiterem  Ansteigen von  \code{Rload} (vermutlich  numerische) Schwierigkeiten
+und  die Simulationszeit  steigt auf  Tage bis  Wochen (falls  sie \"uberhaupt
+jemals endet und  die Software nicht in einem Kreis  von nicht konvergierenden
+Bedingungen festh\"angt).
+
+Es  ist  zu   erkennen,  dass  das  Signal  am   Empf\"anger  nicht  besonders
+stark  von  der  Lastimpedanz abh\"angt. Allerdings  ist  die  Signalamplitude
+ziemlich  klein  und betr\"agt  nur  einige  Millivolt. Positiv gewertet  kann
+aber  werden,  dass  das  Signal   trotz  der  kleinen  Amplitude  immer  noch
+sehr  sauber  aussieht. Allerdings kann  es  nat\"urlich  sein, dass  sonstige
+St\"orungseffekten   auf  der   Leitung  (welche   in  der   Simulation  nicht
+ber\"ucksichtigt  worden  sind)  das Signal  \"uberdecken  w\"urden. Dies  ist
+allerdings  im Rahmen  dieses  Projektes nicht  wirklich  zu verifizieren,  da
+wir  weder einen  gen\"ugend grossen  Modulstrang noch  die zur  gr\"undlichen
+Untersuchung erforderliche Zeit zur Verf\"ugung haben.
+
+
+\begin{table}[h!tb]
+    \centering
+    \caption{%
+        Lastimpedanzparameter  f\"ur die  Simulationsergebnisse aus  Abbildung
+        \ref{fig:simu:inductive:stepping}
+    }
+    \label{tab:inductive:stepping:params}
+    \begin{tabular}{rr|rr|rr}
+        \toprule
+        \code{Cload}             & \code{Rload} & \code{Cload}             & \code{Rload}  & \code{Cload}             & \code{Rload} \\
+        \midrule
+        \SI{  1}{\nano\farad}    & \SI{1}{\ohm} & \SI{  1}{\nano\farad}    & \SI{10}{\ohm} & \SI{  1}{\nano\farad}    & \SI{50}{\ohm} \\
+        \SI{ 10}{\nano\farad}    & \SI{1}{\ohm} & \SI{ 10}{\nano\farad}    & \SI{10}{\ohm} & \SI{ 10}{\nano\farad}    & \SI{50}{\ohm} \\
+        \SI{100}{\nano\farad}    & \SI{1}{\ohm} & \SI{100}{\nano\farad}    & \SI{10}{\ohm} & \SI{100}{\nano\farad}    & \SI{50}{\ohm} \\
+        \SI{  1}{\micro\farad}   & \SI{1}{\ohm} & \SI{  1}{\micro\farad}   & \SI{10}{\ohm} & \SI{  1}{\micro\farad}   & \SI{50}{\ohm} \\
+        \SI{ 10}{\micro\farad}   & \SI{1}{\ohm} & \SI{ 10}{\micro\farad}   & \SI{10}{\ohm} & \SI{ 10}{\micro\farad}   & \SI{50}{\ohm} \\
+        \SI{100}{\micro\farad}   & \SI{1}{\ohm} & \SI{100}{\micro\farad}   & \SI{10}{\ohm} & \SI{100}{\micro\farad}   & \SI{50}{\ohm} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
+
+Interessant    ist    der    Betrieb    des    Senders    mit    Eigenfrequenz
+(ca. \SI{240}{\kilo\hertz} in diesem  Fall) des Modulstrangs\footnotemark. Der
+zugeh\"orige    Spannungsverlauf    am    Empf\"anger   ist    in    Abbildung
+\ref{fig:simu:inductive:resonance}   abgebildet. Hier    wird   ein   vielfach
+gr\"osserer  Signalpegel  erreicht;  allerdings  ben\"otigt  das  Signal  etwa
+\SI{100}{\micro\second},  bis  es wirklich  seine maximale  Amplitude erreicht
+hat. Da  bei  diesem System  jedoch  keine  sehr hohen  Datenraten  ben\"otigt
+werden, muss dies nicht unbedingt kritisch sein.
+
+\footnotetext{%
+    Die Eigenfrequenz  ist hier nicht  mathematisch bestimmt, sondern  aus den
+    Simulationen abgelesen worden.%
+}
+
+\begin{figure}[h!tb]
+    \input{images/simu-inductive/resonance.tex}
+    \caption{%
+        Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
+        \ref{fig:ltspice:inductive:complete}%
+    }
+    \label{fig:simu:inductive:resonance}
+\end{figure}
+
+
+Abschliessend kann man  zur induktiven Kopplung sagen, dass  sie bei kleineren
+Aufbauten  gut  funktionieren  sollte,   dass  aber  bei  gr\"osseren  Anlagen
+m\"oglicherweise  zus\"atzliche  Massnahmen  n\"otig sein  k\"onnten,  um  das
+Signal klar empfangen und auswerten  zu k\"onnen. Dies k\"onnte z.B. bedeuten,
+dass  unser System  die Eigenfrequenz  des Modulstrangs  selbst ausmisst,  und
+sich entsprechend  selbst konfiguriert,  um stets  auf der  optimalen Frequenz
+\"ubermitteln zu k\"onnen.
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage
@@ -577,6 +753,18 @@ welcher zwischen  Eingang und  Ausgang des Moduls  durchschalten kann  und vom
 Microcontroller auf dem Sensor gesteuert wird. \fref{fig:module:mosfet:simple}
 zeigt diesen Aufbau schematisch.
 
+\begin{wrapfigure}{r}{60mm}
+    \vspace*{-1em}
+    \centering
+    \input{images/circuits/moduleMOSFET.tex}
+    \caption{%
+        Gesteuerter     Kurzschluss     eines    Solarmoduls     mit     einem
+        microcontroller-gesteuerten Transistor. %
+    }
+    \label{fig:module:mosfet:simple}
+    \vspace*{-1em}
+\end{wrapfigure}
+
 Die  Ansteuerung des  Transistors  erfolgt mit  \SI{3.3}{\volt},  da dies  die
 maximale Spannung  ist, welche der  auf dem Sensor  platzierte Microcontroller
 ausgeben kann. Es muss  dabei beachtet werden, dass  der gew\"ahlte Transistor
@@ -587,32 +775,22 @@ Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder  sontwo  im
 Stromkreis) vorhandenen Kapazit\"aten nicht  zu starken Stromspitzen f\"uhren,
 welche den Transistor besch\"adigen.
 
-\begin{figure}[h!tb]
+\begin{wrapfigure}{l}{60mm}
+    \vspace*{-1em}
     \centering
-    \input{images/circuits/moduleMOSFET.tex}
-    \caption{%
-        Gesteuerter     Kurzschluss     eines    Solarmoduls     mit     einem
-        microcontroller-gesteuerten       Transistor. Die      vollst\"andigen
-        \code{LTspice}-Schaltungen  sind  in Anhang  \ref{app:simu:module}  ab
-        Seite \pageref{app:simu:module} dokumentiert.%
-    }
-    \label{fig:module:mosfet:simple}
-\end{figure}
-
-
-Zuerst wird ein vereinfachtes Szenario simuliert: Ein einzelnes Modul mit einem
-kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
-\ref{fig:ltspice:shortCircuit:simple}.
-
-\begin{figure}[h!tb]
-    \centering
-    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/shortcircuit-transmitter.eps}
+    \includegraphics[width=60mm]{images/ltspice/jac/shortcircuit-transmitter.eps}
     \caption{
         Simulationsschema  f\"ur  ein  einzelnes Modul  mit  kurzschliessendem
         Transistor und angeschlossener Last von \SI{1}{\kilo\ohm}.%
     }
     \label{fig:ltspice:shortCircuit:transmitter}
-\end{figure}
+    \vspace*{-4em}
+\end{wrapfigure}
+
+Zuerst wird ein vereinfachtes Szenario simuliert: Ein einzelnes Modul mit einem
+kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
+\ref{fig:ltspice:shortCircuit:transmitter}.
+
 
 \begin{figure}[h!tb]
     \input{images/simu-short/short-transmitter.tex}
@@ -640,7 +818,7 @@ thermischen Verluste im  Transistor sind im Mittel bei  einem Sendevorgang von
 
 % ---------------------------------------------------------------------------- %
 \clearpage
-\subsection{\Master (Empf\"anger)}
+\subsection{\Master~(Empf\"anger)}
 \label{subsec:simu:ask:recv}
 % ---------------------------------------------------------------------------- %
 
@@ -668,7 +846,7 @@ Sch\"aden ausgewertet werden kann.
 Das Funktionsprinzip ist dabei wie folgt:
 
 \begin{itemize}
-    \firmlist
+    \tightlist
     \item
         $\mathrm{C_{in}}$ koppelt das AC-Signal aus  der Leitung aus (ist also
         ein sehr einfacher Hochpassfilter).
@@ -704,7 +882,7 @@ integriert.
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/ltspice/jac/shortcircuit-recv.png}
+    \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit-recv.eps}
     \caption{
         Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger. Das
         ankommende  Signal  wird  durch   einen  negativen  Spannungspuls  von
@@ -719,6 +897,7 @@ integriert.
     \label{fig:ltspice:shortCircuit:receiver}
 \end{figure}
 
+\clearpage
 \begin{figure}[h!tb]
     \centering
     \input{images/simu-short/short-recv.tex}
@@ -759,7 +938,7 @@ Die zugeh\"orige  Simulationsschaltung f\"ur  \code{LTspice} ist  in Abbildung
 \ref{fig:ltspice:shortcircuit:complete} dargestellt.
 
 \begin{figure}[h!tb]
-    \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit.png}
+    \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit.eps}
     \caption{Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode}
     \label{fig:ltspice:shortcircuit:complete}
 \end{figure}
@@ -792,9 +971,13 @@ Plot von Abbildung \ref{fig:simu:short:complete}).
 
 Die  Gesamtbeurteilung  dieses   Ansatzes  ist  gemischt: Prinzipiell  scheint
 es    m\"oglich   zu    sein,   eine    funktionierende   Implementation    zu
-entwickeln. Allerdings   gibt   es   wichtige  Faktoren,   welche   erhebliche
-Auswirkungen auf die Erfolgschancen aus\"uben k\"onnen, und auf die wir keinen
-Einfluss haben. Wir sind daher der Meinung, dass die Erfolgsaussichten, diesen
-Ansatz im Rahmen eines  Semsterprojekts zu implementieren, gering sind. W\"are
-die zur  Verf\"ugung stehende  Zeit l\"anger, w\"are  es unserer  Ansicht nach
-aber ein sehr interessanter Ansatz.
+entwickeln. Allerdings gibt  es Faktoren,  welche erhebliche  Auswirkungen auf
+die  Erfolgschancen  aus\"uben  k\"onnen,  und auf  die  wir  keinen  Einfluss
+haben. Wir sind daher  der Meinung, dass die  Erfolgsaussichten, diesen Ansatz
+im Rahmen eines Semsterprojekts zu implementieren, gering sind. W\"are die zur
+Verf\"ugung stehende  Zeit l\"anger, w\"are  es unserer Ansicht nach  aber ein
+sehr  interessanter  Ansatz. Die Schaltung  auf  der  Sensorseite w\"urde  ist
+enorm simpel  und w\"are  somit sehr  kosteng\"unstig herzustellen. Prim\"arer
+Nachteil w\"are,  dass Kommunikation nur unidirektional  m\"oglich w\"are; ein
+Kommunizieren zwischen \Master~ und \Sensor~  w\"are nicht in beide Richtungen
+m\"oglich.

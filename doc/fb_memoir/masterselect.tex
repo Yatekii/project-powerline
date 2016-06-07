@@ -11,41 +11,40 @@
 \begin{document}
 	\section{Leistung}
 	\begin{tabular}{lll}
-		\textbf{Bauteil} & \textbf{Maximale Leistung} & \textbf{Testbedingungen} \\ 
-		Raspberry Pi & \SI{4}{W} & Maximallast im normalen Betrieb\cite{ref:raspipower} \\ 
-		Display & \SI{1.1}{W} & Maximale Helligkeit\cite{datasheet:display} \\ 
-		Modem & \SI{6.6}{W} & Alle Kommunikationskanäle aktiv \cite{ref:modemrefdesign} \\ 
+		\textbf{Bauteil} & \textbf{Maximale Leistung} & \textbf{Testbedingungen} \\
+		Raspberry Pi & \SI{4}{W} & Maximallast im normalen Betrieb\cite{ref:raspipower} \\
+		Display & \SI{1.1}{W} & Maximale Helligkeit\cite{datasheet:display} \\
+		Modem & \SI{6.6}{W} & Alle Kommunikationskanäle aktiv \cite{ref:modemrefdesign} \\
 		Relais & \SI{0.72}{W} & Zwei Relais, schaltend \cite{datasheet:finder36relais} \\
-	\end{tabular} 
-	
+	\end{tabular}
+
 	\section{Bauteilwahl}
 	\cite{datasheet:finder36relais}
 	\begin{tabular}{lllll}
-		\textbf{Typ} & \textbf{Funktion} & \textbf{Anforderungen} & \textbf{Gewähltes Bauteil} & \textbf{Bemerkungen} \\ 
+		\textbf{Typ} & \textbf{Funktion} & \textbf{Anforderungen} & \textbf{Gewähltes Bauteil} & \textbf{Bemerkungen} \\
 		Hauptrechner & \makecell{ Verarbeiten der Sensorsignale \\ Benutzerinteraktion}  & \makecell{Etabliert und verbreitet \\ Vorexistierende Hard-und Softwareschnittstellen \\ Passt in das Gehäuse} & Raspberry Pi 3B &  \makecell{SD-Karte als nicht-flüchtiger Speicher \\ \SI{3.3}{V} Versorgung ist nur für eingebaute Komponenten gedacht}\cite{datasheet:raspberrypi} \\
-		 
-		Relais & Umschalten beliebiger Signale & \makecell{max. 5V Spulenspannung \\ Schalten von \SI{230}{V} und \SI{10}{A} \\  Passt in das Gehäuse} & Serie 36 Relais & -\cite{datasheet:finder36relais} \\ 
-		
-		Display & Benutzerinterface & \makecell{Kompatibel mit der Wahl des Hauptrechners \\ Passt in das Gehäuse} & 4DPi-24-HAT & - \cite{datasheet:display} \\ 
-		
-		Hall-IC & Strommessung & \makecell{ Messung bis \SI{10}{A} \\ \SI{1}{kV} Durchschlagsfestigkeit \\ \SI{3.3}{V} oder \SI{5}{V} Spannungsversorgung} & ACS72(4/5) & Wandelt Strom zu proportionaler Spannung \cite{datasheet:hallic} \\ 
-		
-		IO-Verstärker & Schalten der Ausgabeelemente & \makecell{Schalten mit \SI{3.3}{V} \\ \SI{100}{mA} pro Kanal für Relais} & ULN2003A &  eingebaute Freilaufdioden \cite{datasheet:darlingtonic} \\ 
-		
-		AD-Wandler & Erfassen der Stromwerte & \makecell{Gleicher Spannungsbereich wie die Hall-ICs \\ 3 Kanäle \\ Serielle Schnittstelle} & MAX11612 &  I2C-Interface \cite{datasheet:adc} \\ 
-		
-		UART-Bus-Multiplexer & Multiplexen der Sensorverbindungen & 3 Kanäle parallel & SC16IS740 & \makecell{I2C-Interface \\ 1 IC pro Kanal}\cite{datasheet:uarti2c} \\ 
-		
-		Modem & Versand von SMS & Integrierte Lösung & SIM900 &  -\cite{datasheet:modem} \\ 
-		
-		Pegelwandler & Verbindung von \SI{5}{V} und \SI{3.3}{V} & Bidirektionale Verbindung & NLSX4373 & Entwickelt für I2C \cite{datasheet:levelshifter} \\ 
-		
-		Schaltregler & Stromversorgung &\SI{5}{V} zu \SI{3.3}{V} bei über \SI{2}{A} & LM2596 & 3A, integrierter Schalter \cite{datasheet:3v3dcdc} \\ 
 
-	\end{tabular} 
-	
-	
-	
+		Relais & Umschalten beliebiger Signale & \makecell{max. 5V Spulenspannung \\ Schalten von \SI{230}{V} und \SI{10}{A} \\  Passt in das Gehäuse} & Serie 36 Relais & -\cite{datasheet:finder36relais} \\
+
+		Display & Benutzerinterface & \makecell{Kompatibel mit der Wahl des Hauptrechners \\ Passt in das Gehäuse} & 4DPi-24-HAT & - \cite{datasheet:display} \\
+
+		Hall-IC & Strommessung & \makecell{ Messung bis \SI{10}{A} \\ \SI{1}{kV} Durchschlagsfestigkeit \\ \SI{3.3}{V} oder \SI{5}{V} Spannungsversorgung} & ACS72(4/5) & Wandelt Strom zu proportionaler Spannung \cite{datasheet:hallic} \\
+
+		IO-Verstärker & Schalten der Ausgabeelemente & \makecell{Schalten mit \SI{3.3}{V} \\ \SI{100}{mA} pro Kanal für Relais} & ULN2003A &  eingebaute Freilaufdioden \cite{datasheet:darlingtonic} \\
+
+		AD-Wandler & Erfassen der Stromwerte & \makecell{Gleicher Spannungsbereich wie die Hall-ICs \\ 3 Kanäle \\ Serielle Schnittstelle} & MAX11612 &  I2C-Interface \cite{datasheet:adc} \\
+
+		UART-Bus-Multiplexer & Multiplexen der Sensorverbindungen & 3 Kanäle parallel & SC16IS740 & \makecell{I2C-Interface \\ 1 IC pro Kanal}\cite{datasheet:uarti2c} \\
+
+		Modem & Versand von SMS & Integrierte Lösung & SIM900 &  -\cite{datasheet:modem} \\
+
+		Pegelwandler & Verbindung von \SI{5}{V} und \SI{3.3}{V} & Bidirektionale Verbindung & NLSX4373 & Entwickelt für I2C \cite{datasheet:levelshifter} \\
+
+		Schaltregler & Stromversorgung &\SI{5}{V} zu \SI{3.3}{V} bei über \SI{2}{A} & LM2596 & 3A, integrierter Schalter \cite{datasheet:3v3dcdc} \\
+
+	\end{tabular}
+
+
 	\bibliographystyle{IEEEtran}
 	\bibliography{masterselect}
 \end{document}

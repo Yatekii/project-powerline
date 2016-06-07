@@ -15,44 +15,72 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
         TODO: JAC Cell
     }
     \label{fig:ltspice:jac:cell}
-    \centering
-    \includegraphics[width=0.9\textwidth]{images/ltspice/generic-iv-curves/cell.eps}
-    \figcaption{%
-        TODO: Generic IV Curve Cell
-    }
-    \label{fig:ltspice:iv:generic:cell}
+    %\centering
+    %\includegraphics[width=0.9\textwidth]{images/ltspice/generic-iv-curves/cell.eps}
+    %\figcaption{%
+    %    TODO: Generic IV Curve Cell
+    %}
+    %\label{fig:ltspice:iv:generic:cell}
 \end{minipage}
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/module.eps}
+    \includegraphics[width=\textwidth]{images/ltspice/jac/stringNoD.eps}
     \caption{%
-        TODO
+        \code{LTspice}-Schaltung  f\"ur  einen   Modulstrang  aus  20  Modulen
+        und   variablem  Lastwiderstand   \code{Rload}   zur  Erstellung   von
+        Strom-Spannungs-Kurven. Es  wird   je  ein  Strang  aus   Modulen  mit
+        Freilaufdiode   (Abbildung  \ref{fig:ltspice:jacModule:NoDiode})   und
+        ohne   Freilaufdiode   (Abbildung   \ref{fig:ltspice:jacModule:Diode})
+        simuliert.%
     }
-    \label{fig:ltspice:iv:generic:module}
+    \label{fig:ltspice:string:ivCurve}
 \end{figure}
 
-{\begin{a3pages}
-    \begin{figure}[h!tb]
-        \centering
-        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array.eps}
-        \caption{%
-            TODO
-        }
-        \label{fig:ltspice:iv:generic:array}
-        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array-bypass.eps}
-        \caption{%
-            TODO
-        }
-        \label{fig:ltspice:iv:generic:array:bypass}
-    \end{figure}
-\end{a3pages}}
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=\textwidth]{images/ltspice/jac/jacModuleNoD.eps}
+    \caption{Modul ohne Freilaufdiode}
+    \label{fig:ltspice:jacModule:NoDiode}
+\end{figure}
 
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=\textwidth]{images/ltspice/jac/jacModule.eps}
-    \caption{%
-        TODO
-    }
-    \label{fig:ltspice:jac:Module}
+    \caption{Modul mit Freilaufdiode (unten, Mitte)}
+    \label{fig:ltspice:jacModule:Diode}
 \end{figure}
+
+%\begin{figure}[h!tb]
+%    \centering
+%    \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/module.eps}
+%    \caption{%
+%        TODO
+%    }
+%    \label{fig:ltspice:iv:generic:module}
+%\end{figure}
+
+%{\begin{a3pages}
+%    \begin{figure}[h!tb]
+%        \centering
+%        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array.eps}
+%        \caption{%
+%            TODO
+%        }
+%        \label{fig:ltspice:iv:generic:array}
+%        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array-bypass.eps}
+%        \caption{%
+%            TODO
+%        }
+%        \label{fig:ltspice:iv:generic:array:bypass}
+%    \end{figure}
+%\end{a3pages}}
+
+%\begin{figure}[h!tb]
+%    \centering
+%    \includegraphics[width=\textwidth]{images/ltspice/jac/jacModule.eps}
+%    \caption{%
+%        TODO
+%    }
+%    \label{fig:ltspice:jac:Module}
+%\end{figure}

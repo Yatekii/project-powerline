@@ -1,6 +1,6 @@
 % **************************************************************************** %
-\chapter{Firmware}
-\label{chap:firmware}
+\chapter{Software}
+\label{chap:software}
 % **************************************************************************** %
 
 An  dieser  Stelle wird  genauer  erl\"autert,  welche \"Uberlegungen  in  die
@@ -18,20 +18,46 @@ der Grund ihrer Wahl erl\"autert werden.
 \anweisung   Unterkapitel  entsprechend   Gliederung  der   Firmware  sinnvoll
 erg\"anzen.
 
-% ---------------------------------------------------------------------------- %
-\section{Sensorplatine}
-\label{sec:fw:sensorplatine}
-% ---------------------------------------------------------------------------- %
-
-Sinnvolle Beschreibung der Firmware des Sensors.
-
 
 % ---------------------------------------------------------------------------- %
-\section{Master-Ger\"at}
-\label{sec:fw:mastergerat}
+\section{Firmware \Sensor}
+\label{sec:firmware:sensor}
 % ---------------------------------------------------------------------------- %
 
-Unterbau, GSM-Modul, Benutzeroberfl\"ache. Wichtigster Punkt: Datenauswertung.
+% ---------------------------------------------------------------------------- %
+\section{Software \Master}
+\label{sec:software:master}
+% ---------------------------------------------------------------------------- %
+
+Es wird  im Folgenden auf  die Software des \Master~  genauer eingegangen. Die
+verwendeten  Komponenten  werden beschrieben  und  es  wird auf  die  Lizenzen
+ebendieser  Komponenten eingegangen. Anschliessend  werden der  Aufbau unseres
+Software-Stacks und die Funktionsprinzipien dokumentiert.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Komponenten}
+\label{subsec:software:master:components}
+% ---------------------------------------------------------------------------- %
+
+Als   Betriebssystem   kommt   Raspbian   zum   Einsatz. Raspbian   ist   eine
+Linux-Distribution,  welche auf  Debian  \todo{link auf  website} aufbaut  und
+Erweiterungen f\"ur  zus\"atzliche Display-Funktionalit\"at f\"ur  den \Raspi~
+besitzt.
+
+Unsere eigene Software basiert auf  Python3 und QT5. In Python3 stehen diverse
+Bibliotheken  \todo{welche?} zur  Verf\"ugung,  welche  es uns  erm\"oglichen,
+das  Rad  nicht   neu  erfinden  zu  m\"ussen. Sattdessen   k\"onnen  wir  uns
+darauf  konzentrieren, die  eigentliche Funktionalit\"at  unseres Ger\"ats  zu
+implementieren.
+
+\todo{layering diagramm}
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Lizenzen}
+\label{subsec:software:master:licenses}
+% ---------------------------------------------------------------------------- %
 
 
 % ---------------------------------------------------------------------------- %

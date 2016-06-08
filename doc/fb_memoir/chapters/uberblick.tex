@@ -81,8 +81,10 @@ wird\hfill eine\hfill h\"ohere\hfill Ausgangsspannung
     \centering
     \includegraphics[width=0.3\textwidth]{images/solar-facility/pvJunctionBox.jpeg}
     \caption[Anschlussbox PV-Modul]{
-        Anschlussbox f\"ur  PV-Modul, wird  normalerweise auf  der R\"uckseite
-        des Moduls montiert. \cite{ref:junctionBox}%
+        Anschlussbox   f\"ur   PV-Modul,   Montage   normalerweise   auf   der
+        R\"uckseite  des  Moduls  \cite{ref:junctionBox}. Es  sind  auch  drei
+        Freilaufdioden  erkennbar  (Abschnitt \ref{sec:shadedCells}  ab  Seite
+        \pageref{sec:shadedCells})%
     }
     \label{fig:pvJunctionBox}
 \end{wrapfigure}
@@ -157,22 +159,98 @@ platziert.
 \label{sec:shadedCells}
 % ---------------------------------------------------------------------------- %
 
-\todo{Referenzen auf Simu-Circuits}
+In  diesem Abschnitt  werden einige  Simulationsergebnisse pr\"asentiert,  die
+exemplarisch zeigen,  wie drastisch  die Leistungsf\"ahigkeit  einer PV-Anlage
+aufgrund von bereits ziemlich kleinen Ursachen abnehmen kann.
+
+Bei   der   Serieschaltung   von   Zellen  zu   einem   Modul   kann   bereits
+eine    einzelne   nicht    voll    funktionsf\"ahige    Zelle   zu    starken
+Einbussen   bei   der   Leistungsf\"ahigkeit   des   Moduls   f\"uhren\footnotemark. Dieser
+Effekt  ist  in   den  Abbildungen  \ref{fig:simu:iv-curves:module:generic:3d}
+und    \ref{fig:simu:iv-curves:module:generic}     gezeigt. Die    Abbildungen
+basiert    auf   der    Simulation   eines    PV-Moduls,   welches    aus   72
+in   Serie   geschalteten   Zellen   besteht   (die   zugeh\"orige   Schaltung
+ist    in    Abbildung     \ref{fig:ltspice:iv:generic:module}    auf    Seite
+\pageref{fig:ltspice:iv:generic:module}  dargestellt). Gibt   schon  nur  eine
+Zelle  von  72 weniger  Strom  ab  als  die  restlichen, verringert  sich  die
+Leistungsf\"ahigkeit des Moduls betr\"achtlich. Der dabei von einem Modul noch
+abgegebene Strom h\"angt wesentlich vom  Shunt-Widerstand des Modells bzw. vom
+parallelen Innenwiderstand  der Zelle  ab (mehr zum  Modell einer  PV-Zelle in
+Abschnitt \ref{sec:simu:model:cell} ab Seite \pageref{sec:simu:model:cell}).
+
+\footnotetext{%
+    Es   sei   an   dieser   Stelle  noch   erw\"ahnt,   dass   aufgrund   von
+    Fertigungstoleranzen bei  realen Modulen  nat\"urlich niemals  alle Zellen
+    den genau gleichen Arbeitspunkt  haben. Diese Effekte zu ber\"ucksichtigen
+    w\"urde jedoch  die im  Rahmen dieses  Projekts zur  Verf\"ugung stehenden
+    Ressourcen massiv  \"ubersteigen. Daher werden  sie f\"ur den  Rest dieses
+    Berichts nicht ber\"ucksichtigt.%
+}
 
 \begin{figure}[h!tb]
+    \centering
     \input{images/iv-curves/module-3d.tex}
+    \caption
+    [3d-Darstellung von Leistung, Spannung und Strom eines PV-Moduls]
+    {%
+        3d-Darstellung  von  Leistung,  Spannung und  Strom  eines  PV-Moduls.
+        Abbildung    \ref{fig:simu:iv-curves:module:generic}    zeigt    diese
+        Kurven  zweidimensional.    Die  zuge\"orige  \code{LTspice}-Schaltung
+        ist   in  Abbildung   \ref{fig:ltspice:iv:generic:module}  auf   Seite
+        \pageref{fig:ltspice:iv:generic:module} abgebildet.%
+    }
+    \label{fig:simu:iv-curves:module:generic:3d}
+\end{figure}
+
+\begin{figure}[h!tb]
+    \centering
     \input{images/iv-curves/module-2d.tex}
     \caption[IV- und PV-Kurven eines PV-Moduls bei Leistungseinbruch]{%
         Verhalten   eines    Moduls   bei    Reduktion   des    Stroms   einer
-        einzelnen   Zelle.   Die   zuge\"orige  \code{LTspice}-Schaltung   ist
+        einzelnen   Zelle.
+        Die   zuge\"orige  \code{LTspice}-Schaltung   ist
         in    Abbildung    \ref{fig:ltspice:iv:generic:module}    auf    Seite
-        \pageref{fig:ltspice:iv:generic:module} zu finden.%
+        \pageref{fig:ltspice:iv:generic:module}    zu    finden.     Abbildung
+        \ref{fig:simu:iv-curves:module:generic:3d}  zeigt  die  entsprechenden
+        Zusammenh\"ange dreidimensional.%
     }
     \label{fig:simu:iv-curves:module:generic}
 \end{figure}
 
+Bei Serieschaltung von  mehreren PV-Modulen in einem Strang  kann bereits eine
+einzige nicht voll  funktionsf\"ahige Zelle die Leistung  des gesamten Strangs
+stark beeintr\"achtigen.  Der gesamte von einem Modul und somit auch von einem
+Strang  abgegebene Strom  h\"angt  also  von der  schw\"achsten  Zelle in  der
+Schaltung ab.
+
+Um  diesen  Effekt  zu  reduzieren,  werden  in  der  Praxis  in  jedem  Modul
+jeweils  \"uber mehreren  Zellen  Freilaufdioden  (Engl. \emph{Bypass  Diode})
+geschaltet. In  der  Anschlussbox  aus Abbildung  \ref{fig:pvJunctionBox}  von
+Seite  \pageref{fig:pvJunctionBox}  sind   zum  Beispiel  drei  Freilaufdioden
+sichtbar, womit  z.B. drei mal 24  Zellen mit je einer  Freilaufdiode parallel
+geschaltet werden k\"onnten. Aus Kostengr\"unden wird nicht eine Freilaufdiode
+pro  Zelle  verbaut,  obwohl  dies nat\"urlich  aus  elektrotechnischer  Sicht
+optimal w\"are.
+
+\clearpage
+Wird   ein   Strom   durch   eine   PV-Zelle   geleitet,   ohne   dass   diese
+gen\"ugend   belichtet   ist,   findet    \"uber   der   Zelle   statt   eines
+Spannungsanstiegs  wie  im  regul\"aren  Betrieb  ein  Spannungsabfall  statt,
+was   bedeutet,   dass   der   durch  die   PV-Zelle   fliessende   Strom   in
+der   Zelle  thermische   Verlustleistung  produziert. Dies   ist  nicht   nur
+ineffizient   und  un\"okonomisch,   sondern   kann   auch  eine   Brandgefahr
+darstellen. Abbildung    \ref{fig:simu:iv-curves:array:generic}   zeigt    die
+Simulation eines  Modulstrangs, in  dem keines  der Module  mit Freilaufdioden
+versehen  ist. Wie  leicht  zu  erkennen  ist,  f\"allt  die  vom  Modulstrang
+abgegebene Leistung  bereits bei  einer einzigen defekten  Zelle (von  1440 im
+gesamten  Modulstrang!) bedeutend  ab. Gibt  eine Zelle  lediglich noch  einen
+F\"unftel  des Stromes  der restlichen  Zellen  ab, f\"allt  die vom  gesamten
+Strang  abgegebene  Leistung  um  etwa einen  Viertel  \todo{nicht  abgegebene
+Leistung verheizt?}.
+
+
 \begin{figure}[h!tb]
-    %\input{images/iv-curves/array-3d.tex}
+    \centering
     \input{images/iv-curves/array-2d.tex}
     \caption[%
         IV- und PV-Kurven eines Modulsstrangs bei Leistungseinbruch,
@@ -190,8 +268,16 @@ platziert.
     \label{fig:simu:iv-curves:array:generic}
 \end{figure}
 
+\clearpage
+Abbildung     \ref{fig:simu:iv-curves:array:generic:bypass}      zeigt     das
+Verhalten       des      gleichen       Modulstranges      wie       Abbildung
+\ref{fig:simu:iv-curves:array:generic} , nur dass nun zu jedem Modul noch eine
+Freilaufdiode  parallel  geschaltet ist  (in  der  Praxis wird  wie  erw\"ahnt
+mehr  als   eine  Freilaufdiode  pro   Modul  verwendet,  aber   f\"ur  unsere
+Simulations-Szenarien ist eine Diode pro Modul ausreichend).
+
 \begin{figure}[h!tb]
-    %\input{images/iv-curves/array-bypass-3d.tex}
+    \centering
     \input{images/iv-curves/array-bypass-2d.tex}
     \caption[%
         IV- und PV-Kurven eines Modulsstrangs bei Leistungseinbruch,
@@ -212,6 +298,20 @@ platziert.
     \label{fig:simu:iv-curves:array:generic:bypass}
 \end{figure}
 
+Die  Freilaufdioden leiten  den Strom  an den  nicht korrekt  funktionierenden
+Zellstr\"angen  des Moduls  vorbei, und  verhindern somit,  dass solch  grosse
+Verluste entstehen. Die \"uber der Freilaufdiode abfallende Vorw\"artsspannung
+ist viel kleiner  als die \"uber einem schlecht  beleuchteten Modul abfallende
+Spannung.  Somit sind auch die in der Freilaufdiode stattfindenden thermischen
+Verluste viel geringer.
+
+Keine  oder nur  schwache Wirkung  zeigen die  Bypass-Dioden, wenn  die Zellen
+nur schwach  abgeschattet oder  verschmutzt sind  \todo{weshalb?}. Solange die
+Spannung an den einzelnen Modulen nicht  stets \"uberwacht wird, kann es somit
+trotz dieser  Bypass-Dioden zu  erheblichen Leistungseinbr\"uchen  im gesamten
+System kommen, ohne  dass man Gegenmassnahmen ergreifen kann, da  man ja nicht
+\"uber den Status der Anlage informiert ist.
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage
@@ -222,20 +322,65 @@ platziert.
 Unser   System  bietet   neben   einer   benutzerfreundlichen  Bedienung   und
 Inbetriebnahme,  so wie  einer  einfachen Integration  in bestehende  Anlagen,
 ebenfalls  eine  kosteng\"unstige  und energieeffiziente  L\"osung  f\"ur  die
-\"Uberwachung von Photovoltaikanlagen. Das System setzt sich zusammen aus zwei
-Hauptkomponenten, dem Master-Ger\"at und den jeweiligen Sensoren.
+\"Uberwachung  von Photovoltaikanlagen. Das  System  setzt  sich zusammen  aus
+zwei  Hauptkomponenten, dem  Master-Ger\"at und  den jeweiligen  Sensoren. Die
+Schematische  Integration  des Systems  in  eine  PV-Anlage ist  in  Abbildung
+\ref{fig:pvarray:gak:inverter:ourSystem} gezeigt.
+
+\begin{figure}[h!t]
+    \centering
+    \begin{tikzpicture}
+        \begin{scope}[red,x={(0mm,\textwidth)},y={(0mm,-70mm)}]
+            \node[inner sep=0pt,anchor=north west] at (0mm,0mm) {%
+                \includegraphics[width=\textwidth]{images/solar-facility/pvarray-ourSystem.jpeg}%
+            };
+            \node at (  3.5mm,-28.1mm) {S};
+            \node at (13.75mm,-28mm) {S};
+            \node at (28.75mm,-28mm) {S};
+            \node at ( 43.5mm,-28mm) {S};
+            \node at (58.25mm,-28mm) {S};
+            \node at (72.75mm,-27.65mm) {S};
+            \node at (87.75mm,-27.75mm) {S};
+            \node at (102.25mm,-27.65mm) {S};
+
+            \node at ( 13.5mm ,-34.4mm) {S};
+            \node at ( 28.4mm ,-34.0mm) {S};
+            \node at ( 43.45mm,-34.15mm) {S};
+            \node at ( 57.2mm,-33.9mm) {S};
+            \node at ( 71.75mm,-33.8mm) {S};
+            \node at ( 86.65mm,-34.15mm) {S};
+            \node at (102mm   ,-34.25mm) {S};
+
+            \node at (117.7mm   ,-38.75mm) {S};
+
+            \node at (122.75mm   ,-61.25mm) {\Huge M};
+            %\node at (132mm,-55mm) {\small{GAK}};
+            %\node at (120mm,0mm) {\small{Wechselrichter}};
+            %\node at (55mm,-5mm) {\small{Modulstrang}};
+        \end{scope}
+    \end{tikzpicture}
+    \caption[Modulstrang, \"Ubersichtsbild]{%
+        Modulstrang mit je einem Sensor \textcolor{red}{S} pro Modul und einem
+        \Master~\textcolor{red}{M} beim Generator-Anschlusskasten
+    }
+    \label{fig:pvarray:gak:inverter:ourSystem}
+\end{figure}
 
 Die Installation  des Master-Ger\"ates erfolgt im  zugeh\"origen Schaltschrank
-des  Wechselrichters. Das  schlichte  Hutschienengeh\"ause  erm\"oglicht  eine
-einfache   Installation   in   bestehende  oder   neue   Schaltschr\"anke. Die
-Energieversorgung,  wie  auch  die  Ankopplung  an  die  DC-Leitungen  erfolgt
-intern   des   Schaltschrankes   und  wird   von   einem   Elektroinstallateur
-ausgef\"uhrt. Neben dem  Klemmenanschluss f\"ur die Energieversorgung  und den
-zwei Relaisausg\"angen  f\"ur externe Alarmger\"ate, sieht  das Master-Ger\"at
-die  Ankopplung  der  DC-Leitungen  von  bis  zu  drei  Modulstrangs  vor. Ein
-internes 3.5“ Touch-Display erm\"oglicht eine einfache Inbetriebnahme und eine
-benutzerfreundliche  Bedienung des  Systems. Alle  Messresultate der  Sensoren
-werden  vom Master-Ger\"at  ausgewertet  und dem  Kunden  in einer  grafischen
+des   Wechselrichters\todo{Nicht  GAK?}. Das   schlichte  Hutschienengeh\"ause
+erm\"oglicht   eine   einfache   Installation    in   bestehende   oder   neue
+Schaltschr\"anke. Die  Energieversorgung,  wie  auch  die  Ankopplung  an  die
+DC-Leitungen   erfolgt  im   Innern   Schaltschrankes  und   wird  von   einem
+Elektroinstallateur ausgef\"uhrt.
+
+Neben  dem   Klemmenanschluss  f\"ur   die  Energieversorgung  und   den  zwei
+Relaisausg\"angen  f\"ur   externe  Alarmger\"ate   sieht  das   \Master~  die
+Ankopplung der DC-Leitungen von bis zu drei Modulstr\"angen vor (einer gezeigt
+in Abbildung \ref{fig:pvarray:gak:inverter:ourSystem}).
+
+Ein internes  3.5“ Touch-Display  erm\"oglicht eine  einfache Inbetriebnahme
+und  eine benutzerfreundliche  Bedienung des  Systems. Alle Messresultate  der
+Sensoren werden vom  \Master~ ausgewertet und dem Kunden  auf einer grafischen
 Benutzeroberfl\"ache  dargestellt. Tritt ein  Fehler an  der Anlage  auf, wird
 eine entsprechende Meldung auf dem Display angezeigt, die beiden Relais werden
 bet\"atigt  und  eine  Nachricht  mittels  SMS  wird  versendet. Dadurch  wird
@@ -267,13 +412,15 @@ Kein Fehler soll in folgenden Situationen ausgel\"ost werden.
         Anlage absichtlich ausser Betrieb genommen (z.B. Unterhaltsarbeiten)
 \end{itemize}
 
-F\"ur  die  Spannungsmessung  und  die \"Ubertragung  der  Messresultate  sind
-die  Sensoren  zust\"andig. Die  Installation  der  Sensoren  erfolgt  in  den
-Anschlussdosen  auf der  R\"uckseite der  PV-Module. F\"ur jedes  PV-Modul ist
-jeweils  ein  Sensor  zu  installieren. Eine  zweiadrige  Verbindung  von  der
-Sensorplatine  zu den  Klemmen  der Anschlussdose  ist  zust\"andig f\"ur  die
-Energieversorgung des Sensors und die  Ankopplung an die DC-Leitung, f\"ur die
-\"Ubertragung der Messresultate an das Master-Ger\"at.
+F\"ur   die  Spannungsmessung   und   die   \"Ubertragung  der   Messresultate
+sind  die   Sensoren  zust\"andig. Die   Installation  der   Sensoren  erfolgt
+in  den   Anschlussdosen  auf  der  R\"uckseite   der  PV-Module. F\"ur  jedes
+PV-Modul  ist   jeweils  ein   Sensor  zu   installieren,  wie   in  Abbildung
+\ref{fig:pvarray:gak:inverter:ourSystem}  gezeigt. Eine  zweiadrige Verbindung
+von der Sensorplatine  zu den Klemmen der Anschlussdose  ist zust\"andig f\"ur
+die Energieversorgung des Sensors und  die Ankopplung an die DC-Leitung, f\"ur
+die \"Ubertragung der Messresultate an das Master-Ger\"at.
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage

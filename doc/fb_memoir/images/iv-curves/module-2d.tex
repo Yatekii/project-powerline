@@ -1,9 +1,10 @@
 \begin{tikzpicture}
-   \begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,100mm)}]
+   \begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,110mm)}]
        \begin{axis}[%
+               title = Strom und Spannung eines PV-Moduls mit einer degradierten Zelle,
                height=50mm,
                width=0.95\textwidth,
-               at={(0,50mm)},
+               at={(0,55mm)},
                grid=both,
                xlabel=Spannung (\si{\volt}),
                ylabel=Strom (\si{\ampere}),
@@ -30,6 +31,7 @@
            }
         \end{axis}
         \begin{axis}[%
+               title = Leistung eines PV-Moduls mit einer degradierten Zelle,
                height=50mm,
                width=0.95\textwidth,
                at={(0,0)},

@@ -10,18 +10,48 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
 
 \noindent\begin{minipage}{\textwidth}
     \centering
+    \includegraphics[width=0.9\textwidth]{images/ltspice/generic-iv-curves/cell.eps}
+    \figcaption{%
+        Modell   der   PV-Zelle,   aus   welchem  das   Modul   in   Abbildung
+        \label{fig:ltspice:iv:generic:module} aufgebaut  ist. Die Simulationen
+        aus   Abbildung   \ref{fig:simu:iv-curves:module:generic}  auf   Seite
+        \pageref{fig:simu:iv-curves:module:generic}   basieren    auf   diesem
+        Modell. Gegen\"uber     in     Abschnitt     \ref{sec:simu:model:cell}
+        hergeleiteten Modell hat dieses  Modell einen h\"oheren Photostrom und
+        einen niedrigeren Shunt-Widerstand. Dies  erzeugt etwas anschaulichere
+        Kurven.%
+    }
+    \label{fig:ltspice:iv:generic:cell}
     \includegraphics[width=0.9\textwidth]{images/ltspice/jac/cell.eps}
     \figcaption{%
-        TODO: JAC Cell
+        Modell  der   PV-Zelle,  auf  welchen  die   Simulationen  in  Kapitel
+        \ref{chap:simu} ab  Seite \pageref{chap:simu}  beruhen. Die Herleitung
+        ist in Abschnitt \ref{sec:simu:model:cell} dokumentiert.%
     }
     \label{fig:ltspice:jac:cell}
-    %\centering
-    %\includegraphics[width=0.9\textwidth]{images/ltspice/generic-iv-curves/cell.eps}
-    %\figcaption{%
-    %    TODO: Generic IV Curve Cell
-    %}
-    %\label{fig:ltspice:iv:generic:cell}
 \end{minipage}
+
+\begin{figure}[h!tb]
+    \centering
+    \begin{tikzpicture}[%
+        spy scope = {magnification=7,size=25*8,connect spies},
+        every spy on node/.style={circle,red,draw},
+        every spy in node/.style = {circle, fill=white, fill opacity=1, draw},
+        ]
+        \node[inner sep = 0pt,anchor=south west] {%
+            \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/module.eps}
+        };
+        \spy[red] on (0.45,1.2) in node at (10,8);
+    \end{tikzpicture}
+    \caption{%
+        \code{LTspice}-Modell,    welches    zur    Erzeugung    der    Kurven
+        in   Abbildung   \ref{fig:simu:iv-curves:module:generic}   auf   Seite
+        \pageref{fig:simu:iv-curves:module:generic}  benutzt  worden  ist. Das
+        Modell  der Zelle,  aus welcher  dieses  Modul aufgebaut  ist, ist  in
+        Abbildung \ref{fig:ltspice:iv:generic:cell} abgebildet.%
+    }
+    \label{fig:ltspice:iv:generic:module}
+\end{figure}
 
 \begin{figure}[h!tb]
     \centering
@@ -39,48 +69,51 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/jac/jacModuleNoD.eps}
-    \caption{Modul ohne Freilaufdiode}
+    \begin{tikzpicture}[%
+        spy scope = {magnification=5,height=25*5.5,width=25*10,connect spies},
+        every spy on node/.style={rectangle,red,draw},
+        every spy in node/.style = {rectangle,fill=white, fill opacity=1, draw},
+        ]
+        \node[inner sep = 0pt,anchor=south west] {%
+            \includegraphics[width=\textwidth]{images/ltspice/jac/jacModuleNoD.eps}
+        };
+        \spy[red] on (1.15,1.13) in node at (9,8);
+    \end{tikzpicture}
+    \caption{%
+        Modul    ohne   Freilaufdiode,    benutzt    f\"ur   die    Simulation
+        aus   Abbildung   \ref{fig:simu:iv-curves:array:generic}   von   Seite
+        \pageref{fig:simu:iv-curves:array:generic}.%
+    }
     \label{fig:ltspice:jacModule:NoDiode}
 \end{figure}
 
 \begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/ltspice/jac/jacModule.eps}
-    \caption{Modul mit Freilaufdiode (unten, Mitte)}
+    \begin{tikzpicture}[%
+        spy scope = {magnification=5,height=25*5.5,width=25*10,connect spies},
+        every spy on node/.style={red,draw},
+        every spy in node/.style = {fill=white, fill opacity=1, draw},
+        ]
+        \node[inner sep = 0pt,anchor=south west] {%
+            \includegraphics[width=\textwidth]{images/ltspice/jac/jacModule.eps}
+        };
+        \spy[rectangle,red] on (1.15,1.13) in node at (9,8);
+        \spy[circle,size=25*3,red] on (7.05,0.9) in node at (9,3);
+    \end{tikzpicture}
+    \caption{%
+        Modul      mit      Freilaufdiode       (unten,      Mitte,      Diode
+        \code{D145}). Benutzt       f\"ur       die       Simulation       aus
+        Abbildung   \ref{fig:simu:iv-curves:array:generic:bypass}  von   Seite
+        \pageref{fig:simu:iv-curves:array:generic:bypass}       sowie      die
+        Simulationen zu den L\"osungsvarianten in Abschnitt
+        \ref{sec:simu:coupling:inductive} ab Seite
+        \pageref{sec:simu:coupling:inductive}, Abschnitt
+        \ref{sec:simu:coupling:capacitive} ab Seite
+        \pageref{sec:simu:coupling:capacitive} und Abschnitt
+        \ref{sec:simu:short} ab Seite
+        \pageref{sec:simu:short}.
+        Abbildung   \ref{fig:ltspice:jac:cell}    enth\"alt   das   verwendete
+        Zellenmodell.%
+    }
     \label{fig:ltspice:jacModule:Diode}
 \end{figure}
-
-%\begin{figure}[h!tb]
-%    \centering
-%    \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/module.eps}
-%    \caption{%
-%        TODO
-%    }
-%    \label{fig:ltspice:iv:generic:module}
-%\end{figure}
-
-%{\begin{a3pages}
-%    \begin{figure}[h!tb]
-%        \centering
-%        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array.eps}
-%        \caption{%
-%            TODO
-%        }
-%        \label{fig:ltspice:iv:generic:array}
-%        \includegraphics[width=\textwidth]{images/ltspice/generic-iv-curves/array-bypass.eps}
-%        \caption{%
-%            TODO
-%        }
-%        \label{fig:ltspice:iv:generic:array:bypass}
-%    \end{figure}
-%\end{a3pages}}
-
-%\begin{figure}[h!tb]
-%    \centering
-%    \includegraphics[width=\textwidth]{images/ltspice/jac/jacModule.eps}
-%    \caption{%
-%        TODO
-%    }
-%    \label{fig:ltspice:jac:Module}
-%\end{figure}

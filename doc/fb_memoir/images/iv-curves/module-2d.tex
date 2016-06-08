@@ -1,13 +1,16 @@
 \begin{tikzpicture}
-   \begin{scope}[x={(0mm,0mm)},y={(90mm,0.9\textwidth)}]
+   \begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,100mm)}]
        \begin{axis}[%
                height=50mm,
-               width=\textwidth,
+               width=0.95\textwidth,
                at={(0,50mm)},
                grid=both,
                xlabel=Spannung (\si{\volt}),
                ylabel=Strom (\si{\ampere}),
-               colormap/hot2,
+               xmin = 0,
+               xmax = 48,
+               legend cell align = right,
+               legend style={at={(0.06,0.025)},anchor=south west},
                %axis y line*=left,
                %x unit=u,
                %change x base=true,
@@ -15,32 +18,38 @@
                %thick,
                %x SI prefix=micro,
            ]
-           \addplot[-,purple]  table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--1a.dat};
-           \addplot[-,teal]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--4a.dat};
-           \addplot[-,magenta] table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--7a.dat};
-           \addplot[-,blue]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--9a.dat};
-            %\addplot[-,color=blue] table {data/iv-curves/module-72cells-series--reference--all-ok.dat};
-            %\addplot[-,color=teal] table {data/iv-curves/module-72cells-series--reference--ifail-5A.dat};
-            %\addplot[-,color=magenta] table {data/iv-curves/module-72cells-series--reference--ifail-1A.dat};
+           \addplot[-,blue]  table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--1a.dat};
+           \addplot[-,magenta]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--4a.dat};
+           \addplot[-,teal] table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--7a.dat};
+           \addplot[-,cyan]    table[x=V(out), y=I(R3)] {data/iv-curves/generic-module/iv-generic--9a.dat};
+           \legend{%
+               11\%,
+               44\%,
+               78\%,
+               100\%%
+           }
         \end{axis}
         \begin{axis}[%
                height=50mm,
-               width=\textwidth,
+               width=0.95\textwidth,
                at={(0,0)},
                grid=both,
                xlabel=Spannung (\si{\volt}),
                ylabel=Leistung (\si{\watt}),
-               %axis y line*=left,
-               %x unit=u,
-               %change x base=true,
-               %line width = 1pt,
-               %thick,
-               %x SI prefix=micro,
+               xmin = 0,
+               xmax = 48,
+               legend style={at={(0.025,0.35)},anchor=south west},
            ]
-           \addplot[-,purple]  table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--1a.dat};
-           \addplot[-,teal]    table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--4a.dat};
-           \addplot[-,magenta] table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--7a.dat};
-           \addplot[-,blue]    table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--9a.dat};
+           \addplot[-,blue]  table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--1a.dat};
+           \addplot[-,magenta]    table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--4a.dat};
+           \addplot[-,teal] table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--7a.dat};
+           \addplot[-,cyan]    table[x=V(out), y=power] {data/iv-curves/generic-module/iv-generic--9a.dat};
+           \legend{%
+               11\%,
+               44\%,
+               78\%,
+               100\%%
+           }
         \end{axis}
     \end{scope}
 \end{tikzpicture}

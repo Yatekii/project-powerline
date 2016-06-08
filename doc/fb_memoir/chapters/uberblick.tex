@@ -46,6 +46,7 @@ Frontansicht einer PV-Zelle.
         \ref{fig:pvcell:front}%
     }
     \label{fig:pvmodule}
+    \vspace*{-1em}
 \end{wrapfigure}
 
 
@@ -70,8 +71,9 @@ Module (Beispiel in Abbildung \ref{fig:pvJunctionBox}) \cite{ref:pv:baunetz}.
 
 
 Mehrere  identische  Module  werden  \"ublicherweise  mittels  Reihenschaltung
-zu\hfill  einem\hfill  Modulstrang\hfill verschaltet\hfill  (vereinfacht\hfill
-dargestellt\hfill in\hfill Abbildung\hfill \ref{fig:pvarray:gak:inverter}).
+zu  einem  Modulstrang  verschaltet  (vereinfacht  dargestellt\hfill  in\hfill
+Abbildung\hfill    \ref{fig:pvarray:gak:inverter}).    \hfill    Dadurch\hfill
+wird\hfill eine\hfill h\"ohere\hfill Ausgangsspannung
 
 \begin{wrapfigure}{r}{0.35\textwidth}
     \centering
@@ -83,17 +85,17 @@ dargestellt\hfill in\hfill Abbildung\hfill \ref{fig:pvarray:gak:inverter}).
     \label{fig:pvJunctionBox}
 \end{wrapfigure}
 
-\noindent  Dadurch  wird  eine  h\"ohere  Ausgangsspannung  erzeugt,  was  die
-Umwandlung  des  Gleichstroms  in  Wechselstrom  und  dessen  Einspeisung  ins
-Wechselstromnetz  erleichtert. Die  Ausgangsspannung eines  Modulstrangs  darf
-gem\"ass Vorschrift \SI{1000}{\volt} DC  nicht \"uberschreiten, was die Anzahl
-der in  einem Strang in  Serie geschalteten Module beschr\"ankt.   Module, die
-an  unterschiedlichen Dachneigungen  montiert sind  oder die  unterschiedliche
-Ausrichtungen  haben,  sollten  nie zu  einem  Modulstrang  zusammengeschaltet
-werden, da sie nicht den gleichen  Strom produzieren werden, was die Effizienz
-des Strangs stark reduziert. Ein einzelnes beschattetes oder nicht einwandfrei
-funktionierendes   Modul  beeintr\"achtigt   die   vom  gesamten   Modulstrang
-abgegebene Leistung stark (siehe auch n\"achster Abschnitt).
+\noindent erzeugt,  was die  Umwandlung des  Gleichstroms in  Wechselstrom und
+dessen  Einspeisung  ins  Wechselstromnetz  erleichtert. Die  Ausgangsspannung
+eines  Modulstrangs   darf  gem\"ass  Vorschrift  \SI{1000}{\volt}   DC  nicht
+\"uberschreiten,  was die  Anzahl der  in einem  Strang in  Serie geschalteten
+Module beschr\"ankt.  Module, die  an unterschiedlichen Dachneigungen montiert
+sind  oder die  unterschiedliche  Ausrichtungen haben,  sollten  nie zu  einem
+Modulstrang  zusammengeschaltet  werden,  da  sie  nicht  den  gleichen  Strom
+produzieren  werden,  was  die  Effizienz  des  Strangs  stark  reduziert. Ein
+einzelnes   beschattetes  oder   nicht   einwandfrei  funktionierendes   Modul
+beeintr\"achtigt die vom gesamten Modulstrang abgegebene Leistung stark (siehe
+auch n\"achster Abschnitt).
 
 \todo{Freilaufdioden}
 
@@ -159,8 +161,10 @@ platziert.
     \input{images/iv-curves/module-3d.tex}
     \input{images/iv-curves/module-2d.tex}
     \caption{
-        Verhalten  eines  Moduls  bei  Reduktion des  Stroms  einer  einzelnen
-        Zelle.%
+        Verhalten   eines    Moduls   bei    Reduktion   des    Stroms   einer
+        einzelnen   Zelle.   Die   zuge\"orige  \code{LTspice}-Schaltung   ist
+        in    Abbildung    \ref{fig:ltspice:iv:generic:module}    auf    Seite
+        \pageref{fig:ltspice:iv:generic:module} zu finden.%
     }
     \label{fig:simu:iv-curves:module:generic}
 \end{figure}
@@ -169,8 +173,13 @@ platziert.
     %\input{images/iv-curves/array-3d.tex}
     \input{images/iv-curves/array-2d.tex}
     \caption{
-        Verhalten  eines Modulstrangs  ohne Freilaufdioden  bei Reduktion  des
-        Stroms einer einzelnen Zelle.%
+        Verhalten       eines      Modulstrangs       ohne      Freilaufdioden
+        bei     Reduktion     des     Stroms    einer     einzelnen     Zelle.
+        Die      zugeh\"origen     \code{LTspice}-Schaltungen      sind     im
+        Anhang       in       Abbildung       \ref{fig:ltspice:string:ivCurve}
+        auf     Seite      \pageref{fig:ltspice:string:ivCurve}     und     in
+        Abbildung      \ref{fig:ltspice:jacModule:NoDiode}      auf      Seite
+        \pageref{fig:ltspice:jacModule:NoDiode} dokumentiert.%
     }
     \label{fig:simu:iv-curves:array:generic}
 \end{figure}
@@ -179,61 +188,19 @@ platziert.
     %\input{images/iv-curves/array-bypass-3d.tex}
     \input{images/iv-curves/array-bypass-2d.tex}
     \caption{
-        Verhalten eines Modulstrangs mit einer Freilaufdiode f\"ur jedes Modul
-        bei Reduktion des Stroms einer einzelnen Zelle.%
+        Verhalten   eines    Modulstrangs   bei   einer    Freilaufdiode   pro
+        Modul. Es    werden     zwei    Zellen    in     zwei    verschiedenen
+        Modulen   im   gesamten   Modulstrang   auf   reduzierte   Kapazit\"at
+        gesetzt,   Die   Prozentangaben   in   der   Legende   beziehen   sich
+        auf   die    Stromabgabe   der   zwei   Zellen    bezogen   auf   ihre
+        maximale  Kapazit\"at. Die   zugeh\"origen  \code{LTspice}-Schaltungen
+        sind   im   Anhang   in   Abbildung   \ref{fig:ltspice:string:ivCurve}
+        auf     Seite      \pageref{fig:ltspice:string:ivCurve}     und     in
+        Abbildung       \ref{fig:ltspice:jacModule:Diode}      auf       Seite
+        \pageref{fig:ltspice:jacModule:Diode} dokumentiert.%
     }
     \label{fig:simu:iv-curves:array:generic:bypass}
 \end{figure}
-
-%\input{data/iv-curves/calculations.tex}
-%
-%\begin{figure}[h!tb]
-%    \input{images/iv-curves/module.tex}
-%    \caption{%
-%        Oberes Diagramm: Simulierte  Strom-Spannungs-Kurve eines Moduls  aus 72
-%        Zellen (in Serie geschaltet) mit einer degradierten Zelle\protect\\
-%        Unteres Diagramm: Die zum oberen Diagramm geh\"orenden Leistungskurven.
-%        Gut erkennbar  ist, dass  selbst bei nur  einer degradierten  Zelle die
-%        verf\"ugbare Leistung des gesamten Moduls stark abnimmt.\protect\\
-%        \textbf{\textcolor{blue}{blau}}: Alle   Zellen  geben   volle  Leistung
-%        ab.\protect\\
-%        \textbf{\textcolor{teal}{blaugr\"un}}: Eine Zelle  von 72 gibt  nur den
-%        halben Strom ab.\protect\\
-%        \textbf{\textcolor{magenta}{magenta}}: Eine  Zelle  gibt nur  10\%  des
-%        vollen Stromes ab.\protect\\
-%        Die zuge\"orige \code{LTspice}-Schaltung basiert  auf dem Modell eines
-%        Moduls aus Abbildung \ref{fig:ltspice:module:cellBased:72x1} auf Seite
-%        \pageref{fig:ltspice:module:cellBased:72x1} im Anhang. Dabei wurde die
-%        Stromquelle  in  einer  Zelle  variiert  (100\%,  50\%  bzw. 10\%  der
-%        restlichen Quellen).%
-%    }
-%    \label{fig:ivcurve:cells}
-%\end{figure}
-%\begin{figure}[h!tb]
-%    \input{images/iv-curves/array.tex}
-%    \caption{%
-%        Oberes   Diagramm: Simulierte   Strom-Spannungs-Kurve  eines   Strangs
-%        von   Modulen   mit   einem  degradierten   Modul.\protect\\   Unteres
-%        Diagramm: Die  zum   oberen  Diagramm   geh\"orenden  Leistungskurven.
-%        Selbst   ein   einzelnes   degradiertes   Modul   f\"uhrt   zu   einem
-%        bedeutenden Leistungseinbruch des  gesamten Modulstrangs.  Verkn\"upft
-%        man   diese   Erkenntnis   mit   den   Informationen   aus   Abbildung
-%        \ref{fig:ivcurve:cells},  l\"asst sich  folgern,  dass lediglich  eine
-%        einzelne degradierte  Zelle von mehreren hundert  in einem Modulstrang
-%        vorhandenen Zellen  die gesamte  auf dem Strang  verf\"ugbare Leistung
-%        massiv senken kann.\protect\\
-%        \textbf{\textcolor{blue}{blau}}: Alle   Module   geben  vollen   Strom
-%        ab.\protect\\
-%        \textbf{\textcolor{teal}{blaugr\"un}}: Ein Modul von  zwanzig gibt nur
-%        den halben Strom ab.\protect\\
-%        \textbf{\textcolor{magenta}{magenta}}: Ein  Modul  gibt nur  10\%  des
-%        vollen Stromes ab.\protect\\
-%        Die       zuge\"orige       \code{LTspice}-Schaltung      ist       in
-%        Abbildung    \ref{fig:ltspice:vicurvesimulator:modules}   auf    Seite
-%        \pageref{fig:ltspice:vicurvesimulator:modules} im Anhang zu finden.%
-%    }
-%    \label{fig:ivcurve:modules}
-%\end{figure}
 
 
 % ---------------------------------------------------------------------------- %

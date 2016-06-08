@@ -852,8 +852,7 @@ Das Funktionsprinzip ist dabei wie folgt:
         ein sehr einfacher Hochpassfilter).
     \item
         $\mathrm{R_{in}}$ begrenzt den Strom,  welcher in die Klemmenschaltung
-        fliesst,  \item $\mathrm{R_{out}}$  begrenzt analog  den abfliessenden
-        Strom. Beide Widerst\"ande sollten hochohmig sein.
+        fliesst, sollte also hochohmig sein.
     \item
         $\mathrm{R_{pull-up}}$  und  $\mathrm{R_{pull-down}}$ sorgen  daf\"ur,
         dass  die   Spannung  auf  dem  mittleren   Schaltungsabschnitt  immer
@@ -884,18 +883,28 @@ integriert.
     \centering
     \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit-recv.eps}
     \caption{
-        Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger. Das
-        ankommende  Signal  wird  durch   einen  negativen  Spannungspuls  von
-        \SI{-45}{\volt}   am   Eingang   simuliert   (Leerlaufspannung   eines
-        PV-Moduls),  welche  die  ankommende DC-Spannung  von  \SI{900}{\volt}
-        einbrechen   l\"asst. Hier    ebenfalls   noch   gezeigt    ist   eine
-        parasit\"are    Leitungsinduktivit\"at   von    \SI{100}{\micro\henry}
-        und   eine   Ohm'sch-kapazitive    Last   von   \SI{1}{\kilo\ohm}   ||
-        \SI{100}{\micro\farad}. Auf  der  rechten   Seite  ist  ein  Pull-down
-        Widerstand eingebaut, um einen definierten Signalpegel zu haben.%
+        Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger.%
     }
     \label{fig:ltspice:shortCircuit:receiver}
 \end{figure}
+
+Abbildung \ref{fig:ltspice:shortCircuit:receiver} zeigt die \code{LTspice}-Schaltung,
+welche zur Simulation benutzt wird.
+Das ankommende  Signal  wird  durch   einen  negativen  Spannungspuls  von
+\SI{-45}{\volt}   am   Eingang   simuliert   (Leerlaufspannung   eines
+PV-Moduls),  welche  die  ankommende DC-Spannung  von  \SI{900}{\volt}
+einbrechen   l\"asst. In der Leitung ist eine parasit\"are Induktivit\"at
+von \SI{100}{\micro\henry} eingebaut
+
+Ebenfalls gezeigt  ist eine  Ohm'sch-kapazitive Last von  \SI{1}{\kilo\ohm} ||
+\SI{100}{\micro\farad}. Die  Simulationsergebnisse ohne  Last  sind im  oberen
+Plot in  Abblidung \ref{fig:simu:short:recv} gezeigt;  der untere Plot  in der
+gleichen Abbildung  zeigt das  simulierte Verhalten der  Schaltung mit  der in
+Abbildung \ref{fig:ltspice:shortCircuit:receiver} gezeigten Last.
+
+Auf  der  rechten  Seite  ist   ein  Pull-down  Widerstand  auf  \code{Ground}
+eingebaut,  um einen  definierten  Signalpegel zu  haben. Dies  ist f\"ur  die
+Simulation notwendig, geh\"ort aber nicht per se zur Klemmenschaltung.
 
 \clearpage
 \begin{figure}[h!tb]
@@ -910,15 +919,12 @@ integriert.
     \label{fig:simu:short:recv}
 \end{figure}
 
-In Abbildung  \ref{fig:simu:short:recv} sind Simulationsergebnisse  f\"ur zwei
-F\"alle  dargestellt: Ein  Durchlauf  ohne   angeschlossene  Last  sowie  eine
-Simulation mit  Ohm'sch-kapazitiver Last. Bei der Simulation  mit Last beginnt
-der  \"Ubertragungsvorgang  bei einer  Sekunde. Wie  leicht  zu erkennen  ist,
-hat  die Art  der  angeschlossenen Last  einen  betr\"achtlichen Einfluss  auf
-das  Signal am  Ausgang. Bei  einer  Implementierung dieses  Funktionsprinzips
-m\"ussten  somit sicherlich  noch weitere  Untersuchungen gemacht  werden. Wir
-werden  uns aber  an dieser  Stelle  auf diese  zwei exemplarischen  Beispiele
-beschr\"anken.
+Wie  an  Abbildung  \ref{fig:simu:short:recv}  gesehen werden  kann,  hat  die
+Art  der  angeh\"angten Last  einen  merklichen  Einfluss auf  das  ankommende
+Signal. Ein grosser kapazitiver Anteil in der Last reduziert die Amplitude des
+ankommenden  Signals  bedeutend und  f\"uhrt  einen  sehr lange  (etwa  f\"unf
+Sekunden!) dauernden Entlade- und Ladevorgang der kapazitiven Anteile im Kreis
+ein.
 
 
 % ---------------------------------------------------------------------------- %
@@ -957,27 +963,71 @@ Die zugeh\"orige  Simulationsschaltung f\"ur  \code{LTspice} ist  in Abbildung
 \end{figure}
 
 Wie   in   Abbildung   \ref{fig:simu:short:complete}   zu   sehen,   hat   die
-angeschlossene   Last  einen   betr\"achtlichen  Einfluss   auf  das   Signal,
-welches  beim  Empf\"anger  ankommt. Bei einem  Ohm'schen  Lastwiderstand  von
-\SI{1}{\kilo\ohm} und einer  Lastkapazit\"at von bereits \SI{100}{\nano\farad}
-kommt  anstatt eines  Rechteckpulses  eine  Doppelschwingung beim  Empf\"anger
-an;  steigt   die  Gr\"osse   der  parasit\"aren   Komponente  der   Last  auf
-\SI{1}{\milli\farad},  ist vom  Signal  am Empf\"anger  bei der  eingestellten
-Frequenz nicht mehr viel zu sehen.
+angeschlossene Last einen  betr\"achtlichen Einfluss auf das  Signal (wie auch
+schon im vorigen Abschnitt  beobachtet), welches beim Empf\"anger ankommt. Bei
+einem Ohm'schen Lastwiderstand von \SI{1}{\kilo\ohm} und einer Lastkapazit\"at
+von  bereits \SI{100}{\nano\farad}  kommt  anstatt  eines Rechteckpulses  eine
+Doppelschwingung beim  Empf\"anger an;  steigt die Gr\"osse  der parasit\"aren
+Komponente der  Last auf \SI{1}{\milli\farad},  ist vom Signal  am Empf\"anger
+bei der eingestellten Frequenz nicht mehr viel zu sehen.
 
 Auch die  Ohm'sche Komponente der  Last hat  bedeutenden Einfluss; ist  sie zu
 klein, sinkt die Signalamplitude am  Empf\"anger stark (blaue Kurve im unteren
 Plot von Abbildung \ref{fig:simu:short:complete}).
 
-Die  Gesamtbeurteilung  dieses   Ansatzes  ist  gemischt: Prinzipiell  scheint
-es    m\"oglich   zu    sein,   eine    funktionierende   Implementation    zu
-entwickeln. Allerdings gibt  es Faktoren,  welche erhebliche  Auswirkungen auf
-die  Erfolgschancen  aus\"uben  k\"onnen,  und auf  die  wir  keinen  Einfluss
-haben. Wir sind daher  der Meinung, dass die  Erfolgsaussichten, diesen Ansatz
-im Rahmen eines Semsterprojekts zu implementieren, gering sind. W\"are die zur
-Verf\"ugung stehende  Zeit l\"anger, w\"are  es unserer Ansicht nach  aber ein
-sehr  interessanter  Ansatz. Die Schaltung  auf  der  Sensorseite w\"urde  ist
-enorm simpel  und w\"are  somit sehr  kosteng\"unstig herzustellen. Prim\"arer
-Nachteil w\"are,  dass Kommunikation nur unidirektional  m\"oglich w\"are; ein
-Kommunizieren zwischen \Master~ und \Sensor~  w\"are nicht in beide Richtungen
-m\"oglich.
+Die Gesamtbeurteilung  dieses Ansatzes  ist gemischt: Prinzipiell  k\"onnte es
+m\"oglich sein, eine  funktionierende Implementation zu entwickeln. Allerdings
+gibt  es  Faktoren,  welche  erhebliche Auswirkungen  auf  die  Erfolgschancen
+aus\"uben k\"onnen, und  auf die wir keinen Einfluss haben,  oder deren genaue
+Untersuchung im Rahmen  dieses Projekts aus Zeit-  und Materialgr\"unden nicht
+m\"oglich ist.
+
+Sollte   diese   L\"osungsvariante   implementiert  werden,   m\"ussten   noch
+detaillierte Untersuchungen  gemacht werden. Nicht nur muss  das Verhalten des
+PV-Moduls (bzw. des Modulstrangs) bekannt  sein, es m\"ussen auch detaillierte
+Informationen \"uber die angeh\"angten  Lasten eingeholt werden.  Insbesondere
+muss das  Verhalten des  Wechselrichters unter  verschiedenen Betriebsbedingen
+(Last, momentane Leistung der PV-Modulstr\"ange, allenfalls weitere unbekannte
+Parameter)  bekannt sein. Abh\"angig  von  den  Charakteristiken der  gesamten
+mit  dem  Modulstrang  verbundenen  Schaltung k\"onnte  es  sein,  dass  diese
+L\"osungsvariante nicht implementierbar ist. Oder es m\"ussten m\"oglicherwise
+weitere Schaltkreise entwickelt und eingebaut werden, um mit dem Verhalten des
+Wechselrichters  und  den  an  ihn angeh\"angten  Lasten  korrekt  umgehen  zu
+k\"onnen. Dies wiederum  w\"are nicht  wirklich im  Sinne dieser  L\"osung, da
+ihre grosse Attraktivit\"at  genau darin liegen w\"urde,  dass ihr Schaltungs-
+und Materialaufwand (theoretisch) sehr gering ist.
+
+Grunds\"atzlich finden wir diese  L\"osungsvariante aufgrund des enorm simplen
+Prinzips zwar sehr interessant. Da dies  jedoch (soweit uns bekannt) absolutes
+Neuland ist und wir die Ressourcen  nicht haben, um einen Modulstrang oder das
+an einen Modulstrang  angeh\"angte System wirklich genau  zu untersuchen (also
+ausmessen statt  lediglich simulieren),  beurteilen wir die  Erfolgschancen im
+Rahmen eines Semesterprojekts f\"ur diese Methode als zu gering, um sie weiter
+zu verfolgen.
+
+
+% ---------------------------------------------------------------------------- %
+\clearpage
+\section{Schlussfolgerungen}
+\label{subsec:simu:conclusion}
+% ---------------------------------------------------------------------------- %
+
+Es folgt an dieser Stelle eine zusammenfassende Gegen\"uberstellung der in den
+vorigen Abschnitten untersuchten L\"osungsvarianten und ein Entschluss, welche
+Variante weshalb weiterverfolgt wird.
+
+\begin{table}[h!tb]
+    \centering
+    \caption{Gegen\"uberstellung der drei L\"osungsvarianten}
+    \label{tab:simu:conclusion}
+    \begin{tabular}{lrrr}
+        \toprule
+        Kriterium & induktive Kopplung & kapazitive Kopplung & Kurzschluss \\
+        \midrule
+        bla & bli & bla & bla\\
+        bla & bli & bla & bla\\
+        bla & bli & bla & bla\\
+        bla & bli & bla & bla\\
+        \bottomrule
+    \end{tabular}
+\end{table}

@@ -30,17 +30,41 @@
 
 		Hall-IC & Strommessung & \makecell{ Messung bis \SI{10}{A} \\ \SI{1}{kV} Durchschlagsfestigkeit \\ \SI{3.3}{V} oder \SI{5}{V} Spannungsversorgung} & ACS72(4/5) & Wandelt Strom zu proportionaler Spannung \cite{datasheet:hallic} \\
 
-		IO-Verstärker & Schalten der Ausgabeelemente & \makecell{Schalten mit \SI{3.3}{V} \\ \SI{100}{mA} pro Kanal für Relais} & ULN2003A &  eingebaute Freilaufdioden \cite{datasheet:darlingtonic} \\
+		IO-Verstärker &
+        Schalten der Ausgabeelemente &
+        \makecell{Schalten mit \SI{3.3}{V} \\ \SI{100}{mA} pro Kanal für Relais} &
+        ULN2003A &
+        eingebaute Freilaufdioden \cite{datasheet:darlingtonic} \\
 
-		AD-Wandler & Erfassen der Stromwerte & \makecell{Gleicher Spannungsbereich wie die Hall-ICs \\ 3 Kanäle \\ Serielle Schnittstelle} & MAX11612 &  I2C-Interface \cite{datasheet:adc} \\
+		AD-Wandler &
+        Erfassen der Stromwerte &
+        \makecell{Gleicher Spannungsbereich wie die Hall-ICs \\ 3 Kanäle \\ Serielle Schnittstelle} &
+        MAX11612 &
+        I2C-Interface \cite{datasheet:adc} \\
 
-		UART-Bus-Multiplexer & Multiplexen der Sensorverbindungen & 3 Kanäle parallel & SC16IS740 & \makecell{I2C-Interface \\ 1 IC pro Kanal}\cite{datasheet:uarti2c} \\
+		UART-Bus-Multiplexer &
+        Multiplexen der Sensorverbindungen &
+        3 Kanäle parallel &
+        SC16IS740 &
+        \makecell{I2C-Interface \\ 1 IC pro Kanal}\cite{datasheet:uarti2c} \\
 
-		Modem & Versand von SMS & Integrierte Lösung & SIM900 &  -\cite{datasheet:modem} \\
+		Modem &
+        Versand von SMS &
+        Integrierte Lösung &
+        SIM900
+        &  -\cite{datasheet:modem} \\
 
-		Pegelwandler & Verbindung von \SI{5}{V} und \SI{3.3}{V} & Bidirektionale Verbindung & NLSX4373 & Entwickelt für I2C \cite{datasheet:levelshifter} \\
+		Pegelwandler &
+        Verbindung von \SI{5}{V} und \SI{3.3}{V} &
+        Bidirektionale Verbindung &
+        NLSX4373 &
+        Entwickelt für I2C \cite{datasheet:levelshifter} \\
 
-		Schaltregler & Stromversorgung &\SI{5}{V} zu \SI{3.3}{V} bei über \SI{2}{A} & LM2596 & 3A, integrierter Schalter \cite{datasheet:3v3dcdc} \\
+		Schaltregler &
+        Stromversorgung &
+        \SI{5}{V} zu \SI{3.3}{V} bei über \SI{2}{A} &
+        LM2596 &
+        3A, integrierter Schalter \cite{datasheet:3v3dcdc} \\
 
 	\end{tabular}
 

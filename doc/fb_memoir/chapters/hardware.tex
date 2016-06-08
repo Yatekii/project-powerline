@@ -292,10 +292,29 @@ restlichen Kompomenten auf  der \SI{3.3}{\volt}-Linie\todo{welche?}~ausreichen
 sollte.
 
 Die Beschaltung  des Reglers ist ausgelegt  gem\"ass Herstellerspezifikationen
-aus dem Datenblatt \cite{ref:lm2596} f\"ur unsere Konfiguration.\todo{C1, C2, D5, L1}
-$L1 = \SI{22}{\micro\henry}$, $C_2: output capacitor$
+aus dem Datenblatt \cite{ref:lm2596}  f\"ur unsere Konfiguration.\todo{C1, C2,
+D5, L1} $L1 = \SI{22}{\micro\henry}$, $C_2: output capacitor$
 
-$C_1$: input bypass capacitor.
+
+Tabelle  \ref{tab:hw:master:supply:consumption}  listet die  haupts\"achlichen
+Leistungsverbraucher  auf  mit  den  Bedingungen, unter  den  dieser  maximale
+Verbrauch auftreten kann.
+
+\begin{table}[h!tb]
+    \caption{Haupts\"achliche Leistungsverbraucher}
+    \label{tab:hw:master:supply:consumption}
+    \small
+    \begin{tabular}{llll}
+        \toprule
+        \textbf{Bauteil} & \textbf{Maximale Leistung} & \textbf{Testbedingungen} & \textbf{Quelle} \\
+        \midrule
+        Raspberry Pi & \SI{4}{W}    & Maximallast im normalen Betrieb  & \cite{ref:raspipower} \\
+        Display      & \SI{1.1}{W}  & Maximale Helligkeit              & \cite{datasheet:display} \\
+        Modem        & \SI{6.6}{W}  & Alle Kommunikationskanäle aktiv  & \cite{ref:modemrefdesign} \\
+        Relais       & \SI{0.72}{W} & Zwei Relais, schaltend           & \cite{datasheet:finder36relais} \\
+        \bottomrule
+    \end{tabular}
+\end{table}
 
 \todo{external power brick}
 
@@ -339,6 +358,25 @@ verbunden und k\"onnen f\"ur Jumper, Taster oder Schalter verwendet werden. In
 der  Prototypenkonfiguration  ist   ein  Schalter  angeschlossen. Der  Stecker
 \code{P2} ist die Hauptverbindung zum \Raspi via Flachbandkabel.
 
+Als  IO-Verst\"arker  wird  ein   ULN2003A  von  Texas  Instruments  gew\"ahlt
+\cite{datasheet:darlingtonic}. Der    IC    verf\"ugt    \"uber    integrierte
+Freilaufdioden   zum    Schutz   vor    \"uberh\"ohter   Spannung    auf   der
+Ausgangsseite. In unserem Fall dient  dies dazu, Spannungsspitzen, welche beim
+Ausschalten der Relais auftreten k\"onnen,  abzufangen.  Da der \Raspi maximal
+\SI{3.3}{\volt} am  Ausgang liefern  kann, muss  die Schaltschwelle  f\"ur ein
+\code{true}-Signal bei diesem  IC bei \SI{3.3}{\volt} oder  tiefer liegen, was
+der  ULN2003A erf\"ullt.   Die Relais  beziehen bis  zu \SI{72}{\milli\ampere}
+\cite{datasheet:finder36relais}  Strom  bei   Betrieb  mit  \SI{5}{\volt}. Der
+ULN2003A kann bis zu \SI{100}{\milli\ampere} pro Kanal liefern, was ausreichen
+sollte, um die Relais zuverl\"assig schalten zu k\"onnen.
+
+Die     Relais      sind     von      der     Serie     36      von     Finder
+\cite{datasheet:finder36relais}. Sie  k\"onnen Lasten  bis zu  \SI{230}{\volt}
+und  \SI{10}{\ampere}  schalten,  womit handels\"ubliche  Ger\"ate  f\"ur  das
+Niederspannungsnetz angeschlossen werden k\"onnen. Dies gibt dem Kunden grosse
+Flexibilit\"at bei der Wahl der  zu betreibenden Ger\"ate (Alarmlampe, Sirene,
+\ldots).
+
 
 % ---------------------------------------------------------------------------- %
 \subsection{Kommunikation mit Sensoren}
@@ -361,13 +399,14 @@ genauen  Beschreibung  des   Blocks  \code{fskmodule\_1.sch}  siehe  Abschnitt
 \todo{reference in sensor}.
 
 Auf der rechten Seite in Abbildung \ref{fig:sch:master:comms} ist die Br\"ucke
-\code{U1} abgebildet, welche zwischen UART  und \ISC~konvertiert.  Der \Sensor
-sendet seine Daten  auf der DC-Leitung in UART-Kodierung. Da  der \Raspi~nicht
-gen\"ugend UART-Eing\"ange  f\"ur alle ben\"otigten Leitungen  besitzt, werden
-die Daten im \ISC-Format in den \Raspi~eingespeist. Die Br\"ucke \code{U1} ist
-daf\"ur verantwortlich,  zwischen UART  (Anschl\"usse \code{TX}  und \code{RX}
-und \ISC~(Anschl\"usse  \code{SDA} f\"ur Daten und \code{SDL}  f\"ur Clock) zu
-konvertieren.
+\code{U1} abgebildet,  welche zwischen UART und  \ISC~konvertiert. Es wird das
+Modell  SC16IS740 von  NXP Semiconructors  \cite{datasheet:uarti2c} verwendet.
+Der \Sensor  sendet seine Daten  auf der DC-Leitung in  UART-Kodierung. Da der
+\Raspi~nicht  gen\"ugend  UART-Eing\"ange  f\"ur alle  ben\"otigten  Leitungen
+besitzt,  werden  die  Daten  im \ISC-Format  in  den  \Raspi~eingespeist. Die
+Br\"ucke  \code{U1} ist  daf\"ur verantwortlich,  zwischen UART  (Anschl\"usse
+\code{TX}  und \code{RX}  und  \ISC~(Anschl\"usse \code{SDA}  f\"ur Daten  und
+\code{SDL} f\"ur Clock) zu konvertieren.
 
 Den Clock erh\"alt die Br\"ucke vom Mikrocontroller des \Raspi~via die Leitung
 \code{MUCLK}.
@@ -402,6 +441,7 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
 
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Strommessung}
 \label{subsec:hw:master:current}
 % ---------------------------------------------------------------------------- %
@@ -409,27 +449,41 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.75\textwidth]{images/superv-sch/supervisor--sch--current.eps}
+    \includegraphics[width=0.60\textwidth]{images/superv-sch/supervisor--sch--current.eps}
     \caption{Strommessung}
     \label{fig:sch:master:current}
 \end{figure}
 
-\todo{Auswahl IC4, IC5, IC6, IC3, IC7, Gr\"osse C3, C4, C5}
+%\todo{Auswahl IC4, IC5, IC6, IC3, IC7, Gr\"osse C3, C4, C5}
 
 Der  Strom jedes  Modulstrangs  wird separat  \"uberwacht;  die dazu  benutzte
 Schaltung   ist   in   Abbildung   \ref{fig:sch:master:current}   dargestellt.
-\code{IC4},  \code{IC5}  und  \code{IC6} sind  die  Strommessungssensoren. Sie
-geben   auf   den    Leitungen   \code{isense0},   \code{isense1}   respektive
-\code{isense2}   eine  Spannung   aus,  welche   dem  durch   sie  fliessenden
-Strom  entspricht  (von  den  Modulen  in  die  Eing\"ange  \code{string\_in1}
-usw.   geleitet,   anschliessend   via   \code{string\_out1}   usw.   an   den
-Generatoranschlusskasten).
+\code{IC4},  \code{IC5}  und  \code{IC6}  sind  die  Strommessungssensoren. Es
+werden  Hall-Sensoren   der  Modellreihe   ACS725  von   Allegro  Microsystems
+benutzt. Diese k\"onnen bis zu  \SI{10}{\ampere} messen, sind durchschlagsfest
+bis zu  \SI{1}{\kilo\volt} und  k\"onnen sowohl  mit \SI{3.3}{\volt}  wie auch
+\SI{5}{\volt} betrieben werden \cite{datasheet:hallic}.
 
-\code{IC3} ist der A/D-Konverter,  welcher die analogen Signale \code{isense0}
-bis  \code{isense2}  in  digitale  Signale  mit  \SI{5}{\volt}-Pegel  wandelt.
-\code{IC7} ist  ein Pegelwandler, welcher die  \SI{5}{\volt}-Signale auf einen
-Pegel von  \SI{3.3}{\volt} konvertiert  f\"ur den Versand  via \ISC,  weil die
-Eing\"ange des \Raspi~auf \SI{3.3}{\volt} laufen.
+Sie  geben   auf  den  Leitungen  \code{isense0},   \code{isense1}  respektive
+\code{isense2}  eine   Spannung  aus,   welche  propotional  zum   den  Sensor
+durchfliessenden Strom ist. Der vom Modulstrang  kommende Strom geht in in die
+Eing\"ange \code{string\_in\{0,1,2\}} der Sensoren und verl\"asst diese wieder
+durch die Ausg\"ange \code{string\_out\{0,1,2\}}, von wo der weitergeht in den
+Generatoranschlusskasten.
+
+\code{IC3}   ist    der   A/D-Konverter,   welcher   die    analogen   Signale
+\code{isense0} bis \code{isense2} in  digitale Signale mit \SI{5}{\volt}-Pegel
+wandelt. Es   kommt   ein   MAX11612   von  Maxim   Integrated   zum   Einsatz
+\cite{datasheet:adc}. Dieser besitzt ein \ISC-Interface, drei Kan\"ale und ist
+mit  dem  Ausgangspegel  der  Hall-Sensoren  kompatibel.   Allerdings  liefert
+er  ein  Ausgangssignal  mit  einem \SI{5}{\volt}-Pegel,  was  nicht  mit  dem
+\Raspi  kompatibel  ist, dessen  Eing\"ange  mit  einem Pegel  \SI{3.3}{\volt}
+laufen. Deshalb wird zwischen \code{IC3} und  dem \Raspi noch ein Pegelwandler
+der   Serie   NLSX4373  von   ON   Semiconductors   geschaltet,  welcher   das
+\SI{5}{\volt}-Signal des ADC auf  \SI{3.3}{\volt} konvertiert. Er ist speziell
+f\"ur  \ISC-Anwendungen entwickelt  worden  und eignet  sich  somit gut  f\"ur
+unsere Zwecke.
+
 
 % ---------------------------------------------------------------------------- %
 \clearpage
@@ -447,12 +501,13 @@ Eing\"ange des \Raspi~auf \SI{3.3}{\volt} laufen.
 \todo{Auswahl IC8, Auswahl Modem, Gr\"osse C6, C7, R5, R6, R7}
 
 Das GSM-Modem  ist ein  integrierter Baustein,  der alle  n\"otigen Funktionen
-bereitstellt.    Er  ist   zusammen  mit   seiner  Beschaltung   in  Abbildung
-\ref{fig:sch:master:gsm} dargestellt. Wie auch bei  der Strommessung wird auch
-hier  ein  Pegelwandler  verwendet,  um  das Signal  von  der  UART-Linie  mit
-\SI{3.3}{\volt} auf  den vom  GSM-Chip ben\"otigten Pegel  von \SI{2.8}{\volt}
-(Pin  \code{VDD\_EXT}  auf  dem  Chip, verbunden  mit  \code{Vcc\_B}  auf  dem
-Pegelwandler) zu wandeln.\todo{check values}
+bereitstellt; ein Baustein der SIM900-Serie von Simcom \cite{datasheet:modem}.
+Er ist  zusammen mit seiner Beschaltung  in Abbildung \ref{fig:sch:master:gsm}
+dargestellt. Wie auch  bei der  Strommessung wird  auch hier  ein Pegelwandler
+verwendet, um  das Signal von der  UART-Linie mit \SI{3.3}{\volt} auf  den vom
+GSM-Chip ben\"otigten  Pegel von \SI{2.8}{\volt} (Pin  \code{VDD\_EXT} auf dem
+Chip, verbunden mit \code{Vcc\_B} auf dem Pegelwandler) zu wandeln.\todo{check
+values}
 
 Der  Pin  \code{GSM\_PKEY} dient  zum  Einschalten  des GSM-Modems,  gesteuert
 vom  \Raspi  via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite

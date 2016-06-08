@@ -3,6 +3,7 @@
 \label{chap:software}
 % **************************************************************************** %
 
+
 An  dieser  Stelle wird  genauer  erl\"autert,  welche \"Uberlegungen  in  die
 Firmware  unseres  Systems  geflossen  sind. Weil  Sensor  und  Master-Ger\"at
 jeweils  eine   eigene  Firmware   ben\"otigen,  ist  auch   dieser  Abschnitt
@@ -20,9 +21,16 @@ erg\"anzen.
 
 
 % ---------------------------------------------------------------------------- %
+\section{Datenfluss}
+\label{sec:fw:dataFlow}
+% ---------------------------------------------------------------------------- %
+
+
+% ---------------------------------------------------------------------------- %
 \section{Firmware \Sensor}
 \label{sec:firmware:sensor}
 % ---------------------------------------------------------------------------- %
+
 
 % ---------------------------------------------------------------------------- %
 \section{Software \Master}
@@ -53,18 +61,66 @@ implementieren.
 
 \todo{layering diagramm}
 
+\todo{layering wird hier integriert, kein separater abschnitt}
+
+ - Grundlage für die Software bildet das angepasste Betriebssystem.
+ - Darauf aufgebaut sind Programmbibliotheken zur Abstraktion von Betriebsystemfunktionen und weiteren Hardwareaufrufen.
+ - Diese werden in der Master-Software eingebunden und mittels Python-API angesprochen.
+
 
 % ---------------------------------------------------------------------------- %
 \subsection{Lizenzen}
 \label{subsec:software:master:licenses}
 % ---------------------------------------------------------------------------- %
 
+Unterschiedliche konditionen zur Verwendung der Software
+ - GPL für Linux kernel
+ - Closed Source Firmware Blobs für rpi und display
+ - DFSG für alle weitere Software, da von Debian kontrolliert
+
+In Ordung für kommerzielle Zwecke, darf kein Geld verlangt werden
+Eigener Quellcode nicht öffentlich und kann als Bestandteil des Produkts verkauft werden.
+
 
 % ---------------------------------------------------------------------------- %
-\section{Kommunikation/Protokoll}
-\label{sec:fw:sensorplatine}
+\subsection{Threads}
+\label{subsec:software:master:threads}
 % ---------------------------------------------------------------------------- %
 
-Wie im Abschnitt  zur Hardware wird in einem  separaten Abschnitt beschrieben,
-welche \"Uberlegungen in die Entwicklung  des Protokolls eingeflossen sind und
-wie das Ergebnis aussieht.
+ - Hauptthread initialisiert Datenbank und startet Threads, unter welchen die eigentlichen Funktionen aufgeteilt sind.
+ - Unterthreads werden mittels Semaphoren vom Hauptthread koordiniert. Dies gewährleistet, dass Arbeitsschritte nur mit aktuellen Daten durchgeführt werden.
+ - Geteilte Ressourcen wie die Datenbank und Logging-Funktionalität sind threadsafe.
+    - Logging verwendet eine Queue um Anfragen zu speichern und hintereinander abzuarbeiten.
+    - Die verwendete Datenbankbibliothek beinhaltet Funkionalität um aus mehreren Threads parallel aufgerufen zu werden. Dazu werden die Anfragen aus jeweils einem Thread gruppiert und atomar ausgeführt.
+ - Alle anderen externen Ressourcen, dies sind I2C-bus, UART und GPIO, werden jeweils von nur einem Thread genutzt, wodurch keine Konflikte auftreten können.
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Aufgabenteilung}
+\label{subsec:software:master:taskSeparation}
+% ---------------------------------------------------------------------------- %
+
+ - Datensammlung: Empfangen von Spannungs- und Strommesswerte von den Sensoren und abspeichern in der Datenbank.
+ - Datenauswertung: Untersuchen der gespeicherten Messwerte auf Defekte Panels
+ - Benutzerinterface
+   - Graphisch (Display / Touchscreen): Konfigurieren der Einstellungen von Alarmierung und Telefonnummer.
+   - Modem (SMS): Versand von SMS beim Eintritt von vordefinierten Ereignissen.
+   - Elektrisch (Relais / Tasten): Schalten der eingebauten Relais
+ - Datenbankverwaltung: Initialisierung der Datenbank und Vorbereiten der Datenbankverbindung
+ - Prozesssteuerung: Verwaltung der einzelnen Threads und ihrem Zustand
+
+
+% ---------------------------------------------------------------------------- %
+\subsection{Benutzeroberfl\"ache}
+\label{subsec:software:master:GUI}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\subsection{Datenbank}
+\label{subsec:software:master:database}
+% ---------------------------------------------------------------------------- %
+
+% ---------------------------------------------------------------------------- %
+\subsection{Funktionen}
+\label{subsec:software:master:functions}
+% ---------------------------------------------------------------------------- %

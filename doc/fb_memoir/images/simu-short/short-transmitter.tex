@@ -1,6 +1,5 @@
 \begin{tikzpicture}
-    %\begin{scope}[x={(0mm,0mm)},y={(175mm,\textwidth)}] % for four plots
-    \begin{scope}[x={(0mm,\textwidth)},y={(0mm,150mm)}]
+    \begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,150mm)}]
         \begin{axis}[%
             title=Spannung am Knoten \code{MEASURE},
             height=45mm,
@@ -13,7 +12,6 @@
             xmax = 2e-4,
             change x base=true,
             x SI prefix=micro,
-            %yticklabel={\num[round-mode=places, round-precision=4]{\tick}},
         ]
             \addplot[-,blue] table[x=time, y=V(measure)] {data/short-circuit/shortcircuit-transmitter-0.2ms.dat};
         \end{axis}
@@ -29,7 +27,6 @@
             xmax = 2e-4,
             change x base=true,
             x SI prefix=micro,
-            %yticklabel={\num[round-mode=places, round-precision=4]{\tick}},
         ]
             \addplot[-,blue] table[x=time, y=Id(MOS)] {data/short-circuit/shortcircuit-transmitter-0.2ms.dat};
             \addplot[-,magenta] table[x=time, y=I(module)] {data/short-circuit/shortcircuit-transmitter-0.2ms.dat};
@@ -47,29 +44,10 @@
             xmax = 1.5e-6,
             change x base=true,
             x SI prefix=micro,
-            %yticklabel={\num[round-mode=places, round-precision=4]{\tick}},
         ]
             \addplot[-,blue] table[x=time, y=powerMOS] {data/short-circuit/shortcircuit-transmitter-PPeak.dat};
             \addplot[-,magenta] table[x=time, y=powerModule] {data/short-circuit/shortcircuit-transmitter-PPeak.dat};
             \legend{MOSFET,PV-Modul};
         \end{axis}
-        %\begin{axis}[%
-        %    title=Form einer Spitze,
-        %    height=45mm,
-        %    width=0.95\textwidth,
-        %    at={(0,0)},
-        %    grid=both,
-        %    xlabel=Zeit (\si{\milli\second}),
-        %    ylabel=Strom (\si{\micro\ampere}),
-        %    %change x base=true,
-        %    %change y base=true,
-        %    %x SI prefix=milli,
-        %    %y SI prefix=micro,
-        %    %xmin=0,
-        %    %xmax=0.001,
-        %    %yticklabel={\num[round-mode=places, round-precision=4]{\tick}},
-        %   ]
-        %       \addplot[-,blue] table[x=time, y=V(measure)] {data/short-circuit/shortcircuit-transmitter-2us.dat};
-        %\end{axis}
    \end{scope}
 \end{tikzpicture}

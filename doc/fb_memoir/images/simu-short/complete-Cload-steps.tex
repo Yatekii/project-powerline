@@ -1,6 +1,5 @@
 \begin{tikzpicture}
-    %\begin{scope}[x={(0mm,0mm)},y={(175mm,\textwidth)}] % for four plots
-    \begin{scope}[x={(0mm,\textwidth)},y={(0mm,50mm)}]
+    \begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,50mm)}]
         \begin{axis}[%
             title=Klemmenschaltung Spannung am Empf\"anger{,} ohne Last,
             height=50mm,
@@ -27,8 +26,6 @@
             $\mathrm{C_{load}} = \SI{100}{\nano\farad}$,
             $\mathrm{C_{load}} = \SI{1000}{\nano\farad}$%
         };
-            %\addplot[-,magenta] table[x=time, y=powerModule] {data/short-circuit/shortcircuit-transmitter-PPeak.dat};
-            %\legend{MOSFET,PV-Modul};
         \end{axis}
    \end{scope}
 \end{tikzpicture}

@@ -18,7 +18,7 @@ simuliert und die Resultate beurteilt.
 \begin{wrapfigure}{r}{65mm}
     \centering
     \input{images/circuits/solarCell-1d.tex}
-    \caption{%
+    \caption[Eindiodenmodell PV-Zelle]{%
         Eindiodenmodell  einer  PV-Zelle  mit  Stromquelle  $I_{\mathrm{Ph}}$,
         Diode  $D$,  Shunt-Widerstand $R_{\mathrm{Sh}}$~  und  Seriewiderstand
         $R_{\mathrm{S}}$.%
@@ -101,7 +101,7 @@ die  Ergebnisse  sind  in Abbildung  \ref{fig:circuit:solarCell}  und  Tabelle
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/solarCell.tex}
-    \caption{%
+    \caption[Zweidiodenmodell PV-Zelle mit zus\"atzlicher Kapazit\"at]{%
         Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
         Zweidiodenmodell  mit  zus\"atzlicher  Kapazit\"at. Die  zugeh\"origen
         Modellparameter    sind    in    Tabelle    \ref{tab:solarCell:params}
@@ -153,7 +153,7 @@ zugeh\"origen Anmerkungen.
 \begin{wrapfigure}{l}{50mm}
     \centering
     \input{images/solar-facility/pvmodule-wiring.tex}
-    \caption{
+    \caption[PV-Modul, Modell f\"ur den Strompfad]{
         Solarmodul  gem\"ass Abbildung  \ref{fig:pvmodule} mit  Stromleitungen
         und  L\"angen   zur  Verbindung   der  Zellen. Die   Nummerierung  der
         Leiterbahnen   entspricht    der   Nummerierung    der   Koeffizienten
@@ -337,7 +337,7 @@ modellieren.
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/module72x1-simplified.tex}
-    \caption{%
+    \caption[Ersatzschaltbild PV-Modul]{%
         Ersatzschaltbild  f\"ur  das  PV-Modul. Es besteht  einem  Strang  mit
         72  Zellen  in Serie  geschaltet  und  angeordnet  wie auf  dem  Modul
         in  Abbildung  \ref{fig:pvmodule}  auf  Seite  \pageref{fig:pvmodule}.
@@ -430,10 +430,10 @@ Der Ohm'sche Widerstand der Anschlussleitung errechnet sich zu:
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/modulestring.tex}
-    \caption{
-        Modell  eines   Modulstrangs  aus  20  seriell   geschalteten  Modulen
-        mit  Ber\"ucksichtigung  der   Induktivit\"at  und  Kapazit\"at  einer
-        \SI{20}{\meter} langen Zuleitung%
+    \caption[Ersatzschaltbild Modulstrang mit Verbindungsleitung]{
+        Modell  eines Modulstrangs  aus  20 seriell  geschalteten Modulen  mit
+        Ber\"ucksichtigung der Resistivit\"at,  Induktivit\"at und Kapazit\"at
+        einer \SI{20}{\meter} langen Zuleitung%
     }
     \label{fig:pvstring}
 \end{figure}
@@ -471,7 +471,7 @@ Kern eine Permeabilit\"atszahl $\mu_{\mathrm{r}} = 400$ annehmen.
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/coupling-inductive.tex}
-    \caption{Induktive Einkopplung}
+    \caption[Prinzip der induktiven Einkopplung]{Induktive Einkopplung}
     \label{fig:circuit:coupling:inductive}
 \end{figure}
 
@@ -486,7 +486,7 @@ Die Selbstinduktivit\"at unserer Toroidspule errechnet sich gem\"ass:
 %\begin{figure}[h!tb]
 \marginpar{%
     \input{images/inductive/toroid.tex}
-    \figcaption{\protect\raggedright Geometrie der Spule}
+    \figcaption[Geometrie Kopplungsspule]{\protect\raggedright Geometrie der Spule}
     \label{fig:toroid:geometry}%
 }
 %\end{figure}
@@ -528,7 +528,10 @@ einem  Modul,  dem  Sender  und  dem  Empf\"anger,  dargestellt  in  Abbildung
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.67\textwidth]{images/ltspice/jac/inductive-singleModule.eps}
-    \caption{Inductive Simple}
+    \caption[Induktive Einkopplung, vereinfachte \code{LTspice}-Schaltung]{%
+        \code{LTspice}-Schaltung f\"ur den vereinfachten Schaltkreis zur
+        Simulation der induktiven Einkopplung%
+    }
     \label{fig:ltspice:inductive:singleModule}
 \end{figure}
 
@@ -539,7 +542,7 @@ nicht sehr stark.
 
 \begin{figure}[h!tb]
     \input{images/simu-inductive/singleModule.tex}
-    \caption{%
+    \caption[Simulationsergebniss induktive Einkopplung, vereinfachte Schaltung]{%
         Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
         \label{fig:ltspice:inductive:singleModule}%
     }
@@ -553,7 +556,7 @@ auf den Herleitungen aus Abschnitt \ref{Modellierung eines Modulstrangs}.
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.95\textwidth]{images/ltspice/jac/inductive.eps}
-    \caption{%
+    \caption[Induktive Einkopplung, \code{LTspice}-Schaltung f\"ur Modulstrang]{%
         Schaltung  zur   Simulation  eines  Modulstranges   mit  parasit\"aren
         Impedanzen in der Zuleitung und komplexer Lastimpedanz.%
     }
@@ -562,7 +565,7 @@ auf den Herleitungen aus Abschnitt \ref{Modellierung eines Modulstrangs}.
 
 \begin{figure}[h!tb]
     \input{images/simu-inductive/stepping.tex}
-    \caption{%
+    \caption[Simulationsergebniss, induktive Einkopplung, Modulstrang]{%
         Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
         \ref{fig:ltspice:inductive:complete}%
     }
@@ -628,7 +631,7 @@ werden, muss dies nicht unbedingt kritisch sein.
 
 \begin{figure}[h!tb]
     \input{images/simu-inductive/resonance.tex}
-    \caption{%
+    \caption[Simulationsergebniss induktive Einkopplung bei Resonanz]{%
         Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
         \ref{fig:ltspice:inductive:complete}%
     }
@@ -664,7 +667,7 @@ das Verfahren ist bidirektional.
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/coupling-capacitive.tex}
-    \caption{%
+    \caption[Ersatzschaltbild kapazitive Einkopplung]{%
         Vereinfachte Darstellung  der kapazitiven  Einkopplung mit  Sender auf
         der linken  Seite und  Empf\"anger auf der  rechten Seite. Prinzipiell
         ist das Verfahren jedoch bidirektional.%
@@ -688,7 +691,7 @@ Abschw\"achungen des Signals zu rechnen.
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.75\textwidth]{images/ltspice/jac/capacitive.eps}
-    \caption{%
+    \caption[\code{LTspice}-Schaltung kapazitive Einkopplung, Modulstrang]{%
         Simulationsschaltung  eines Modulstrangs  mit kapazitiver  Einkopplung
         eines  Signals. Jedes   Modulsymbol  repr\"asentiert dabei  ein  Modul
         gem\"ass  Abbildung \ref{fig:ltspice:jac:Module}  im Anhang  auf Seite
@@ -708,7 +711,7 @@ zu sehen.%
 
 \begin{figure}[h!tb]
     \input{images/simu-capacitive/tran.tex}
-    \caption{%
+    \caption[Simulationsergebnisse kapazitive Einkopplung, Modulstrang]{%
         Transientensimulation  der  kapazitiven   Einkopplung  am  Anfang  des
         Modulstrangs und  am Ende des  Modulstrangs. Ist der Sender  am Anfang
         des Strangs, wird das Signal merklich abgeschw\"acht und verzerrt, ist
@@ -757,7 +760,7 @@ zeigt diesen Aufbau schematisch.
     \vspace*{-1em}
     \centering
     \input{images/circuits/moduleMOSFET.tex}
-    \caption{%
+    \caption[Grundprinzip Kurzschluss mit Transistor]{%
         Gesteuerter     Kurzschluss     eines    Solarmoduls     mit     einem
         microcontroller-gesteuerten Transistor. %
     }
@@ -779,7 +782,7 @@ welche den Transistor besch\"adigen.
     \vspace*{-1em}
     \centering
     \includegraphics[width=60mm]{images/ltspice/jac/shortcircuit-transmitter.eps}
-    \caption{
+    \caption[\code{LTspice}-Schaltung Kurzschlussmethode, Sender, vereinfacht]{
         Simulationsschema  f\"ur  ein  einzelnes Modul  mit  kurzschliessendem
         Transistor und angeschlossener Last von \SI{1}{\kilo\ohm}.%
     }
@@ -794,7 +797,7 @@ kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
 
 \begin{figure}[h!tb]
     \input{images/simu-short/short-transmitter.tex}
-    \caption{%
+    \caption[Simulationsergebnisse Kurzschlussmethode, Sender]{%
         Transientensimulation    f\"ur     einen    gesteuerten    Kurzschluss
         \"uber     ein     Solarmodul     mit     einer     rein     Ohm'schen
         Last      von      \SI{100}{\ohm}     gem\"ass      der      Schaltung
@@ -839,7 +842,7 @@ Sch\"aden ausgewertet werden kann.
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/clamper.tex}
-    \caption{Die hier verwendete Klemmenschaltung}
+    \caption[Klemmenschaltung]{Die hier verwendete Klemmenschaltung}
     \label{fig:circuit:clamper}
 \end{figure}
 
@@ -882,7 +885,7 @@ integriert.
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit-recv.eps}
-    \caption{
+    \caption[\code{LTspice}-Schema f\"ur Klemmenschaltung]{
         Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger.%
     }
     \label{fig:ltspice:shortCircuit:receiver}
@@ -910,7 +913,7 @@ Simulation notwendig, geh\"ort aber nicht per se zur Klemmenschaltung.
 \begin{figure}[h!tb]
     \centering
     \input{images/simu-short/short-recv.tex}
-    \caption{%
+    \caption[Simulationsergebnisse Klemmenschaltung]{%
         Simulation   Empf\"anger. Die   obere   Kurve  ist   das   Signal   am
         Empf\"anger  ohne  angeschlossene Last. Der  \"Ubertragungsvorgang  im
         unteren  Bild beginnt  bei einer  Sekunde. Die Schaltungsfrequenz  ist
@@ -945,14 +948,15 @@ Die zugeh\"orige  Simulationsschaltung f\"ur  \code{LTspice} ist  in Abbildung
 
 \begin{figure}[h!tb]
     \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit.eps}
-    \caption{Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode}
+    \caption[\code{LTspice}-Schaltung f\"ur Kurzschlussmethode, Modulstrang]
+    {Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode}
     \label{fig:ltspice:shortcircuit:complete}
 \end{figure}
 
 \begin{figure}[h!tb]
     \centering
     \input{images/simu-short/complete-Load-steps.tex}
-    \caption{%
+    \caption[Simulationsergebnisse Kurzschlussmethode]{%
         Simulationsergebnisse  f\"ur  das  Signal  am  Knoten  \code{RECEIVER}
         aus  Abbildung  \ref{fig:ltspice:shortcircuit:complete}  f\"ur  Lasten
         mit   verschiedenen    kapazitiven   Anteilen    \code{Cload}   (obere

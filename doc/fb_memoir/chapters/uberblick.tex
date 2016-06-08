@@ -17,7 +17,8 @@ wie es zu bedienen ist.
 \begin{wrapfigure}{r}{0.45\textwidth}
     \centering
     \includegraphics[width=0.4\textwidth]{images/solar-facility/cell--400px.png}
-    \caption{Solarzelle, Frontalansicht \cite{ref:pvcell:wikipedia}}
+    \caption[Bild einer PV-Zelle]
+    {Solarzelle, Frontalansicht \cite{ref:pvcell:wikipedia}}
     \label{fig:pvcell:front}
 \end{wrapfigure}
 
@@ -41,7 +42,8 @@ Frontansicht einer PV-Zelle.
 \begin{wrapfigure}{l}{0.45\textwidth}
     \centering
     \includegraphics[width=0.4\textwidth]{images/solar-facility/pvmodule.jpeg}
-    \caption{
+    \caption[Bild eines PV-Moduls]
+    {%
         Solarmodul,  zusammengesetzt  aus  72 Solarzellen  gem\"ass  Abbildung
         \ref{fig:pvcell:front}%
     }
@@ -78,8 +80,8 @@ wird\hfill eine\hfill h\"ohere\hfill Ausgangsspannung
 \begin{wrapfigure}{r}{0.35\textwidth}
     \centering
     \includegraphics[width=0.3\textwidth]{images/solar-facility/pvJunctionBox.jpeg}
-    \caption{
-        Anschlussbox f\"ur Solarmodul, wird  normalerweise auf der R\"uckseite
+    \caption[Anschlussbox PV-Modul]{
+        Anschlussbox f\"ur  PV-Modul, wird  normalerweise auf  der R\"uckseite
         des Moduls montiert. \cite{ref:junctionBox}%
     }
     \label{fig:pvJunctionBox}
@@ -111,7 +113,7 @@ auch n\"achster Abschnitt).
             \node at (55mm,-5mm) {\small{Modulstrang}};
         \end{scope}
     \end{tikzpicture}
-    \caption{%
+    \caption[Modulstrang, \"Ubersichtsbild]{%
         Modulstrang aus 16 Modulen  gem\"ass Abbildung \ref{fig:pvmodule}, GAK
         und Wechselrichter. Bild des GAK  von \cite{ref:gak:gantner}, Bild des
         Wechselrichters von \cite{ref:inverter:sunnyboy}.%
@@ -160,7 +162,7 @@ platziert.
 \begin{figure}[h!tb]
     \input{images/iv-curves/module-3d.tex}
     \input{images/iv-curves/module-2d.tex}
-    \caption{
+    \caption[IV- und PV-Kurven eines PV-Moduls bei Leistungseinbruch]{%
         Verhalten   eines    Moduls   bei    Reduktion   des    Stroms   einer
         einzelnen   Zelle.   Die   zuge\"orige  \code{LTspice}-Schaltung   ist
         in    Abbildung    \ref{fig:ltspice:iv:generic:module}    auf    Seite
@@ -172,7 +174,11 @@ platziert.
 \begin{figure}[h!tb]
     %\input{images/iv-curves/array-3d.tex}
     \input{images/iv-curves/array-2d.tex}
-    \caption{
+    \caption[%
+        IV- und PV-Kurven eines Modulsstrangs bei Leistungseinbruch,
+        keine Freilaufdioden%
+    ]
+    {%
         Verhalten       eines      Modulstrangs       ohne      Freilaufdioden
         bei     Reduktion     des     Stroms    einer     einzelnen     Zelle.
         Die      zugeh\"origen     \code{LTspice}-Schaltungen      sind     im
@@ -187,7 +193,11 @@ platziert.
 \begin{figure}[h!tb]
     %\input{images/iv-curves/array-bypass-3d.tex}
     \input{images/iv-curves/array-bypass-2d.tex}
-    \caption{
+    \caption[%
+        IV- und PV-Kurven eines Modulsstrangs bei Leistungseinbruch,
+        mit Freilaufdioden%
+    ]
+    {
         Verhalten   eines    Modulstrangs   bei   einer    Freilaufdiode   pro
         Modul. Es    werden     zwei    Zellen    in     zwei    verschiedenen
         Modulen   im   gesamten   Modulstrang   auf   reduzierte   Kapazit\"at
@@ -289,10 +299,10 @@ dargestellt.
 \begin{figure}[h!tb]
     \centering
     \input{images/python/fsk.pgf}
-    \caption{%
-        \emph{Frequency-shift  keying}: Oben   sind  die   zu  \"ubertragenden
-        digitalen  Daten  als  \code{1}  und \code{0}  abgebildet,  unten  das
-        zugeh\"orige Verhalten des  modulierten Signals.%
+    \caption[Frequency-Shift keying]{%
+        Frequency-shift  keying: Oben sind  die  zu \"ubertragenden  digitalen
+        Daten  als \code{1}  und \code{0}  abgebildet, unten  das zugeh\"orige
+        Verhalten des modulierten Signals.%
     }
     \label{fig:fsk:concept}
 \end{figure}
@@ -318,8 +328,8 @@ Spannungseinbruchs mit einem Offset des halben Spannungseinbruchs.
 \begin{figure}[h!tb]
     \centering
     \input{images/python/ask.pgf}
-    \caption{%
-        \emph{Amplitude-shift  keying}: Oben   sind  die   zu  \"ubertragenden
+    \caption[Amplitude-shift keying]{%
+        Amplitude-shift  keying: Oben   sind  die   zu  \"ubertragenden
         digitalen  Daten als  \code{1} und  \code{0} abgebildet. Die  mittlere
         Abbildung stellt eine typische Umsetzung des Konzepts mit harmonischer
         Tr\"agerschwingung und zwei verschiedenen Amplituden dar.\protect\\

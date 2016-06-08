@@ -58,13 +58,13 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
             \includegraphics[width=0.9\textwidth]{images/sensor-pcb/sensor-3d-front.png}
-            \figcaption{PCB, Vorderseite}
+            \figcaption[Sensor: Vorderseite PCB]{PCB, Vorderseite}
             \label{fig:sensor:pcb:front}
         \end{minipage}}
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
             \includegraphics[width=0.9\textwidth]{images/sensor-pcb/sensor-3d-back.png}
-            \figcaption{PCB, R\"uckseite}
+            \figcaption[Sensor: R\"uckseite PCB]{PCB, R\"uckseite}
             \label{fig:sensor:pcb:back}
         \end{minipage}}
     \end{minipage}}
@@ -72,7 +72,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \adjustbox{valign=t}{\begin{minipage}{195mm}
         \centering
         \includegraphics[width=\textwidth]{images/sensor-sch/sensor--sch--highlights.eps}%
-        \figcaption{%
+        \figcaption[Schema Sensor, \"Ubersicht]{%
             Schema   des   \Sensor   s. Eine  Grossversion   ist   in   Anhang
             \label{app:chap:schemas}  zu  finden,   die  einzelnen  Baugruppen
             sind  in  den  folgenden  Abschnitten  beschrieben  und  gr\"osser
@@ -90,7 +90,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--supply.eps}
-    \caption{Speisung Sensor}
+    \caption[Sensor: Schema Speisung]{Speisung Sensor}
 \end{figure}
 
 \todo{R24, C1, R14, U1, C8, D1, R\_FB1, R\_FB2, C11, C12, R4, D2, DMP1CH4D2s}
@@ -102,7 +102,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
-    \caption{Transmitter Sensor}
+    \caption[Sensor: Schema Transmitter]{Transmitter Sensor}
 \end{figure}
 
 \todo{R1, R21, RV1, R7, R8, C10, C15}
@@ -115,7 +115,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--mcu.eps}
-    \caption{Microcontroller Sensor}
+    \caption[Sensor: Schema Microcontroller]{Microcontroller Sensor}
 \end{figure}
 
 \todo{R15, C14, Atmel Chip}
@@ -127,7 +127,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--sensor.eps}
-    \caption{Spannungsmessung Sensor}
+    \caption[Sensor: Schema Spannungsmessung]{Spannungsmessung Sensor}
 \end{figure}
 
 \todo{R16, R17, C18}
@@ -139,7 +139,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--interface.eps}
-    \caption{Spannungsmessung Sensor}
+    \caption[Sensor: Schema Interface]{Interface Sensor}
 \end{figure}
 
 \todo{C17, R18, R19, R20}
@@ -151,7 +151,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
 \begin{figure}[h!t]
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--receiver.eps}
-    \caption{Empf\"anger Sensor}
+    \caption[Sensor: Schema Empf\"anger]{Empf\"anger Sensor}
 \end{figure}
 
 \todo{R5, D3, C5, R3, R2, R10, C4, U2}
@@ -183,10 +183,10 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
         {\centering
             \includegraphics[width=100mm]{images/superv-photos/master.jpeg}
-            \figcaption{\Master, zusammengesetzt}
+            \figcaption[\Master: Foto zusammengesetzt]{\Master, zusammengesetzt}
             \label{fig:hw:master:photo:master}
             \includegraphics[width=100mm]{images/superv-photos/raspi-1.jpeg}
-            \figcaption{\Raspi mit aufgestecktem Touchscreen-Modul}
+            \figcaption[\Master: Foto Touchscreen-Modul]{\Raspi mit aufgestecktem Touchscreen-Modul}
             \label{fig:hw:master:photo:raspi}
         }
     \end{minipage}}
@@ -194,10 +194,10 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
     \adjustbox{valign=t}{\begin{minipage}{195mm}
         \centering
         \includegraphics[width=100mm]{images/superv-photos/dinrail.jpeg}
-        \figcaption{Hutschienengeh\"ause}
+        \figcaption[\Master: Foto Hutschienengeh\"ause]{Hutschienengeh\"ause}
         \label{fig:hw:master:photo:dinrail}
         \includegraphics[width=100mm]{images/superv-photos/dinrail-cover.jpeg}
-        \figcaption{3D-degruckte Abdeckung f\"ur das Hutschienengeh\"ause}
+        \figcaption[\Master: Foto Abdeckung]{3D-degruckte Abdeckung f\"ur das Hutschienengeh\"ause}
         \label{fig:hw:master:photo:dinrailCover}
     \end{minipage}}
 
@@ -230,13 +230,13 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
             \includegraphics[width=0.9\textwidth]{images/superv-pcb/supervisor-3d-1.png}
-            \figcaption{PCB, Vorderseite}
+            \figcaption[\Master: Vorderseite PCB]{PCB, Vorderseite}
             \label{fig:master:pcb:front}
         \end{minipage}}
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
             \includegraphics[width=0.9\textwidth]{images/superv-pcb/supervisor-3d-2.png}
-            \figcaption{PCB, R\"uckseite}
+            \figcaption[\Master: R\"uckseite PCB]{PCB, R\"uckseite}
             \label{fig:master:pcb:back}
         \end{minipage}}
     \end{minipage}}
@@ -245,7 +245,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 
         \centering
         \includegraphics[width=\textwidth]{images/superv-sch/supervisor--sch--highlights.eps}%
-        \figcaption{%
+        \figcaption[\Master: Schema, \"Ubersicht]{%
             Schema  des  Master-Ger\"ats. Eine   Grossversion  ist  in  Anhang
             \label{app:chap:schemas}  zu  finden,   die  einzelnen  Baugruppen
             sind  in  den  folgenden  Abschnitten  beschrieben  und  gr\"osser
@@ -265,7 +265,7 @@ etc. Bezug auf das Pflichtenheft, wo m\"oglich.
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.33\textwidth]{images/superv-sch/supervisor--sch--supply.eps}
-    \caption{Stromversorgung \Master}
+    \caption[\Master: Schema Stromversorgung]{Stromversorgung \Master}
     \label{fig:sch:master:supply}
 \end{figure}
 
@@ -328,7 +328,7 @@ Verbrauch auftreten kann.
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.725\textwidth]{images/superv-sch/supervisor--sch--gpio.eps}
-    \caption{GPIO \Master}
+    \caption[\Master: Schema GPIO]{GPIO \Master}
     \label{fig:sch:master:gpio}
 \end{figure}
 
@@ -387,7 +387,7 @@ Flexibilit\"at bei der Wahl der  zu betreibenden Ger\"ate (Alarmlampe, Sirene,
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.75\textwidth]{images/superv-sch/supervisor--sch--comms.eps}
-    \caption{Kommunikation zu \Sensor auf \Master}
+    \caption[\Master: Schema Kommunikation]{Kommunikation zu \Sensor auf \Master}
     \label{fig:sch:master:comms}
 \end{figure}
 
@@ -435,7 +435,7 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
 \adjustbox{valign=t}{\begin{minipage}{0.25\textwidth}
     \centering
     \includegraphics[width=\textwidth]{images/superv-sch/supervisor--sch--coupling.eps}
-    \figcaption{Anschl\"usse zur Einkopplung}
+    \figcaption[\Master: Schema Einkopplung]{Anschl\"usse zur Einkopplung}
     \label{fig:sch:master:coupling}
 \end{minipage}}
 
@@ -450,7 +450,7 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.60\textwidth]{images/superv-sch/supervisor--sch--current.eps}
-    \caption{Strommessung}
+    \caption[\Master: Schema Strommessung]{Strommessung}
     \label{fig:sch:master:current}
 \end{figure}
 
@@ -494,7 +494,7 @@ unsere Zwecke.
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.85\textwidth]{images/superv-sch/supervisor--sch--gsm.eps}
-    \caption{GSM-Modem Schaltung}
+    \caption[\Master: Schema GSM-Modem]{GSM-Modem Schaltung}
     \label{fig:sch:master:gsm}
 \end{figure}
 

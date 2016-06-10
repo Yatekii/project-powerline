@@ -51,10 +51,10 @@ Dann wird mithilfe des sogenannten Cascaded Integrator–Comb Filters
 der aktuelle Moving Average berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
 
 \begin{equation}\label{eq:hogenauer}
-  \begin{align}
-    y[n] &= \sum_{k=0}^{RM-1} x[n-k] \\
-         &= y[n-1] + x[n] - x[n-RM].
-  \end{align}
+    \begin{split}
+        y[n] &= \sum_{k=0}^{RM-1} x[n-k] \\
+             &= y[n-1] + x[n] - x[n-RM].
+    \end{split}
 \end{equation}
 
 Dieser Moving Average wird nun per UART verschickt.

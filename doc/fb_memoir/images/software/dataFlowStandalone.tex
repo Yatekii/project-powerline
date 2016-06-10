@@ -1,6 +1,8 @@
 \documentclass[10pt,a4paper]{article}
 \usepackage[margin=10mm]{geometry}
 \usepackage{tikz}
+\usepackage{kpfonts}
+\usepackage{xcolor-solarized}
 %\usepackage{flowchart}
 \usetikzlibrary{positioning}
 \usetikzlibrary{shapes.misc}
@@ -14,93 +16,277 @@
 \begin{tikzpicture}[%
         %rounded corners,
         align=center,
-        %node distance = 5mm,
+        text=solarized-base02,
+        draw=solarized-base02,
     ]
     \small
+    \sffamily
     %\begin{scope}[x={(0mm,0.95\textwidth)},y={(0mm,50mm)}]
 
     %\draw [help lines] (0,0) grid (10,-15);
 
-    %\node at (1,1) [above=2pt+3pt,draw] {above};
-
     \begin{scope}[
         every node/.style = draw,
-        terminal/.append style={rounded rectangle,fill=magenta!20},
-        sign/.style={fill=blue!20},         % custom signal style
-        circ/.style={double,fill=green!20}, % circuitry
-        proc/.style={fill=yellow!20},       % process/activity
-        stor/.style={fill=cyan!30},         % storage
+        terminal/.append style={
+            rounded rectangle,
+            fill=solarized-violet,
+            text=solarized-base3,
+            inner sep=2mm,
+        }, % data packages
+        sign/.style={
+            inner sep=2mm,
+            rounded corners=1mm,
+            fill=solarized-magenta,
+            text=solarized-base3,
+        },         % custom signal style
+        circ/.style={
+            inner sep=2mm,
+            rounded corners=1mm,
+            double,
+            fill=solarized-base02,
+            draw=solarized-base02,
+            text=solarized-base2,
+        }, % circuitry
+        proc/.style={
+            inner sep=2mm,
+            rounded corners=1mm,
+            fill=solarized-cyan,
+            text=solarized-base3,
+        },       % process/activity
+        stor/.style={
+            fill=cyan!30
+        },         % storage
+        dbtable/.style={
+            text=solarized-base3,
+            draw=solarized-base3,
+            rounded corners=1mm,
+            inner sep=2mm,
+        } % database tables
     ]
-        \node (voltage)   [sign,signal,signal to=east] at (0,0)     {Spannung};
+        \node (voltage) [
+            sign,
+            signal,
+            signal to=east
+        ] at (0,0) {Spannung};
 
         % uC on Sensor
-        \node (ADCVolt)   [circ,right=of voltage]                        {ADC};
-        \node (avg)       [proc,right=of ADCVolt,align=center]           {Durchschnitt\\berechnen};
-        \node (data)      [terminal,right=of avg,align=center]                   {Messdaten\\Modulspannung,\\Sensor-ID};
-        \node (id)        [sign,signal,signal to=east,above left=of data] {Seriennummer};
-        \node (crc)       [proc,below right=of data]                     {CRC berechnen};
-        \node (package)   [terminal,below=of data]                  {Datenpaket};
-        \node (uart)      [circ,left=of package]                         {UART-Modul};
+        \node (ADCVolt) [
+            circ,
+            right=30mm of voltage
+        ] {ADC};
+        \node (avg) [
+            proc,
+            right=of ADCVolt,
+            align=center
+        ] {Durchschnitt\\berechnen};
+        \node (data) [
+            terminal,
+            right=of avg,
+            align=center
+        ] {Messdaten\\Modulspannung,\\Sensor-ID};
+        \node (id) [
+            sign,
+            signal,
+            signal to=east,
+            above left=of data
+        ] {Seriennummer};
+        \node (crc) [
+            proc,
+            below right=of data
+        ] {CRC berechnen};
+        \node (package) [
+            terminal,
+            below=of data
+        ] {Datenpaket};
+        \node (uart) [
+            circ,
+            left=of package
+        ] {UART-Modul};
 
-        \node (oosk1)     [circ,below=of uart,align=center]                   {ON/OFF-Shift \\Keying-Schaltung};
-        \node (clk1)      [sign,signal,signal to=east,left=2cm of oosk1]      {\texttt{CLK}};
-        \node (oosk2)     [circ,below=20mm of oosk1,align=center]             {ON/OFF-Shift \\Keying-Schaltung};
-        \node (clk2)      [sign,signal,signal to=east,left=2cm of oosk2]      {\texttt{CLK}};
-        \node (bridge)    [circ,right=of oosk2]                                    {UART/I\textsuperscript{2}C-Br\"ucke};
-        \node (package2)  [terminal,below=of bridge] {Datenpaket};
+        \node (oosk1)[
+            circ,
+            below=of uart,
+            align=center
+        ] {ON/OFF-Shift \\Keying-Schaltung};
+        \node (clk1) [
+            sign,
+            signal,
+            signal to=east,
+            left=2cm of oosk1
+        ] {CLK VCO};
+        \node (oosk2) [
+            circ,
+            below=20mm of oosk1,
+            align=center
+        ] {ON/OFF-Shift \\Keying-Schaltung};
+        \node (clk2) [
+            sign,
+            signal,
+            signal to=east,
+            left=2cm of oosk2
+        ] {CLK VCO};
+        \node (bridge) [
+            circ,
+            right=of oosk2
+        ] {UART/I\textsuperscript{2}C-Br\"ucke};
+        \node (package2) [
+            terminal,
+            below=of bridge
+        ] {Datenpaket};
 
         % Raspi
-        \node (crc2)      [proc,align=center,diamond,below=of package2]                          {CRC\\korrekt?};
-        \node (discard)   [cross out,right=of crc2]                                            {Paket verwerfen};
-        \node (data2)     [terminal,left=of crc2,align=center]                                 {Messdaten\\Modulspannung,\\Sensor-ID};
-        \node (dbVolts)   [left=of data2,text width=7em,align=left,minimum width=7.5em]     {Table:\\ Spannungen\\};
-        \node (dbCurr)    [below=1mm of dbVolts,text width=7em,align=left,minimum width=7.5em] {Table:\\ Strang-Str\"ome\\};
-        \node (dbIDs)     [below=1mm of dbCurr,text width=7em,align=left,minimum width=7.5em]  {Tables:\\ Sensor-IDs \\ pro Strang};
+        \node (crc2) [
+            proc,
+            align=center,
+            diamond,
+            below=of package2
+        ] {CRC\\korrekt?};
+        \node (discard) [
+            draw=solarized-red,
+            cross out,
+            right=of crc2
+        ] {Paket verwerfen};
+        \node (data2) [
+            terminal,
+            left=of crc2,
+            align=center
+        ] {Messdaten\\Modulspannung,\\Sensor-ID};
+        \node (dbVolts) [
+            dbtable,
+            left=of data2,
+            text width=7em,
+            align=left,
+            minimum width=7.5em
+        ] {Table:\\ Spannungen\\};
+        \node (dbCurr) [
+            dbtable,
+            below=1mm of dbVolts,
+            text width=7em,
+            align=left,
+            minimum width=7.5em
+        ] {Table:\\ Strang-Str\"ome\\};
+        \node (dbIDs) [
+            dbtable,
+            below=1mm of dbCurr,
+            text width=7em,
+            align=left,
+            minimum width=7.5em
+        ] {Tables:\\ Sensor-IDs \\ pro Strang};
 
-        \node (newID)     [proc,align=center,diamond,below=of crc2]                          {Modul-ID\\bekannt?};
-        \node (sensorID)  [terminal,left=of newID] {Sensor-ID};
-        \node (stringNr2) [sign,signal,signal to=west,below=5mm of sensorID] {String-Nr.};
+        \node (newID) [
+            proc,
+            align=center,
+            diamond,
+            below=of crc2] {Sensor-ID\\bekannt?};
+        \node (sensorID)  [
+            terminal,
+            left=of newID] {Sensor-ID};
+        \node (stringNr2) [
+            sign,
+            signal,
+            signal to=west,
+            below=5mm of sensorID
+        ] {String-Nr.};
 
-        \node (stringNr)  [sign,signal,signal to=east,left=15mm of dbVolts]       {String-Nr.};
-        \node (timestamp) [sign,signal,signal to=east,above=1mm of stringNr] {Timestamp};
-        \node (dbID)      [sign,signal,signal to=east,below=1mm of stringNr] {ID-Nr DB};
+        \node (stringNr) [
+            sign,
+            signal,
+            signal to=east,
+            left=15mm of dbVolts
+        ] {String-Nr.};
+        \node (timestamp) [
+            sign,
+            signal,
+            signal to=east,
+            above=1mm of stringNr
+        ] {Timestamp};
 
-        \node (dataCurr) [terminal,below=25mm of dbID,align=center] {Messdaten\\Strom};
+        \node (dataCurr) [
+            terminal,
+            below=35mm of stringNr,
+            align=center
+        ] {Messdaten\\Strom};
 
-        \node (bridge2) [circ,below=45mm of dbID] {UART/I\textsuperscript{2}C-Br\"ucke};
-        \node (hall)    [circ,right=of bridge2] {Hall-Sensoren};
-        \node (current) [sign,signal,signal to=west,right=of hall]         {Strang-Strom};
+        \node (bridge2) [
+            circ,
+            below=55mm of stringNr
+        ] {UART/I\textsuperscript{2}C-Br\"ucke};
+        \node (hall) [
+            circ,
+            right=of bridge2
+        ] {Hall-Sensoren};
+        \node (current) [
+            sign,
+            signal,
+            signal to=west,
+            right=of hall
+        ] {Strang-Strom};
     \end{scope}
 
     \begin{scope}
         % Need to have this inside  a separate scope so that
         % its border does not get drawn.
-        \node (db)        [above=1mm of dbVolts,align=left] {Datenbank};
-        \node (dbSignals) [circle,inner sep=1pt,fill=black,right=3mm of stringNr] { };
-        \node (dbSignals2)[circle,inner sep=1pt,fill=black,left=4mm of dbCurr] { };
-        \node (dbSignals3)[circle,inner sep=1pt,fill=black,left=of sensorID] { };
+        \node (db)        [
+            text=solarized-base3,
+            above=1mm of dbVolts,
+            align=left
+        ] {Datenbank};
+        \node (dbSignals) [
+            circle,
+            inner sep=1pt,
+            fill=black,
+            right=3mm of stringNr
+        ] { };
+        \node (dbSignals2) [
+            circle,
+            inner sep=1pt,
+            fill=black,
+            left=4mm of dbCurr] { };
+        \node (dbSignals3) [
+            circle,
+            inner sep=1pt,
+            fill=black,
+            left=of sensorID
+        ] { };
     \end{scope}
 
     \begin{scope}[on background layer]
+        \node (SENSOR) [%
+            draw,
+            double,
+            rounded corners=5mm,
+            fill=solarized-base3,
+            inner sep=2em,
+            fit=(ADCVolt) (avg) (data) (id) (crc) (package) (uart) (oosk1) (clk1),
+            align=left,
+            text height=21em,
+            align=right,
+        ] {\large{\textbf{Sensor}}};
         \node (uCSensor) [%
             draw,
-            fill=gray!10,
+            double,
+            rounded corners=5mm,
+            fill=solarized-base2,
             inner sep=1em,
             fit=(ADCVolt) (avg) (data) (id) (crc) (package) (uart),
             align=right,
             text height=1em,
-        ] {Atmel SAM D09};
+        ] {\textbf{Atmel SAM D09}};
         \node (rasPi) [%
             draw,
-            fill=gray!10,
+            double,
+            rounded corners=5mm,
+            fill=solarized-base2,
             inner sep=1em,
-            fit=(stringNr) (timestamp) (dbID) (crc2) (newID) (discard) (stringNr2),
+            fit=(stringNr) (timestamp) (crc2) (newID) (discard) (stringNr2),
             align=right,
             text height=1em,
-        ] {Raspberry Pi};
+        ] {\textbf{Raspberry Pi}};
         \node (database) [%
-            draw,
-            fill=cyan!30,
+            draw=solarized-base03,
+            rounded corners=3mm,
+            inner sep=2mm,
+            fill=solarized-blue,
             fit=(dbVolts) (dbCurr) (dbIDs) (db),
         ] { };
     \end{scope}
@@ -108,6 +294,8 @@
 
     \begin{scope}[
         %every node/.style={ },
+            rounded corners,
+            every path/.append style={draw=solarized-base02,},
     ]
         \draw[-latex] (voltage) -- (ADCVolt);
         \draw[-latex] (ADCVolt) -- (avg);
@@ -129,10 +317,9 @@
         \draw[-latex] (data2) -- (dbVolts);
         \draw[-] (stringNr) -- (dbSignals);
         \draw[-] (timestamp) -| (dbSignals);
-        \draw[-] (dbID) -| (dbSignals);
         \draw[-latex] (dbSignals) -- (dbVolts);
         \draw[-latex] (dbSignals) -| (dbSignals2);
-        \draw[-latex] (dbSignals2) |- (dbCurr);
+        \draw[-latex] (dbSignals2) -- (dbCurr);
         \draw[-latex] (crc2) -- node[anchor=west,align=right] {ja} (newID);
         \draw[-latex] (newID) -- node[anchor=north] {nein} (sensorID);
         \draw[-latex] (sensorID) -| (dbIDs);
@@ -141,8 +328,6 @@
         \draw[-latex] (hall) -- (bridge2);
         \draw[-latex] (bridge2) -- (dataCurr);
         \draw[-latex] (dataCurr) |- (dbSignals2);
-        %\draw[-latex] (current) -| (dbSignals2);
-        %\draw[-latex] (dbSignals3) |- (dbCurr);
     \end{scope}
 
 \end{tikzpicture}

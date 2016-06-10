@@ -20,10 +20,31 @@ der Grund ihrer Wahl erl\"autert werden.
 erg\"anzen.
 
 
+{\begin{a3pages}
 % ---------------------------------------------------------------------------- %
 \section{Datenfluss}
 \label{sec:fw:dataFlow}
 % ---------------------------------------------------------------------------- %
+\setlength{\parindentbak}{\parindent}
+\noindent\adjustbox{valign=t}{\begin{minipage}{135mm}
+    Abbilung   \ref{fig:dataFlow}  zeigt   den  Ablauf   der  Spannungs-   und
+    Strommessung von den Messsonden bis zur Speicherung der Messergebnisse und
+    der zugeh\"origen Metadaten in der Datenbank.
+
+    \setlength{\parindent}{\parindentbak} % restore paragraph indentation
+\end{minipage}}
+\hspace*{5mm}
+\adjustbox{valign=t}{\begin{minipage}{205mm}
+    \input{images/software/dataFlow.tex}
+    \figcaption
+        [Datenfluss von Messungen bis Speicherung]
+        {%
+            Datenfluss von den Messungen der Modulspannungen und Strang-Str\"ome bis
+            zur Speicherung in der Datenbank%
+        }
+        \label{fig:dataFlow}
+\end{minipage}}
+\end{a3pages}}
 
 
 % ---------------------------------------------------------------------------- %

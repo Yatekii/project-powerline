@@ -2,6 +2,8 @@
         align=center,
         text=solarized-base02,
         draw=solarized-base02,
+        remember picture,
+        overlay,
     ]
     \small
     \sffamily
@@ -51,7 +53,7 @@
             sign,
             signal,
             signal to=east
-        ] at (0,0) {Spannung};
+        ] at (20mm,-33mm) {Spannung};
 
         % uC on Sensor
         \node (ADCVolt) [
@@ -89,14 +91,14 @@
 
         \node (oosk1)[
             circ,
-            below=of uart,
+            below left=of uart,
             align=center
         ] {ON/OFF-Shift \\Keying-Schaltung};
         \node (clk1) [
             sign,
             signal,
-            signal to=east,
-            left=2cm of oosk1
+            signal to=west,
+            right=2cm of oosk1
         ] {CLK VCO};
         \node (oosk2) [
             circ,
@@ -115,7 +117,7 @@
         ] {UART/I\textsuperscript{2}C-Br\"ucke};
         \node (package2) [
             terminal,
-            below=of bridge
+            right=of bridge
         ] {Datenpaket};
 
         % Raspi
@@ -193,7 +195,7 @@
 
         \node (bridge2) [
             circ,
-            below=55mm of stringNr
+            below=60mm of stringNr
         ] {UART/I\textsuperscript{2}C-Br\"ucke};
         \node (hall) [
             circ,
@@ -203,7 +205,7 @@
             sign,
             signal,
             signal to=west,
-            right=of hall
+            below right=of hall
         ] {Strang-Strom};
     \end{scope}
 
@@ -218,18 +220,18 @@
         \node (dbSignals) [
             circle,
             inner sep=1pt,
-            fill=black,
+            fill=solarized-base03,
             right=3mm of stringNr
         ] { };
         \node (dbSignals2) [
             circle,
             inner sep=1pt,
-            fill=black,
+            fill=solarized-base03,
             left=4mm of dbCurr] { };
         \node (dbSignals3) [
             circle,
             inner sep=1pt,
-            fill=black,
+            fill=solarized-base03,
             left=of sensorID
         ] { };
     \end{scope}
@@ -256,6 +258,16 @@
             align=right,
             text height=1em,
         ] {\textbf{Atmel SAM D09}};
+        \node (MASTER) [%
+            draw,
+            double,
+            rounded corners=5mm,
+            fill=solarized-base3,
+            inner sep=2em,
+            fit=(clk2) (bridge2) (hall) (stringNr) (timestamp) (crc2) (newID) (discard) (stringNr2),
+            align=right,
+            text height=1em,
+        ] {\large{\textbf{Master}}};
         \node (rasPi) [%
             draw,
             double,
@@ -279,7 +291,7 @@
     \begin{scope}[
         %every node/.style={ },
             rounded corners,
-            every path/.append style={draw=solarized-base02,},
+            every path/.append style={draw=solarized-base03,},
     ]
         \draw[-latex] (voltage) -- (ADCVolt);
         \draw[-latex] (ADCVolt) -- (avg);
@@ -289,10 +301,10 @@
         \draw[-latex] (crc) -- (package);
         \draw[-latex] (data) -- (package);
         \draw[-latex] (package) -- (uart);
-        \draw[-latex] (uart) -- (oosk1);
+        \draw[-latex] (uart) -| (oosk1);
         \draw[-latex] (clk1) -- (oosk1);
         \draw[-latex] (clk2) -- (oosk2);
-        \draw[-latex] (oosk1) --  node[midway, anchor = west] {DC-Leitung} (oosk2);
+        \draw[line width=2pt,-latex] (oosk1) --  node[midway, anchor = west] {DC-Leitung} (oosk2);
         \draw[-latex] (oosk2) -- (bridge);
         \draw[-latex] (bridge) -- (package2);
         \draw[-latex] (package2) -- (crc2);
@@ -308,7 +320,7 @@
         \draw[-latex] (newID) -- node[anchor=north] {nein} (sensorID);
         \draw[-latex] (sensorID) -| (dbIDs);
         \draw[-latex] (stringNr2) -| (dbSignals3);
-        \draw[-latex] (current) -- (hall);
+        \draw[-latex] (current) -| (hall);
         \draw[-latex] (hall) -- (bridge2);
         \draw[-latex] (bridge2) -- (dataCurr);
         \draw[-latex] (dataCurr) |- (dbSignals2);

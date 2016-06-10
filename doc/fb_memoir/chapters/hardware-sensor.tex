@@ -8,30 +8,21 @@
     \setlength{\parindentbak}{\parindent}
 
     \noindent\adjustbox{valign=t}{\begin{minipage}{135mm}
-        asdf   aweiufh  we   aluwesikfhalweifuawheilf   aweif  alwieuhfi   waf
-        aliwuhefla2983a haewfhua alwifeuhal23  ahwfi awiuehf afshi wfhiuwaejhf
-        aasd   sdf   we    aluwesikfhalweifuawheilf   aweif   alwieuhfi   waff
-        aaliwuhefla2983a haewfhua alwifeuhal23 ahwfi awiuehf afshi wfhiuwaejhf
-        aasd  sdf  aweiufh we  aweif  alwieuhfi  waf aliwuhefla2983a  haewfhua
-        aalwifeuhal23  ahwfi  awiuehf afshi  wfhiuwaejh  asdf  sdf aweiufh  we
-        aaluwesikfhalweifuawheilf  waf  haewfhua  alwifeuhal23  ahwfi  awiuehf
-        aafshi wfhiuwaejh asdf sdf aweiufh  we aweif waf haewfhua alwifeuhal23
-        aawiuehf afshi wfhiuwaejh asdf sdf aweiufh we aluwesikfhalweifuawheilf
-        aaweif alwieuhfi  aliwuhefla2983a haewfhua alwifeuhal23  ahwfi awiuehf
-        aafshi wfhiuwaejh asdf sdf we aweif alwieuhfi aliwuhefla2983a haewfhua
-        aalwifeuhal23  ahwfi  awiuehf  afshi  wfhiuwaejh  asdf  sdf  we  aweif
-        aalwieuhfi  waf  haewfhua  ahwfi  awiuehf  afshi  wfhiuwaejh  sdf  sdf
-        aaweiufh we aweif alwieuhfi  waf aliwuhefla2983a haewfhua alwifeuhal23
-        aahwfi  awiuehf  afshi  wfhiuwaejh asdf  sdf  aluwesikfhalweifuawheilf
-        aaweif  alwieuhfi  waf  aliwuhefla2983a  haewfhua  alwifeuhal23  ahwfi
-        aawiuehf afshi wfhiuwaejh asdf sdf aweiufh we aluwesikfhalweifuawheilf
-        aaweif  alwieuhfi waf  haewfhua  ahwfi awiuehf  afshi wfhiuwaejh  asdf
-        asdf  aweiufh we  aweif  alwieuhfi waf  haewfhua  ahwfi awiuehf  afshi
-        awfhiuwaejh  asdf   sdf  aweiufh  we   aluwesikfhalweifuawheilf  aweif
-        aalwieuhfi  haewfhua  afshi  wfhiuwaejh  asdf  sdf  aweiufh  we  aweif
-        aalwieuhfi  waf  aliwuhefla2983a  haewfhua  alwifeuhal23  ahwfi  afshi
-        awfhiuwaejh  asdf   sdf  aweiufh  we   aluwesikfhalweifuawheilf  aweif
-        aalwieuhfi waf aliwuhefla2983a ahwfi wfhiuwaejh asdf
+        Das Sensorboard besteht aus einer CPU welche alle Komponenten koordiniert, einem Modulator und einem Demodulator zur Kommunikation, einem Buck-Konverter der die Netzspannung f\"ur das Board transformiert.
+
+        Als CPU dient ein Atmel SAM D09. Dieser wurde gew\"ahlt da er die g\"unstigste CPU in seiner Klasse ist und alle notwendigen Features mitbringt. (3)
+        Der Mikrochip hat einen 12 Bit ADC, ein CRC Modul, hat eine 32 Bit ARM Architektur und braucht extrem wenig Leistung.
+
+        Zum Speisen des Boardes wird ein LMR16006 verwendet. Dieser kann die volle Spanne von 12 Volt bis 60 Volt ohne Probleme auf 3.3 Volt regeln, welche das Board versorgen. (1)
+
+        Als Modulator dient ein Voltage Controlled Oscillator (VCO) auf dem 74HC4640 Chip von Texas Instruments.
+        Dieser kann mit der richtigen Beschaltung Frequenzen zwischen wenigen Kilohertz bis mehrere Megahertz erzeugen.(2)
+
+        Zum Demodulieren wird ein einfaches Tiefpassfilter mit einer Diode und einem Verst\"arker benutzt.(6)
+
+        Und nat\"urlich hat es einen Spannungsteiler zum Messen der Versorgungsspannung. (4)
+
+        Im Folgenden sind die einzelnen Komponenten dokumentiert und ihre Wahl begr\"undet.
 
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
@@ -66,22 +57,33 @@
 \label{subsec:hw:sensor:supply}
 % ---------------------------------------------------------------------------- %
 
+Die Speisung der Schaltung übernimmt ein LMR16006. Er ist bis 63 Volt input rated, das heisst es ist noch ein wenig Spiel zu den 60 Volt welche am Einganz anliegen können. Er kommt auch mit 4 Volt am Eingang noch klar. Da die Versorgungsspannung zwischen 12 Volt und 60 Volt schwankt durch den Tag, ist der LMR16006 soweit bestens geeignet.
+Er hat einen sehr konstanten Wirkungsgrad von 70 bis 80 Prozent, je nach Speisespannung.
+Der LMR16006 kann maximal 600 Miliampere liefern was ausreicht wenn man einen genug grossen Puffercap für Powerspikes einberechnet.
+Zudem hat dieser Spannungsregler einen typischen Quiescent Current von nur 28 Mikroampere. Damit ist er auch extrem Stromsparend.
+Die Beschaltung wurde nach Empehlung des Datenblatts gewählt, welche garantiert dass Powerspikes gut gefangen werden. $R_{FB1}$ und $R_{FB2}$ wurden explizit im Verhältnis $1:3.3$ gewählt, da 3.3 Volt die Spannung ist, die wir am Ausgang anstreben.
+
+Der Active Low Shutdown Pin wird dauernd auf High gezogen, damit der Regler immer an ist sobald am Eingang Spannung anliegt.
+
+Damit die Montage einfacher ist, ist ein Verpolungsschutz eingebaut. Dieser besteht aus einem P-Fet, einer Zenerdiode und einem Gate-Vorwiderstand.
+
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--supply.eps}
+    \includegraphics[width=1\textwidth]{images/sensor-sch/sensor--sch--supply.eps}
     \caption[Sensor: Schema Speisung]{Speisung Sensor}
 \end{figure}
-
-\todo{R24, C1, R14, U1, C8, D1, R\_FB1, R\_FB2, C11, C12, R4, D2, DMP1CH4D2s}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Transmitter}
 \label{subsec:hw:sensor:transmitter}
 % ---------------------------------------------------------------------------- %
 
+Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungsversorgung aufmoduliert.
+
+
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
+    \includegraphics[width=1\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
     \caption[Sensor: Schema Transmitter]{Transmitter Sensor}
 \end{figure}
 

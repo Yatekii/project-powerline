@@ -22,7 +22,7 @@ class HandyNbView(QWidget):
             self.nr_edit.setText(self.handy_nb)
         self.grid.addWidget(self.nr_edit, 0, 0, 1, 3)
 
-        self.clear_bt = QPushButton('Clear')
+        self.clear_bt = QPushButton('\u232B')
         self.clear_bt.clicked.connect(self.clear_nb)
         self.clear_bt.setFixedSize(40, 40)
         self.grid.addWidget(self.clear_bt, 0, 3)
@@ -39,7 +39,7 @@ class HandyNbView(QWidget):
             self.buttons[name].clicked.connect(self.enter_character)
             self.grid.addWidget(self.buttons[name], *position)
 
-        self.cancel_bt = QPushButton("Abbrechen")
+        self.cancel_bt = QPushButton("Zurück")
         self.cancel_bt.clicked.connect(self.cancel_nb)
         self.grid.addWidget(self.cancel_bt, 5, 0, 2, 2)
 
@@ -59,8 +59,8 @@ class HandyNbView(QWidget):
     def save_nb(self):
         self.handy_nb = self.nr_edit.text()
         print(self.handy_nb)
-        #self.parent().show_home_view
+        #self.parent().parent().show_home_view()
 
     def cancel_nb(self):
         self.nr_edit.setText(self.handy_nb)
-        #self.parent().show_home_view
+        self.parent().parent().show_configuration_view()

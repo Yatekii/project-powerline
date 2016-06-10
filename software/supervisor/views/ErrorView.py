@@ -27,7 +27,7 @@ class ErrorView(QWidget):
         self.modul_nr_lb = QLabel(self)
         self.modul_nr_lb.move(120, 150)
 
-        self.hist_bt = QPushButton("History", self)
+        self.hist_bt = QPushButton("Verlauf", self)
         self.hist_bt.resize(140, 50)
         self.hist_bt.move(0, 160)
         self.hist_bt.clicked.connect(self.parent().show_history_view)

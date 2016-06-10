@@ -20,7 +20,6 @@ class MainWindow(QWidget):
         self.reporter.start()
 
         self.home_view = HomeView.HomeView(self)
-
         self.configuration_view = ConfigurationView.ConfigurationView(self)
         self.error_view = ErrorView.ErrorView(self)
         self.handy_nb_view = HandyNbView.HandyNbView(self)

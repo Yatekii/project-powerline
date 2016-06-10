@@ -15,7 +15,7 @@ class ConfigurationView(QWidget):
         font_title = QFont()
         font_title.setBold(1)
 
-        self.cancel_bt = QPushButton("Abbrechen", self)
+        self.cancel_bt = QPushButton("Zurück", self)
         self.cancel_bt.move(0, 160)
         self.cancel_bt.resize(140, 50)
         self.cancel_bt.clicked.connect(self.cancel_qcheckbox)
@@ -49,10 +49,10 @@ class ConfigurationView(QWidget):
         self.sms_cb.setChecked(self.saved_configuration[0])
         self.relais_cb_1.setChecked(self.saved_configuration[1])
         self.relais_cb_2.setChecked(self.saved_configuration[2])
-        #self.parent().show_home_view
+        self.parent().parent().show_home_view()
 
     def save_configuration(self):
         self.saved_configuration[0] = self.sms_cb.isChecked()
         self.saved_configuration[1] = self.relais_cb_1.isChecked()
         self.saved_configuration[2] = self.relais_cb_2.isChecked()
-        #self.parent().show_home_view
+        #self.parent().parent().show_home_view()

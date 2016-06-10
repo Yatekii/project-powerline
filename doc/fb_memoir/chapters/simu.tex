@@ -1016,22 +1016,77 @@ zu verfolgen.
 \label{subsec:simu:conclusion}
 % ---------------------------------------------------------------------------- %
 
-Es folgt an dieser Stelle eine zusammenfassende Gegen\"uberstellung der in den
-vorigen Abschnitten untersuchten L\"osungsvarianten und ein Entschluss, welche
-Variante weshalb weiterverfolgt wird.
+Es folgt  an dieser  Stelle eine  zusammenfassende Gegen\"uberstellung  der in
+den vorigen  Abschnitten untersuchten  L\"osungsvarianten und  ein Entschluss,
+welche Variante weshalb weiterverfolgt wird. Tabelle \ref{tab:simu:conclusion}
+enth\"alt eine \"Ubersicht einiger Merkmale der verschiedenen Ans\"atze.
+
+Die Kurzschlussvariante  wird aufgrund der starken  Lastabh\"angigkeit und der
+Neuartigkeit des  Konzepts nicht weiterverfolgt. Wie bereits  angemerkt halten
+wird  diesen  Ansatz  zwar  f\"ur sehr  interessant,  beurteilen  aber  unsere
+Erfolgschancen  im  Rahmen eines  Semesterprojekts  als  zu gering,  um  diese
+Variante weiter zu verfolgen.
+
+Bei der  kapazitiven Einkopplung hat  der Ort, an  dem die Einkopplung  in den
+Strang erfolgt einen  grossen Einfluss nicht nur auf  die Signalamplitude beim
+Empf\"anger, sondern auf die Form  des Signals. Dies beurteilen wird als nicht
+optimal, da allenfalls  komplexe L\"osungen n\"otig w\"aren, um  das Signal am
+Empf\"anger \"uberhaupt noch als solches erkennen zu k\"onnen.
+
+Aufgrund der niedrigen  Verzerrung des Signals bei  der induktiven Einkopplung
+wird diese  Variante implementiert. Die Signalamplitude beim  Betrieb in einem
+Strang mit mehreren Modulen kann zwar  stark abfallen, jedoch ist selbst unter
+diesen  Umst\"anden  das Signal  prinzipiell  noch  sehr sauber  und  k\"onnte
+allenfalls wieder herausgefiltert  und verst\"arkt werden. Alternativ k\"onnte
+in einer weiteren Entwicklungsstufe eine L\"osung implementiert werden, welche
+den Strang, in  dem ein Sensor installiert ist, ausmisst,  und automatisch bei
+der  optimalen Frequenz  (innerhalb  von  spezifizierten Grenzen  nat\"urlich)
+sendet.
 
 \begin{table}[h!tb]
     \centering
+    \small
     \caption{Gegen\"uberstellung der drei L\"osungsvarianten}
     \label{tab:simu:conclusion}
-    \begin{tabular}{lrrr}
+    \begin{tabular}{p{38mm}p{28mm}p{28mm}p{28mm}}
         \toprule
-        Kriterium & induktive Kopplung & kapazitive Kopplung & Kurzschluss \\
+        \textbf{Kriterium} &
+        \textbf{induktive Kopplung} &
+        \textbf{kapazitive Kopplung} &
+        Kurzschluss \\
+
         \midrule
-        bla & bli & bla & bla\\
-        bla & bli & bla & bla\\
-        bla & bli & bla & bla\\
-        bla & bli & bla & bla\\
+
+        Komplexit\"at der Schaltung &
+        mittel &
+        mittel &
+        simpel \\
+        [2mm]
+
+        \rowcolor{solarized-base2}
+        Neuartigkeit des Konzepts &
+        niedrig &
+        niedrig &
+        hoch \\
+        [2mm]
+
+        Kosten &
+        hoch &
+        mittel &
+        klein  \\
+        [2mm]
+
+        \rowcolor{solarized-base2}
+        St\"arke des Signals am Empf\"anger &
+        bei Resonanz gut, kann sonst stark abfallen &
+        variiert stark mit Position im Strang &
+        variiert stark mit Last \\
+        [2mm]
+
+        Verzerrung des Signals am Empf\"anger &
+        schwache Verzerrung &
+        variiert mit Position im Strang, Signal kann sehr stark verzerrt werden &
+        variiert stark mit Last \\
         \bottomrule
     \end{tabular}
 \end{table}

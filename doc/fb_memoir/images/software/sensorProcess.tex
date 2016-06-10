@@ -59,12 +59,21 @@
             dec,
             align=center,
             diamond,
+            minimum width=33mm,
+            minimum height=33mm,
         ] at (0,0) {neuer\\UART\\Request?};
+        \node (init) [
+            proc,
+            above=of newUART,
+            align=center,
+        ] {Hardware\\initialisieren};
         \node (forMe) [
             dec,
             align=center,
             diamond,
-            right=of newUART
+            right=of newUART,
+            minimum width=33mm,
+            minimum height=33mm,
         ] {F\"ur mich?};
         \node (getADC) [
             proc,
@@ -78,7 +87,7 @@
         ] {Moving\\Average\\berechnen};
         \node (LED) [
             proc,
-            right=of movAvg,
+            left=of movAvg,
             align=center,
         ] {LED\\blinken\\lassen};
         \node (package) [
@@ -88,19 +97,19 @@
         ] {Datenpaket mit\\Moving Average\\ und Addresse\\erstellen};
         \node (crc) [
             proc,
-            right=of package,
+            below=of package,
             align=center,
         ] {CRC brechnen\\und zu Daten\\hinzuf\"ugen};
         \node (send) [
             proc,
-            below=18.5mm of crc,
+            below=of crc,
             align=center,
         ] {Datenpaket\\senden};
         \node (converge) [
             circle,
             fill=solarized-base03,
             inner sep=1pt,
-            right=25mm of getADC,
+            right=30mm of getADC,
         ] { };
     \end{scope}
 
@@ -109,20 +118,18 @@
             rounded corners,
             every path/.append style={draw=solarized-base03,},
     ]
+        \draw[-latex] (init) -- (newUART);
         \draw[-latex] (newUART) -- node[midway,anchor=south] {ja} (forMe);
         \draw[-latex] (newUART) -- node[midway,anchor=east] {nein} (getADC);
         \draw[-latex] (getADC) -- (movAvg);
         \draw[-latex] (movAvg) -- (LED);
-        \draw[-latex] (forMe) -- (package);
+        \draw[-latex] (forMe) -- node[midway,anchor=south] {ja} (package);
         \draw[-latex] (package) -- (crc);
         \draw[-latex] (crc) -- (send);
-        \draw[-latex] (forMe) -- (converge);
-        \draw[-latex] (send) -- (converge);
+        \draw[-latex] (forMe) -- node[midway,anchor=east] {nein} (converge);
+        \draw[-latex] (send) -| (converge);
         \draw[-latex] (converge) -- (getADC);
-        %\draw[-latex] (voltage) -- (ADCVolt);
-        %\draw[line width=2pt,-latex] (oosk1) --  node[midway, anchor = west] {DC-Leitung} (oosk2);
-        %\draw[-latex] (crc2) -- node[anchor=north] {nein} (discard);
-        %\draw[-latex] (crc2) -- node[anchor=north] {ja} (data2);
+        \draw[-latex] (LED) |- (newUART);
     \end{scope}
 
 \end{tikzpicture}

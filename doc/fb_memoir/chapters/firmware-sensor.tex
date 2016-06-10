@@ -1,0 +1,39 @@
+\subsection{SAMD09}
+
+Als CPU auf dem Sensor wurde wie im Abschnitt~\ref{sec:hardware-sensor} erw\"ahnt ein Atmel Smart ARM Cortex M0+ gew\"ahlt.
+Dies war aus Sicht der Kostenoptimierung und der Harware eine gute Wahl. Es stellte sich aber heraus dass dies f\"ur die Softwareentwicklung nicht der Fall war.
+Das Datasheet ist leider nicht so \"ubersichtlich und ausf\"uhrlich wie diejenigen der AVR Chips oder anderer bekannter ARM Hersteller (ST, NXP, etc.).
+Hier versprach das Atmel Software Framework (ASF) Abhilfe. Es f\"uhrt einen Hardware Abstraction Layer (HAL) ein, welcher die Hardware-Bl\"ocke der einzelnen Atmel CPUs in einfache Interfaces in Form von C-Funtionen abstrahiert.
+
+\subsection{Atmel Software Framework}
+
+Das ASF versprach zuerst viel Gutes. Es unterst\"utzt GNU Makefiles out of the Box. Wir haben explizit freie Software f\"ur unser Projekt gew\"ahlt und so war es wichtig die Software auch ohne Propriet\"are IDEs kompilieren zu k\"onnen.
+
+In einer ersten, extrem simplen Firmware wurde der Betrieb der LEDs angestrebt. Dazu fanden sich einfache Beispiele und das Ansteuern der PINs war so einfach wie gewohnt.
+
+Bald darauf wurde die UART in Betrieb genommen. Hier sollte auch das ASF helfen und die Schnittstelle zur entsprechenden Hardware stellen. Wenige Zeilen waren notwendig um Daten zu verschicken und so hatte man eine gute Debug-Schnittstelle um im folgenden Firmwareprozess gut arbeiten zu k\"onnen.
+Leider machte die Gegenrichtung, das heisst Daten auf dem Chip empfangen \"uber UART, viele Probleme. Da das ASF nicht wirklich gut dokumentiert ist war hier das genaue Lesen der Headerfiles gefragt.
+Um mit der UART zu interagieren gibt es Callbacks wenn \textit{read} und \textit{write} vollendet sind. Leider wird der read-Callback nur dann ausgef\"uhrt wenn ein read-Polling erfolgreich war. Das heisst, es werden nicht immer Daten gelesen und dann per Interrupt ein Callback ausgel\"ost, sondern es werden nur Daten durch Polling gelesen und falls der Buffer nicht leer war das Callback zum Ende aufgerufen. Dies hat extrem viel Zeit gekostet da die Dokumentation eine Katastrophe ist und die Funktionen effektiv irref\"uhrende Namen haben. Hinzu kommt, das das ASF extrem inkonsistent in sich selber ist, so heissen zum Beispiel Funktionen, die dieselbe Funktion auf einem SAMD21 ausf\"uhren, komplett anders.
+
+Auch der ADC konnte gut in Betrieb genommen werden auch wenn hier Die Doku komplett versagte und man ein wenig mit den Spannungen und den resultierenden Messwerten spielen musste.
+Der 12 bit ADC liefert akkurate Messungen der angelegten Spannungen.
+
+Das CRC Modul zu betreiben war das einfachste Unterfangen, da es effektiv nur zwei Funktionen ben\"otigt. Die erste hasht das erste Wort (4 Bytes) w\"ahrend eine zweite Funktion darauf aufbauend weitere folgende W\"orter performant hasht.
+Am Ende existiert dann nur noch ein Wort welches die CRC der Daten darstellt.
+
+Alles in allem laufen die ben\"otigten Hardware-Module des Chips gut.
+
+\subsection{Open On Chip Debugger}
+
+Zum programmieren der CPUs haben wir OpenOCD gew\"ahlt. Auch hier ist wieder anzumerken dass es ein St\"uck freie Software ist.
+Auch ist OpenOCD extrem leicht zu erweitern und unterst\"utzt eine grosse Breite an Programmierschnittstellen wie den STLinkv2 oder den Segger J-Link. Es werden Protokolle wie JTag und SWD ohne weiteres unterst\"utzt.
+Ebenfalls gibt es einen Reichtum an Chips die unterst\"utzt sind.
+
+Da der SAMD09 erst im ersten Quartal 2016 auf den Markt kam, waren sehr wenige Projekte vorhanden, welche ihn bereits benutzt haben. Dies hatte zur Ursache, dass OpenOCD den Chip nicht unterst\"utzte. Also haben wir kurzerhand einen Treiber daf\"ur geschrieben. Dies stellte sich als viel einfacher heraus als gedacht, da andere Atmel Chips mit gleichen Schnittstellen bereits unterst\"utzt sind und wir das meiste davon \"ubernehmen konnten. Der Patch daf\"ur ist im Git Repository zu finden.
+Um die Kosten Tief zu halten haben wir einen StLinkv2 als Programmierschnittstelle verwendet. Damit konnten wir den Chip erst nicht programmieren. Auf einen Tip aus dem Internet hin (TODO: Quelle: https://sourceforge.net/p/openocd/mailman/openocd-user/thread/CADxtLgQsSAG%2BC4xGEUtNarDQKTOrc109oaBM%3D7VUoUVSa7h1eA%40mail.gmail.com/#msg34565375 Falsche Quelle!!) haben wir herausgefunden dass der STLinkv2 keine 16 Bit-Schreibbefehle unterst\"utzt, der SAMD09 aber genau jene erwartet. Da \textit{target_write_u16} beim STLinkv2 aber ins Leere zeigt wurde nie etwas an die CPU geschickt. Ein unsch\"oner Patch der nun 32 Bit statt 16 Bit Schreibbefehle schickt hat hier Abhilfe geschaffen.
+
+Alles in allem gingt danach die Programmierung gut voran und konnte zuverl\"assig genutzt werden.
+
+\subsection{R\"uckblick}
+
+R\"uckblickend war der SAMD09 nur aus Hardware-Sicht eine gute Wahl. Zu dem Zeitpunkt als wir ihn verwendet haben war er ein zu neuer Chip. So war schlechte bis keine Doku vorhanden, drei verschiedene HALs aus dem Hause Atmels und auch die Programmierschnittstelle unterst\"utzte ihn nicht gut. Softwaretechnisch war der Chip eine sehr schlechte Wahl und hat zu mehr M\"uhe gemacht als notwendig. Zum Zeitpunkt dieses Kommentares ist aber die Dokumentation viel vollst\"andiger geworden (letztes Dokumentationsupdate Ende Mai 2016) und es w\"are heute wohl einfacher diesen Chip zu verwenden, der rein hardwaretechnisch gesehen super ist.

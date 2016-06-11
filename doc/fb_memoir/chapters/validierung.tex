@@ -17,7 +17,9 @@ Funktionali\"at der jeweiligen Subsysteme zu verifizieren?
 \label{sec:val:coupling:coil}
 % ---------------------------------------------------------------------------- %
 
-Oszilloskop-Einstellungen: \ref{app:sec:scope:settings}
+Eine Spule leitet nicht alle Frequenzen gleich gut. Zudem sättigt ein Ferritkern bei einem bestimmten Strom. Deswegen wurden Frequency-Sweeps der Spule mit dem Ferritkern und ein Power-Choke Test mit einer Sekundärwindung gemacht.
+
+Es wurde die Induktivität einer Spule getestet, welche mehrere Windungen übereinander hat und einer Spule, welche nur eine Schicht mit Wicklungen hat. Beide Spulen haben genau 30 Wicklungen. Wie man Abbildung~\ref{fig:meas:coupling:coil:L} entnehmen kann, ist die Spule mit nur einer Wicklungsschicht bis über 20 Megahertz induktiv, während die Multilayer-Spule schon bei 4 Megahertz induktiv wird. Für unser Projekt haben wir deswegen die einschichtige Spule gewählt. Eine Messung der Streuinduktivität der gewählten Spule wurde dann ebenfalls angestellt um gut damit rechnen und simulieren zu können.
 
 \begin{figure}[h!tb]
     \centering
@@ -32,25 +34,45 @@ Oszilloskop-Einstellungen: \ref{app:sec:scope:settings}
     \caption[Messresultate Kopplungsspule]{Messergebnisse Kopplungsspule}
     \label{fig:meas:coupling:coil:R}
 \end{figure}
+TODO: To Appendix
+
+Die Power-Choke Tests wurden ebnfalls nur für die gewählte Einlayerspule genacht. Dafür wurde durch den Kern eine kurzgeschlossene Primerwicklung geführt, welche dem Aufbau des Endproduktes entspricht. Wie man Grafik~\ref{fig:meas:coupling:power_choke:1} entnehmen kann fängt der Kern bei ungefähr 2 Ampère zu sättigen an. Die beiden Kurven sind zwei verschidene Messmethoden (inkrementelle Messung und Sekantenmessung), wobei wir hier eher auf die inkrementelle Messung rücksicht nehmen, da hier der Kurvenverlauf schlechter ausfällt und wir mit dem Worstcase-Szenario rechnen. Uns interessiert hier vorallem die Stromabhängigkeit der Induktivität.
+Da das Stromverhältnis im Trafo durch \ref{eq:trafo} gegeben ist, können wir, bei 30 Windungen auf der Primärseite, auf der Sekundärseite 60 Ampére führen, ohne dass der Kern sättigt. Bei den 10 Ampöre die die Stromzufuhr maximal führt, ist dies mehr als ausreichend.
+
+\begin{equation}\label{eq:trafo}
+    I_S = \frac{I_P * N_P}{N_S}
+\end{equation}
 
 \begin{figure}[h!tb]
     \centering
     \input{images/fsk-meas/power_choke_I.pgf}
     \caption[Messresultate Kopplungsspule]{Messergebnisse Kopplungsspule}
-    \label{fig:meas:coupling:coil:R}
+    \label{fig:meas:coupling:coil:power_choke:1}
 \end{figure}
 
 \begin{figure}[h!tb]
     \centering
     \input{images/fsk-meas/power_choke_SUdt.pgf}
     \caption[Messresultate Kopplungsspule]{Messergebnisse Kopplungsspule}
-    \label{fig:meas:coupling:coil:R}
+    \label{fig:meas:coupling:coil:power_choke:2}
 \end{figure}
+TODO: To Appendix
+
+% ---------------------------------------------------------------------------- %
+\section{Modulator}
+\label{sec:val:modulator}
+% ---------------------------------------------------------------------------- %
+
+Bei Modulator war es besonders wichtig ein schönes Signal zu haben.
+Wie man den Kurven aus den Abbildungen~\ref{lst:meas:scope:0},~\ref{lst:meas:scope:1} und~\ref{lst:meas:scope:6} entnehmen kann produziert der VCO ein eigentlich schönes Signal, Jedoch gibt es Überschwinger jeweils bei der Flanke. Auch ist das Signal ziemlich eckig, was auch nicht optimal ist. Dem kann mit einem Tiefpassfilter entgegengewirkt werden.
+Leider produziertr der VCO ab und an auch misteriöse Irregularitäten wie Abbildung~\ref{lst:meas:scope:1} zu entnehmen ist. Da der 74HC4640 wovon der VCO Teil ist auch sonst nicht so funktionierte wie es dem Datenblatt zu entnehmen ist, könnte es sein dass diese Irregularitäten vom Chip aus gehen, sehr gut möglich ist aber dass da ein anderes Signal eingekoppelt wird oder es auf einen Messfehler zurückzuführen ist.
+
+Die Oszilloskop-Einstellungen sind im Anhang~\ref{app:sec:scope:settings} zu finden.
 
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.5\textwidth]{images/scopeShots/scope_0.png}
-    \caption{Scope 0, Parameter in Listing \ref{lst:meas:scope:1}}
+    \caption{Scope 0, Parameter in Listing \ref{lst:meas:scope:0}}
     \label{fig:meas:scope:0}
 \end{figure}
 
@@ -67,6 +89,16 @@ Oszilloskop-Einstellungen: \ref{app:sec:scope:settings}
     \caption{Scope 6, Parameter in Listing \ref{lst:meas:scope:6}}
     \label{fig:meas:scope:6}
 \end{figure}
+
+% ---------------------------------------------------------------------------- %
+\section{Demodulator}
+\label{sec:val:demodulator}
+% ---------------------------------------------------------------------------- %
+
+Beim Demodulator war es wichtig dass die Schaltflanken einigermassen Steil sind und der Signalverlauf ansonsten konstant.
+Dass dies der Fall ist kann aus den Abbildungen~\ref{lst:meas:scope:7},~\ref{lst:meas:scope:8} und~\ref{lst:meas:scope:9} ennommen werden.
+Man sieht dass die Schaltzeit etwa 2 Mikrosekunden beträgt. Wenn man nun mit 9600 Baud empfangen würde, so wären das 104 Mikrosekunden Periode. Damit wäre die Schaltzeit lediglich 3.8 Prozent, was reibungslos funktioniert wie auch gut in Grafik \ref{lst:meas:scope:8} zu erkennen ist.
+Ein Problem was auf den Grafiken gut sichtbar ist, ist die geringe Amplitude. Dem wird mithilfe eines Verstärkers entgegengewirkt, welcher die Signalamplitude verdoppelt.
 
 \begin{figure}[h!tb]
     \centering

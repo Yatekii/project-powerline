@@ -78,7 +78,8 @@ Damit die Montage einfacher ist, ist ein Verpolungsschutz eingebaut. Dieser best
 % ---------------------------------------------------------------------------- %
 
 Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungsversorgung aufmoduliert.
-
+Dafür wird am $VCO_{in}$ mithilfe eines Spannungsteilers eine fixe Spannung angelegt. Mit der korrekten Wahl von R7, R8 und C10 kann die Resonanazfrequenz für die Leitung erreicht werden, mit der dann moduliert wird. Diese Werte sind so gewählt wie es die Graphen im Datasheet zeigten. Es wurde eine Frequenz von 20 Megahertz ausgewählt da diese bei Leitungen unserer Länge optimal sind.
+Das Signal wird dann moduliert indem der UART TX Pin direkt am INH Pin den VCO ein- und ausschaltet und somit eine OOSK zustande bringt. Hier ist wichtig dass der Pin Active High ist.
 
 \begin{figure}[h!t]
     \centering
@@ -94,6 +95,8 @@ Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungs
 \label{subsec:hw:sensor:mcu}
 % ---------------------------------------------------------------------------- %
 
+Der Mikrokontroller braucht bis auf einen Pullup am Active Low Reset und einen Stabilisierungskondensator an der Spannungsversorgung keine spezielle Beschaltung. Der Mikrochip ist so geroutet dass die beiden UARTs verfügbar sind. Eine zum Senden über die Leitung und eine zum Debuggen. Ebenfalls zu einem Stecker verbunden ist die Programmierschnittstelle (SWD).
+
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--mcu.eps}
@@ -106,6 +109,9 @@ Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungs
 \subsection{Spannungsmessung}
 \label{subsec:hw:sensor:voltageSense}
 % ---------------------------------------------------------------------------- %
+
+Der Spannungsteiler ist so eingestellt dass am ADC Pin 3.3 Volt anliegen wenn die Spannungsversorgung 60 Volt hat.
+Ein Kondensator zur Glättung des Signales wurde ebenfalls hinzugefügt.
 
 \begin{figure}[h!t]
     \centering
@@ -132,6 +138,9 @@ Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungs
 \subsection{Empf\"anger}
 \label{subsec:hw:sensor:receiver}
 % ---------------------------------------------------------------------------- %
+
+Der Empfänger ist ein einfaches Tiefpassfilter.
+Zuerst wird das Eingangssignal welches noch Moduliert ist durch die Diode D3 gleichgerichtet. Nun sorgt ein Tiefpass dahinter dafür, dass das Signal geglättet wird. Da diese Signal durch Berluste auf der Leitung und über der Diode eine viel zu kleine Amplitude hat, wird es zusätzlich durch einen nicht invertierenden Opamp verstärkt.
 
 \begin{figure}[h!t]
     \centering

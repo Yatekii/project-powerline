@@ -1,0 +1,47 @@
+% **************************************************************************** %
+\chapter*{Management Summary}
+\label{chap:mgmtsum}
+% **************************************************************************** %
+
+\section*{Main Ideas and facts}
+For  Project 4  in the  spring  semester 2015  the students  were assigned  to
+develop  an electro  mechanical system  to  keep a  laser pointer  steady. The
+device should be able to emit a laser beam and keep it steady even if the user
+is nervous and  trembling. The goal of this project is  to develop a prototype
+that  is small  and  light enough  to  carry around  and  hold a  presentation
+with. Another focus was on the budget: The  production costs of a series of 20
+pieces should not exceed 120 CHF per unit.
+
+\section*{Background}
+In the autumn semester  2014, a group of students were  assigned with the task
+to  find out  if  itwould be  possible  to develop  such  an anti-shake  laser
+pointer, the results were inconclusive. Theparticipants agreed that the device
+should be able to perform at a frequency range of 3 to 20 Hz.
+
+\section*{Results}
+The final prototype  did not meet the expectations. It is  able to correct low
+frequency movements,but it struggles when  it is shaken at higher frequencies.
+The prototype is small, it blends in with the usual laser pointers although it
+is slightly  larger in  diameter. The estimated  price per  unit to  produce a
+series  of 20  is around  70 SFr. However,  this figure  does not  include the
+casing,  which was  produced for  free  by the  FHNW mechanical  workshop. The
+prototype is powered by  a battery that is rechargeable by USB  and is able to
+last eight hours.
+
+\section*{Conclusions}
+The approach of deflecting the laser beam with stepper motors seems promising,
+the power usage is manageable and it allows a very small size, while the price
+for the  parts is low. While the  overall concept and the  peripheral hardware
+are solid and meet the expectations, there is the problem that the device does
+not work at  higher frequencies.  The stepper motors used  in this project are
+probably a  bit too cheap and  tend to break. A simulation  in Simulink showed
+that the problem lies within  the laser deflection mechanism. We estimate that
+the moment  of inertia  of the components  is too much  for the  small stepper
+motors.
+
+\section*{Recommendation}
+To get rid of the flaws  in higher frequency performance, we suggest improving
+the laser deflection mechanism. Most likely  reducing weight would not cut it,
+as laser diodes can’t  get much smaller than the one  we use. This means the
+whole  deflection  mechanism  should be  redesigned. Also,  different  stepper
+motors should be considered.

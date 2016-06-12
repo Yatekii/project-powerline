@@ -4,41 +4,48 @@
 % **************************************************************************** %
 
 Photovoltaikanlagen   sind  heutzutage   kein   Nischenprodukt  mehr. Um   die
-Abhängigkeit  vom Erdöl  zu verringern,  werden vielerorts  kleine, aber  auch
+Abh\"angigkeit vom Erd\"ol zu verringern,  werden vielerorts kleine, aber auch
 grosse  Anlagen gebaut. Die  W\"arme-Energie, welche  kostenlos von  der Sonne
-kommt,  wird  in elektrische  Energie  umgewandelt  und  kann gleich  vor  Ort
-genutzt werden. Anlagenbesitzer  investieren meistens einen grossen  Betrag in
-eine  neue  Anlage  und  sind  darauf angewiesen,  dass  diese  den  maximalen
-Ertrag  liefert. Das ist  in der  Regel  ohne grossen  Aufwand der  Fall. Doch
-es  gibt Umstände,  welche  die Effizienz  einer Photovoltaikanlage  erheblich
-verringern  können und  dies meist  ohne, dass  es jemand  bemerkt.  In  einer
-Photovoltaikanlage  werden üblicherweise  mehrere  PV-Module  zu einem  String
-zusammengefasst,  indem  sie  in   Serie  geschaltet  werden. Dabei  kann  ein
+kommt, wird in elektrische Energie umgewandelt und kann gleich vor Ort genutzt
+werden. Anlagenbesitzer  investieren meistens  einen  grossen  Betrag in  eine
+neue  Anlage und  sind  darauf  angewiesen, dass  diese  den maximalen  Ertrag
+liefert. Das  ist  in  der  Regel  ohne  grossen  Aufwand  der  Fall. Doch  es
+gibt  Umst\"ande,  welche  die Effizienz  einer  Photovoltaikanlage  erheblich
+verringern  k\"onnen  und  dies  meist  ohne,  dass  es  jemand  bemerkt.   In
+einer  Photovoltaikanlage werden  \"ublicherweise mehrere  PV-Module zu  einem
+String zusammengefasst, indem  sie in Serie geschaltet  werden. Dabei kann ein
 abgeschattetes,  verschmutztes  oder  gar  defektes  Modul  den  Strom  dieser
 Serieschaltung und somit auch die Leistung des gesamten Strings und der Anlage
-stark beeinträchtigen. Was grosse finanzielle Einbussen zur Folge haben kann.
+stark  beeintr\"achtigen. Was grosse  finanzielle  Einbussen  zur Folge  haben
+kann.
 
-Das  Ziel des  Projektes P4  war es,  ein PV-Überwachungssystem  bestehend aus
-einer Sensorplatine für den Einbau in  die Anschlussbox jedes Moduls und einem
-zentralen Meldegerät  für den Einbau  im Schaltschrank beim  Wechselrichter zu
-entwickeln, aufzubauen und zu testen. Die  Sensorplatine soll die Spannung des
-jeweiligen PV-Modules  messen und sie  an das Mastergerät über  die bestehende
-DC-Leitung  der  Anlage  übermitteln. Im  Mastergerät  werden  die  gemessenen
-Spannungen der  einzelnen PV-Module  gespeichert und  ausgewertet. Erkennt das
-Mastergerät ein fehlerhaftes  PV-Modul, soll eine Alarmierung  am Gerät selbst
-und  per  SMS  ausgegeben  werden. Zusätzlich wird  ein  Relais  zur  externen
-Signalisation  betätigt.   Das  System  soll  möglichst  energieeffizient  und
-kostengünstig sein,  um die wirtschaftlichkeit einer  Photovoltaikanlage nicht
-zu verschlechtern.
+Das Ziel  des Projektes P4  war es, ein PV-\"Uberwachungssystem  bestehend aus
+einer  Sensorplatine  f\"ur  den  Einbau  in  die  Anschlussbox  jedes  Moduls
+und  einem  zentralen Meldeger\"at  f\"ur  den  Einbau im  Schaltschrank  beim
+Wechselrichter zu entwickeln, aufzubauen und zu testen. Die Sensorplatine soll
+die Spannung  des jeweiligen  PV-Modules messen und  sie an  das Masterger\"at
+\"uber die  bestehende DC-Leitung  der Anlage  \"ubermitteln. Im Masterger\"at
+werden  die  gemessenen Spannungen  der  einzelnen  PV-Module gespeichert  und
+ausgewertet. Erkennt das  Masterger\"at ein  fehlerhaftes PV-Modul,  soll eine
+Alarmierung am Ger\"at selbst und per SMS ausgegeben werden. Zus\"atzlich wird
+ein Relais zur externen Signalisation bet\"atigt.  Das System soll m\"oglichst
+energieeffizient  und kosteng\"unstig  sein, um  die wirtschaftlichkeit  einer
+Photovoltaikanlage nicht zu verschlechtern.
 
-Das  Hauptproblem liegt  bei  der Signalübertragung  über  die DC-Leitung  der
+Das Hauptproblem liegt  bei der Signal\"ubertragung \"uber  die DC-Leitung der
 Photovoltaikanlage. Denn die Spannung darauf schwankt  zwischen 12 und 60 Volt
-an der Sensorplatine  und beträgt am Mastergerät bis zu  1000 Volt. Auf dieser
-Leitung  ein Signal  zu  übertragen  ist schwierig  und  wird heutzutage  kaum
-gemacht.  Zudem muss auf kleine Leistung beim gesamten System geachtet werden,
-um keine wertfolle Energie zu verschwenden.
+an  der Sensorplatine  und betr\"agt  am Masterger\"at  bis zu  1000 Volt. Auf
+dieser Leitung  ein Signal zu  \"ubertragen ist schwierig und  wird heutzutage
+kaum gemacht.   Zudem muss auf  kleine Leistung beim gesamten  System geachtet
+werden, um keine wertfolle Energie zu verschwenden.
 
-\todo{Beschreibung unseres Produkts}
+Anhand zahlreicher  Simulationen, L\"osungsentw\"urfen  und Tests,  konnte ein
+System  entwickelt werden,  das  allen Anforderungen  an  den Auftrag  gerecht
+wird. Mit  dem  Master-Ger\"at  als  zentrales  Gehirn  des  Systems  und  den
+Sensoren  als \"Uberwachungskomponente  der  einzelnen  PV-Modulen, wurde  ein
+\"Uberwachungssystem  konzipiert,   das  problemlos  in  neue,   wie  auch  in
+bestehende Photovoltaikanlagen eingebaut werden kann.
+
 
 Der vorliegende  Bericht stellt  die technische Dokumentation  unseres Systems
 dar.  Zuerst wird das Konzept unserer L\"osung beschrieben, zusammen mit einer

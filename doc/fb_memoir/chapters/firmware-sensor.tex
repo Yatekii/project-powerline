@@ -25,16 +25,18 @@ Hierzu wird ein Datenpakt wie es in Abbildung \ref{fig:sensor:firmware:datenpake
   \centering
   \begin{bytefield}{32}
     \bitheader{0,7,8,15,16,23,24,31} \\
-    \begin{rightwordgroup}{Adresse}
-      \bitbox{32}{Adressbyte 0} \\
-      \bitbox{32}{Adressbyte 1} \\
-      \bitbox{32}{Adressbyte 2} \\
-      \bitbox{32}{Adressbyte 3} \\
+    \begin{rightwordgroup}{\sffamily Adresse}
+        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 0} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 1} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 2} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 3}
     \end{rightwordgroup} \\
-    \bitbox{16}{Spannung}\bitbox{16}{Nicht verwendet}\\
-    \bitbox{32}{CRC}\\
+    \colorbitbox{solarized-magenta}{solarized-base3}{16}{Spannung}
+    \colorbitbox{gray!50}{black}{16}{Nicht verwendet}\\
+    \colorbitbox{solarized-blue}{solarized-base3}{32}{CRC}\\
   \end{bytefield}
-  \caption{\label{fig:sensor:firmware:datenpaket}Sample packet}
+  \caption{Aufbau eines Datenpakets}
+  \label{fig:sensor:firmware:datenpaket}
 \end{figure*}
 
 Damit der Empf\"anger eines Paketes erkennen kann dass es keine Technische St\"orung beim \"ubertragen gab und er falsche Daten liest, wird eine Pr\"ufsumme (CRC) der zu verschickenden Daten mitgeschickt.
@@ -62,14 +64,28 @@ Dieser Moving Average wird nun per UART verschickt.
 \subsubsection{Statusanzeige}
 \label{subs:Statusanzeige}
 
-Damit man gut sieht ob der Sensor noch korrekt leuchtet kommt an letzter Stelle der Endlosschleife noch ein simples Toggeln der LED, so dass man sieht dass etwas nicht stimmt falls es einmal nicht mehr toggeln sollte.
+Damit  man gut  sieht ob  der Sensor  noch korrekt  leuchtet kommt  an letzter
+Stelle der Endlosschleife noch ein simples  Toggeln der LED, so dass man sieht
+dass etwas nicht stimmt falls es einmal nicht mehr toggeln sollte.
 
 \subsection{Open On Chip Debugger}
 
-Zum Programmieren der CPUs haben wir OpenOCD gew\"ahlt. Auch hier ist wieder anzumerken, dass es ein St\"uck freie Software ist.
-OpenOCD extrem leicht zu erweitern und unterst\"utzt eine grosse Breite an Programmierschnittstellen wie den STLinkv2 oder den Segger J-Link. Es werden Protokolle wie JTag und SWD ohne weiteres unterst\"utzt.
-Ebenfalls gibt es einen Reichtum an Chips die unterst\"utzt sind.
+Zum Programmieren der CPUs haben  wir OpenOCD gew\"ahlt. Auch hier ist wieder.
+anzumerken, dass es ein St\"uck freie  Software ist OpenOCD extrem leicht zu.
+erweitern und  unterst\"utzt eine grosse Breite  an Programmierschnittstellen.
+wie den  STLinkv2 oder den Segger  J-Link. Es werden Protokolle wie  JTag und.
+SWD ohne weiteres unterst\"utzt Ebenfalls gibt es einen Reichtum an Chips die.
+unterst\"utzt sind                                                           .
 
-Da der SAMD09 erst im ersten Quartal 2016 auf den Markt kam, waren sehr wenige Projekte vorhanden, welche ihn bereits benutzt haben. Dies hatte zur Ursache, dass OpenOCD den Chip nicht unterst\"utzte. Also haben wir einen Treiber daf\"ur geschrieben beziehungsweise den bestehenden f\"ur Atmel Chips erweitert.
+Da  der SAMD09  erst im  ersten Quartal  2016 auf  den Markt  kam, waren  sehr
+wenige Projekte  vorhanden, welche ihn  bereits benutzt haben. Dies  hatte zur
+Ursache,  dass OpenOCD  den Chip  nicht unterst\"utzte. Also  haben wir  einen
+Treiber daf\"ur geschrieben beziehungsweise  den bestehenden f\"ur Atmel Chips
+erweitert.
 
-Um die Kosten Tief zu halten haben wir einen StLinkv2 als Programmierschnittstelle verwendet. Auch daf\"ur brauchte es einen Patch des Treibers, da der STLinkv2 nur 32 Bit Schreibbefehle unterstutzt, der SAMD09 aber 16 Bit Schreibbefehle erwartet. Wir haben einen unsch\"onen Patch der nun 32 Bit statt 16 Bit Schreibbefehle schickt geschrieben um dieses Problem zu l\"osen.
+Um   die   Kosten   tief   zu    halten   haben   wir   einen   StLinkv2   als
+Programmierschnittstelle verwendet. Auch  daf\"ur brauchte es einen  Patch des
+Treibers, da  der STLinkv2 nur  32 Bit Schreibbefehle unterstutzt,  der SAMD09
+aber 16 Bit Schreibbefehle erwartet. Wir haben einen unsch\"onen Patch der nun
+32 Bit  statt 16 Bit Schreibbefehle  schickt geschrieben um dieses  Problem zu
+l\"osen.

@@ -7,10 +7,12 @@ Die Mastersoftware ist aus mehreren Schichten aufgebaut:
 
 ## Lizenzen
 Bei der Auswahl von Drittsoftware wurde auf die jeweiligen Lizenzbedingungen geachtet, um keine Konflikte zu verursachen. Die wichtigsten drei Lizenz-Bereiche werden wie folgt definiert:
-Teil | Lizenz | Bedingung
-Linux-Kernel | GPL | Quellcode und Änderungen müssen öffentlich sein.
-Treiber für Raspberry Pi und Display | Restricted | Quellcode wird vom Hersteller geheim gehalten
-Raspbian | DFSG (Sammlung diverser Lizenzen) | Darf frei verwendet, aber nicht unbedingt verkauft, werden.
+
+Teil                                 | Lizenz                            | Bedingung
+Linux-Kernel                         | GPL                               | Quellcode und Änderungen müssen öffentlich sein.
+Treiber für Raspberry Pi und Display | Restricted                        | Quellcode wird vom Hersteller geheim gehalten
+Raspbian                             | DFSG (Sammlung diverser Lizenzen) | Darf frei verwendet, aber nicht unbedingt verkauft, werden.
+
 Grundlage für die Software bildet das angepasste Betriebssystem. Dieses wird von der Raspberry Pi Foundation frei zur Verfügung gestellt und unterliegt den Bedingungen der DFSG. Die darauf aufbauenden Programmbibliotheken zur Abstraktion von Betriebsystemfunktionen und weiteren Hardwareaufrufen sind alle aus Raspbian-Repository verfügbar und unterliegen daher ebenfalls der DFSG.
 Da die Mastersoftware zwar auf diesen Komponenten aufsetzt, sie aber nicht verändert oder statisch verlinkt wird, entstehen keine Lizenzkonflikte. Zu beachten ist hier, dass diese Drittsoftware im Allgemeinen nicht als Eigenwerk verkauft werden darf. Das heisst, dass sie zwar beliebig verbreitet werden darf, nicht aber zum Produkt hinzugezählt werden kann.
 Die DFSG stellt insbesondere folgende Anforderung an alle Programme, welche Teil von Raspbian sind:
@@ -22,10 +24,11 @@ Der eigentliche Mastersoftware-Quellcode dagegen ist nicht öffentlich und kann 
 
 ## Python-Bibliotheken
 Folgende Python-Bilbiotheken kommen in der Mastersoftware zum Einsatz:
-Name | Version | Zweck | Webseite
-PyQt | 5 | Erstellen und verwalten von graphischen Benutzeroberflächen | <https://riverbankcomputing.com/software/pyqt/intro>
-SQLAlchemy | 1.0 | Datenbankabstraktion | <http://www.sqlalchemy.org/>
-WiringPi for Python | 2 | Abstraktion der  Hardwareschnittstellen | <https://github.com/WiringPi/WiringPi-Python>
+
+Name                | Version | Zweck                                                       | Webseite
+PyQt                | 5       | Erstellen und verwalten von graphischen Benutzeroberflächen | <https://riverbankcomputing.com/software/pyqt/intro>
+SQLAlchemy          | 1.0     | Datenbankabstraktion                                        | <http://www.sqlalchemy.org/>
+WiringPi for Python | 2       | Abstraktion der  Hardwareschnittstellen                     | <https://github.com/WiringPi/WiringPi-Python>
 
 # Interner Aufbau
 ## Threads

@@ -4,9 +4,9 @@
 % **************************************************************************** %
 
 Dieses Kapitel  beinhaltet \code{LTspice}-Schaltungen, welche  zu Simulationen
-benutzt worden sind. Erkl\"arungen  zu den jeweiligen Schaltungen  sind in den
-Kapiteln  zu finden,  welche auf  sie verweisen. S\"amtliche  Schaltungen sind
-auch elektronisch als \code{.asc}-Datei verf\"ugbar.
+benutzt  worden  sind. Erkl\"arungen zu  den  jeweiligen  Schaltungen sind  in
+den  Kapiteln zu  finden, welche  auf  sie verweisen. Zu  jeder Schaltung  ist
+angegeben, wo sie auf dem Datentr\"ager gefunden werden kann.
 
 \noindent\begin{minipage}{\textwidth}
     \centering
@@ -19,18 +19,21 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
         Modell. Gegen\"uber     in     Abschnitt     \ref{sec:simu:model:cell}
         hergeleiteten Modell hat dieses  Modell einen h\"oheren Photostrom und
         einen niedrigeren Shunt-Widerstand. Dies  erzeugt etwas anschaulichere
-        Kurven.%
+        Kurven.\protect\\
+        Dateipfad: \code{ltspice/generic/cell-9A.asc}%
     }
     \label{fig:ltspice:iv:generic:cell}
     \includegraphics[width=0.9\textwidth]{images/ltspice/jac/cell.eps}
     \figcaption[\code{LTspice}-Schaltung f\"ur PV-Zelle]{%
         Modell  der   PV-Zelle,  auf  welchen  die   Simulationen  in  Kapitel
         \ref{chap:simu} ab  Seite \pageref{chap:simu}  beruhen. Die Herleitung
-        ist in Abschnitt \ref{sec:simu:model:cell} dokumentiert.%
+        ist in Abschnitt \ref{sec:simu:model:cell} dokumentiert.\protect\\
+        Dateipfad: \code{ltspice/jac/jac-cell.asc}%
     }
     \label{fig:ltspice:jac:cell}
 \end{minipage}
 
+\clearpage
 \begin{figure}[h!tb]
     \centering
     \begin{tikzpicture}[%
@@ -48,9 +51,34 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
         in   Abbildung   \ref{fig:simu:iv-curves:module:generic}   auf   Seite
         \pageref{fig:simu:iv-curves:module:generic}  benutzt  worden  ist. Das
         Modell  der Zelle,  aus welcher  dieses  Modul aufgebaut  ist, ist  in
-        Abbildung \ref{fig:ltspice:iv:generic:cell} abgebildet.%
+        Abbildung \ref{fig:ltspice:iv:generic:cell} abgebildet.\protect\\
+        Dateipfad: \code{ltspice/generic/module-9A.asc}%
     }
     \label{fig:ltspice:iv:generic:module}
+\end{figure}
+
+\clearpage
+Bei  Schaltungen  mit  hunderten  oder  gar  tausenden  von  Komponenten  wird
+\code{LTspice} sehr  schwerf\"allig zum Bedienen,  da das Updaten  der Netlist
+sehr  lange  dauert   und  die  Netlist bei  jeder  \"Anderung  der  Schaltung
+aktualisiert  werden muss.   Zur einfacheren  Handhabung von  Simulationen mit
+mehreren  Modulen wird  deshalb ein  neues Symbol  f\"ur ein  Modul definiert,
+gezeigt in  Abbildung \ref{fig:ltspice:module:symbol}, welches je  nach Bedarf
+mit  der Schaltung  f\"ur ein  Modul mit  oder ohne  Freilaufdiode verkn\"upft
+werden kann.
+
+\begin{figure}[h!tb]
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/ltspice/module-symbol.eps}
+    \caption{%
+        Selbst erstelltes Symbol f\"ur PV-Modul\protect\\
+        Dateipfad:   \code{ltspice/jac/jacModule.asy}   (mit   Freilaufdioden,
+        verkn\"upft          mit          Modul         aus          Abbildung
+        \ref{fig:ltspice:jacModule:NoDiode})\protect\\
+        Dateipfad: \code{ltspice/jac/jacModuleNoD.asy} (ohne Freilaufdioden, verknupft mit
+        Modul aus Abbildung \ref{fig:ltspice:jacModule:Diode})%
+    }
+    \label{fig:ltspice:module:symbol}
 \end{figure}
 
 \begin{figure}[h!tb]
@@ -62,7 +90,9 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
         Strom-Spannungs-Kurven. Es  wird   je  ein  Strang  aus   Modulen  mit
         Freilaufdiode   (Abbildung  \ref{fig:ltspice:jacModule:NoDiode})   und
         ohne   Freilaufdiode   (Abbildung   \ref{fig:ltspice:jacModule:Diode})
-        simuliert.%
+        simuliert.\protect\\
+        Dateipfad: \code{ltspice/jac/string.asc} (mit Freilaufdioden)\protect\\
+        Dateipfad: \code{ltspice/jac/stringNoD.asc} (ohne Freilaufdioden)%
     }
     \label{fig:ltspice:string:ivCurve}
 \end{figure}
@@ -82,7 +112,8 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
     \caption[\code{LTspice}-Schaltung f\"ur PV-Modul ohne Freilaufdiode]{%
         Modul    ohne   Freilaufdiode,    benutzt    f\"ur   die    Simulation
         aus   Abbildung   \ref{fig:simu:iv-curves:array:generic}   von   Seite
-        \pageref{fig:simu:iv-curves:array:generic}.%
+        \pageref{fig:simu:iv-curves:array:generic}.\protect\\
+        Dateipfad: \code{ltspice/jac/jacModuleNoD.asc}%
     }
     \label{fig:ltspice:jacModule:NoDiode}
 \end{figure}
@@ -113,7 +144,8 @@ auch elektronisch als \code{.asc}-Datei verf\"ugbar.
         \ref{sec:simu:short} ab Seite
         \pageref{sec:simu:short}.
         Abbildung   \ref{fig:ltspice:jac:cell}    enth\"alt   das   verwendete
-        Zellenmodell.%
+        Zellenmodell.\protect\\
+        Dateipfad: \code{ltspice/jac/jacModule.asc}%
     }
     \label{fig:ltspice:jacModule:Diode}
 \end{figure}

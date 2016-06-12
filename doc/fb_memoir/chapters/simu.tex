@@ -10,6 +10,8 @@ Modell dann  ein Strang  aus Modulen simuliert  wird.  Es  werden verschiedene
 L\"osungsans\"atze pr\"asentiert, mit den  entwickelten Modellen simuliert und
 die Resultate beurteilt.
 
+Es ist zu jeder \code{LTspice}-Schaltung  angegeben, wo die zugeh\"orige Datei
+auf dem Datentr\"ager gespeichert ist.
 
 % ---------------------------------------------------------------------------- %
 \section{Modellierung einer PV-Zelle}
@@ -340,13 +342,14 @@ modellieren.
     \centering
     \input{images/circuits/module72x1-simplified.tex}
     \caption[Ersatzschaltbild PV-Modul]{%
-        Ersatzschaltbild  f\"ur  das  PV-Modul. Es besteht  einem  Strang  mit
-        72  Zellen  in Serie  geschaltet  und  angeordnet  wie auf  dem  Modul
-        in  Abbildung  \ref{fig:pvmodule}  auf  Seite  \pageref{fig:pvmodule}.
-        Zus\"atzlich  ist  die  parasit\"are Induktivit\"at  der  Leiterbahnen
-        im  Modul ber\"ucksichtigt  und  eine  Freilaufdiode integriert.   Die
-        vollst\"andige  \code{LTspice}-Schaltung  ist  in Abbildung  TODO  auf
-        Seite TODO dargestellt.%
+        Ersatzschaltbild   f\"ur  das   PV-Modul. Es   besteht  einem   Strang
+        mit   72    Zellen   in   Serie   geschaltet    und   angeordnet   wie
+        auf   dem   Modul   in    Abbildung   \ref{fig:pvmodule}   auf   Seite
+        \pageref{fig:pvmodule}.     Zus\"atzlich    ist    die    parasit\"are
+        Induktivit\"at  der Leiterbahnen  im Modul  ber\"ucksichtigt und  eine
+        Freilaufdiode integriert.  Die vollst\"andige \code{LTspice}-Schaltung
+        ist   in   Abbildung   \ref{fig:ltspice:jacModule:Diode}   auf   Seite
+        \pageref{fig:ltspice:jacModule:Diode} dargestellt.%
     }
     \label{fig:circuit:72x1:simplified}
 \end{figure}
@@ -532,7 +535,8 @@ einem  Modul,  dem  Sender  und  dem  Empf\"anger,  dargestellt  in  Abbildung
     \includegraphics[width=0.67\textwidth]{images/ltspice/jac/inductive-singleModule.eps}
     \caption[Induktive Einkopplung, vereinfachte \code{LTspice}-Schaltung]{%
         \code{LTspice}-Schaltung f\"ur den vereinfachten Schaltkreis zur
-        Simulation der induktiven Einkopplung%
+        Simulation der induktiven Einkopplung\protect\\
+        Dateipfad: \code{ltspice/inductive/singleModule.asc}%
     }
     \label{fig:ltspice:inductive:singleModule}
 \end{figure}
@@ -560,7 +564,8 @@ auf den Herleitungen aus Abschnitt \ref{Modellierung eines Modulstrangs}.
     \includegraphics[width=0.95\textwidth]{images/ltspice/jac/inductive.eps}
     \caption[Induktive Einkopplung, \code{LTspice}-Schaltung f\"ur Modulstrang]{%
         Schaltung  zur   Simulation  eines  Modulstranges   mit  parasit\"aren
-        Impedanzen in der Zuleitung und komplexer Lastimpedanz.%
+        Impedanzen in der Zuleitung und komplexer Lastimpedanz.\protect\\
+        Dateipfad: \code{ltspice/inductive/string.asc}%
     }
     \label{fig:ltspice:inductive:complete}
 \end{figure}
@@ -701,7 +706,8 @@ Abschw\"achungen des Signals zu rechnen.
         Leitungsimpedanzen.\protect\\
         Die  Sender  werden  durch  Sinus-Spannungsquellen  simuliert. Es  ist
         jeweils  nur ein  Sender  aktiv  in der  Simulation,  der andere  wird
-        abgeh\"angt.%
+        abgeh\"angt.\protect\\
+        Dateipfad: \code{ltspice/capacitive/string.asc}%
     }
     \label{fig:ltspice:capacitive:string}
 \end{figure}
@@ -764,10 +770,10 @@ zeigt diesen Aufbau schematisch.
     \input{images/circuits/moduleMOSFET.tex}
     \caption[Grundprinzip Kurzschluss mit Transistor]{%
         Gesteuerter     Kurzschluss     eines    Solarmoduls     mit     einem
-        microcontroller-gesteuerten Transistor. %
+        microcontroller-gesteuerten Transistor.%
     }
     \label{fig:module:mosfet:simple}
-    \vspace*{-1em}
+    \vspace*{-1.0em}
 \end{wrapfigure}
 
 Die  Ansteuerung des  Transistors  erfolgt mit  \SI{3.3}{\volt},  da dies  die
@@ -776,21 +782,22 @@ ausgeben kann. Es muss  dabei beachtet werden, dass  der gew\"ahlte Transistor
 vollst\"andig durchschaltet und in S\"attigung betrieben wird, damit der Strom
 m\"oglichst ungehindert am kurzgeschlossenen Modul vorbeifliessen kann.
 
-Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder  sontwo  im
-Stromkreis) vorhandenen Kapazit\"aten nicht  zu starken Stromspitzen f\"uhren,
-welche den Transistor besch\"adigen.
-
-\begin{wrapfigure}{l}{60mm}
+\begin{wrapfigure}{l}{65mm}
     \vspace*{-1em}
     \centering
-    \includegraphics[width=60mm]{images/ltspice/jac/shortcircuit-transmitter.eps}
+    \includegraphics[width=65mm]{images/ltspice/jac/shortcircuit-transmitter.eps}
     \caption[\code{LTspice}-Schaltung Kurzschlussmethode, Sender, vereinfacht]{
         Simulationsschema  f\"ur  ein  einzelnes Modul  mit  kurzschliessendem
-        Transistor und angeschlossener Last von \SI{1}{\kilo\ohm}.%
+        Transistor und angeschlossener Last von \SI{1}{\kilo\ohm}.\protect\\
+        Dateipfad: \code{ltspice/short/single.asc}%
     }
     \label{fig:ltspice:shortCircuit:transmitter}
-    \vspace*{-4em}
+    \vspace*{-2em}
 \end{wrapfigure}
+
+Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder  sontwo  im
+Stromkreis)  vorhandenen   Kapazit\"aten  zu  starken   Stromspitzen  f\"uhren
+k\"onnen, welche den Transistor besch\"adigen k\"onnten.
 
 Zuerst wird ein vereinfachtes Szenario simuliert: Ein einzelnes Modul mit einem
 kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
@@ -888,7 +895,8 @@ integriert.
     \centering
     \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit-recv.eps}
     \caption[\code{LTspice}-Schema f\"ur Klemmenschaltung]{
-        Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger.%
+        Simulationsschema f\"ur die Simulation  der Klemme am Empf\"anger.\protect\\
+        Dateipfad: \code{ltspice/short/receiver.asc}%
     }
     \label{fig:ltspice:shortCircuit:receiver}
 \end{figure}
@@ -951,7 +959,10 @@ Die zugeh\"orige  Simulationsschaltung f\"ur  \code{LTspice} ist  in Abbildung
 \begin{figure}[h!tb]
     \includegraphics[width=\textwidth]{images/ltspice/jac/shortcircuit.eps}
     \caption[\code{LTspice}-Schaltung f\"ur Kurzschlussmethode, Modulstrang]
-    {Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode}
+    {%
+        Gesamte Simulationsschaltung f\"ur die Kurzschlussmethode\protect\\
+        Dateipfad: \code{ltspice/short/string.asc}%
+    }
     \label{fig:ltspice:shortcircuit:complete}
 \end{figure}
 

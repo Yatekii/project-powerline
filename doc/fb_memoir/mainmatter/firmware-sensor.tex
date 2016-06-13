@@ -9,21 +9,30 @@ geschrieben.
 
 \subsection{Benutze Bibliotheken}
 
-Es wird komplett freie Software verwendet, weswegen zum bauen der Binaries GNU Makefiles benutzt werden.
+Es wird komplett freie Software verwendet, weswegen zum bauen der Binaries GNU
+Makefiles benutzt werden.
 
-Die Firmware ist auf dem Atmel Software Framework (ASF) aufgebaut. Das ASF f\"uhrt einen Hardware Abstraction Layer (HAL) ein, welcher die Hardware-Bl\"ocke der einzelnen Atmel CPUs in einfache Interfaces in Form von C-Funtionen abstrahiert.
-Um die g\"angigen ARM Schnittstellen zu nutzen, wird CMSIS im ASF verwendet.
-Das ASF darf f\"ur Atmel Chips ohne weiteres verwendet werden solange die Copyright Bemerkungen nicht entfernt werden.
+Die  Firmware  ist  auf  dem Atmel  Software  Framework  (ASF)  aufgebaut. Das
+ASF  f\"uhrt  einen   Hardware  Abstraction  Layer  (HAL)   ein,  welcher  die
+Hardware-Bl\"ocke der einzelnen Atmel CPUs  in einfache Interfaces in Form von
+C-Funtionen abstrahiert. Um die g\"angigen  ARM-Schnittstellen zu nutzen, wird
+CMSIS im  ASF  verwendet. Das  ASF  darf  f\"ur  Atmel  Chips  ohne  weiteres
+verwendet werden, solange die Copyright Bemerkungen nicht entfernt werden.
 
 \subsection{Die Firmware}
 
-Die Firmware besteht im Kern aus einer simplen main() Funktion welche in einer Endlosschleife l\"auft.
+Die Firmware besteht im Kern aus einer simplen main() Funktion welche in einer
+Endlosschleife l\"auft.
 
 \subsubsection{UART}
 \label{subs:UART}
 
-Die Endlosschleife \"uberpr\"uft zuerst ob Daten \"uber die UART empfangen wurden, sprich Anweisungen vom Master oder Antworten von anderen Sensoren. Ist das der Fall, so wird darauf reagiert. Dies heisst dass die UART die gemittelten Daten der letzten x Samples an den Master adressiert und verschickt.
-Hierzu wird ein Datenpakt wie es in Abbildung \ref{fig:sensor:firmware:datenpaket} zu sehen ist verschickt:
+Die Endlosschleife  \"uberpr\"uft zuerst, ob Daten  \"uber die  UART empfangen
+wurden,   sprich   Anweisungen  vom   Master   oder   Antworten  von   anderen
+Sensoren. Ist  das  der  Fall,  so  wird  darauf  reagiert. Dies  heisst  dass
+die  UART  die  gemittelten  Daten  der   letzten  x  Samples  an  den  Master
+adressiert  und verschickt.   Hierzu wird  ein Datenpakt  wie es  in Abbildung
+\ref{fig:sensor:firmware:datenpaket} zu sehen ist verschickt:
 
 \begin{figure*}[ht!]
   \centering
@@ -43,18 +52,23 @@ Hierzu wird ein Datenpakt wie es in Abbildung \ref{fig:sensor:firmware:datenpake
   \label{fig:sensor:firmware:datenpaket}
 \end{figure*}
 
-Damit der Empf\"anger eines Paketes erkennen kann dass es keine Technische St\"orung beim \"ubertragen gab und er falsche Daten liest, wird eine Pr\"ufsumme (CRC) der zu verschickenden Daten mitgeschickt.
-Um die CRC zu berechnen wird zuerst das Datenpaket zusammengestellt. Davon wird dann mithilfe des ASF eine Pr\"ufsumme erstellt und an das bestehende Datenpaket angeh\"angt. Dann wird das Datenpaket per UART verschickt.
+Damit der  Empf\"anger eines  Paketes erkennen kann  dass es  keine Technische
+St\"orung  beim  \"ubertragen  gab  und  er falsche  Daten  liest,  wird  eine
+Pr\"ufsumme (CRC)  der zu  verschickenden Daten mitgeschickt.   Um die  CRC zu
+berechnen  wird  zuerst  das  Datenpaket  zusammengestellt. Davon  wird  dann
+mithilfe des  ASF eine Pr\"ufsumme  erstellt und an das  bestehende Datenpaket
+angeh\"angt. Dann wird das Datenpaket per UART verschickt.
 
 \subsubsection{Sensor}
 \label{subs:Sensor}
 
-Der Spannungssensor selbst wird mittels Analog Digital Konverters (ADC) verwirklicht.
-Daf\"ur wird mithilfe des ASF ein 12 Bit ADC ausgelesen und von diesen Werten ein Moving Average erstellt.
-Deshalb kommt an zweiter Stelle in der Endlosschleife ein Lesevorgang auf dem ADC.
-Dann wird mithilfe des sogenannten Cascaded Integrator–Comb Filters
+Der  Spannungssensor selbst  wird  mittels Analog  Digital  Konverters (  ADC)
+verwirklicht.  Daf\"ur  wird mithilfe des ASF  ein 12 Bit ADC  ausgelesen und
+von  diesen Werten  ein Moving  Average  erstellt.  Deshalb  kommt an  zweiter
+Stelle in der Endlosschleife ein Lesevorgang  auf dem ADC.  Dann wird mithilfe
+des sogenannten Cascaded Integrator–Comb Filters der aktuelle Moving Average
+berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
 %(TODO: ref to https://en.wikipedia.org/wiki/Cascaded_integrator%E2%80%93comb_filter)
-der aktuelle Moving Average berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
 
 \begin{equation}\label{eq:hogenauer}
     \begin{split}
@@ -68,28 +82,28 @@ Dieser Moving Average wird nun per UART verschickt.
 \subsubsection{Statusanzeige}
 \label{subs:Statusanzeige}
 
-Damit  man gut  sieht ob  der Sensor  noch korrekt  leuchtet kommt  an letzter
-Stelle der Endlosschleife noch ein simples  Toggeln der LED, so dass man sieht
-dass etwas nicht stimmt falls es einmal nicht mehr toggeln sollte.
+Damit man  gut sieht  ob der  Sensor noch korrekt  leuchtet, kommt  an letzter
+Stelle der Endlosschleife noch ein simples Toggeln der LED, so dass man sieht,
+ob etwas nicht stimmt, falls es einmal nicht mehr toggeln sollte.
 
 \subsection{Open On Chip Debugger}
 
-Zum Programmieren der CPUs haben  wir OpenOCD gew\"ahlt. Auch hier ist wieder.
-anzumerken, dass es ein St\"uck freie  Software ist OpenOCD extrem leicht zu.
-erweitern und  unterst\"utzt eine grosse Breite  an Programmierschnittstellen.
-wie den  STLinkv2 oder den Segger  J-Link. Es werden Protokolle wie  JTag und.
-SWD ohne weiteres unterst\"utzt Ebenfalls gibt es einen Reichtum an Chips die.
-unterst\"utzt sind                                                           .
+Zum Programmieren der  CPUs haben wir OpenOCD gew\"ahlt. Auch  hier ist wieder
+anzumerken, dass es ein St\"uck freie Software ist. OpenOCD ist extrem leicht
+zu erweitern und unterst\"utzt eine grosse Breite an Programmierschnittstellen
+wie den STLinkv2 oder den Segger J-Link. Es werden Protokolle wie JTag und SWD
+ohne spezielle Konfigurationen unterst\"utzt. Ebenfalls gibt es einen Reichtum
+an Chips, die unterst\"utzt sind.
 
-Da  der SAMD09  erst im  ersten Quartal  2016 auf  den Markt  kam, waren  sehr
-wenige Projekte  vorhanden, welche ihn  bereits benutzt haben. Dies  hatte zur
-Ursache,  dass OpenOCD  den Chip  nicht unterst\"utzte. Also  haben wir  einen
-Treiber daf\"ur geschrieben beziehungsweise  den bestehenden f\"ur Atmel Chips
-erweitert.
+Da der  SAMD09 erst im  ersten Quartal 2016 auf  den Markt gekommen  ist, sind
+sehr wenige Projekte vorhanden, welche ihn bereits benutzt haben.  Deshalb hat
+OpenOCD unseren Chip zu Beginn nicht unterst\"utzt. Deshalb ist der bestehende
+Treiber f\"ur Atmel-Chips von uns entsprechend erweitert worden.
 
-Um   die   Kosten   tief   zu    halten   haben   wir   einen   StLinkv2   als
+
+Um   die   Kosten   tief   zu   halten,   haben   wir   einen   StLinkv2   als
 Programmierschnittstelle verwendet. Auch  daf\"ur brauchte es einen  Patch des
-Treibers, da  der STLinkv2 nur  32 Bit Schreibbefehle unterstutzt,  der SAMD09
-aber 16 Bit Schreibbefehle erwartet. Wir haben einen unsch\"onen Patch der nun
-32 Bit  statt 16 Bit Schreibbefehle  schickt geschrieben um dieses  Problem zu
-l\"osen.
+Treibers,  da  der  STLinkv2  nur  32  Bit-Schreibbefehle  unterst\"utzt,  der
+SAMD09  aber 16  Bit-Schreibbefehle  erwartet. Wir haben  deshalb einen  Patch
+geschrieben,  welcher  16  Bit-Schreibbefehle  anstatt  32  Bit-Schreibbefehle
+sendet.

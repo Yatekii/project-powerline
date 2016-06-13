@@ -11,8 +11,9 @@ untersucht. Letztlich wird  evaluiert, ob das gesteuerte  Kurzschliessen eines
 PV-Moduls mitteles eines Transistors sich allenfalls dazu eignen k\"onnte, ein
 Signal mit den entsprechenden kurzen Spannungseinbr\"uchen zu codieren.
 
-Es ist zu jeder \code{LTspice}-Schaltung  angegeben, wo die zugeh\"orige Datei
-auf dem Datentr\"ager gespeichert ist.
+Zur  Simulation wird  \code{LTspice  IV}  \cite{ref:ltspice} von  \emph{Linear
+Technologies} verwendet. Es  ist zu jeder  \code{LTspice}-Schaltung angegeben,
+wo die zugeh\"orige Datei auf dem Datentr\"ager gespeichert ist.
 
 % ---------------------------------------------------------------------------- %
 \section{Induktive Einkopplung}
@@ -122,7 +123,8 @@ nicht sehr stark.
 
 Zur  Simulation eines  ganzen Modulstrangs  wird die  Schaltung aus  Abbildung
 \ref{fig:ltspice:inductive:complete}  benutzt; der  Modulstrang basiert  dabei
-auf den Herleitungen aus Abschnitt \ref{Modellierung eines Modulstrangs}.
+auf den Herleitungen aus Abschnitt \ref{sec:simu:model:module:string} ab Seite
+\pageref{sec:simu:model:module:string}
 
 \begin{figure}[h!tb]
     \centering
@@ -263,12 +265,18 @@ Abschw\"achungen des Signals zu rechnen.
 \begin{figure}[h!tb]
     \centering
     \includegraphics[width=0.75\textwidth]{images/ltspice/jac/capacitive.eps}
-    \caption[\code{LTspice}-Schaltung kapazitive Einkopplung, Modulstrang]{%
-        Simulationsschaltung  eines Modulstrangs  mit kapazitiver  Einkopplung
-        eines  Signals. Jedes   Modulsymbol  repr\"asentiert dabei  ein  Modul
-        gem\"ass  Abbildung \ref{fig:ltspice:jac:Module}  im Anhang  auf Seite
-        \pageref{fig:ltspice:jac:Module}  mit Freilaufdiode  und parasit\"aren
-        Leitungsimpedanzen.\protect\\
+    \caption
+    [\code{LTspice}-Schaltung kapazitive Einkopplung, Modulstrang]
+    {%
+        Simulationsschaltung     eines     Modulstrangs    mit     kapazitiver
+        Einkopplung    eines    Signals. Zur   einfacheren    Handhabung    in
+        \code{LTspice}   wird    ein   eigenes   Symbol   f\"ur    ein   Modul
+        verwendet   (siehe   Abbildung   \ref{fig:ltspice:module:symbol}   auf
+        Seite   \pageref{fig:ltspice:module:symbol}   und  die   zugeh\"origen
+        Anmerkungen).   Jedes  Modulsymbol  repr\"asentiert  dabei  ein  Modul
+        gem\"ass Abbildung  \ref{fig:ltspice:jacModule:NoDiode} im  Anhang auf
+        Seite  \pageref{fig:ltspice:jacModule:NoDiode}  mit Freilaufdiode  und
+        parasit\"aren Leitungsimpedanzen.\protect\\
         Die  Sender  werden  durch  Sinus-Spannungsquellen  simuliert. Es  ist
         jeweils  nur ein  Sender  aktiv  in der  Simulation,  der andere  wird
         abgeh\"angt.\protect\\
@@ -301,11 +309,11 @@ zu sehen.%
 \label{sec:simu:short}
 % ---------------------------------------------------------------------------- %
 
-Wie in Abschnitt \todo{reference} erw\"ahnt, wird bei dieser L\"osungsvariante
-jeweils  ein Modul  gesteuert  kurzgeschlossen. Dies verursacht  (theoretisch)
-kurze  Spannungseinbr\"uche   auf  der  DC-Leitung,  welche   vom  Empf\"anger
-ausgewertet  werden  k\"onnen,  wie in  Abbildung  \todo{reference}vereinfacht
-dargestellt.
+Bei   dieser    L\"osungsvariante   wird    jeweils   ein    Modul   gesteuert
+kurzgeschlossen. Dies  verursacht   (theoretisch)  kurze  Spannungseinbr\"uche
+auf  der  DC-Leitung,  welche  vom Empf\"anger  ausgewertet  werden  k\"onnen,
+wie  in Abbildung  \ref{fig:ask:concept}  auf Seite  \pageref{fig:ask:concept}
+vereinfacht dargestellt.
 
 Da die Spannungseinbr\"uche  auf der Leitung bei diesem  Verfahren sehr abrupt
 sind,  k\"onnen  die im  System  vorhandenen  Induktivit\"aten gem\"ass  $v  =

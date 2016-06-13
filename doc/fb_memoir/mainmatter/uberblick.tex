@@ -101,8 +101,6 @@ einzelnes   beschattetes  oder   nicht   einwandfrei  funktionierendes   Modul
 beeintr\"achtigt die vom gesamten Modulstrang abgegebene Leistung stark (siehe
 auch n\"achster Abschnitt).
 
-\todo{Freilaufdioden}
-
 \begin{figure}[h!t]
     \centering
     \begin{tikzpicture}
@@ -126,8 +124,7 @@ auch n\"achster Abschnitt).
 Die    Umwandlung    der    Gleichspannung    in    Wechselspannung    erfolgt
 mittels    Wechselrichter   (dargestellt    auf   der    rechten   Seite    in
 Abbildung    \ref{fig:pvarray:gak:inverter}). Je     nach    Anwendungsbereich
-werden  unterschiedliche  Wechselrichter  eingesetzt:\todo{Anwendungsbereiche,
-Vor-Nachteile spezifizieren}
+werden  unterschiedliche  Wechselrichter  eingesetzt:
 
 \begin{symbols}
     \firmlist
@@ -245,8 +242,11 @@ versehen  ist. Wie  leicht  zu  erkennen  ist,  f\"allt  die  vom  Modulstrang
 abgegebene Leistung  bereits bei  einer einzigen defekten  Zelle (von  1440 im
 gesamten  Modulstrang!) bedeutend  ab. Gibt  eine Zelle  lediglich noch  einen
 F\"unftel  des Stromes  der restlichen  Zellen  ab, f\"allt  die vom  gesamten
-Strang  abgegebene  Leistung  um  etwa einen  Viertel  \todo{nicht  abgegebene
-Leistung verheizt?}.
+Strang  abgegebene Leistung  um etwa  einen Viertel. Da  die Sonneneintrahlung
+verglichen mit  einem voll  funktionsf\"ahigen Anlage aber  unver\"andert ist,
+produziert die Anlage eigentlich immer noch beinahge gleich viel Leistung, die
+nicht  mehr  zur  Verf\"ugung  stehende  Leistung  wird  aber  gr\"osstenteils
+thermisch statt elektrisch abgegeben (daher auch Brandgefahr).
 
 
 \begin{figure}[h!tb]
@@ -366,12 +366,11 @@ Schematische  Integration  des Systems  in  eine  PV-Anlage ist  in  Abbildung
     \label{fig:pvarray:gak:inverter:ourSystem}
 \end{figure}
 
-Die Installation  des Master-Ger\"ates erfolgt im  zugeh\"origen Schaltschrank
-des   Wechselrichters\todo{Nicht  GAK?}. Das   schlichte  Hutschienengeh\"ause
-erm\"oglicht   eine   einfache   Installation    in   bestehende   oder   neue
-Schaltschr\"anke. Die  Energieversorgung,  wie  auch  die  Ankopplung  an  die
-DC-Leitungen   erfolgt  im   Innern   Schaltschrankes  und   wird  von   einem
-Elektroinstallateur ausgef\"uhrt.
+Die    Installation   des    Master-Ger\"ates    erfolgt   im    zugeh\"origen
+Schaltschrank. Das schlichte  Hutschienengeh\"ause erm\"oglicht  eine einfache
+Installation in bestehende  oder neue Schaltschr\"anke. Die Energieversorgung,
+wie auch die Ankopplung an  die DC-Leitungen erfolgt im Innern Schaltschrankes
+und wird von einem Elektroinstallateur ausgef\"uhrt.
 
 Neben  dem   Klemmenanschluss  f\"ur   die  Energieversorgung  und   den  zwei
 Relaisausg\"angen  f\"ur   externe  Alarmger\"ate   sieht  das   \Master~  die
@@ -460,7 +459,7 @@ benutzt statt verschiedenen Frequenzen unterschiedliche Amplituden, um Symbole
 zu  codieren.  \fref{fig:ask:concept}  stellt  das  grundlegende  Konzept  des
 Verfahrens schematisch dar.
 
-Unsere  Umsetzung unterscheidet  sich  von  einer <<normalen>> \todo{<<text>> oder ``text'' ?}  Implementation
+Unsere  Umsetzung unterscheidet  sich  von  einer <<normalen>>  Implementation
 (mittlere   Graphik  in   \fref{fig:ask:concept})  dadurch,   dass  nicht   im
 eigentlichen Sinne  ein zus\"atzliches  Signal auf den  DC-Anteil aufmoduliert
 wird. Stattdessen   wird  ein   Solarmodul  mit   einer  bestimmten   Frequenz
@@ -469,8 +468,6 @@ in  Intervallen  einbrechen  l\"asst. Diese  Spannungseinbr\"uche  werden  zur
 Datencodierung  benutzt   (unterster  Plot   in  \fref{fig:ask:concept}). Dies
 entspricht  im  Prinzip  einer  ASK  mit Amplituden  null  und  dem  Wert  des
 Spannungseinbruchs mit einem Offset des halben Spannungseinbruchs.
-
-\todo{Zahlen in Ticks auf Achsen weglassen?}
 
 \begin{figure}[h!tb]
     \centering

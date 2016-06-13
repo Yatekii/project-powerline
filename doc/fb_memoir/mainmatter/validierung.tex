@@ -7,30 +7,25 @@ Im Folgenden  wird dargelegt,  welche Tests  an unserem  System durchgef\"uhrt
 worden  sind, weshalb  die  durchgef\"uhrten Tests  relevant  sind und  welche
 Ergebnisse erzielt werden konnten.
 
-\anweisung  Welche   Tests  sind   \"uberhaupt  notwendig,  um   die  korrekte
-Funktionali\"at der jeweiligen Subsysteme zu verifizieren?
-
-\anweisung Allenfalls mehr Unterkapitel hinzuf\"ugen, falls sinnvoll.
-
 % ---------------------------------------------------------------------------- %
 \section{Kopplungsspule}
 \label{sec:val:coupling:coil}
 % ---------------------------------------------------------------------------- %
 
 Eine  Spule  leitet nicht  alle  Frequenzen  gleich gut. Zudem  s\"attigt  ein
-Ferritkern bei  einem bestimmten  Strom. Deswegen wurden  Frequency-Sweeps der
+Ferritkern  bei einem  bestimmten Strom. Deswegen  werden Frequenzg\"ange  der
 Spule mit dem Ferritkern und  ein Power-Choke Test mit einer Sekund\"arwindung
 gemacht.
 
-Es   wurde   die  Induktivit\"at   einer   Spule   getestet,  welche   mehrere
+Es   wird   die   Induktivit\"at   einer  Spule   getestet,   welche   mehrere
 Windungen  \"ubereinander  hat  und  einer  Spule,  welche  nur  eine  Schicht
 mit  Wicklungen   hat. Beide  Spulen   haben  genau  30   Wicklungen. Wie  man
 Abbildung~\ref{fig:meas:coupling:coil:L} entnehmen kann, ist die Spule mit nur
 einer  Wicklungsschicht  bis  \"uber  20  Megahertz  induktiv,  w\"ahrend  die
 Multilayer-Spule  schon bei  4  Megahertz induktiv  wird. F\"ur unser  Projekt
 haben  wir  deswegen  die  einschichtige  Spule  gew\"ahlt. Eine  Messung  der
-Streuinduktivit\"at der  gew\"ahlten Spule wurde dann  ebenfalls angestellt um
-gut damit rechnen und simulieren zu k\"onnen.
+Streuinduktivit\"at der gew\"ahlten Spule ist ebenfalls gemacht worden, um gut
+damit rechnen und simulieren zu k\"onnen.
 
 \begin{figure}[h!tb]
     \centering
@@ -45,22 +40,22 @@ gut damit rechnen und simulieren zu k\"onnen.
     \caption[Messresultate Kopplungsspule]{Messergebnisse Kopplungsspule}
     \label{fig:meas:coupling:coil:R}
 \end{figure}
-TODO: To Appendix
+\todo{To Appendix}
 
-Die Power-Choke Tests wurden ebnfalls  nur f\"ur die gew\"ahlte Einlayerspule.
-Dgenacht. Daf\"ur wurde  durch den Kern eine  kurzgeschlossene Primerwicklung.
-Dgef\"uhrt,   welche  dem   Aufbau  des   Endproduktes  entspricht. Wie   man.
-DGrafik~\ref{fig:meas:coupling:power_choke:1} entnehmen kann f\"angt der Kern.
-Dbei  ungef\"ahr 2  Ampère zu  s\"attigen  an. Die beiden  Kurven sind  zwei.
-Dverschidene Messmethoden (inkrementelle  Messung und Sekantenmessung), wobei.
-Dwir hier eher auf die inkrementelle  Messung r\"ucksicht nehmen, da hier der.
-DKurvenverlauf  schlechter  ausf\"allt  und wir  mit  dem  Worstcase-Szenario.
-Drechnen. Uns   interessiert  hier   vorallem  die   Stromabh\"angigkeit  der.
-DInduktivit\"at a das Stromverh\"altnis im Trafo durch \ref{eq:trafo} gegeben.
-Dist,  k\"onnen  wir,  bei  30  Windungen  auf  der  Prim\"arseite,  auf  der.
-DSekund\"arseite 60 Ampére  f\"uhren, ohne dass der  Kern s\"attigt. Bei den.
-D10  Amp\"ore  die  die  Stromzufuhr  maximal  f\"uhrt,  ist  dies  mehr  als.
-Dausreichend                                                                 .
+Die  Power-Choke Tests  sind nur  f\"ur die  gew\"ahlte Einlayerspule  genacht
+worden. Daf\"ur  wird durch  den Kern  eine kurzgeschlossene  Prim\"arwicklung
+gef\"uhrt,   welche   dem   Aufbau  des   Endproduktes   entspricht. Wie   man
+Grafik~\ref{fig:meas:coupling:power_choke:1} entnehmen kann,  f\"angt der Kern
+bei  ungef\"ahr  \SI{2}{\ampere}  zu  s\"attigen an. Die  beiden  Kurven  sind
+zwei  verschidene Messmethoden  (inkrementelle  Messung und  Sekantenmessung),
+wobei  wir  hier  eher  der  inkrementellen  Messung  Beachtung  schenken,  da
+hier  der   Kurvenverlauf  schlechter  ausf\"allt   und  wir  mit   dem  Worst
+Case-Szenario rechnen. Uns interessiert  hier vorallem die Stromabh\"angigkeit
+der  Induktivit\"at. Da das  Stromverh\"altnis im  Trafo durch  \ref{eq:trafo}
+gegeben ist,  k\"onnen wir  bei 30  Windungen auf  der Prim\"arseite,  auf der
+Sekund\"arseite \SI{60}{\ampere}  f\"uhren, ohne  den Kern  zu s\"attigen. Bei
+den \SI{10}{\ampere}, die  die Stromzufuhr maximal f\"uhrt, ist  dies mehr als
+ausreichend.
 
 \begin{equation}\label{eq:trafo}
     I_S = \frac{I_P * N_P}{N_S}
@@ -79,7 +74,7 @@ Dausreichend                                                                 .
     \caption[Messresultate Kopplungsspule]{Messergebnisse Kopplungsspule}
     \label{fig:meas:coupling:coil:power_choke:2}
 \end{figure}
-TODO: To Appendix
+\todo{To Appendix}
 
 % ---------------------------------------------------------------------------- %
 \section{Modulator}
@@ -91,16 +86,16 @@ Bei Modulator ist es besonders wichtig, ein sch\"ones Signal zu haben.
 Wie               man               den               Kurven               aus
 den                 Abbildungen~\ref{lst:meas:scope:0},~\ref{lst:meas:scope:1}
 und~\ref{lst:meas:scope:6} entnehmen  kann, produziert der VCO  ein eigentlich
-sch\"ones Signal. Jedoch gibt es  \"Uberschwinger jeweils bei der Flanke. Auch
-ist das Signal ziemlich eckig, was  auch nicht optimal ist. Dem kann mit einem
+sch\"ones Signal. Jedoch gibt es  bei der Flanke \"Uberschwinger jeweils. Auch
+ist  das Signal  ziemlich eckig,  was nicht  optimal ist. Dem  kann mit  einem
 Tiefpassfilter entgegengewirkt werden.
 
-Leider produziertr der  VCO ab und an auch  mysteri\"ose Irregularit\"aten wie
-Abbildung~\ref{lst:meas:scope:1} zu  entnehmen ist. Da der 74HC4640  wovon der
-VCO  Teil ist  auch sonst  nicht  so funktionierte  wie es  dem Datenblatt  zu
-entnehmen  ist, k\"onnte  es sein  dass diese  Irregularit\"aten vom  Chip aus
-gehen, sehr  gut m\"oglich ist  aber dass  da ein anderes  Signal eingekoppelt
-wird oder es auf einen Messfehler zur\"uckzuf\"uhren ist.
+Leider produziert der VCO ab und an auch mysteri\"ose Irregularit\"aten wie in
+Abbildung~\ref{lst:meas:scope:1} gezeigt. Da der 74HC4640,  wovon der VCO Teil
+ist, auch sonst nicht so funktionierte wie es dem Datenblatt zu entnehmen ist,
+k\"onnte  es sein,  dass diese  Irregularit\"aten vom  Chip stammen. Sehr  gut
+m\"oglich ist aber  auch, dass dort ein anderes Signal  eingekoppelt wird oder
+es auf einen Messfehler zur\"uckzuf\"uhren ist.
 
 Die Oszilloskop-Einstellungen  sind im  Anhang~\ref{app:sec:scope:settings} zu
 finden.
@@ -133,15 +128,16 @@ finden.
 % ---------------------------------------------------------------------------- %
 
 Beim  Demodulator  ist  es   wichtig,  dass  die  Schaltflanken  einigermassen
-Steil  sind und  der Signalverlauf  ansonsten  konstant.  Dass  dies der  Fall
-ist  kann  aus den  Abbildungen~\ref{lst:meas:scope:7},~\ref{lst:meas:scope:8}
-und~\ref{lst:meas:scope:9} entnommen  werden.  Man  sieht dass  die Schaltzeit
-etwa 2 Mikrosekunden betr\"agt. Wenn man  nun mit 9600 Baud empfangen w\"urde,
-so  w\"aren  das  104   Mikrosekunden  Periode. Damit  w\"are  die  Schaltzeit
-lediglich 3.8  Prozent, was  reibungslos funktioniert wie  auch gut  in Grafik
-\ref{lst:meas:scope:8} zu erkennen ist.  Ein  Problem was auf den Grafiken gut
-sichtbar ist, ist die geringe Amplitude. Dem wird mithilfe eines Verst\"arkers
-entgegengewirkt, welcher die Signalamplitude verdoppelt.
+Steil  sind  und   der  Signalverlauf  ansonsten  konstant.    Dass  dies  der
+Fall ist,  kann den Abbildungen~\ref{lst:meas:scope:7},~\ref{lst:meas:scope:8}
+und~\ref{lst:meas:scope:9} entnommen  werden.  Man sieht, dass  die Schaltzeit
+etwa  \SI{2}{\micro\second} betr\"agt. Wenn  man nun  mit 9600  Baud empfangen
+w\"urde,  erg\"abe dies  eine  Periode  von \SI{104}{\micro\second}.   Damit
+w\"are die Schaltzeit lediglich 3.8 Prozent, was reibungslos funktioniert, wie
+auch gut in  Grafik \ref{lst:meas:scope:8} zu erkennen ist.   Ein Problem, was
+auf  den  Grafiken gut  sichtbar  ist,  ist  die geringe  Amplitude. Dem  wird
+mithilfe  eines  Verst\"arkers  entgegengewirkt, welcher  die  Signalamplitude
+verdoppelt.
 
 \begin{figure}[h!tb]
     \centering
@@ -166,13 +162,6 @@ entgegengewirkt, welcher die Signalamplitude verdoppelt.
 
 
 % ---------------------------------------------------------------------------- %
-\clearpage
-\section{Sensorplatine}
-\label{sec:validierung:sensorplatine}
-% ---------------------------------------------------------------------------- %
-
-
-% ---------------------------------------------------------------------------- %
-\section{Master-Ger\"at}
-\label{sec:validierung:master}
+\section{Gesamtsystem}
+\label{sec:validierung:total}
 % ---------------------------------------------------------------------------- %

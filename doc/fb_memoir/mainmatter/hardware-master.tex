@@ -130,13 +130,25 @@ daher  wichtig,  dass   die  Spannungsversorgung  der  \SI{3.3}{\volt}-Schiene
 gen\"ugend  Strom  liefern  kann. Der  ausgew\"ahlte  Regler  kann  bei  einer
 Versorgungsspanunung   von  \SI{5}{\volt}   und  einer   Ausgangsspannung  von
 \SI{3.3}{\volt} bis  zu \SI{3}{\ampere} liefern,  was f\"ur das Modem  und die
-restlichen Kompomenten auf  der \SI{3.3}{\volt}-Linie\todo{welche?}~ausreichen
-sollte.
+restlichen Kompomenten auf der \SI{3.3}{\volt}-Linie ausreichen sollte.
 
-Die Beschaltung  des Reglers ist ausgelegt  gem\"ass Herstellerspezifikationen
-aus dem Datenblatt \cite{ref:lm2596}  f\"ur unsere Konfiguration.\todo{C1, C2,
-D5, L1} $L1 = \SI{22}{\micro\henry}$, $C_2: output capacitor$
+Die  Schaltregler  der  LM2596-Linie  integrieren  so  viele  Komponenten  wie
+m\"oglich. Dadurch  sind  nur  vier  diskrete  Bauteile  n\"otig,  welche  zur
+Unterdr\"uckung  von  Spannungsrippel  ben\"otigt  werden  und  nicht  in  das
+Chipgeh\"ause  passen. Sie  werden  anhand   der  Empfehlungen  im  Datenblatt
+\cite{ref:lm2596} ausgew\"ahlt:
 
+\begin{itemize}
+    \tightlist
+    \item
+        Spule \code{L1}: \SI{22}{\micro\henry}, Seite 23
+    \item
+        \code{Cout}: \SI{560}{\micro\farad}, Seite 23
+    \item
+        Diode \code{D5}: Kompatibel mit SK3-Serie, Seite 24
+    \item
+        \code{Cin}: \SI{680}{\micro\farad}, Seite 25
+\end{itemize}
 
 Tabelle  \ref{tab:hw:master:supply:consumption}  listet die  haupts\"achlichen
 Leistungsverbraucher  auf  mit  den  Bedingungen, unter  den  dieser  maximale
@@ -152,17 +164,20 @@ Verbrauch auftreten kann.
         \midrule
         Raspberry Pi & \SI{4}{W}    & Maximallast im normalen Betrieb  & \cite{ref:raspipower} \\
         Display      & \SI{1.1}{W}  & Maximale Helligkeit              & \cite{datasheet:display} \\
-        Modem        & \SI{6.6}{W}  & Alle Kommunikationskanäle aktiv  & \cite{ref:modemrefdesign} \\
+        Modem        & \SI{6.6}{W}  & Alle Kommunikationskan\"ale aktiv  & \cite{ref:modemrefdesign} \\
         Relais       & \SI{0.72}{W} & Zwei Relais, schaltend           & \cite{datasheet:finder36relais} \\
         \bottomrule
     \end{tabular}
 \end{table}
 
-\todo{external power brick}
+Anhand  der  Absch\"atzung  des  Leistungsverbrauchs wurde  als  Netzteil  ein
+TXM  025-105  von   \emph{Traco  Power}  ausgew\"ahlt  \cite{ref:farnell:psu}.
+Es   handelt    sich   dabei   um   ein    kompaktes   und   kosteng\"unstiges
+\SI{5}{\volt}-Netzteil, welches  bis zu \SI{5}{\ampere} liefert  und damit die
+Anforderungen gut erf\"ullt.
 
 
 % ---------------------------------------------------------------------------- %
-\clearpage
 \subsection{Ein-/Ausg\"ange (GPIO)}
 \label{subsec:hw:master:gpio}
 % ---------------------------------------------------------------------------- %
@@ -173,8 +188,6 @@ Verbrauch auftreten kann.
     \caption[\Master: Schema GPIO]{GPIO \Master}
     \label{fig:sch:master:gpio}
 \end{figure}
-
-\todo{Wahl Darlington-Array, Relay, Stromkonsum}
 
 Das  \Master   besitzt  verschiedene  Ein-  und   Ausg\"ange. Kernst\"uck  des
 GPIO-Blocks  ist  ein Darlington  Transistor  Array  (\code{IC1} in  Abbildung
@@ -233,12 +246,11 @@ Flexibilit\"at bei der Wahl der  zu betreibenden Ger\"ate (Alarmlampe, Sirene,
     \label{fig:sch:master:comms}
 \end{figure}
 
-\todo{Genauere Erkl\"arung fskmodule.sch in Sensor-Abschnitt, Selektion U1}
-
-Abbildung  \ref{fig:sch:master:comms}   zeigt  das   Schema  einer   der  drei
-Schaltungen,  welche  zur Kommunikation  mit  dem  Sensor benutzt  werden. Zur
-genauen  Beschreibung  des   Blocks  \code{fskmodule\_1.sch}  siehe  Abschnitt
-\todo{reference in sensor}.
+Abbildung     \ref{fig:sch:master:comms}     zeigt    das     Schema     einer
+der    drei     Schaltungen,    welche     zur    Kommunikation     mit    dem
+Sensor    benutzt     werden. Zur    genauen    Beschreibung     des    Blocks
+\code{fskmodule\_1.sch} siehe Abschnitt \ref{subsec:hw:sensor:transmitter} auf
+Seite \pageref{subsec:hw:sensor:transmitter}.
 
 Auf der rechten Seite in Abbildung \ref{fig:sch:master:comms} ist die Br\"ucke
 \code{U1} abgebildet,  welche zwischen UART und  \ISC~konvertiert. Es wird das
@@ -259,31 +271,28 @@ Datenverarbeitung startet.
 
 Die Pins  \code{A0} und  \code{A1} dienen der  Addressierung der  Br\"ucke und
 sind f\"ur  jede Br\"ucke individuell angeschlossen. F\"ur  die vollst\"andige
-Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
+Verdrahtung  siehe Seite
+\pageref{fig:schema:master:full}
+in Anhang
+\ref{app:chap:schemas}
 
-\setlength{\parindentbak}{\parindent}
-\noindent\adjustbox{valign=t}{\begin{minipage}{0.60\textwidth}
-    \setlength{\parindent}{\parindentbak} % restore paragraph indentation
-    \fref{fig:sch:master:coupling} zeigt die  Anschl\"usse zur Einkopplung des
-    Signals auf die DC-Leitung. Es sind drei Stecker \code{P13} \code{P14} und
-    \code{P15}  vorhanden,  durch  welche  der  Strom  geleitet  wird. An  den
-    Steckern kann jeweils eine  Einkopplung angeschlossen werden. Dies erlaubt
-    Flexibilit\"at bei der  Implementierung der Einkopplung, da  das PCB nicht
-    auf eine spezifische Variante beschr\"ankt ist.
+\fref{fig:sch:master:coupling} zeigt die  Anschl\"usse zur Einkopplung des
+Signals auf die DC-Leitung. Es sind drei Stecker \code{P13} \code{P14} und
+\code{P15}  vorhanden,  durch  welche  der  Strom  geleitet  wird. An  den
+Steckern kann jeweils eine  Einkopplung angeschlossen werden. Dies erlaubt
+Flexibilit\"at bei der  Implementierung der Einkopplung, da  das PCB nicht
+auf eine spezifische Variante beschr\"ankt ist.
 
-    Die Ausg\"ange des Einkopplungsblocks gehen auf die Strommessung.
-\end{minipage}}
-\hspace*{0.05\textwidth}
-\adjustbox{valign=t}{\begin{minipage}{0.25\textwidth}
+Die Ausg\"ange des Einkopplungsblocks gehen auf die Strommessung.
+\begin{figure}[h!tb]
     \centering
-    \includegraphics[width=\textwidth]{images/superv-sch/supervisor--sch--coupling.eps}
-    \figcaption[\Master: Schema Einkopplung]{Anschl\"usse zur Einkopplung}
+    \includegraphics[width=0.25\textwidth]{images/superv-sch/supervisor--sch--coupling.eps}
+    \caption[\Master: Schema Einkopplung]{Anschl\"usse zur Einkopplung}
     \label{fig:sch:master:coupling}
-\end{minipage}}
+\end{figure}
 
 
 % ---------------------------------------------------------------------------- %
-\clearpage
 \subsection{Strommessung}
 \label{subsec:hw:master:current}
 % ---------------------------------------------------------------------------- %
@@ -291,12 +300,10 @@ Verdrahtung siehe Abbildung \todo{ref} in Anhang \todo{pic}.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.60\textwidth]{images/superv-sch/supervisor--sch--current.eps}
+    \includegraphics[angle=-90,width=0.60\textwidth]{images/superv-sch/supervisor--sch--current.eps}
     \caption[\Master: Schema Strommessung]{Strommessung}
     \label{fig:sch:master:current}
 \end{figure}
-
-%\todo{Auswahl IC4, IC5, IC6, IC3, IC7, Gr\"osse C3, C4, C5}
 
 Der  Strom jedes  Modulstrangs  wird separat  \"uberwacht;  die dazu  benutzte
 Schaltung   ist   in   Abbildung   \ref{fig:sch:master:current}   dargestellt.
@@ -326,6 +333,9 @@ der   Serie   NLSX4373  von   ON   Semiconductors   geschaltet,  welcher   das
 f\"ur  \ISC-Anwendungen entwickelt  worden  und eignet  sich  somit gut  f\"ur
 unsere Zwecke.
 
+Der Hersteller sieht zur  Stabilisierung der Stromversorgung einen Kondensator
+der  Gr\"osse \SI{100}{\nano\farad},  sichtbar  im Diagramm  auf  Seite 1  des
+Datenblattes \cite{datasheet:hallic}, vor.
 
 % ---------------------------------------------------------------------------- %
 \clearpage
@@ -340,16 +350,13 @@ unsere Zwecke.
     \label{fig:sch:master:gsm}
 \end{figure}
 
-\todo{Auswahl IC8, Auswahl Modem, Gr\"osse C6, C7, R5, R6, R7}
-
 Das GSM-Modem  ist ein  integrierter Baustein,  der alle  n\"otigen Funktionen
 bereitstellt; ein Baustein der SIM900-Serie von Simcom \cite{datasheet:modem}.
 Er ist  zusammen mit seiner Beschaltung  in Abbildung \ref{fig:sch:master:gsm}
 dargestellt. Wie auch  bei der  Strommessung wird  auch hier  ein Pegelwandler
 verwendet, um  das Signal von der  UART-Linie mit \SI{3.3}{\volt} auf  den vom
 GSM-Chip ben\"otigten  Pegel von \SI{2.8}{\volt} (Pin  \code{VDD\_EXT} auf dem
-Chip, verbunden mit \code{Vcc\_B} auf dem Pegelwandler) zu wandeln.\todo{check
-values}
+Chip, verbunden mit \code{Vcc\_B} auf dem Pegelwandler) zu wandeln.
 
 Der  Pin  \code{GSM\_PKEY} dient  zum  Einschalten  des GSM-Modems,  gesteuert
 vom  \Raspi  via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite
@@ -359,3 +366,6 @@ Via die beiden Pins \code{STATUS}  und \code{NETLIGHT} werden zwei Status-LEDs
 angesteuert (siehe  ebenfalls Abschnitt  \ref{subsec:hw:master:gpio}). Auf der
 rechten Seite des  Schaltungsblocks ist die Antenne und der  Adapter f\"ur die
 SIM-Karte zu sehen.
+
+Gem\"ass  Referenzdesign  auf  Seite 9  des  Modem-Guides  \cite{ref:sim900:1}
+betr\"agt der Wert aller Simkarten-Widerst\"ande \SI{22}{\ohm}.

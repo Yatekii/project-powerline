@@ -6,21 +6,41 @@
     \setlength{\parindentbak}{\parindent}
 
     \noindent\adjustbox{valign=t}{\begin{minipage}{135mm}
-        Das Sensorboard besteht aus einer CPU welche alle Komponenten koordiniert, einem Modulator und einem Demodulator zur Kommunikation, einem Buck-Konverter der die Netzspannung f\"ur das Board transformiert.
+        Das  Sensorboard  besteht  aus  einer,  CPU  welche  alle  Komponenten
+        koordiniert, einem  Modulator und einem Demodulator  zur Kommunikation
+        und  einem  Buck-Konverter,  der  die  Netzspannung  f\"ur  das  Board
+        transformiert.
 
-        Als CPU dient ein Atmel SAM D09. Dieser wurde gew\"ahlt da er die g\"unstigste CPU in seiner Klasse ist und alle notwendigen Features mitbringt. (3)
-        Der Mikrochip hat einen 12 Bit ADC, ein CRC Modul, hat eine 32 Bit ARM Architektur und braucht extrem wenig Leistung.
+        \setlength{\parindent}{\parindentbak}
+        Als   CPU  dient   ein  Atmel   SAM  D09   (Bereich  3   in  Abbildung
+        \ref{fig:sensor:schema:highlights}). Dieser  wird  verwendet, weil  er
+        der g\"unstigste Prozessor  in seiner Klasse ist  und alle notwendigen
+        Features mitbringt. Der Mikrochip hat einen 12 Bit-ADC, ein CRC-Modul,
+        eine 32 Bit ARM-Architektur und braucht extrem wenig Leistung.
 
-        Zum Speisen des Boardes wird ein LMR16006 verwendet. Dieser kann die volle Spanne von 12 Volt bis 60 Volt ohne Probleme auf 3.3 Volt regeln, welche das Board versorgen. (1)
+        Zum  Speisen  des  Boards  wird ein  LMR16006  von  Texas  Instruments
+        verwendet (Bereich 1 in Abbildung \ref{fig:sensor:schema:highlights}).
+        Dieser kann  die gesamte  Spanne der Modulspannung  von \SI{12}{\volt}
+        bis \SI{60}{\volt}  ohne Probleme auf  \SI{3.3}{\volt} transformieren,
+        welche das Board versorgt.
 
-        Als Modulator dient ein Voltage Controlled Oscillator (VCO) auf dem 74HC4640 Chip von Texas Instruments.
-        Dieser kann mit der richtigen Beschaltung Frequenzen zwischen wenigen Kilohertz bis mehrere Megahertz erzeugen.(2)
+        Als Modulator  dient ein Voltage  Controlled Oscillator (VCO)  auf dem
+        74HC4640  Chip von  Texas Instruments  (Bereich 2).   Dieser kann  mit
+        der richtigen  Beschaltung Frequenzen  zwischen wenigen  Kilohertz bis
+        mehreren Megahertz erzeugen.
 
-        Zum Demodulieren wird ein einfaches Tiefpassfilter mit einer Diode und einem Verst\"arker benutzt.(6)
+        Zum Demodulieren wird ein einfaches Tiefpassfilter mit einer Diode und
+        einem Verst\"arker benutzt (Bereich 6).
 
-        Und nat\"urlich hat es einen Spannungsteiler zum Messen der Versorgungsspannung. (4)
+        Die  Messung der  Versorgungsspannung  ist  mit einem  Spannungsteiler
+        implementiert,    zu   finden    in    Bereich    4   von    Abbildung
+        \ref{fig:sensor:schema:highlights}.
 
-        Im Folgenden sind die einzelnen Komponenten dokumentiert und ihre Wahl begr\"undet.
+        Bereich  5  enth\"alt   zwei  LEDs  und  einen   Schalter,  welche  zu
+        Statusangaben und Debuggen am Sensor direkt verwendet werden k\"onnen.
+
+        Im Folgenden  sind die einzelnen Teilschaltungen  dokumentiert und die
+        Komponentenwahl ihre Wahl begr\"undet.
 
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
@@ -55,15 +75,32 @@
 \label{subsec:hw:sensor:supply}
 % ---------------------------------------------------------------------------- %
 
-Die Speisung der Schaltung übernimmt ein LMR16006. Er ist bis 63 Volt input rated, das heisst es ist noch ein wenig Spiel zu den 60 Volt welche am Einganz anliegen können. Er kommt auch mit 4 Volt am Eingang noch klar. Da die Versorgungsspannung zwischen 12 Volt und 60 Volt schwankt durch den Tag, ist der LMR16006 soweit bestens geeignet.
-Er hat einen sehr konstanten Wirkungsgrad von 70 bis 80 Prozent, je nach Speisespannung.
-Der LMR16006 kann maximal 600 Miliampere liefern was ausreicht wenn man einen genug grossen Puffercap für Powerspikes einberechnet.
-Zudem hat dieser Spannungsregler einen typischen Quiescent Current von nur 28 Mikroampere. Damit ist er auch extrem Stromsparend.
-Die Beschaltung wurde nach Empehlung des Datenblatts gewählt, welche garantiert dass Powerspikes gut gefangen werden. $R_{FB1}$ und $R_{FB2}$ wurden explizit im Verhältnis $1:3.3$ gewählt, da 3.3 Volt die Spannung ist, die wir am Ausgang anstreben.
+Die  Speisung  der  Schaltung   \"ubernimmt  ein  LMR16006. Er  verkraftet  am
+Input   bis   \SI{63}{\volt};  und   sollte   so   die  an   handels\"ublichen
+PV-Modulen    anliegenden   Spannungen    verkraften   (siehe    auch   Anhang
+\ref{app:commercial:modules} auf  Seite \pageref{app:commercial:modules}).  Er
+kommt auch  mit 4  Volt am  Eingang noch  klar. Da die  Versorgungsspannung im
+Verlauf des  Tages zwischen \SI{12}{\volt} und  \SI{60}{\volt} schwanken kann,
+ist der LMR16006 soweit bestens f\"ur unsere Schaltung geeignet.
 
-Der Active Low Shutdown Pin wird dauernd auf High gezogen, damit der Regler immer an ist sobald am Eingang Spannung anliegt.
+Er  hat einen  sehr konstanten  Wirkungsgrad von  70 bis  80 Prozent,  je nach
+Speisespannung.
 
-Damit die Montage einfacher ist, ist ein Verpolungsschutz eingebaut. Dieser besteht aus einem P-Fet, einer Zenerdiode und einem Gate-Vorwiderstand.
+Der LMR16006 kann maximal \SI{600}{\milli\ampere} liefern, was ausreicht, wenn
+man einen genug grossen Pufferkondensator f\"ur Leistungsspitzen einbaut.
+
+Zudem  hat  dieser  Spannungsregler  einen  typischen  Quiescent  Current  von
+nur  \SI{28}{\micro\ampere}. Damit  ist  er  auch  extrem  stromsparend.   Die
+Beschaltung  wurde  nach   Empehlung  des  Datenblatts  \cite{ref:ti:lmr16006}
+gew\"ahlt,  welche   garantiert,  dass  Powerspikes  gut   abgefangen  werden.
+$R_{\mathrm{FB1}}$  und  $R_{\mathrm{FB2}}$  wurden  im  Verh\"altnis  $1:3.3$
+gew\"ahlt, da \SI{3.3}{\volt} die Spannung ist, die wir am Ausgang anstreben.
+
+Der Active  Low Shutdown Pin wird  dauernd auf High gezogen,  damit der Regler
+immer an ist sobald am Eingang Spannung anliegt.
+
+Damit die  Montage einfacher  ist, ist ein  Verpolungsschutz eingebaut. Dieser
+besteht aus einem P-Fet, einer Zenerdiode und einem Gate-Vorwiderstand.
 
 \begin{figure}[h!t]
     \centering
@@ -71,22 +108,29 @@ Damit die Montage einfacher ist, ist ein Verpolungsschutz eingebaut. Dieser best
     \caption[Sensor: Schema Speisung]{Speisung Sensor}
 \end{figure}
 
+
 % ---------------------------------------------------------------------------- %
 \subsection{Transmitter}
 \label{subsec:hw:sensor:transmitter}
 % ---------------------------------------------------------------------------- %
 
-Der Transmitter besteht aus einem einfachen VCO der das Signal auf die Spannungsversorgung aufmoduliert.
-Dafür wird am $VCO_{in}$ mithilfe eines Spannungsteilers eine fixe Spannung angelegt. Mit der korrekten Wahl von R7, R8 und C10 kann die Resonanazfrequenz für die Leitung erreicht werden, mit der dann moduliert wird. Diese Werte sind so gewählt wie es die Graphen im Datasheet zeigten. Es wurde eine Frequenz von 20 Megahertz ausgewählt da diese bei Leitungen unserer Länge optimal sind.
-Das Signal wird dann moduliert indem der UART TX Pin direkt am INH Pin den VCO ein- und ausschaltet und somit eine OOSK zustande bringt. Hier ist wichtig dass der Pin Active High ist.
+Der  Transmitter  besteht  aus  einem   einfachen  VCO,  der  das  Signal  auf
+die  Spannungsversorgung aufmoduliert.   Daf\"ur  wird am  $VCO_{\mathrm{in}}$
+mithilfe eines Spannungsteilers eine fixe Spannung angelegt. Mit der korrekten
+Wahl von \code{R7},  \code{R8} und \code{C10} kann  die Resonanzfrequenz f\"ur
+die Leitung erreicht werden, mit der  dann moduliert wird. Diese Werte sind so
+gew\"ahlt, wie es die Graphen  im Datasheet \todo{Source Datasheet} zeigen. Es
+wurde  eine  Frequenz  von  \SI{20}{\mega\hertz} ausgew\"ahlt,  da  diese  bei
+Leitungen unserer  L\"ange optimal sind\todo{Weshalb?}.  Das  Signal wird dann
+moduliert, indem der UART \code{TX} Pin  direkt am \code{INH} Pin den VCO ein-
+und ausschaltet und  somit eine OOSK zustande bringt. Hier  ist wichtig, dass
+der Pin Active High ist.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=1\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
+    \includegraphics[width=0.70\textwidth]{images/sensor-sch/sensor--sch--transmitter.eps}
     \caption[Sensor: Schema Transmitter]{Transmitter Sensor}
 \end{figure}
-
-\todo{R1, R21, RV1, R7, R8, C10, C15}
 
 
 % ---------------------------------------------------------------------------- %
@@ -94,31 +138,37 @@ Das Signal wird dann moduliert indem der UART TX Pin direkt am INH Pin den VCO e
 \label{subsec:hw:sensor:mcu}
 % ---------------------------------------------------------------------------- %
 
-Der Mikrokontroller braucht bis auf einen Pullup am Active Low Reset und einen Stabilisierungskondensator an der Spannungsversorgung keine spezielle Beschaltung. Der Mikrochip ist so geroutet dass die beiden UARTs verfügbar sind. Eine zum Senden über die Leitung und eine zum Debuggen. Ebenfalls zu einem Stecker verbunden ist die Programmierschnittstelle (SWD).
-
-\begin{figure}[h!t]
+\begin{wrapfigure}{r}{0.6\textwidth}
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--mcu.eps}
+    \includegraphics[width=0.60\textwidth]{images/sensor-sch/sensor--sch--mcu.eps}
     \caption[Sensor: Schema Microcontroller]{Microcontroller Sensor}
-\end{figure}
+\end{wrapfigure}
 
-\todo{R15, C14, Atmel Chip}
+Der  Mikrokontroller  braucht  bis  auf  einen  Pull-Up Widerstand  am  Active
+Low  Reset und  einen  Stabilisierungskondensator  an der  Spannungsversorgung
+keine  spezielle  Beschaltung. Der  Mikrochip  ist  so  beschaltet,  dass  die
+beiden  UART-Linien  verf\"ugbar sind;  eine  zum  Senden \"uber  die  Leitung
+und  eine  zum   Debuggen. Ebenfalls  zu  einem  Stecker   verbunden  ist  die
+Programmierschnittstelle (SWD).\todo{datenblatt source}
+
+
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Spannungsmessung}
 \label{subsec:hw:sensor:voltageSense}
 % ---------------------------------------------------------------------------- %
 
-Der Spannungsteiler ist so eingestellt dass am ADC Pin 3.3 Volt anliegen wenn die Spannungsversorgung 60 Volt hat.
-Ein Kondensator zur Glättung des Signales wurde ebenfalls hinzugefügt.
+Der  Spannungsteiler  ist  so  eingestellt, dass  am  ADC-Pin  \SI{3.3}{\volt}
+anliegen,  wenn  bei  der Spannungsversorgung  \SI{60}{\volt}  anliegen.   Der
+Kondensator \code{C18} dient der Gl\"attung des Signals.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--sensor.eps}
+    \includegraphics[width=0.25\textwidth]{images/sensor-sch/sensor--sch--sensor.eps}
     \caption[Sensor: Schema Spannungsmessung]{Spannungsmessung Sensor}
 \end{figure}
 
-\todo{R16, R17, C18}
 
 % ---------------------------------------------------------------------------- %
 \subsection{Interface}
@@ -127,23 +177,29 @@ Ein Kondensator zur Glättung des Signales wurde ebenfalls hinzugefügt.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--interface.eps}
+    \includegraphics[angle=-90,width=0.4\textwidth]{images/sensor-sch/sensor--sch--interface.eps}
     \caption[Sensor: Schema Interface]{Interface Sensor}
 \end{figure}
 
-\todo{C17, R18, R19, R20}
+Am Sensor sind zwei LEDs und ein Schalter angebracht, welche zu Statusanzeigen
+und Debuggen benutzt werden k\"onnen.
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Empf\"anger}
 \label{subsec:hw:sensor:receiver}
 % ---------------------------------------------------------------------------- %
 
-Der Empfänger ist ein einfaches Tiefpassfilter.
-Zuerst wird das Eingangssignal welches noch Moduliert ist durch die Diode D3 gleichgerichtet. Nun sorgt ein Tiefpass dahinter dafür, dass das Signal geglättet wird. Da diese Signal durch Berluste auf der Leitung und über der Diode eine viel zu kleine Amplitude hat, wird es zusätzlich durch einen nicht invertierenden Opamp verstärkt.
+Der   Empf\"anger  ist   ein  einfaches   Tiefpassfilter.   Zuerst   wird  das
+Eingangssignal,  welches  noch  moduliert   ist,  durch  die  Diode  \code{D3}
+gleichgerichtet. Ein dahinter  geschalteter Tiefpass  sorgt daf\"ur,  dass das
+Signal gegl\"attet wird. Da  dieses Signal durch Verluste auf  der Leitung und
+\"uber der Diode eine viel zu kleine Amplitude hat, wird es zus\"atzlich durch
+einen nicht invertierenden Opamp verst\"arkt.
 
 \begin{figure}[h!t]
     \centering
-    \includegraphics[width=0.5\textwidth]{images/sensor-sch/sensor--sch--receiver.eps}
+    \includegraphics[width=0.9\textwidth]{images/sensor-sch/sensor--sch--receiver.eps}
     \caption[Sensor: Schema Empf\"anger]{Empf\"anger Sensor}
 \end{figure}
 

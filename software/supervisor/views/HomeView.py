@@ -21,10 +21,6 @@ class HomeView(QWidget):
         font_title = QFont()
         font_title.setBold(1)
 
-        self.test_error_bt = QPushButton('Error', self)         #comment for final use
-        self.test_error_bt.clicked.connect(self.parent().show_error_view)
-        self.test_error_bt.move(200, 40)
-
         self.history_bt = QPushButton("Verlauf", self)
         self.history_bt.clicked.connect(self.parent().show_history_view)
         self.history_bt.resize(140, 50)

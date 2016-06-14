@@ -22,15 +22,15 @@ class HistoryView(QWidget):
         self.ok_bt.move(150, 160)
         self.ok_bt.resize(140, 50)
 
-        self.history_lb = QLabel("Errorhistory:", self)
+        self.history_lb = QLabel("Fehlerverlauf:", self)
         self.history_lb.setFont(font_title)
         self.history_lb.move(0, 0)
 
         self.modul_lb1 = QLabel("Modul:   " + str(hex(self.modul_nr1)) + "   09:41 12-05-2016", self)
         self.modul_lb1.move(0, 40)
 
-        self.modul_lb2 = QLabel("Modul:   " + str(hex(self.modul_nr2)) + "   15:25 11-05-2016", self)
+        self.modul_lb2 = QLabel("Modul:   " + str(hex(self.modul_nr2)) + "    15:25 11-05-2016", self)
         self.modul_lb2.move(0, 60)
 
-        self.modul_lb3 = QLabel("Modul:   " + str(hex(self.modul_nr3)) + "   15:25 10-05-2016", self)
+        self.modul_lb3 = QLabel("Modul:   " + str(hex(self.modul_nr3)) + "    15:25 10-05-2016", self)
         self.modul_lb3.move(0, 80)

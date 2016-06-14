@@ -8,12 +8,18 @@ from PyQt5.QtCore import *
 from views import HomeView, ConfigurationView, ErrorView, HandyNbView, HistoryView
 
 
+from reporter import Reporter
+
+
 class MainWindow(QWidget):
     def __init__(self):
         super().__init__()
 
-        self.home_view = HomeView.HomeView(self)
+        self.reporter = Reporter()
+        self.reporter.set_report_callback(self.show_error_view)
+        self.reporter.start()
 
+        self.home_view = HomeView.HomeView(self)
         self.configuration_view = ConfigurationView.ConfigurationView(self)
         self.error_view = ErrorView.ErrorView(self)
         self.handy_nb_view = HandyNbView.HandyNbView(self)

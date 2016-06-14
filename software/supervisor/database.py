@@ -32,7 +32,6 @@ strings = Table('strings', metadata,
                 Column('stringcurrent', Integer),
                 Column('timestamp', Integer),
                 Column('deviation', Integer),
-                Column('flag_watch', Boolean, default=False),
                 Column('flag_reported', Boolean, default=False)
                 )
 
@@ -98,11 +97,3 @@ string3mapper = mapper(String3, string3)
 
 # creates the session
 session = create_session()
-
-
-# just to delete everything for debugging
-# panels.drop(db)
-# strings.drop(db)
-# string1.drop(db)
-# string2.drop(db)
-# string3.drop(db)

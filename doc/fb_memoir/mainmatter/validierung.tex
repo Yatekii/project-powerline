@@ -160,8 +160,19 @@ verdoppelt.
     \label{fig:meas:scope:9}
 \end{figure}
 
-
 % ---------------------------------------------------------------------------- %
 \section{Gesamtsystem}
 \label{sec:validierung:total}
 % ---------------------------------------------------------------------------- %
+
+Wie in den vorherigen Abschnitten dokumentiert ist, sind alle Teilsysteme getestet und funktionstüchtig.
+Am Sensorboard müssen einige Anpassungen zum Einstellen der Trägerfrequenz der OOSK angepasst werden. Des Weiteren muss am Demodulator der Verstärker in Betrieb genommen werden, da im Moment die empfangene Signalamplitude zu klein ist, ansonsten aber in Ordnung.
+Die Modulation und Demodulation wurden separat getestet. Nun ist es wichtig diese im Zusammenspiel zu testen. Dank ansonstem funktionstüchtigem Sensorboard mit kompletter Firmware, sollte dies einfach möglich sein.
+
+Beim Master sieht die Lage ähnlich aus. Bis auf die Strommessung konnten alle Teilkomponenten erfolgreich getestet werden. Diese müssten jetzt im Vollbetrieb getestet werden, da dies Aufgrund fehlender Kommunikation der Sensoren bisher wegfiel.
+
+Softwareseitig ist der Master auf gutem Wege.
+Das Auslesen und Auswerten der Sensoren ist ohne Powerline-Communication sondern über normale UART getestet und funktioniert. Es wird das GUI angesteuert und eine Fehlermeldung ausgelöst wenn ein Modul defekt ist.
+Jedoch fehlt ein wenig Politur. So fehlt noch die Ansteuerungssoftware für das GSM-Modul. Da dies vollintegriert ist, kann dies angenehm über TWI gemacht werden und ist ein einfacher Task sobald die restlichen Teilsysteme laufen.
+Die Ansteuerung der Strommessung ist erledigt, konnte aber noch nicht getestet werden.
+Zu guter Letzt ist eine gute Abrundung wichtig. So muss zum Beispiel noch der Button zum Ein- und Ausschalten des Displays angesteuert werden.

@@ -23,6 +23,7 @@ verwendet werden, solange die Copyright Bemerkungen nicht entfernt werden.
 
 Die Firmware besteht im Kern aus einer simplen main() Funktion welche in einer
 Endlosschleife l\"auft. Abbildung~\ref{fig:sensor:firmware:mainloop} zeigt sehr gut, wie diese Schleife aufgebaut ist.
+Zudem zeigt sie den regelmässigen SysTick-Interrupt, welcher den ADC ausliest und die LEDs toggelt.
 
 \begin{figure}[h!tb]
 \input{images/software/sensorProcess.tex}
@@ -73,8 +74,7 @@ angeh\"angt. Dann wird das Datenpaket per UART verschickt.
 
 Der  Spannungssensor selbst  wird  mittels Analog  Digital  Konverters (  ADC)
 verwirklicht.  Daf\"ur  wird mithilfe des ASF  ein 12 Bit ADC  ausgelesen und
-von  diesen Werten  ein Moving  Average  erstellt.  Deshalb  kommt an  zweiter
-Stelle in der Endlosschleife ein Lesevorgang  auf dem ADC.  Dann wird mithilfe
+von  diesen Werten  ein Moving  Average  erstellt.  Dies wird regelmässig innerhalb des SysTick-Interrupts erledigt.  Dann wird mithilfe
 des sogenannten Cascaded Integrator–Comb Filters der aktuelle Moving Average
 berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
 %(TODO: ref to https://en.wikipedia.org/wiki/Cascaded_integrator%E2%80%93comb_filter)
@@ -86,14 +86,11 @@ berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
     \end{split}
 \end{equation}
 
-Dieser Moving Average wird nun per UART verschickt.
-
 \subsubsection{Statusanzeige}
 \label{subs:Statusanzeige}
 
-Damit man  gut sieht  ob der  Sensor noch korrekt  leuchtet, kommt  an letzter
-Stelle der Endlosschleife noch ein simples Toggeln der LED, so dass man sieht,
-ob etwas nicht stimmt, falls es einmal nicht mehr toggeln sollte.
+Damit man  gut sieht  ob der  Sensor noch korrekt  funtioniert, wird im SysTick-Interrupt simples Toggeln der LED ausgeführt, so dass man sieht,
+ob etwas nicht stimmt, falls die LEDs einmal nicht mehr blinken sollten.
 
 \subsection{Open On Chip Debugger}
 

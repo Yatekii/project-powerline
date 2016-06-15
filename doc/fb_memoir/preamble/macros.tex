@@ -25,3 +25,7 @@
 \newcommand{\myfancybreak}{\fancybreak{$\myfancybreaksymbol\quad\myfancybreaksymbol\quad\myfancybreaksymbol$}}
 
 \newlength{\parindentbak}
+
+\newcommand{\colorbitbox}[4]{%
+    \rlap{\bitbox{#3}{\color{#1}\rule{\width}{\height}}}%
+    \bitbox{#3}{\sffamily\textcolor{#2}{#4}}}

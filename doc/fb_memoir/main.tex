@@ -67,13 +67,27 @@
 % compilation run, specify those files here.               %
 % -------------------------------------------------------- %
 %\includeonly{%
-%    appendices/validierung,
-%    chapters/hardware,
-%    chapters/firmware,
-%    chapters/simu,
-%    chapters/uberblick,
+%    frontmatter/info,
+%    frontmatter/abstract,
+%    mainmatter/einleitung,
+%    mainmatter/uberblick,
+%    mainmatter/models,
+%    mainmatter/simu,
+%    mainmatter/hardware,
+%    mainmatter/hardware-sensor,
+%    mainmatter/hardware-master,
+%    mainmatter/software,
+%    mainmatter/firmware-sensor,
+%    mainmatter/software-master,
+%    mainmatter/validierung,
+%    mainmatter/userguide,
+%    mainmatter/fazit,
+%    appendices/commercial-modules,
 %    appendices/ltspice,
-%    chapters/userguide,
+%    appendices/schema,
+%    appendices/validierung,
+%    appendices/costs,
+%    appendices/datentrager,
 %}
 
 % ******************************************************** %
@@ -112,9 +126,8 @@
 % in the ToC, the unstarred versions do.                   %
 % -------------------------------------------------------- %
 \tableofcontents*
-\newpage
-\listoffigures
-%\listoftables
+%\newpage\listoffigures
+%\newpage\listoftables
 
 
 % -------------------------------------------------------- %
@@ -135,14 +148,19 @@
 % chapters)  without  needing  to adjust  file  names  and %
 % similar shenanigans.                                     %
 % -------------------------------------------------------- %
-\include{chapters/einleitung}
-\include{chapters/uberblick}
-\include{chapters/simu}
-\include{chapters/hardware}
-\include{chapters/firmware}
-\include{chapters/validierung}
-\include{chapters/userguide}
-\include{chapters/fazit}
+\include{mainmatter/einleitung}
+\include{mainmatter/uberblick}
+\include{mainmatter/models}
+\include{mainmatter/simu}
+\include{mainmatter/hardware}
+\include{mainmatter/hardware-sensor}
+\include{mainmatter/hardware-master}
+\include{mainmatter/software}
+\include{mainmatter/firmware-sensor}
+\include{mainmatter/software-master}
+\include{mainmatter/validierung}
+\include{mainmatter/userguide}
+\include{mainmatter/fazit}
 
 
 % -------------------------------------------------------- %

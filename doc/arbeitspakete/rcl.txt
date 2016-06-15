@@ -1,0 +1,14 @@
+Modem <http://simcom.ee/documents/SIM900/AN_SIM900 Reference Design Guide_V1.02.pdf>
+Gemäss Referenzdesign auf Seite 9 des Modem-Guides, beträgt der Wert aller Simkarten-Widerstände 22Ohm
+
+Spannungsregler (Vout = 3.3V, Iout = 3A, Vin = 5V) <http://www.ti.com/lit/ds/symlink/lm2596.pdf>
+Die Schaltregler der LM2596-Linie integrieren so viele Komponenten wie möglich. Dadurch sind nur vier diskrete Bauteile nötig, welche zur Unterdrückung von Spannungsrippel benötigt werden und nicht in das Chipgehäuse passen. Sie werden anhand der Empfehlungen im Datenblatt ausgewählt:
+Spule 22uH, Seite 23
+Cout 560uF Seite 23
+Diode B3?0 (Kompatibel mit SK3?) Seite 24
+Cin 680uF Seite 25
+
+Hallsensor
+Der Hersteller sieht zur Stabilisierung der Stromversorgung einen 100nF-Kondensator, Sichtbar im Diagramm auf Seite 1 des Datenblattes, vor.
+
+Anhand der Abschätzung des Leistungsverbrauchs wurde als Netzteil ein TXM 025-105 ausgewählt. Es handelt sich dabei um ein kompaktes und kostengünstiges 5V-Netzteil, welches bis zu 5A liefert und damit die Anforderungen gut erfüllt.

@@ -3,5 +3,40 @@
 \label{chap:fazit}
 % **************************************************************************** %
 
-Was  l\"auft? Was  l\"auft  nicht? Weshalb? Weiteres Vorgehen  bei  gen\"ugend
-Zeit? Schwierigkeiten w\"ahren des Projekts?
+Nach  Abschluss  des   Projektes  steht  dem  Auftraggeber   ein  Produkt  zur
+Verf\"ugung, dass als  Gesamtsystem die Spannungen an  PV-Modulen erfassen und
+auswerten  kann. Die einzelnen  Teilsysteme sind  mehrheitlich als  Prototypen
+vorhanden, wurden im Labor getestet und funktionieren einwandfrei.
+
+Der Sensor kann Spannungen messen  und Werte ausgeben. Mit einer Abmessung von
+knapp 5cm*5cm bieten  wir dem Auftraggeber eine  Sensorplatine, die garantiert
+in jedem  Anschlussgeh\"ause Platz findet. Die einwandfreie  Firmware zusammen
+mit den gew\"ahlten Hardwarekomponenten erm\"oglichen eine saubere Messung der
+Modulspannung. Die Hauptproblematik  im Projekt  bestand darin,  eine optimale
+L\"osung  f\"ur  die  Kommunikation  zwischen  Sensor  und  Master-Ger\"at  zu
+finden. Mit dem  FSK (Frequency-shift  keying) wurde eine  Variante gew\"ahlt,
+die es uns erm\"oglicht, die  gemessenen Daten der PV-Module dem Masterger\"at
+zu   \"ubermitteln. Das  Grundprinzip   dieser  \"Ubertragungsmethode   konnte
+validiert werden.
+
+Anhand  eines Testaufbaus  konnten  Signale vom  Master-Ger\"at empfangen  und
+an  den  Raspberry  Pi   weitergeleitet  werden. Mithilfe  der  Mastersoftware
+ist  der Raspberry  Pi  im  Stande, die  empfangenen  Messwerte zu  berechnen,
+auszuwerten,  mit   anderen  Messdaten   zu  vergleichen   und  n\"otigenfalls
+eine  Fehlermeldung  auf  dem Display  auszugeben. Das  Master-Ger\"at  bietet
+einerseits  eine benutzerfreundliche  Oberfl\"ache, andererseits  l\"asst sich
+das schlichte  Geh\"ause bequem in einen  bestehenden Generatoranschlusskasten
+installieren,  auch   wenn  nur  wenig  Platz   vorhanden  ist. Die  Bedienung
+und   Inbetriebnahme   \"uber   das   2.5``   Touch-Display   ist   \"ausserst
+komfortabel und selbsterkl\"arend. Das GSM-Modul  der Masterplatine, f\"ur die
+Fehlerbenachrichtigung  per  SMS,  konnte als  einzelne  Komponente  ebenfalls
+\"uberpr\"uft werden. Das Master-Ger\"at  ist somit im Stande,  im Falle eines
+Modulfehlers,  neben der  Bet\"atigung  der beiden  Relaiskontakte, auch  eine
+Fehlermeldung per  SMS zu  versenden. Die geplante Zusatzfunktion  zur Messung
+der  Strangstr\"ome  am  Master-Ger\"at  konnte wegen  Zeitmangel  nicht  mehr
+getestet werden.
+
+Als  n\"achster   Schritt  sollte  die  Daten\"ubermittlung   vom  Sensor  zum
+Master-Ger\"at mittels  Powerline getestet werden, wie  auch das Zusammenspiel
+von  Tochterboard  und Raspberry  Pi. Folglich  sollten  alle Teilsysteme  des
+gesamten Systems als Ganzes \"uberpr\"uft werden.

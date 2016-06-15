@@ -22,31 +22,41 @@ verwendet werden, solange die Copyright Bemerkungen nicht entfernt werden.
 \subsection{Die Firmware}
 
 Die Firmware besteht im Kern aus einer simplen main() Funktion welche in einer
-Endlosschleife l\"auft.
+Endlosschleife l\"auft. Abbildung~\ref{fig:sensor:firmware:mainloop} zeigt sehr gut, wie diese Schleife aufgebaut ist.
+Zudem zeigt sie den regelmässigen SysTick-Interrupt, welcher den ADC ausliest und die LEDs toggelt.
+
+\begin{figure}[h!tb]
+\input{images/software/sensorProcess.tex}
+\caption{Main Loop der Sensorfirmware}
+\label{fig:sensor:firmware:mainloop}
+\end{figure}
 
 \subsubsection{UART}
 \label{subs:UART}
 
 Die Endlosschleife  \"uberpr\"uft zuerst, ob Daten  \"uber die  UART empfangen
 wurden,   sprich   Anweisungen  vom   Master   oder   Antworten  von   anderen
-Sensoren. Ist  das  der  Fall,  so  wird  darauf  reagiert. Dies  heisst  dass
-die  UART  die  gemittelten  Daten  der   letzten  x  Samples  an  den  Master
-adressiert  und verschickt.   Hierzu wird  ein Datenpakt  wie es  in Abbildung
-\ref{fig:sensor:firmware:datenpaket} zu sehen ist verschickt:
+Sensoren. Ist  das  der  Fall,  so  wird  darauf  reagiert.
+Zuerst wird überprüft ob das Paket auch für den Sensor bestimmt war. Falls das erste Byte 0 ist, war das Paket für den Master bestimmt. Falls es 1 ist, so war das paket für einen Sensor bestimmt. Um zu bestimmen ob das Paket für sich selbst bestimmt war, prüft die Firmware, ob die nächsten 4 empfangenen Bytes der eigenen ID entsprechen. Hier ist wichtig, dass alle Daten Little Endian codiert sind.
+Falls das Paket tatsächlich für den Sensor bestimmt war, so wertet er nun den Befehl aus und reagiert darauf. Im Normalfall bedeutet dies, dass die  UART die  gemittelten Daten der letzten 64 Messwerte an den Master adressiert und verschickt. Hierzu wird ein Datenpakt wie es in Abbildung~\ref{fig:sensor:firmware:datenpaket} zu sehen ist verschickt:
 
 \begin{figure*}[ht!]
   \centering
-  \begin{bytefield}{32}
-    \bitheader{0,7,8,15,16,23,24,31} \\
+  \begin{bytefield}[bitwidth=2em]{8}
+    \bitheader{0,7} \\
+        \colorbitbox{gray!50}{black}{8}{Indikatorbyte}\\
     \begin{rightwordgroup}{\sffamily Adresse}
-        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 0} \\
-        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 1} \\
-        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 2} \\
-        \colorbitbox{solarized-base2}{solarized-base02}{32}{Adressbyte 3}
+        \colorbitbox{solarized-base2}{solarized-base02}{8}{Adressbyte 0} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{8}{Adressbyte 1} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{8}{Adressbyte 2} \\
+        \colorbitbox{solarized-base2}{solarized-base02}{8}{Adressbyte 3}
     \end{rightwordgroup} \\
-    \colorbitbox{solarized-magenta}{solarized-base3}{16}{Spannung}
-    \colorbitbox{gray!50}{black}{16}{Nicht verwendet}\\
-    \colorbitbox{solarized-blue}{solarized-base3}{32}{CRC}\\
+    \colorbitbox{solarized-magenta}{solarized-base3}{8}{Spannungsbyte 0}\\
+    \colorbitbox{solarized-magenta}{solarized-base3}{8}{Spannungsbyte 1}\\
+    \colorbitbox{solarized-blue}{solarized-base3}{8}{CRCbyte 0}\\
+    \colorbitbox{solarized-blue}{solarized-base3}{8}{CRCbyte 1}\\
+    \colorbitbox{solarized-blue}{solarized-base3}{8}{CRCbyte 2}\\
+    \colorbitbox{solarized-blue}{solarized-base3}{8}{CRCbyte 3}\\
   \end{bytefield}
   \caption{Aufbau eines Datenpakets}
   \label{fig:sensor:firmware:datenpaket}
@@ -64,8 +74,7 @@ angeh\"angt. Dann wird das Datenpaket per UART verschickt.
 
 Der  Spannungssensor selbst  wird  mittels Analog  Digital  Konverters (  ADC)
 verwirklicht.  Daf\"ur  wird mithilfe des ASF  ein 12 Bit ADC  ausgelesen und
-von  diesen Werten  ein Moving  Average  erstellt.  Deshalb  kommt an  zweiter
-Stelle in der Endlosschleife ein Lesevorgang  auf dem ADC.  Dann wird mithilfe
+von  diesen Werten  ein Moving  Average  erstellt.  Dies wird regelmässig innerhalb des SysTick-Interrupts erledigt.  Dann wird mithilfe
 des sogenannten Cascaded Integrator–Comb Filters der aktuelle Moving Average
 berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
 %(TODO: ref to https://en.wikipedia.org/wiki/Cascaded_integrator%E2%80%93comb_filter)
@@ -77,14 +86,11 @@ berechnet. Die Formel~\ref{eq:hogenauer} zeigt gut wie dies berechnet wird.
     \end{split}
 \end{equation}
 
-Dieser Moving Average wird nun per UART verschickt.
-
 \subsubsection{Statusanzeige}
 \label{subs:Statusanzeige}
 
-Damit man  gut sieht  ob der  Sensor noch korrekt  leuchtet, kommt  an letzter
-Stelle der Endlosschleife noch ein simples Toggeln der LED, so dass man sieht,
-ob etwas nicht stimmt, falls es einmal nicht mehr toggeln sollte.
+Damit man  gut sieht  ob der  Sensor noch korrekt  funtioniert, wird im SysTick-Interrupt simples Toggeln der LED ausgeführt, so dass man sieht,
+ob etwas nicht stimmt, falls die LEDs einmal nicht mehr blinken sollten.
 
 \subsection{Open On Chip Debugger}
 

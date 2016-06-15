@@ -1,50 +1,57 @@
 # imports
-from sqlalchemy import MetaData, Column, Table, Integer, create_engine
-#todo nur debug - wieder rausnehmen
-import time
+from sqlalchemy import MetaData, Column, Table, Integer, Float, Boolean, create_engine
+from sqlalchemy.orm import mapper, create_session
 
-# Erstellen des Database-File
+# creates the database file
 db = create_engine('sqlite:///powerline.db')
 
-# Ausgaben unterdrücken
+# disables database outputs
 db.echo = False
 
-# Metadaten erstellen
+# creates metadata
 metadata = MetaData(bind=db)
 
-# Struktur des Panel-Tables definieren
-
+# defines structure of the panels table
 panels = Table('panels', metadata,
                Column('id', Integer, primary_key=True, autoincrement=True),
                Column('serialnumber', Integer),
-               Column('voltage', Integer),
+               Column('voltage', Float),
                Column('stringnumber', Integer),
-               Column('timestamp', Integer)
+               Column('timestamp', Integer),
+               Column('flag_watch', Boolean, default=False),
+               Column('flag_reported', Boolean, default=False)
                )
-insertp = panels.insert()
 
-# Alter Table löschen falls vorhanden todo(noch rausnehmen?)
-panels.drop(db, checkfirst=False)
+# creates panels table if there isn't a existing one
+panels.create(checkfirst=True)
 
-# Panel-Table erstellen
-panels.create()
-
-# Struktur des String-Tables definieren
-
+# defines structure of the strings table
 strings = Table('strings', metadata,
                 Column('id', Integer, primary_key=True, autoincrement=True),
                 Column('stringnumber', Integer),
-                Column('stringcurrent', Integer)
+                Column('stringcurrent', Integer),
+                Column('timestamp', Integer),
+                Column('flag_watch', Boolean, default=False),
+                Column('flag_reported', Boolean, default=False)
                 )
-inserts = strings.insert()
 
-# Alter Table löschen falls vorhanden todo(noch rausnehmen?)
-strings.drop(db, checkfirst=False)
-
-# String-Table erstellen
-strings.create()
+# creates strings table if there isn't a existing one
+strings.create(checkfirst=True)
 
 
-#todo nur zu debugzwecken
-insertp.execute(serialnumber=123456, voltage=30, stringnumber=4, timestamp=time.time())
-inserts.execute(stringnumber=27, stringcurrent=35)
+# creates the Panels class for object mapping
+class Panels(object):
+    pass
+
+
+# creates the Strings class for object mapping
+class Strings(object):
+    pass
+
+# creates the two mappers
+panelmapper = mapper(Panels, panels)
+stringmapper = mapper(Strings, strings)
+
+# creates the session
+session = create_session()
+

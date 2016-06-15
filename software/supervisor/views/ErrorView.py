@@ -33,4 +33,6 @@ class ErrorView(QWidget):
         self.ok_bt.move(150, 160)
 
     def set_serial_number(self, serial_number):
-        self.modul_nr_title_lb.setText('Modulnummer: \n' + str(hex(serial_number)) + '\n' + time.strftime('%d-%m-%Y %H:%M'))
+        t = time.strftime('%d-%m-%Y %H:%M')
+        self.modul_nr_title_lb.setText('Modulnummer: \n' + str(hex(serial_number)) + '\n' + t)
+        self.parent().parent().history_view.add_new_fault(serial_number, t)

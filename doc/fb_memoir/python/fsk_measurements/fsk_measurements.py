@@ -37,12 +37,12 @@ def open_csv_pc(csv, start, stop, scale_x, scale_y):
 
 plt.rc('text',usetex=True)
 plt.rc('font',family='serif',size=11)
-plt.rc('legend', fontsize=9)
-plt.rc('axes', labelsize=9, titlesize=11)
-plt.rc('xtick', labelsize=9)
-plt.rc('ytick', labelsize=9)
-plt.rc('savefig', transparent=True)
-plt.rc('lines', linewidth=0.5)
+plt.rc('legend',fontsize=9)
+plt.rc('axes',labelsize=9,titlesize=11)
+plt.rc('xtick',labelsize=9)
+plt.rc('ytick',labelsize=9)
+plt.rc('savefig',transparent=True)
+plt.rc('lines',linewidth=0.5)
 plt.rc('axes',linewidth=0.5)
 plt.rc('patch',linewidth=0.5) # For legend box line
 

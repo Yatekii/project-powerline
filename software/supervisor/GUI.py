@@ -9,7 +9,7 @@ from views import HomeView, ConfigurationView, ErrorView, HandyNbView, HistoryVi
 
 
 from reporter import Reporter
-
+from input_handler import InputHandler
 
 class MainWindow(QWidget):
     def __init__(self):

@@ -3,52 +3,63 @@
 \label{chap:einleitung}
 % **************************************************************************** %
 
-Photovoltaikanlagen   sind  heutzutage   kein   Nischenprodukt  mehr. Um   die
-Abh\"angigkeit vom Erd\"ol zu verringern,  werden vielerorts kleine, aber auch
-grosse  Anlagen gebaut. Die  W\"arme-Energie, welche  kostenlos von  der Sonne
-kommt, wird in elektrische Energie umgewandelt und kann gleich vor Ort genutzt
-werden. Anlagenbesitzer  investieren meistens  einen  grossen  Betrag in  eine
-neue  Anlage und  sind  darauf  angewiesen, dass  diese  den maximalen  Ertrag
-liefert. Das  ist  in  der  Regel  ohne  grossen  Aufwand  der  Fall. Doch  es
-gibt  Umst\"ande,  welche  die Effizienz  einer  Photovoltaikanlage  erheblich
-verringern  k\"onnen  und  dies  meist  ohne,  dass  es  jemand  bemerkt.   In
+In Zeiten der Energiewende  sind Photovoltaikanlagen kein Nischenprodukt mehr.
+Um die Abh\"angigkeit vom Erd\"ol  zu verringern, werden vielerorts Anlagen in
+allen Gr\"ossen gebaut;  von kleinen Anlagen f\"ur  Einfamilienh\"auser bis zu
+Anlagen,  welche  einem  normalen  Kraftwerk  in  Sachen  Leistung  die  Stirn
+bieten  kann.  Die  Sonnenstrahlung,  welche kostenlos  von  der Sonne  kommt,
+wird  in elektrische  Energie  umgewandelt  und kann  gleich  vor Ort  genutzt
+werden.   PV-Anlagen sind  teuer,  weshalb  Anlagenbesitzer darauf  angewiesen
+sind,  dass diese  den maximalen  Ertrag liefert. Das  ist in  der Regel  ohne
+grossen  Aufwand  der  Fall.   Doch  es gibt  Umst\"ande,  unter  welchen  die
+Effizienz  einer  Photovoltaikanlage  sich   erheblich  verringern  kann,  und
+h\"aufig wird dies  nicht oder nur mit bedeutender  Verz\"ogerung bemerkt.  In
 einer  Photovoltaikanlage werden  \"ublicherweise mehrere  PV-Module zu  einem
-String zusammengefasst, indem  sie in Serie geschaltet  werden. Dabei kann ein
-abgeschattetes,  verschmutztes  oder  gar  defektes  Modul  den  Strom  dieser
-Serieschaltung und somit auch die Leistung des gesamten Strings und der Anlage
-stark  beeintr\"achtigen. Was grosse  finanzielle  Einbussen  zur Folge  haben
-kann.
+String zusammengefasst, indem sie  in Serie geschaltet werden. Dabei reduziert
+ein abgeschattetes,  verschmutztes oder  gar defektes  Modul den  Strom dieser
+Serieschaltung  und  beeintr\"achtigt somit  auch  die  Leistung des  gesamten
+Strings und  der Anlage  stark beeintr\"achtigen. Dies hat  grosse finanzielle
+Einbussen zur Folge.
 
-Das Ziel  des Projektes P4  war es, ein PV-\"Uberwachungssystem  bestehend aus
-einer  Sensorplatine  f\"ur  den  Einbau  in  die  Anschlussbox  jedes  Moduls
-und  einem  zentralen Meldeger\"at  f\"ur  den  Einbau im  Schaltschrank  beim
-Wechselrichter zu entwickeln, aufzubauen und zu testen. Die Sensorplatine soll
-die Spannung  des jeweiligen  PV-Modules messen und  sie an  das Masterger\"at
-\"uber die  bestehende DC-Leitung  der Anlage  \"ubermitteln. Im Masterger\"at
-werden  die  gemessenen Spannungen  der  einzelnen  PV-Module gespeichert  und
-ausgewertet. Erkennt das  Masterger\"at ein  fehlerhaftes PV-Modul,  soll eine
-Alarmierung am Ger\"at selbst und per SMS ausgegeben werden. Zus\"atzlich wird
-ein Relais zur externen Signalisation bet\"atigt.  Das System soll m\"oglichst
-energieeffizient  und kosteng\"unstig  sein, um  die wirtschaftlichkeit  einer
-Photovoltaikanlage nicht zu verschlechtern.
+Das Ziel des  Projektes P4 ist es, ein  PV-\"Uberwachungssystem zu entwickeln,
+um bei  Szenarien wie dem  oben geschilderten Abhilfe zu  schaffen. Das System
+soll aus  einer Sensorplatine  und einem zentralen  Meldeger\"at bestehen. Die
+Sensorplatine wird  beim PV-Modul  eingebaut und \"uberwacht  dessen Spannung,
+das   zentrale  Meldeger\"at   wird  im   Schaltschrank  beim   Wechselrichter
+eingebaut. Die Kommunikation  zwischen den  beiden Komponenten  erfolgt \"uber
+die  zur  Energie\"ubertragung  benutzte  DC-Leitung;  es  werden  also  keine
+zus\"atzlichen Datenleitungen ben\"otigt.
 
-Das Hauptproblem liegt  bei der Signal\"ubertragung \"uber  die DC-Leitung der
-Photovoltaikanlage. Denn die Spannung darauf schwankt  zwischen 12 und 60 Volt
-an  der Sensorplatine  und betr\"agt  am Masterger\"at  bis zu  1000 Volt. Auf
-dieser Leitung  ein Signal zu  \"ubertragen ist schwierig und  wird heutzutage
-kaum gemacht.   Zudem muss auf  kleine Leistung beim gesamten  System geachtet
-werden, um keine wertfolle Energie zu verschwenden.
+Das Master-Ger\"at wertet die gemessenen  Spannungen der Module aus und l\"ost
+beim Erkennen eines  fehlerhaften Moduls einen Alarm am  Ger\"at selbst, lokal
+in der PV-Anlage via Relais (z.B. Sirene oder Warnlampe) und per SMS aus.  Das
+System  soll m\"oglichst  energieeffizient  und kosteng\"unstig  sein, um  die
+Wirtschaftlichkeit einer Photovoltaikanlage nicht zu verschlechtern.
 
-Anhand zahlreicher  Simulationen, L\"osungsentw\"urfen  und Tests,  konnte ein
-System  entwickelt werden,  das  allen Anforderungen  an  den Auftrag  gerecht
-wird. Mit  dem  Master-Ger\"at  als  zentrales  Gehirn  des  Systems  und  den
-Sensoren  als \"Uberwachungskomponente  der  einzelnen  PV-Modulen, wurde  ein
-\"Uberwachungssystem  konzipiert,   das  problemlos  in  neue,   wie  auch  in
-bestehende Photovoltaikanlagen eingebaut werden kann.
+Das  Hauptproblem  eines solchen  Systems  liegt  bei der  Signal\"ubertragung
+\"uber  die  DC-Leitung  der   Photovoltaikanlage. Denn  die  Spannung  darauf
+schwankt  zwischen 12  und  60  Volt an  der  Sensorplatine  und betr\"agt  am
+Masterger\"at bis zu 1000 Volt. Auf  dieser Leitung ein Signal zu \"ubertragen
+ist schwierig  und wird heutzutage  kaum gemacht. Unsere L\"osung  koppelt mit
+einer Spule  und dem Effekt  der Induktivit\"at  ein Signal in  die DC-Leitung
+ein, was uns das \"Ubertragen von  Daten erlaubt. Die Spule wird von einem auf
+dem  Sensor  platzierten Mikrocontroller  gesteuert,  der  die Spannung  misst
+und  die  Messdaten  zum  Versenden  vorbereitet. Das  Master-Ger\"at  besitzt
+eine  grafische  Benutzeroberfl\"ache zur  Interaktion  mit  dem Benutzer  und
+benutzt  eine Datenbank  zum Verwalten  der Messdaten.   Zudem ist  das System
+darauf optimiert, m\"oglichst  wenig Leistung zu verbrauchen,  um nicht selbst
+bedeutende Zusatzkosten im Betrieb zu verursachen.
 
-
-Der vorliegende  Bericht stellt  die technische Dokumentation  unseres Systems
-dar.  Zuerst wird das Konzept unserer L\"osung beschrieben, zusammen mit einer
-Benutzerf\"uhrung.  Anschliessend  wird auf  das Hardware-  und Firmwaredesign
-eingegangen,  und   zuletzt  werden  die  am   System  durchgef\"uhrten  Tests
-dokumentiert.
+Der   vorliegende  Bericht   stellt  die   technische  Dokumentation   unseres
+Systems     dar. Das    Kapitel     \emph{\titleref{chap:uberblick}}    bietet
+eine    \"Ubersicht    der    Thematik,   anschliessend    werden    in    den
+Kapiteln    \emph{\titleref{chap:models}}   und    \emph{\titleref{chap:simu}}
+verschiedene     verfolgte    L\"osungsvarianten     modelliert    und     mit
+Simulationen  in  \code{LTspice}   untersucht. Die  schlussendlich  gew\"ahlte
+L\"osung   mit    induktiver   Kopplung   ist   in    den   darauf   folgenden
+Kapiteln  \emph{\titleref{chap:hardware}} und  \emph{\titleref{chap:software}}
+dokumentiert.   Im   Kapitel  \emph{\titleref{chap:validierung}}   werden  das
+entwickelte  System   und  seine   Komponenten  mit   Labormessungen  kritisch
+untersucht, um letztlich  im \emph{\titleref{chap:fazit}} unseren Gesamterfolg
+zu beurteilen und auch  Empfehlungen f\"ur zuk\"unftige Weiterentwicklungen zu
+geben.

@@ -75,21 +75,6 @@
             minimum width=33mm,
             minimum height=33mm,
         ] {F\"ur mich?};
-        \node (getADC) [
-            proc,
-            below=of newUART,
-            align=center,
-        ] {ADC-Messung\\ausf\"uhren};
-        \node (movAvg) [
-            proc,
-            below=of getADC,
-            align=center,
-        ] {Moving\\Average\\berechnen};
-        \node (LED) [
-            proc,
-            left=of movAvg,
-            align=center,
-        ] {LED\\blinken\\lassen};
         \node (package) [
             proc,
             right=of forMe,
@@ -102,34 +87,50 @@
         ] {CRC brechnen\\und zu Daten\\hinzuf\"ugen};
         \node (send) [
             proc,
-            below=of crc,
+            left=of crc,
             align=center,
         ] {Datenpaket\\senden};
-        \node (converge) [
-            circle,
-            fill=solarized-base03,
-            inner sep=1pt,
-            right=30mm of getADC,
-        ] { };
+        \node (getADC) [
+            proc,
+            below=of send,
+            align=center,
+        ] {ADC-Messung\\ausf\"uhren};
+        \node (movAvg) [
+            proc,
+            below right=of getADC,
+            align=center,
+        ] {Moving\\Average\\berechnen};
+        \node (LED) [
+            proc,
+            below left=of movAvg,
+            align=center,
+        ] {LED\\blinken\\lassen};
+        \node (systick) [
+            proc,
+            above left=of LED,
+            align=center,
+        ] {auf n\"achsten\\\texttt{systick} warten};
     \end{scope}
 
     \begin{scope}[
-        %every node/.style={ },
             rounded corners,
             every path/.append style={draw=solarized-base03,},
+            >=latex',
     ]
         \draw[-latex] (init) -- (newUART);
         \draw[-latex] (newUART) -- node[midway,anchor=south] {ja} (forMe);
-        \draw[-latex] (newUART) -- node[midway,anchor=east] {nein} (getADC);
-        \draw[-latex] (getADC) -- (movAvg);
-        \draw[-latex] (movAvg) -- (LED);
         \draw[-latex] (forMe) -- node[midway,anchor=south] {ja} (package);
         \draw[-latex] (package) -- (crc);
         \draw[-latex] (crc) -- (send);
-        \draw[-latex] (forMe) -- node[midway,anchor=east] {nein} (converge);
-        \draw[-latex] (send) -| (converge);
-        \draw[-latex] (converge) -- (getADC);
-        \draw[-latex] (LED) |- (newUART);
+        \draw[-latex] (forMe) edge[bend left] node[midway,anchor=north] {nein} (newUART);
+        \draw[-latex] (send) edge[bend left] (newUART);
+        \draw (newUART) edge[loop below]  node {nein} (newUART);
+
+        \draw[-latex] (getADC) edge[bend left] (movAvg);
+        \draw[-latex] (movAvg) edge[bend left] (LED);
+        \draw[-latex] (LED) edge[bend left] (systick);
+        \draw[-latex] (systick) edge[bend left] (getADC);
+
     \end{scope}
 
 \end{tikzpicture}

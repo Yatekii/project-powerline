@@ -2,48 +2,32 @@
 \chapter*{Abstract}
 \label{chap:abstract}
 % **************************************************************************** %
+\enlargethispage{2em}
 
-\emph{Note: I have  added headings  for the five  sections of  the ``abstract
-hand'' to  highlight my thinking process;  obviously those will be  removed in
-the final version.}
+This project's  aim was to develop  a system for real-time  monitoring of each
+panel  of a  photovoltaic facility.   The  system must  be cost-effective  and
+should scale  from small single-household solutions  to large industrial-scale
+solar  farms. Panels which  are not  operating at  full capacity  for whatever
+reason (dirt, shade,  defects) must be detected and the  user informed so that
+appropriate measures (cleaning, replacement) can be taken.
 
-\vspace{2em}
-\textbf{Research Question: What does the client expect?}\\
-This  project's aim  was  to  develop a  system  for  real-time monitoring  of
-photovoltaic  facilities on  the level  of single  panels. The system  must be
-cost-effective and should scale from small single-household solutions to large
-industrial-scale solar farms. Panels which are  not operating at full capacity
-for whatever reason  (dirt, shade, defects) must be detected  and announced to
-the user so that appropriate measures (cleaning, replacement) can be taken.
+Monitoring  of  the  individual  photovoltaic modules  allows  the  facility's
+operator to  optimally run  their solar  plant, thus  reducing losses  in both
+power output and profit.
 
-\textbf{Relevance}\\
-Monitoring individual photovoltaic modules  will allow the facility's operator
-to run  their solar farm at  optimal conditions, thus reducing  losses in both
-power output and money.
-
-\textbf{Background}\\
 Current solutions for per-module monitoring  of solar facilities are expensive
-and are  therefore often  foregone in  order to save  costs when  building new
-facilities. This approach is short-sighted and more expensive in the long term
-because not being able  to properly monitor a solar facility  means that it is
-often not operating at optimal  conditions. As non-renewable sources of energy
-such  as fossil  fuels  and nuclear  power are  losing  ground to  alternative
-sources of  energy such  as wind and  solar power, the  overall losses  in the
-energy industry of power and money  incurred due to insufficient monitoring of
-solar facilities will become unsustainable.
+and often left  out to save costs.   As alternative sources of  energy such as
+wind and  solar power  grow in  importance, the overall  losses in  the energy
+industry of power  and money incurred due to insufficient  monitoring of solar
+facilities will become unsustainable.
 
-\textbf{Method}\\
-Our  system consists  of  two primary  components: A  controller is  installed
-centrally  near  the  inverter. Additionally,  a sensor  is  mounted  on  each
-photovoltaic  panel.  Communication  between  the sensors  and  the master  is
-routed  through the  direct  current power  transmission  line; no  additional
-wiring is needed. A  coil is used to  couple the signal to  the power line. In
-case  of  an  error (e.g.  a  dirty  panel),  a  text  message is  sent  to  a
-user-configurable phone  number. Additionally, local alarms such  as sirens or
-warning lights  can be connected  to our system  and are triggered  whenever a
-text message is sent.
+Our  system  has  two  primary components: A  controller  which  is  installed
+centrally  near  the  inverter  and  a  sensor  on  each  photovoltaic  panel.
+Communication between the sensors and the  master is routed through the direct
+current power  transmission line;  no additional wiring  is needed. A  coil is
+used to couple the signal to the power line. In case of an error (e.g. a dirty
+panel), an error message is sent to a user-configurable phone number.
 
-\textbf{Results}\\
 Simulations for  various coupling methods  for a string  of 20 PV  panels have
 been performed. Inductive  coupling at  non-resonance conditions results  in a
 signal  level  of roughly  \SI{6}{\milli\volt}  peak-to-peak  at the  receiver
@@ -52,25 +36,13 @@ improved peak-to-peak  voltage of \SI{250}{\milli\volt} at  the receiver (also
 without amplification), which is sufficient for our purposes.
 
 A  frequency sweep  for  the coupling  coil has  been  measured and  inductive
-behavior up to  \SI{20}{\mega\hertz} verified, thus ensuring that  the coil we
-have  picked is  suitable for  our uses  and  allows the  of a  vast range  of
-frequencies as  needed. The system can  therefore adapt to conditions  in each
-specific setup.
+behavior up to  \SI{20}{\mega\hertz} verified, thus ensuring that  the coil is
+adaptable enough to allow the use of a vast range of frequencies as needed.
 
-\vspace{1em}
-\emph{Question: How negative  should we  go in  the paragraph  below? We don't
-exactly  want to  sound like  depressed failures,  but then  again, facts  are
-facts, and things  just aren't working properly. Should we  also add something
-about how  we would proceed if  we had the time  or is this not  the place for
-that?}
-
-\vspace{1em}
-The system  in its  entirety is  at this  point not  operational. The sensor's
-components  do not  yet  work perfectly  in unison;  error  analysis is  still
-ongoing. The printed circuit board for the  master device is not available due
-to an issue with the  manufacturer when ordering. However, development for the
-master's software is mostly completed.  A functioning graphical user interface
-has been implemented and a database to which it connects is functional.
+The system's components have been implemented. A  signal can be coupled to the
+DC transmission line  and the sensor can perform  correct voltage measurements
+and return that  data. Both the graphical user interface on  the master device
+and its database back-end are functioning.
 
 \vspace{2em}
 \textbf{Key  words:}  photovoltaic  technology,  photovoltaic  module,  remote

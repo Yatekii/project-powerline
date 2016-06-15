@@ -26,7 +26,7 @@ void configure_adc(void)
 int read_adc_data(uint16_t* result){
   adc_start_conversion(&adc_instance);
   do {
-    /* Wait for conversion to be done and read out result */
+    // Wait for conversion to be done and read out result
   } while (adc_read(&adc_instance, result) == STATUS_BUSY);
   return 0;
 }

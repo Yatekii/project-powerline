@@ -68,6 +68,8 @@ int main(void){
   // Set buffer size to 0 since no data is in it at the start
   buffer.length = 0;
 
+  // TODO: reset self if UART stops sending data for a longer period of time
+
   // main loop
   while (1){
     // Try reading commands from the UART
@@ -105,7 +107,7 @@ int main(void){
 
             // check if send good data (sgd) command was received
             // do stuff if it matches
-            if(strncmp(buffer.buffer + 4 + 1, send_good_data, 3)){
+            else if(strncmp(buffer.buffer + 4 + 1, send_good_data, 3)){
 
               uint16_t real_adc_value = 60;
               usart_write_buffer_wait(&usart_instance, &zero, 1);
@@ -116,7 +118,7 @@ int main(void){
 
             // check if send faulty data (sfd) command was received
             // do stuff if it matches
-            if(strncmp(buffer.buffer + 4 + 1, send_faulty_data, 3)){
+            else if(strncmp(buffer.buffer + 4 + 1, send_faulty_data, 3)){
               uint16_t real_adc_value = 40;
               usart_write_buffer_wait(&usart_instance, &zero, 1);
               usart_write_buffer_wait(&usart_instance, (char *)&id, 4);

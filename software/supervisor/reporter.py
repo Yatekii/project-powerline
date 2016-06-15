@@ -26,7 +26,7 @@ class Reporter(threading.Thread):
         self.report_callback = callback
 
     def emmit_error(self):
-        self.report_callback()
+        self.report_callback(0xcafebabe)
 
     def run(self):
         self.running = True

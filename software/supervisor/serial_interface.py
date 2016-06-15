@@ -2,18 +2,21 @@ import serial
 import struct
 import time
 
-sensor_id = 0xdeadbeef
 
 class SerialInterface():
 
-    def __init__(self, wait_timeout):
+
+    def __init__(self, wait_timeout, real_sensor_id):
         self.wait_timeout = wait_timeout
+        self.real_sensor_id = real_sensor_id
         self.ser = serial.Serial('/dev/tty.usbserial-A9X2VVZC', 9600, timeout=5)
 
     def read(self):
         return self.ser.read()
 
     def wait_for_voltage(self, sensor_id):
+        if self.real_sensor_id != sensor_id:
+            return 60
         data = b''
         message = b''
         message += struct.pack('B', 0)
@@ -21,14 +24,14 @@ class SerialInterface():
         t1 = time.time()
         while time.time() - t1 < self.wait_timeout:
             char = self.ser.read()
-            print(char)
             if char == b'\r':
                 if len(data) == 7 and data[:5] == message:
                     voltage = struct.unpack('H', data[5:7])
                     return voltage[0]
             else:
+                print(char)
                 data += char
-        return None
+        return 0
 
     # Get actual voltage
     def send_read(self, sensor_id):
@@ -49,7 +52,6 @@ class SerialInterface():
         message += b'\r'
         self.ser.write(message)
         print('Get bad data')
-        print(message)
 
     # Get fake data as if module works
     def request_good_fake_data(self, sensor_id):
@@ -61,14 +63,14 @@ class SerialInterface():
         self.ser.write(message)
         print('Get good data')
 
-interface = SerialInterface(100)
-
-interface.request_good_fake_data(sensor_id)
-voltage = interface.wait_for_voltage(sensor_id)
-if voltage != None:
-    print(voltage)
-time.sleep(1)
-interface.request_bad_fake_data(sensor_id)
-voltage = interface.wait_for_voltage(sensor_id)
-if voltage != None:
-    print(voltage)
+# interface = SerialInterface(3, 0xdeadbeef)
+# sensor_id = 0xdeadbeef
+# interface.request_good_fake_data(sensor_id)
+# voltage = interface.wait_for_voltage(sensor_id)
+# if voltage != None:
+#     print(voltage)
+# time.sleep(1)
+# interface.request_bad_fake_data(sensor_id)
+# voltage = interface.wait_for_voltage(sensor_id)
+# if voltage != None:
+#     print(voltage)

@@ -5,12 +5,16 @@ from database import session, Strings, strings, String1, string1, String2, strin
 import time
 # import quick2wire.i2c as i2c
 import serial_interface
+import threading
 
-class InputHandler:
+class InputHandler(threading.Thread):
 
     def __init__(self):
+        threading.Thread.__init__(self)
         # 3 seconds read timeout for now
-        self.tty = serial_interface.SerialInterface(3)
+        self.tty = serial_interface.SerialInterface(3, 0xdeadbeef)
+        # Issue a call for faulty data after 10 samples; just for simulation purpose
+        self.counter = 5
 
     # function to write a database-item into the strings table
     def write_string_into_database(self, strnumber, strcurrent):
@@ -21,7 +25,6 @@ class InputHandler:
         session.add(newcurrent)
         session.flush()
 
-
     # function to write a database-item into the panles table
     def write_panel_into_database(self, serialnumber, stringnumber, voltage):
         newvoltage = Panels()
@@ -31,16 +34,9 @@ class InputHandler:
         newvoltage.timestamp = time.time()
         session.add(newvoltage)
         session.flush()
-        #todo überprüfen ob sn in stringsx table schon vorhanden falls nicht reinschreiben
-
+        #TODO: überprüfen ob sn in stringsx table schon vorhanden falls nicht reinschreiben
 
     # function to wirte a database item into the string1 table
-    def write_string1_into_database(self, serialnumber):
-        newstringitem = String1()
-        newstringitem.serialnumber = serialnumber
-        session.add(newstringitem)
-        session.flush()
-
 
     # function to wirte a database item into the string2 table
     def write_string2_into_database(self, serialnumber):
@@ -49,14 +45,12 @@ class InputHandler:
         session.add(newstringitem)
         session.flush()
 
-
     # function to wirte a database item into the string3 table
     def write_string3_into_database(self, serialnumber):
         newstringitem = String3()
         newstringitem.serialnumber = serialnumber
         session.add(newstringitem)
         session.flush()
-
 
     # # function to get the current-values of a string
     # def read_stringcurrents_i2c(self, stringnumber):
@@ -142,51 +136,72 @@ class InputHandler:
         strings.append(session.query(String1).all())
         strings.append(session.query(String2).all())
         strings.append(session.query(String3).all())
-        print(strings)
+
+        # Only for simulation purposes
+        if self.counter > 0:
+            self.counter -= 1;
+        else:
+            self.counter = 5
 
         for string_id, string in enumerate(strings):
             if string:
                 for item in string:
                     # TODO: change back to i2c; UART only for testing purposes
                     # (sn, voltage) = read_modulevoltage_i2c(1, item.serialnumber)
+                    if self.counter > 0:
+                        self.tty.request_good_fake_data(item.serialnumber)
+                    else:
+                        self.tty.request_bad_fake_data(item.serialnumber)
                     voltage = self.tty.wait_for_voltage(item.serialnumber)
                     # TODO: voltage in richtiges format anpassen
                     # TODO: timer auf antwort warten (wie realisieren)
-                    if voltage == 0: #todo muss noch angepasst werden
-                    # TODO: if keine antwort
-                        historycheck = session.query(Panels).filter((panels.c.serialnumber == item.serialnumber) & (panels.c.timestamp > (time.time() - 24*60*60))).all()
-                        if len(historycheck)==0:
-                            # TODO: melden auslösen
-                            pass #zu testzwecken - wieder rausnehmen
-                        else:
-                            pass
-                    # TODO: else antwort kommt
-                    else:
-                        self.write_panel_into_database(item.serialnumber, string_id, voltage)
+                    # if voltage == 0: #TODO: muss noch angepasst werden
+                    # # TODO: if keine antwort
+                    #     historycheck = session.query(Panels).filter((panels.c.serialnumber == item.serialnumber) & (panels.c.timestamp > (time.time() - 24*60*60))).all()
+                    #     if len(historycheck)==0:
+                    #         # TODO: melden auslösen
+                    #         pass #zu testzwecken - wieder rausnehmen
+                    #     else:
+                    #         pass
+                    # # TODO: else antwort kommt
+                    # else:
+                    self.write_panel_into_database(item.serialnumber, string_id + 1, voltage)
 
                 latestlogs = []
                 values = []
                 for panel in string:
-                    print(panel.serialnumber)
                     result = session.query(Panels).filter(panels.c.serialnumber == panel.serialnumber).order_by(panels.c.timestamp.desc()).first()
                     latestlogs.append(result)
                     values.append(result.voltage)
-                print(values)
                 avg_value = sum(values) / len(values)
                 for log in latestlogs:
                     deviation = avg_value - log.voltage
                     log.deviation = deviation
                     # TODO: remove this ugly demo patch as it just instantly faults an isse when a module drops significantly (could be a 2sec shadow)
-                    if(abs(deviation) > 0.2 * avg_value):
-                        issue_fault(log.serialnumber)
+                    if(deviation > 0.2 * avg_value):
+                        self.issue_fault(log.serialnumber)
                     session.flush()
 
     def issue_fault(self, serial_number):
-        pass
+        print('FAULT DETECTED', serial_number)
+        self.fault_callback(serial_number)
+
+    def set_fault_callback(self, callback):
+        self.fault_callback = callback
+
+    def stop(self):
+        self.running = False
+
+    def run(self):
+        self.running = True
+        while self.running:
+            self.modulevoltage_request()
+            #Wait for 3 Secs, then issue new sample
+            time.sleep(3)
 
 # TODO: main sequence:
 # stringcurrents_request()
 # string_compare()
-input_handler = InputHandler()
-#input_handler.write_string1_into_database(0xdeadbeef)
-input_handler.modulevoltage_request()
+# input_handler.write_string1_into_database(0xdeadbeef)
+# input_handler.write_string1_into_database(0xcafebabe)
+# input_handler.write_string1_into_database(0xbadeaffe)

@@ -228,6 +228,15 @@ aktiviert)  quittiert  und das  Hauptmen\"u  wird  wieder angezeigt. Das  Feld
 Zeitpunkt aufgetretenen  Modulfehler. Jeweils wird  die Modulnummer,  die Zeit
 und das Datum in einer Zeile angezeigt.
 
+Die Benutzeroberfläche wurde in PyQt5 implementiert. PyQt5 basiert auf Qt5 welches eine sehr verbreitete Library für GUI-Oberflächen ist. Dadurch ist sie extrem feature-reich und bringt alles mit was die Benutzeroberfläche braucht.
+
+In Qt5 gibt es das sogenante MainWindow, welches alle weiteren Code-Teile unter sich bündelt. So werden zum beispiel auch separate Threads wie die Schnittstelle zur UART darüber gesteuert.
+
+Das GUI besteht aus meheren Views in Form vom QWidgets welche mit einem QStackedWidget gruppiert und angezeigt werden. Das QStackedWidget erlaubt es in einem bestimmten Viewport zwischen verschiedenen QWidgets und somit verschiedenen Ansichten zu wechseln.
+
+Um einen Fehler anzuzeigen wird die ErrorView im QStackedWidget selektiet. Zudem werden die Parameter zum fehlerhaften Modul übergeben und angezeigt.
+
+Über Callbacks können Prozesse ausserhalb des GUIs angestossen und kontrolliert werden.
 
 % ---------------------------------------------------------------------------- %
 \subsection{Datenbank}
@@ -324,4 +333,3 @@ und das Datum in einer Zeile angezeigt.
 \subsection{Funktionen}
 \label{subsec:software:master:functions}
 % ---------------------------------------------------------------------------- %
-

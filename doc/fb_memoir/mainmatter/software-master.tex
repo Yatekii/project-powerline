@@ -15,9 +15,9 @@ Software-Stacks und die Funktionsprinzipien dokumentiert.
 % ---------------------------------------------------------------------------- %
 
 Als Betriebssystem kommt Raspbian zum  Einsatz. Raspbian ist eine Variante von
-Debian-Linux mit  einigen Erweiterungen,  welche das  System auf  einem \Raspi
+Debian-Linux mit  einigen Erweiterungen, welche  das System auf  einem \Raspi~
 lauff\"ahig machen. Als  graphische Oberfl\"ache wird LXDE  benutzt, aufbauend
-auf  X11. Die wichtigsten  Komponenten  des gesamten  Software-Stackn sind  in
+auf  X11. Die wichtigsten  Komponenten  des gesamten  Software-Stacks sind  in
 Abbildung \ref{fig:softwarestack} dargestellt.
 
 Die  Funktionalit\"at  unserer  Software  wird  mit  einigen  Python-Libraries
@@ -74,7 +74,7 @@ Aufgaben in einer \"Ubersicht auf.
 Bei    der   Auswahl    von    Drittsoftware   wird    auf   die    jeweiligen
 Lizenzbedingungen   geachtet,   um   keine   Konflikte   zu   verursachen. Die
 wichtigsten  drei Lizenz-Bereiche  und ihre  Charakteristiken sind  in Tabelle
-\ref{tab:lincenseAreas} aufgef\"uhrt.
+\ref{tab:licenseAreas} aufgef\"uhrt.
 
 \begin{table}[h!tb]
     \centering
@@ -142,7 +142,7 @@ kann als Bestandteil des Produkts verkauft werden.
 
 
 Die  Mastersoftware  ist in  mehrere  Threads  gegliedert, unter  welchen  die
-Funktionen aufgeteild  sind. Sie werden alle von  einem Hauptthread gestartet,
+Funktionen aufgeteilt  sind. Sie werden alle von  einem Hauptthread gestartet,
 welcher die Koordination mittels Semaphoren \"ubernimmt. Dazu initialisiert er
 alle  Resourcen,  auf  welche  aus  mehreren  Threads  zugegriffen  sind. Dies
 sind  Datenbank und  Logging-System, welche  beide Multithreading  beherrschen
@@ -150,26 +150,24 @@ und  threadsafe  sind. Die zentrale  Koordination  bedeutet  zudem, dass  alle
 Arbeitsschritte nur sofern n\"otig und nicht mit veralteten Daten ausgef\"uhrt
 werden.
 
-Um  die Threadsicherheit  zu  gew\"ahrleisten verwenden  die beiden  geteilten
+Um  die Threadsicherheit  zu  gew\"ahrleisten, verwenden  die beiden  geteilten
 Resourcen spezielle Mechanismen:
 \begin{itemize}
     \tightlist
     \item
-        Die   Loggingfunktion   setzt  eine   Queue   eim   um  Meldungen   zu
+        Die   Loggingfunktion  setzt   eine   Queue  ein,   um  Meldungen   zu
         zwischenzuspeichern und asynchron hintereinander abzuarbeiten.
      \item
-        SQLAlchemy  beinhaltet   mit  der  "ScopedSession"  eine   Methode  um
+        SQLAlchemy beinhaltet  mit der  \emph{ScopedSession} eine  Methode, um
         aus  mehreren  Threads  parallel  aufgerufen  zu  werden. Dazu  werden
         die  Anfragen  aus jeweils  einem  Thread  gruppiert und  dann  atomar
         ausgef\"uhrt.
  \end{itemize}
 
-Alle anderen  externen Ressourcen, dies  sind \ISC-bus, UART und  GPIO, werden
-jeweils  von  nur einem  Thread  genutzt,  wodurch keine  Konflikte  auftreten
-k\"onnen.
+Alle anderen externen Ressourcen (\ISC-bus,  UART und GPIO) werden jeweils von
+nur einem Thread genutzt, wodurch keine Konflikte auftreten k\"onnen.
 
 Im Detail sieht die Aufgabenteilung folgendermassen aus:
-
 \begin{itemize}
     \tightlist
     \item
@@ -199,57 +197,67 @@ Im Detail sieht die Aufgabenteilung folgendermassen aus:
 \label{subsec:software:master:GUI}
 % ---------------------------------------------------------------------------- %
 
-\todo{unterliegender aufbau statt benutzerf\"uhrung?}
-Die Benutzeroberfl\"ache wurde bewusst sehr schlicht gehalten. Sie besteht aus
-folgenden  Ansichten: Hauptmen\"u,  Einstellungen, Eingabe  der  Telefonnummer
-und   dem   Fehlerverlauf. Im   regul\"aren  Betrieb   ist   das   Hauptmen\"u
-ersichtlich. Es  informiert  \"uber  den  Anlagestatus  sowie  den  gemessenen
-Strom  der Str\"ange. Vom  Hauptmen\"u  aus kann  durch  dr\"ucken des  Feldes
-\emph{Einstellungen} zu den Einstellungen gelangt werden. In den Einstellungen
-k\"onnen die  Relaiskontakte 1  und 2  aktiviert oder  deaktiviert werden. Sie
-dienen  zur Bet\"atigung  einer externen  Signalisation im  Fehlerfall. Weiter
-kann   die  SMS   Benachrichtigung   ebenfalls   aktiviert  oder   deaktiviert
-werden. Durch  bet\"atigen  des  Feldes  \emph{Speichern}  wird  die  aktuelle
-Auswahl  gespeichert. Falls  die  SMS Benachrichtigung  gew\"ahlt  wird,  muss
-eine  g\"ultige Telefonnummer  hinterlegt werden.   Die Ansicht  Eingabe einer
-Telefonnummer  wird vom  Feld \emph{Telefonnr.  hinzuf\"ugen} aufgerufen. Nach
-der  Eingabe  einer  g\"ultigen  Nummer,  wird  mittels  \emph{Speichern}  die
-Telefonnummer  gespeichert und  es kann  mit dem  Feld \emph{Zur\"uck}  zu den
-Einstellungen  zur\"uckgekehrt  werden. Diese  Ansichten sind  im  regul\"aren
-Betrieb ersichtlich und k\"onnen nach Belieben eingestellt werden.
 
-Folgend werden  die St\"orbetrieb Ansichten erl\"autert. Wird  ein Modulfehler
-erkannt,  signalisiert   dies  die  Ansicht  \emph{Modulfeher}. Es   wird  die
-Modulseriennummer und die Zeit mit Datum angezeigt. Damit ist es m\"oglich ein
-fehlerhaftes Modul zu erkennen  und entsprechend zu handeln. Durch bet\"atigen
-des  Feldes  \emph{OK} wird  der  externe  Alarm der  Relais  1  und 2  (falls
-aktiviert)  quittiert  und das  Hauptmen\"u  wird  wieder angezeigt. Das  Feld
-\emph{Fehlerverlauf}  f\"uhrt  zu  einer   \"Ubersicht  aller  bis  zu  diesem
-Zeitpunkt aufgetretenen  Modulfehler. Jeweils wird  die Modulnummer,  die Zeit
-und das Datum in einer Zeile angezeigt.
-
-Die Benutzeroberfl\"ache  wurde in PyQt5 implementiert. PyQt5  basiert auf Qt5
+Die Benutzeroberfl\"ache  ist in  PyQt5 implementiert. PyQt5 basiert  auf Qt5,
 welches eine sehr verbreitete Library f\"ur GUI-Oberfl\"achen ist. Dadurch ist
 sie extrem  feature-reich und  bringt alles  mit was  die Benutzeroberfl\"ache
 braucht.
 
-In  Qt5 gibt  es das  sogenante MainWindow,  welches alle  weiteren Code-Teile
-unter sich  b\"undelt. So werden  zum beispiel auch  separate Threads  wie die
-Schnittstelle zur UART dar\"uber gesteuert.
+In  Qt5  gibt  es  das  sogenante  \code{MainWindow},  welches  alle  weiteren
+Code-Teile unter sich b\"undelt. So werden  zum Beispiel auch separate Threads
+wie die Schnittstelle zur UART dar\"uber gesteuert.
 
-Das  GUI besteht  aus meheren  Views  in Form  vom QWidgets  welche mit  einem
-QStackedWidget gruppiert  und angezeigt werden. Das QStackedWidget  erlaubt es
-in  einem  bestimmten  Viewport  zwischen  verschiedenen  QWidgets  und  somit
-verschiedenen Ansichten zu wechseln.
+Das  GUI  besteht  aus  meheren  Views in  Form  vom  \code{QWidgets},  welche
+mit   einem   \code{QStackedWidget}   gruppiert  und   angezeigt   werden. Das
+\code{QStackedWidget}  erlaubt  es,  in  einem  bestimmten  Viewport  zwischen
+verschiedenen \code{QWidgets} und somit verschiedenen Ansichten zu wechseln.
 
-Um   einen   Fehler   anzuzeigen   wird  die   ErrorView   im   QStackedWidget
+Um einen Fehler anzuzeigen, wird die \code{ErrorView} im \code{QStackedWidget}
 selektiet. Zudem werden  die Parameter zum fehlerhaften  Modul \"ubergeben und
 angezeigt.
 
 \"Uber  Callbacks  k\"onnen  Prozesse  ausserhalb  des  GUIs  angestossen  und
 kontrolliert werden.
 
+\clearpage
+\begin{wrapfigure}{r}{0.45\textwidth}
+    \includegraphics[width=0.45\textwidth]{images/userguide/screen0.jpg}
+    \caption{Hauptmenu}
+    \label{fig:software:gui:screen0}
+\end{wrapfigure}
+
+Die Benutzeroberfl\"ache  ist bewusst sehr schlicht  gehalten. Sie besteht aus
+folgenden Ansichten: Hauptmen\"u, Einstellungen, Eingabe der Telefonnummer und
+dem Fehlerverlauf,  gezeigt in den  Abbildungej \ref{fig:software:gui:screen0}
+bis     \ref{fig:software:gui:screen4}. Die     Beschreibung    der     vollen
+Funktionalit\"at  ist  im  Kapitel \emph{\titleref{chap:userguide}}  ab  Seite
+\pageref{chap:userguide} zu finden.
+
+\vspace*{6em}
+\noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+    \includegraphics[width=\textwidth]{images/userguide/screen1.jpg}
+    \figcaption[Master: Menu: Einstellungen]{Einstellungen}
+    \label{fig:software:gui:screen1}
+\end{minipage}}
+\noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+    \includegraphics[width=\textwidth]{images/userguide/screen2.jpg}
+    \figcaption[Master: Menu: Einstellungen: Telefonnummer]{Eingabe einer Telefonnummer}
+    \label{fig:software:gui:screen2}
+\end{minipage}}
+
+\noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+    \includegraphics[width=\textwidth]{images/userguide/screen3.png}
+    \figcaption[Master: Menu: Modulfehler]{Fehler bei einem Modul}
+    \label{fig:software:gui:screen3}
+\end{minipage}}
+\noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
+    \includegraphics[width=\textwidth]{images/userguide/screen4.jpg}
+    \figcaption[Master: Menu: Einstellungen: History]{Fehler-History der Anlage}
+    \label{fig:software:gui:screen4}
+\end{minipage}}
+
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Datenbank}
 \label{subsec:software:master:database}
 % ---------------------------------------------------------------------------- %

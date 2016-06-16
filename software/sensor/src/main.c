@@ -125,11 +125,10 @@ int main(void){
               usart_write_buffer_wait(&usart_instance, (char *)&real_adc_value, 2);
               usart_write_buffer_wait(&usart_instance, &r, 1);
             }
-
-            // Reset buffer since data in it was worked
-            buffer.length = 0;
           }
         }
+        // Reset buffer since data in it was worked
+        buffer.length = 0;
       }
     }
   }

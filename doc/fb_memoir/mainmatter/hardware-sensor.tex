@@ -6,7 +6,7 @@
     \setlength{\parindentbak}{\parindent}
 
     \noindent\adjustbox{valign=t}{\begin{minipage}{135mm}
-        Das  Sensorboard  besteht  aus  einer,  CPU  welche  alle  Komponenten
+        Das  Sensorboard  besteht  aus  einer   CPU  welche  alle  Komponenten
         koordiniert, einem  Modulator und einem Demodulator  zur Kommunikation
         und  einem  Buck-Konverter,  der  die  Netzspannung  f\"ur  das  Board
         transformiert.
@@ -15,8 +15,9 @@
         Als   CPU  dient   ein  Atmel   SAM  D09   (Bereich  3   in  Abbildung
         \ref{fig:sensor:schema:highlights}). Dieser  wird  verwendet, weil  er
         der g\"unstigste Prozessor  in seiner Klasse ist  und alle notwendigen
-        Features mitbringt. Der Mikrochip hat einen 12 Bit-ADC, ein CRC-Modul,
-        eine 32 Bit ARM-Architektur und braucht extrem wenig Leistung.
+        Funktionen  mitbringt. Der   Mikrochip  hat  einen  12   Bit-ADC,  ein
+        CRC-Modul,  eine  32  Bit  ARM-Architektur und  braucht  extrem  wenig
+        Leistung.
 
         Zum  Speisen  des  Boards  wird ein  LMR16006  von  Texas  Instruments
         verwendet (Bereich 1 in Abbildung \ref{fig:sensor:schema:highlights}).
@@ -39,8 +40,8 @@
         Bereich  5  enth\"alt   zwei  LEDs  und  einen   Schalter,  welche  zu
         Statusangaben und Debuggen am Sensor direkt verwendet werden k\"onnen.
 
-        Im Folgenden  sind die einzelnen Teilschaltungen  dokumentiert und die
-        Komponentenwahl ihre Wahl begr\"undet.
+        Im Folgenden werden die einzelnen Teilschaltungen dokumentiert und die
+        Komponentenwahl begr\"undet.
 
         \adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
             \centering
@@ -76,7 +77,7 @@
 % ---------------------------------------------------------------------------- %
 
 Die  Speisung  der  Schaltung   \"ubernimmt  ein  LMR16006. Er  verkraftet  am
-Input   bis   \SI{63}{\volt};  und   sollte   so   die  an   handels\"ublichen
+Input   bis   \SI{63}{\volt}   und   sollte   so   die  an   handels\"ublichen
 PV-Modulen    anliegenden   Spannungen    verkraften   (siehe    auch   Anhang
 \ref{app:commercial:modules} auf  Seite \pageref{app:commercial:modules}).  Er
 kommt auch  mit 4  Volt am  Eingang noch  klar. Da die  Versorgungsspannung im
@@ -87,7 +88,8 @@ Er  hat einen  sehr konstanten  Wirkungsgrad von  70 bis  80 Prozent,  je nach
 Speisespannung.
 
 Der LMR16006 kann maximal \SI{600}{\milli\ampere} liefern, was ausreicht, wenn
-man einen genug grossen Pufferkondensator f\"ur Leistungsspitzen einbaut.
+man  einen  genug  grossen Pufferkondensator  f\"ur  Leistungsspitzen  einbaut
+(\SI{10}{\micro\farad} in unserem Fall).
 
 Zudem  hat  dieser  Spannungsregler  einen  typischen  Quiescent  Current  von
 nur  \SI{28}{\micro\ampere}. Damit  ist  er  auch  extrem  stromsparend.   Die
@@ -102,6 +104,8 @@ immer an ist sobald am Eingang Spannung anliegt.
 Damit die  Montage einfacher  ist, ist ein  Verpolungsschutz eingebaut. Dieser
 besteht aus einem P-Fet, einer Zenerdiode und einem Gate-Vorwiderstand.
 
+\vspace*{2em}
+
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=1\textwidth]{images/sensor-sch/sensor--sch--supply.eps}
@@ -110,6 +114,7 @@ besteht aus einem P-Fet, einer Zenerdiode und einem Gate-Vorwiderstand.
 
 
 % ---------------------------------------------------------------------------- %
+\clearpage
 \subsection{Transmitter}
 \label{subsec:hw:sensor:transmitter}
 % ---------------------------------------------------------------------------- %
@@ -119,12 +124,11 @@ die  Spannungsversorgung aufmoduliert.   Daf\"ur  wird am  $VCO_{\mathrm{in}}$
 mithilfe eines Spannungsteilers eine fixe Spannung angelegt. Mit der korrekten
 Wahl von \code{R7},  \code{R8} und \code{C10} kann  die Resonanzfrequenz f\"ur
 die Leitung erreicht werden, mit der  dann moduliert wird. Diese Werte sind so
-gew\"ahlt, wie es die Graphen  im Datasheet \todo{Source Datasheet} zeigen. Es
-wurde  eine  Frequenz  von  \SI{20}{\mega\hertz} ausgew\"ahlt,  da  diese  bei
-Leitungen unserer  L\"ange optimal sind\todo{Weshalb?}.  Das  Signal wird dann
+gew\"ahlt,  wie es  die  Graphen im  Datenblatt \cite{ref:ti:cd54}  zeigen. Es
+wird  eine Frequenz  von  \SI{20}{\mega\hertz}  ausgew\"ahlt. Das Signal  wird
 moduliert, indem der UART \code{TX} Pin  direkt am \code{INH} Pin den VCO ein-
-und ausschaltet und  somit eine OOSK zustande bringt. Hier  ist wichtig, dass
-der Pin Active High ist.
+und  ausschaltet  und  somit  ein  On-Off  Keying zustande  bringt. Hier  ist
+wichtig, dass der Pin \emph{Active High} ist.
 
 \begin{figure}[h!t]
     \centering
@@ -144,12 +148,13 @@ der Pin Active High ist.
     \caption[Sensor: Schema Microcontroller]{Microcontroller Sensor}
 \end{wrapfigure}
 
-Der  Mikrokontroller  braucht  bis  auf  einen  Pull-Up Widerstand  am  Active
+Der  Mikrokontroller  braucht  bis  auf einen  Pull-Up  Widerstand  am  Active
 Low  Reset und  einen  Stabilisierungskondensator  an der  Spannungsversorgung
 keine  spezielle  Beschaltung. Der  Mikrochip  ist  so  beschaltet,  dass  die
 beiden  UART-Linien  verf\"ugbar sind;  eine  zum  Senden \"uber  die  Leitung
 und  eine  zum   Debuggen. Ebenfalls  zu  einem  Stecker   verbunden  ist  die
-Programmierschnittstelle (SWD).\todo{datenblatt source}
+Programmierschnittstelle (SWD). Das Datenblatt  ist unter \cite{ref:atmel:cpu}
+verf\"ugbar.
 
 
 
@@ -202,5 +207,3 @@ einen nicht invertierenden Opamp verst\"arkt.
     \includegraphics[width=0.9\textwidth]{images/sensor-sch/sensor--sch--receiver.eps}
     \caption[Sensor: Schema Empf\"anger]{Empf\"anger Sensor}
 \end{figure}
-
-\todo{R5, D3, C5, R3, R2, R10, C4, U2}

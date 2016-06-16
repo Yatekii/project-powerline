@@ -19,8 +19,8 @@
         Montiert    ist    das     \Master~in    einem    Hutschienengeh\"ause
         (auch       bekannt       als      DIN-Rail-Geh\"ause,       Abbildung
         \ref{fig:hw:master:photo:dinrail}). Damit   unser   Ger\"at   sinnvoll
-        in    dem   Geh\"ause    untergebracht   werden    kann,   ist    eine
-        eigene   Frontplatte  entwickelt   und  gefertigt   worden  (Abbildung
+        im   Geh\"ause   untergebracht   werden    kann,   ist   eine   eigene
+        Frontplatte    entwickelt    und     gefertigt    worden    (Abbildung
         \ref{fig:hw:master:photo:dinrailCover}).
 
         {\centering
@@ -28,7 +28,7 @@
             \figcaption[\Master: Foto zusammengesetzt]{\Master, zusammengesetzt}
             \label{fig:hw:master:photo:master}
             \includegraphics[width=100mm]{images/superv-photos/raspi-1.jpeg}
-            \figcaption[\Master: Foto Touchscreen-Modul]{\Raspi mit aufgestecktem Touchscreen-Modul}
+            \figcaption[\Master: Foto Touchscreen-Modul]{\Raspi~mit aufgestecktem Touchscreen-Modul}
             \label{fig:hw:master:photo:raspi}
         }
     \end{minipage}}
@@ -113,9 +113,9 @@
 
 Die  Energie wird  vom  \SI{230}{\volt}-Netz bezogen  und  von einem  externen
 Netzteil auf \SI{5}{\volt} transformiert. Aus  Platzgr\"unden und aufgrund der
-Form des Geh\"auses wird der Netzanschluss dabei zuerst auf das PCB gef\"uhrt,
-anschliessend  zum   Netzger\"at  weggef\"uhrt,  welches   dann  \SI{5}{\volt}
-zur\"uckliefert.
+Form  des Geh\"auses  wird der  Netzanschluss dabei  zuerst auf  das PCB  hin-
+und  anschliessend zum  Netzger\"at  weggef\"uhrt. Das  Netzteil liefert  dann
+\SI{5}{\volt} zur\"uck.
 
 F\"ur   Bauteile,  welche   \SI{3.3}{\volt}  Versorgungsspannung   ben\"otigen
 (GSM-Modem,  \ldots),  ist  eine   Spannungswandlung  mit  einem  Schaltregler
@@ -189,7 +189,7 @@ Anforderungen gut erf\"ullt.
     \label{fig:sch:master:gpio}
 \end{figure}
 
-Das  \Master   besitzt  verschiedene  Ein-  und   Ausg\"ange. Kernst\"uck  des
+Das  \Master~  besitzt  verschiedene  Ein-  und   Ausg\"ange. Kernst\"uck  des
 GPIO-Blocks  ist  ein Darlington  Transistor  Array  (\code{IC1} in  Abbildung
 \ref{fig:sch:master:gpio}),  welches verschiedene  Steuersignale durchschalten
 kann.
@@ -211,13 +211,13 @@ PC einzuschalten.
 Die  beiden  Anschl\"usse  \code{BT0}  und \code{BT1}  sind  mit  dem  \Raspi~
 verbunden und k\"onnen f\"ur Jumper, Taster oder Schalter verwendet werden. In
 der  Prototypenkonfiguration  ist   ein  Schalter  angeschlossen. Der  Stecker
-\code{P2} ist die Hauptverbindung zum \Raspi via Flachbandkabel.
+\code{P2} ist die Hauptverbindung zum \Raspi~via Flachbandkabel.
 
 Als  IO-Verst\"arker  wird  ein   ULN2003A  von  Texas  Instruments  gew\"ahlt
 \cite{datasheet:darlingtonic}. Der    IC    verf\"ugt    \"uber    integrierte
 Freilaufdioden   zum    Schutz   vor    \"uberh\"ohter   Spannung    auf   der
 Ausgangsseite. In unserem Fall dient  dies dazu, Spannungsspitzen, welche beim
-Ausschalten der Relais auftreten k\"onnen,  abzufangen.  Da der \Raspi maximal
+Ausschalten der Relais auftreten k\"onnen,  abzufangen.  Da der \Raspi~maximal
 \SI{3.3}{\volt} am  Ausgang liefern  kann, muss  die Schaltschwelle  f\"ur ein
 \code{true}-Signal bei diesem  IC bei \SI{3.3}{\volt} oder  tiefer liegen, was
 der  ULN2003A erf\"ullt.   Die Relais  beziehen bis  zu \SI{72}{\milli\ampere}
@@ -254,7 +254,7 @@ Seite \pageref{subsec:hw:sensor:transmitter}.
 
 Auf der rechten Seite in Abbildung \ref{fig:sch:master:comms} ist die Br\"ucke
 \code{U1} abgebildet,  welche zwischen UART und  \ISC~konvertiert. Es wird das
-Modell  SC16IS740 von  NXP Semiconructors  \cite{datasheet:uarti2c} verwendet.
+Modell  SC16IS740 von  NXP Semiconductors  \cite{datasheet:uarti2c} verwendet.
 Der \Sensor  sendet seine Daten  auf der DC-Leitung in  UART-Kodierung. Da der
 \Raspi~nicht  gen\"ugend  UART-Eing\"ange  f\"ur alle  ben\"otigten  Leitungen
 besitzt,  werden  die  Daten  im \ISC-Format  in  den  \Raspi~eingespeist. Die
@@ -310,8 +310,9 @@ Schaltung   ist   in   Abbildung   \ref{fig:sch:master:current}   dargestellt.
 \code{IC4},  \code{IC5}  und  \code{IC6}  sind  die  Strommessungssensoren. Es
 werden  Hall-Sensoren   der  Modellreihe   ACS725  von   Allegro  Microsystems
 benutzt. Diese k\"onnen bis zu  \SI{10}{\ampere} messen, sind durchschlagsfest
-bis zu  \SI{1}{\kilo\volt} und  k\"onnen sowohl  mit \SI{3.3}{\volt}  wie auch
-\SI{5}{\volt} betrieben werden \cite{datasheet:hallic}.
+bis  zu   \SI{2.5}{\kilo\volt}  (Mindestanforderung   \SI{1}{\kilo\volt})  und
+k\"onnen sowohl  mit \SI{3.3}{\volt}  wie auch \SI{5}{\volt}  betrieben werden
+\cite{datasheet:hallic}.
 
 Sie  geben   auf  den  Leitungen  \code{isense0},   \code{isense1}  respektive
 \code{isense2}  eine   Spannung  aus,   welche  propotional  zum   den  Sensor
@@ -326,8 +327,8 @@ wandelt. Es   kommt   ein   MAX11612   von  Maxim   Integrated   zum   Einsatz
 \cite{datasheet:adc}. Dieser besitzt ein \ISC-Interface, drei Kan\"ale und ist
 mit  dem  Ausgangspegel  der  Hall-Sensoren  kompatibel.   Allerdings  liefert
 er  ein  Ausgangssignal  mit  einem \SI{5}{\volt}-Pegel,  was  nicht  mit  dem
-\Raspi  kompatibel  ist, dessen  Eing\"ange  mit  einem Pegel  \SI{3.3}{\volt}
-laufen. Deshalb wird zwischen \code{IC3} und  dem \Raspi noch ein Pegelwandler
+\Raspi~ kompatibel  ist, dessen  Eing\"ange  mit  einem Pegel  \SI{3.3}{\volt}
+laufen. Deshalb wird zwischen \code{IC3} und  dem \Raspi~noch ein Pegelwandler
 der   Serie   NLSX4373  von   ON   Semiconductors   geschaltet,  welcher   das
 \SI{5}{\volt}-Signal des ADC auf  \SI{3.3}{\volt} konvertiert. Er ist speziell
 f\"ur  \ISC-Anwendungen entwickelt  worden  und eignet  sich  somit gut  f\"ur
@@ -359,7 +360,7 @@ GSM-Chip ben\"otigten  Pegel von \SI{2.8}{\volt} (Pin  \code{VDD\_EXT} auf dem
 Chip, verbunden mit \code{Vcc\_B} auf dem Pegelwandler) zu wandeln.
 
 Der  Pin  \code{GSM\_PKEY} dient  zum  Einschalten  des GSM-Modems,  gesteuert
-vom  \Raspi  via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite
+vom  \Raspi~ via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite
 \pageref{subsec:hw:master:gpio}).
 
 Via die beiden Pins \code{STATUS}  und \code{NETLIGHT} werden zwei Status-LEDs

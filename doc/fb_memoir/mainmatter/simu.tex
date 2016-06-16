@@ -3,33 +3,34 @@
 \label{chap:simu}
 % **************************************************************************** %
 
+
 Mit   den  im   vorigen  Kapitel   entwickelten  Modellen   werden  nun   drei
 L\"osungsans\"atze auf  ihre Vor-  und Nachteile untersucht,  um anschliessend
-eine   Variante  auszuw\"ahlen. Es   werden  zuerst   die  Einkopplung   eines
-Signals  in  die  DC-Leitung   via  induktive  Kopplung,  kapazitive  Kopplung
-untersucht. Letztlich wird  evaluiert, ob das gesteuerte  Kurzschliessen eines
-PV-Moduls mitteles eines Transistors sich allenfalls dazu eignen k\"onnte, ein
-Signal mit den entsprechenden kurzen Spannungseinbr\"uchen zu codieren.
+eine Variante auszuw\"ahlen. Zuerst wird die  Einkopplung eines Signals in die
+DC-Leitung mittels induktiver Kopplung untersucht, gefolgt von der kapazitiven
+Einkopplung.   Zuletzt  wird  die  Machbarkeit  der  OOK  mittels  Kurzschluss
+beurteilt. Eine zusammenfassende Gegen\"uberstellung der Simulationsergebnisse
+befindet sich auf Seite \pageref{subsec:simu:conclusion}.
 
 Zur  Simulation wird  \code{LTspice  IV}  \cite{ref:ltspice} von  \emph{Linear
 Technologies} verwendet. Es  ist zu jeder  \code{LTspice}-Schaltung angegeben,
 wo die zugeh\"orige Datei auf dem Datentr\"ager gespeichert ist.
+
 
 % ---------------------------------------------------------------------------- %
 \section{Induktive Einkopplung}
 \label{sec:simu:coupling:inductive}
 % ---------------------------------------------------------------------------- %
 
-Eine induktive Einkopplung legt eine  Spule um die DC-Leitung. Auf diese Spule
-wird vom Sensor  das zu \"ubertragende Signal gegeben und  die Spule induziert
-in der DC-Leitung entsprechende  Spannungs-Rippel, die vom \Master ausgewertet
-werden k\"onnen. Der  entsprechende Schaltkreis  ist schematisch  in Abbildung
-\ref{fig:circuit:coupling:inductive} dargestellt.
+Bei der induktiven Einkopplung wird eine  Spule um die DC-Leitung gelegt.  Auf
+diese  Spule  wird  vom  Sensor  das  zu  \"ubertragende  Signal  gegeben  und
+die  Spule induziert  in  der DC-Leitung  entsprechende Spannungs-Rippel,  die
+vom  \Master~ausgewertet werden  k\"onnen. Der  entsprechende Schaltkreis  ist
+schematisch in Abbildung \ref{fig:circuit:coupling:inductive} dargestellt.
 
-\code{LTspice}    modelliert   diese    Situation   als    gekoppelte   Spulen
-mit    je     einer    Induktivit\"at     (L1    und    L2     in    Abbildung
-\ref{fig:circuit:coupling:inductive)}und  einem   Kopplungsfaktor  K. Es  gilt
-also, diese drei Parameter zu bestimmen.
+\code{LTspice} modelliert diese  Situation als gekoppelte Spulen  mit je einer
+Induktivit\"at  (L1 und  L2 in  Abbildung \ref{fig:circuit:coupling:inductive}
+und einem Kopplungsfaktor K. Es gilt, diese drei Parameter zu bestimmen.
 
 Wir  werden   f\"ur  unsere   Simulationen  von  einer   Toroidspule  gem\"ass
 Abbildung  \ref{fig:toroid:geometry}  mit   20  Prim\"arwicklungen  und  einer
@@ -51,7 +52,7 @@ Die Selbstinduktivit\"at unserer Toroidspule errechnet sich gem\"ass:
 
 \begin{equation}
     \label{eq:selfInductance:toroid:primary}
-    L_{\mathrm{1}} = \frac{\mu_{0} \mu_{\mathrm{r}} r^2 N_1^2}{2 R} \approx \SI{200}{\micro\henry}
+    L_{\mathrm{1}} = \frac{\mu_{0} \mu_{\mathrm{r}} r^2 N_1^2}{2 R} \approx \underline{\underline{\SI{200}{\micro\henry}}}
 \end{equation}
 
 %\begin{figure}[h!tb]
@@ -74,7 +75,7 @@ Die Induktivit\"at der sekund\"aren Seite berechnet sich gem\"ass:
 
 \begin{equation}
     \label{eq:selfInductance:toroid:secondary}
-    L_{\mathrm{2}} = L_{1} \cdot \frac{N_2^2 }{N_1^2} \approx \SI{500}{\nano\henry}
+    L_{\mathrm{2}} = L_{1} \cdot \frac{N_2^2 }{N_1^2} \approx \underline{\underline{\SI{500}{\nano\henry}}}
 \end{equation}
 
 \begin{conditions}
@@ -92,9 +93,15 @@ heisst, dass der gesamte Fluss, welcher  die eine Spule durchfliesst, auch die
 andere Spule durchfliesst.  Es wird  hier ein Streuverlust von 5\% angenommen,
 was einen Kopplungsfaktor von 0.95 ergibt.
 
+\clearpage
 Es  wird   zuerst  eine  vereinfachte  Schaltung   untersucht,  bestehend  aus
 einem  Modul,  dem  Sender  und  dem  Empf\"anger,  dargestellt  in  Abbildung
 \ref{fig:ltspice:inductive:singleModule}.
+
+Abbildung  \ref{fig:simu:inductive:singleModule}  zeigt  den  Spannungsverlauf
+am      Empf\"anger      f\"ur      die      Schaltung      aus      Abbildung
+\ref{fig:ltspice:inductive:singleModule}. Das Signal kommt sauber an, ist aber
+nicht sehr stark.
 
 \begin{figure}[h!tb]
     \centering
@@ -107,24 +114,42 @@ einem  Modul,  dem  Sender  und  dem  Empf\"anger,  dargestellt  in  Abbildung
     \label{fig:ltspice:inductive:singleModule}
 \end{figure}
 
-Abbildung  \ref{fig:simu:inductive:singleModule}  zeigt  den  Spannungsverlauf
-am      Empf\"anger      f\"ur      die      Schaltung      aus      Abbildung
-\ref{fig:ltspice:inductive:singleModule}. Das Signal kommt sauber an, ist aber
-nicht sehr stark.
-
 \begin{figure}[h!tb]
     \input{images/simu-inductive/singleModule.tex}
     \caption[Simulationsergebniss induktive Einkopplung, vereinfachte Schaltung]{%
         Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
-        \label{fig:ltspice:inductive:singleModule}%
+        \ref{fig:ltspice:inductive:singleModule}%
     }
     \label{fig:simu:inductive:singleModule}
 \end{figure}
 
+\clearpage
 Zur  Simulation eines  ganzen Modulstrangs  wird die  Schaltung aus  Abbildung
 \ref{fig:ltspice:inductive:complete}  benutzt; der  Modulstrang basiert  dabei
 auf den Herleitungen aus Abschnitt \ref{sec:simu:model:module:string} ab Seite
-\pageref{sec:simu:model:module:string}
+\pageref{sec:simu:model:module:string}.
+
+Abbildung  \ref{fig:simu:inductive:stepping}  enth\"alt  Simulationsergebnisse
+f\"ur    verschiedene   Lastimpedanzen    bei    einer   Senderfrequenz    von
+\SI{1}{\mega\hertz}.   Die zugeh\"origen Impedanzkombinationen sind in Tabelle
+\ref{tab:inductive:stepping:params}  aufgelistet. Simulationen  mit  h\"oheren
+resistiven  Anteilen w\"aren  interessant, allerdings  hat \code{LTspice}  bei
+weiterem  Ansteigen von  \code{Rload} (vermutlich  numerische) Schwierigkeiten
+und  die Simulationszeit  steigt auf  Tage bis  Wochen (falls  sie \"uberhaupt
+jemals endet und  die Software nicht in einem Kreis  von nicht konvergierenden
+Bedingungen festh\"angt).
+
+Es  ist zu  erkennen, dass  das Signal  am Empf\"anger  nicht besonders  stark
+von der  Lastimpedanz abh\"angt. Allerdings  ist die  Signalamplitude ziemlich
+klein und  betr\"agt nur  einige Millivolt. Daf\"ur ist  das Signal  in seiner
+Form  sehr  schwach   verzerrt,  was  wir  als  einen   sehr  positiven  Punkt
+bewerten. Vorausgesetzt,  das  Signal  wird  nicht  von  St\"orungen  auf  der
+Leitungen \"uberdeckt, w\"urde  es sich gut f\"ur  Filterung und Verst\"arkung
+eignen. Ob  dies  wirklich  der  Fall  ist, kann  im  Rahmen  dieses  Projekts
+allerdings  nicht  eruiert  werden,  da wir  weder  einen  gen\"ugend  grossen
+Modulstrang  noch die  zur gr\"undlichen  Untersuchung erforderliche  Zeit zur
+Verf\"ugung haben. Soll  das System  aber wirklich in  der Praxis  zum Einsatz
+kommen, muss dieser Punkt sicherlich genauer untersucht werden.
 
 \begin{figure}[h!tb]
     \centering
@@ -140,33 +165,13 @@ auf den Herleitungen aus Abschnitt \ref{sec:simu:model:module:string} ab Seite
 \begin{figure}[h!tb]
     \input{images/simu-inductive/stepping.tex}
     \caption[Simulationsergebniss, induktive Einkopplung, Modulstrang]{%
-        Simulationsergebniss f\"ur die Spannung am Empf\"anger aus Abbildung
-        \ref{fig:ltspice:inductive:complete}%
+        Simulationsergebniss f\"ur  die Spannung am Empf\"anger  aus Abbildung
+        \ref{fig:ltspice:inductive:complete}  mit den  Parametern aus  Tabelle
+        \ref{tab:inductive:stepping:params}%
     }
     \label{fig:simu:inductive:stepping}
 \end{figure}
-
-Abbildung  \ref{fig:simu:inductive:stepping}  enth\"alt  Simulationsergebnisse
-f\"ur    verschiedene   Lastimpedanzen    bei    einer   Senderfrequenz    von
-\SI{1}{\mega\hertz}.   Die zugeh\"origen Impedanzkombinationen sind in Tabelle
-\ref{tab:inductive:stepping:params}  aufgelistet. Simulationen  mit  h\"oheren
-resistiven  Anteilen w\"aren  interessant, allerdings  hat \code{LTspice}  bei
-weiterem  Ansteigen von  \code{Rload} (vermutlich  numerische) Schwierigkeiten
-und  die Simulationszeit  steigt auf  Tage bis  Wochen (falls  sie \"uberhaupt
-jemals endet und  die Software nicht in einem Kreis  von nicht konvergierenden
-Bedingungen festh\"angt).
-
-Es  ist  zu   erkennen,  dass  das  Signal  am   Empf\"anger  nicht  besonders
-stark  von  der  Lastimpedanz abh\"angt. Allerdings  ist  die  Signalamplitude
-ziemlich  klein  und betr\"agt  nur  einige  Millivolt. Positiv gewertet  kann
-aber  werden,  dass  das  Signal   trotz  der  kleinen  Amplitude  immer  noch
-sehr  sauber  aussieht. Allerdings kann  es  nat\"urlich  sein, dass  sonstige
-St\"orungseffekten   auf  der   Leitung  (welche   in  der   Simulation  nicht
-ber\"ucksichtigt  worden  sind)  das Signal  \"uberdecken  w\"urden. Dies  ist
-allerdings  im Rahmen  dieses  Projektes nicht  wirklich  zu verifizieren,  da
-wir  weder einen  gen\"ugend grossen  Modulstrang noch  die zur  gr\"undlichen
-Untersuchung erforderliche Zeit zur Verf\"ugung haben.
-
+\vspace*{-1em}
 
 \begin{table}[h!tb]
     \centering
@@ -174,6 +179,7 @@ Untersuchung erforderliche Zeit zur Verf\"ugung haben.
         Lastimpedanzparameter  f\"ur die  Simulationsergebnisse aus  Abbildung
         \ref{fig:simu:inductive:stepping}
     }
+    \small
     \label{tab:inductive:stepping:params}
     \begin{tabular}{rr|rr|rr}
         \toprule
@@ -189,6 +195,7 @@ Untersuchung erforderliche Zeit zur Verf\"ugung haben.
     \end{tabular}
 \end{table}
 
+\clearpage
 Interessant    ist    der    Betrieb    des    Senders    mit    Eigenfrequenz
 (ca. \SI{240}{\kilo\hertz} in diesem  Fall) des Modulstrangs\footnotemark. Der
 zugeh\"orige    Spannungsverlauf    am    Empf\"anger   ist    in    Abbildung
@@ -217,7 +224,7 @@ Abschliessend kann man  zur induktiven Kopplung sagen, dass  sie bei kleineren
 Aufbauten  gut  funktionieren  sollte,   dass  aber  bei  gr\"osseren  Anlagen
 m\"oglicherweise  zus\"atzliche  Massnahmen  n\"otig sein  k\"onnten,  um  das
 Signal klar empfangen und auswerten  zu k\"onnen. Dies k\"onnte z.B. bedeuten,
-dass  unser System  die Eigenfrequenz  des Modulstrangs  selbst ausmisst,  und
+dass  unser System  die Eigenfrequenz  des Modulstrangs  selbst ausmisst   und
 sich entsprechend  selbst konfiguriert,  um stets  auf der  optimalen Frequenz
 \"ubermitteln zu k\"onnen.
 
@@ -368,7 +375,7 @@ m\"oglichst ungehindert am kurzgeschlossenen Modul vorbeifliessen kann.
     \vspace*{-2em}
 \end{wrapfigure}
 
-Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder  sontwo  im
+Ein  weiterer  kritischer  Punkt  ist,  dass die  im  Modul  (oder sonstwo  im
 Stromkreis)  vorhandenen   Kapazit\"aten  zu  starken   Stromspitzen  f\"uhren
 k\"onnen, welche den Transistor besch\"adigen k\"onnten.
 
@@ -392,12 +399,12 @@ kurzschliessenden Transistor und einer Ohm'schen Last, dargestellt in Abbildung
 
 Wie  in Abbildung  \ref{fig:simu:shortCircuit:transmitter} sichtbar,  kommt am
 Knoten \code{MEASURE} ein  recht klares Signal an. Der Strom  durch den MOSFET
-oszilliert bei durchgeschaltetem  Transistor ungef\"hart um den  im Mittel vom
+oszilliert bei  durchgeschaltetem Transistor ungefh\"ar  um den im  Mittel vom
 Modul angegebenen Strom. Auffallend sind  die Spannungs- und Leistungsspitzen,
 welche beim Deaktivieren des  Transistors auftreteten. Das PV-Modul gibt f\"ur
-kurze  Zeit  sogar  beinahe  \SI{600}{\watt}  ab  und  der  MOSFET  absorbiert
-mehr  als \SI{400}{\watt},  allerdings sind  diese Spitzen  sehr kurz  und die
-thermischen Verluste im  Transistor sind im Mittel bei  einem Sendevorgang von
+kurze Zeit sogar beinahe \SI{600}{\watt} ab und der MOSFET absorbiert mehr als
+\SI{400}{\watt}, allerdings sind  diese Spitzen sehr kurz  und die thermischen
+Verluste  im  Transistor  sind  im Durchschnitt  bei  einem  Sendevorgang  von
 \SI{1}{\milli\second} lediglich etwa \SI{1}{\watt}.
 
 
@@ -577,15 +584,15 @@ detaillierte Untersuchungen  gemacht werden. Nicht nur muss  das Verhalten des
 PV-Moduls (bzw. des Modulstrangs) bekannt  sein, es m\"ussen auch detaillierte
 Informationen \"uber die angeh\"angten  Lasten eingeholt werden.  Insbesondere
 muss das  Verhalten des  Wechselrichters unter  verschiedenen Betriebsbedingen
-(Last, momentane Leistung der PV-Modulstr\"ange, allenfalls weitere unbekannte
-Parameter)  bekannt sein. Abh\"angig  von  den  Charakteristiken der  gesamten
-mit  dem  Modulstrang  verbundenen  Schaltung k\"onnte  es  sein,  dass  diese
-L\"osungsvariante nicht implementierbar ist. Oder es m\"ussten m\"oglicherwise
-weitere Schaltkreise entwickelt und eingebaut werden, um mit dem Verhalten des
-Wechselrichters  und  den  an  ihn angeh\"angten  Lasten  korrekt  umgehen  zu
-k\"onnen. Dies wiederum  w\"are nicht  wirklich im  Sinne dieser  L\"osung, da
-ihre grosse Attraktivit\"at  genau darin liegen w\"urde,  dass ihr Schaltungs-
-und Materialaufwand (theoretisch) sehr gering ist.
+(Last,   momentane   Leistung   der  PV-Modulstr\"ange,   allenfalls   weitere
+unbekannte  Parameter)  bekannt   sein. Abh\"angig  von  den  Charakteristiken
+der  gesamten mit  dem  Modulstrang verbundenen  Schaltung  k\"onnte es  sein,
+dass  diese L\"osungsvariante  nicht  implementierbar  ist. Oder es  m\"ussten
+m\"oglicherweise weitere Schaltkreise entwickelt  und eingebaut werden, um mit
+dem Verhalten des Wechselrichters und  den an ihn angeh\"angten Lasten korrekt
+umgehen  zu k\"onnen. Dies  wiederum  w\"are nicht  wirklich  im Sinne  dieser
+L\"osung, da ihre grosse Attraktivit\"at  genau darin liegen w\"urde, dass ihr
+Schaltungs- und Materialaufwand (theoretisch) sehr gering ist.
 
 Grunds\"atzlich finden wir diese  L\"osungsvariante aufgrund des enorm simplen
 Prinzips zwar sehr interessant. Da dies  jedoch (soweit uns bekannt) absolutes
@@ -626,8 +633,9 @@ diesen  Umst\"anden  das Signal  prinzipiell  noch  sehr sauber  und  k\"onnte
 allenfalls wieder herausgefiltert  und verst\"arkt werden. Alternativ k\"onnte
 in einer weiteren Entwicklungsstufe eine L\"osung implementiert werden, welche
 den Strang, in  dem ein Sensor installiert ist, ausmisst,  und automatisch bei
-der  optimalen Frequenz  (innerhalb  von  spezifizierten Grenzen  nat\"urlich)
-sendet.
+der optimalen Frequenz (innerhalb von spezifizierten Grenzen) sendet.
+
+\vspace*{2em}
 
 \begin{table}[h!tb]
     \centering
@@ -636,10 +644,10 @@ sendet.
     \label{tab:simu:conclusion}
     \begin{tabular}{p{38mm}p{28mm}p{28mm}p{28mm}}
         \toprule
-        \textbf{Kriterium} &
-        \textbf{induktive Kopplung} &
-        \textbf{kapazitive Kopplung} &
-        Kurzschluss \\
+        \textsc{Kriterium} &
+        \parbox[t]{27mm}{\textsc{induktive\\Kopplung}} &
+        \parbox[t]{27mm}{\textsc{kapazitive\\Kopplung}} &
+        \textsc{Kurzschluss} \\
 
         \midrule
 
@@ -647,27 +655,27 @@ sendet.
         mittel &
         mittel &
         simpel \\
-        [2mm]
+        [7mm]
 
         \rowcolor{solarized-base2}
         Neuartigkeit des Konzepts &
         niedrig &
         niedrig &
         hoch \\
-        [2mm]
+        [7mm]
 
         Kosten &
         hoch &
         mittel &
         klein  \\
-        [2mm]
+        [7mm]
 
         \rowcolor{solarized-base2}
         St\"arke des Signals am Empf\"anger &
         bei Resonanz gut, kann sonst stark abfallen &
         variiert stark mit Position im Strang &
         variiert stark mit Last \\
-        [2mm]
+        [7mm]
 
         Verzerrung des Signals am Empf\"anger &
         schwache Verzerrung &

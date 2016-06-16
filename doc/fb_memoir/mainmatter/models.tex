@@ -76,9 +76,23 @@ Wechselstrom ist,  sollte das  Wechselstromverhalten von PV-Zellen  in unseren
 Simulationen ber\"ucksichtigt werden.
 
 Das  Zweidiodenmodell  aus  \cite{pvcell:masmoudi}  wird  deshalb  in  unseren
-Simulationen   noch   durch    eine   parallele   Kapazit\"at   erg\"anzt. Die
-Gr\"ossenordnung   dieser   Kapazit\"at   kann  stark   variieren   und   wird
-unter    anderem   vom    Diodenmaterial,   der    Diodenspannung   und    der
+Simulationen noch durch eine parallele Kapazit\"at erg\"anzt, wie in Abbildung
+\ref{fig:circuit:solarCell} gezeigt.
+
+\begin{figure}[h!tb]
+    \centering
+    \input{images/circuits/solarCell.tex}
+    \caption[Zweidiodenmodell PV-Zelle mit zus\"atzlicher Kapazit\"at]{%
+        Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
+        Zweidiodenmodell  mit  zus\"atzlicher  Kapazit\"at. Die  zugeh\"origen
+        Modellparameter    sind    in    Tabelle    \ref{tab:solarCell:params}
+        aufgelistet.%
+    }
+    \label{fig:circuit:solarCell}
+\end{figure}
+
+Die   Gr\"ossenordnung   dieser   Kapazit\"at   kann   stark   variieren   und
+wird   unter  anderem   vom   Diodenmaterial,  der   Diodenspannung  und   der
 Diodentemperatur   beeinflusst. Basierend    auf   \cite{capacitance:hegedus},
 \cite{capacitance:mandal}     und      \cite{capacitance:mauk}     soll     an
 dieser    Stelle   eine    fl\"achennormierte    Kapazit\"at    von   $C'    =
@@ -94,25 +108,14 @@ berechnet zu:
     C_{\mathrm{Zelle}}
     = A_{\mathrm{Zelle}} \cdot C'
     = \left( \SI{125}{\milli\meter} \right)^4 \cdot \SI{20}{\nano\farad\per\centi\meter\squared}
-    = \SI{3.125}{\micro\farad}
+    = \underline{\underline{\SI{3.125}{\micro\farad}}}
 \end{equation}
 
 Somit  sind das  Ersatzschaltbild  und die  zugeh\"origen Parameter  bestimmt;
 die  Ergebnisse  sind  in Abbildung  \ref{fig:circuit:solarCell}  und  Tabelle
 \ref{tab:solarCell:params} abgebildet respektive aufgelistet.
 
-\begin{figure}[h!tb]
-    \centering
-    \input{images/circuits/solarCell.tex}
-    \caption[Zweidiodenmodell PV-Zelle mit zus\"atzlicher Kapazit\"at]{%
-        Schaltschema    zur    Modellierung    einer    Solarzelle    gem\"ass
-        Zweidiodenmodell  mit  zus\"atzlicher  Kapazit\"at. Die  zugeh\"origen
-        Modellparameter    sind    in    Tabelle    \ref{tab:solarCell:params}
-        aufgelistet.%
-    }
-    \label{fig:circuit:solarCell}
-\end{figure}
-
+\vspace*{6em}
 \begin{table}[h!t]
     \centering
     \caption{\"Ubersicht Modellparameter f\"ur Solarzelle aus Abbildung \ref{fig:circuit:solarCell}}
@@ -185,7 +188,7 @@ basieren auf folgenden Annahmen:
 \begin{itemize}
     \tightlist
     \item
-        Kantenl\"ange eines Moduls: \SI{125}{\milli\meter}
+        Kantenl\"ange einer Zelle: \SI{125}{\milli\meter}
     \item
         Abstand zwischen zwei Modulen: \SI{2}{\milli\meter}
     \item
@@ -300,6 +303,7 @@ bestimmt werden:
     A_{\mathrm{3}}   =   0.2877                  & Korrektursummand                        \\
 \end{conditions}
 
+\clearpage
 Die Gesamtinduktivit\"at der Leiterbahnen in einem Modul ist somit:
 
 \begin{equation}
@@ -432,6 +436,7 @@ Der Ohm'sche Widerstand der Anschlussleitung errechnet sich zu:
     l    = \SI{40}{\meter} & Gesamtl\"ange der Anschlussleitung (beide Wege) \\
 \end{conditions}
 
+\vspace*{3em}
 \begin{figure}[h!tb]
     \centering
     \input{images/circuits/modulestring.tex}
@@ -443,6 +448,7 @@ Der Ohm'sche Widerstand der Anschlussleitung errechnet sich zu:
     \label{fig:pvstring}
 \end{figure}
 
+\vspace*{3em}
 Abbildung  \ref{fig:pvstring} zeigt  das  Ersatzschaltbild eines  Modulstrangs
 aus    20   in    Serie   geschalteten    Modulen   mit    den   parasit\"aren
 Leiterimpedanzen. Dieses  und  die  vorangegangenen   Modelle  werden  nun  in

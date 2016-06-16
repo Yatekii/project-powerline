@@ -1,0 +1,42 @@
+diff --git a/src/flash/nor/at91samd.c b/src/flash/nor/at91samd.c
+index 2730f71..cd7726d 100644
+--- a/src/flash/nor/at91samd.c
++++ b/src/flash/nor/at91samd.c
+@@ -75,6 +75,7 @@
+ #define SAMD_SERIES_21		0x01
+ #define SAMD_SERIES_10		0x02
+ #define SAMD_SERIES_11		0x03
++#define SAMD_SERIES_09		0x04
+ 
+ /* Device ID macros */
+ #define SAMD_GET_PROCESSOR(id) (id >> 28)
+@@ -89,6 +90,11 @@ struct samd_part {
+ 	uint32_t ram_kb;
+ };
+ 
++/* Known SAMD09 parts */
++static const struct samd_part samd09_parts[] = {
++	{ 0x0, "SAMD09D14A", 16, 4 },
++};
++
+ /* Known SAMD10 parts */
+ static const struct samd_part samd10_parts[] = {
+ 	{ 0x0, "SAMD10D14AMU", 16, 4 },
+@@ -242,6 +248,8 @@ static const struct samd_family samd_families[] = {
+ 		samd10_parts, ARRAY_SIZE(samd10_parts) },
+ 	{ SAMD_PROCESSOR_M0, SAMD_FAMILY_D, SAMD_SERIES_11,
+ 		samd11_parts, ARRAY_SIZE(samd11_parts) },
++	{ SAMD_PROCESSOR_M0, SAMD_FAMILY_D, SAMD_SERIES_09,
++		samd09_parts, ARRAY_SIZE(samd09_parts) },
+ 	{ SAMD_PROCESSOR_M0, SAMD_FAMILY_L, SAMD_SERIES_21,
+ 		saml21_parts, ARRAY_SIZE(saml21_parts) },
+ 	{ SAMD_PROCESSOR_M0, SAMD_FAMILY_C, SAMD_SERIES_20,
+@@ -437,7 +445,7 @@ static int samd_issue_nvmctrl_command(struct target *target, uint16_t cmd)
+ 	}
+ 
+ 	/* Issue the NVM command */
+-	res = target_write_u16(target,
++	res = target_write_u32(target,
+ 			SAMD_NVMCTRL + SAMD_NVMCTRL_CTRLA, SAMD_NVM_CMD(cmd));
+ 	if (res != ERROR_OK)
+ 		return res;

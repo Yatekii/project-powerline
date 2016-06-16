@@ -1,0 +1,6 @@
+#ifndef CONF_USART_H_INCLUDED
+#define CONF_USART_H_INCLUDED
+
+#define USART_CALLBACK_MODE true
+
+#endif /* CONF_USART_H_INCLUDED */

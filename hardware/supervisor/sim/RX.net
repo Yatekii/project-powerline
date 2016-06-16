@@ -1,0 +1,20 @@
+* Z:\home\yatekii\Projects\project-powerline\hardware\supervisor\sim\RX.asc
+V1 IN 0 PULSE(192 180 0 10e-10 10e-10 1us 2us)
+C1 BIASED DIVIDER 100n
+R1 IN DIVIDER 4k
+R2 DIVIDER 0 1k
+V2 N001 0 3.3
+R3 INVERTED 0 10k
+L1 N002 BIASED 22m
+M1 OUT INVERTED 0 0 BSS123
+R4 N001 OUT 100
+R5 N001 N002 1.5k
+R6 N002 0 1k
+R7 BIASED 0 1k
+M2 INVERTED BIASED N001 N001 BSS84
+.model NMOS NMOS
+.model PMOS PMOS
+.lib C:\Program Files (x86)\LTC\LTspiceIV\lib\cmp\standard.mos
+.tran 0 10ms 0 uic
+.backanno
+.end

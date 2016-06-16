@@ -5,6 +5,9 @@
  * This file includes all API header files for the selected drivers from ASF.
 */
 
+#include <sercom_interrupt.h>
+#include <usart_interrupt.h>
+
 // From module: Common SAM0 compiler driver
 #include <compiler.h>
 #include <status_codes.h>
@@ -30,5 +33,7 @@
 
 // From module: SYSTEM - Reset Management for SAM D20/D21/R21/D09/D10/D11/DA0/DA1
 #include <reset.h>
+
+#include <usart.h>
 
 #endif // ASF_H

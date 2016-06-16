@@ -1,16 +1,10 @@
 # todo imports
 
-# todo wird vermutlich per Interrupt angekickt
+# todo GUI ankicken um Meldung auf Display darstellen
 
-
-# todo Interrupt in configurator auslösen und Meldung auf Display darstellen
-
-# todo Relaiskontakt auslösen (umsetzung je nach additional board)
+# todo Relaiskontakt auslösen
 
 # todo SMS-Nachricht auslösen
-
-
-# todo Interrupt
 
 import threading
 import socket
@@ -32,7 +26,7 @@ class Reporter(threading.Thread):
         self.report_callback = callback
 
     def emmit_error(self):
-        self.report_callback()
+        self.report_callback(0xcafebabe)
 
     def run(self):
         self.running = True

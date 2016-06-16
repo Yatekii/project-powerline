@@ -9,7 +9,7 @@ from views import HomeView, ConfigurationView, ErrorView, HandyNbView, HistoryVi
 
 
 from reporter import Reporter
-
+from input_handler import InputHandler
 
 class MainWindow(QWidget):
     def __init__(self):
@@ -18,6 +18,9 @@ class MainWindow(QWidget):
         self.reporter = Reporter()
         self.reporter.set_report_callback(self.show_error_view)
         self.reporter.start()
+        self.input_handler = InputHandler()
+        self.input_handler.set_fault_callback(self.show_error_view)
+        self.input_handler.start()
 
         self.home_view = HomeView.HomeView(self)
         self.configuration_view = ConfigurationView.ConfigurationView(self)
@@ -41,13 +44,13 @@ class MainWindow(QWidget):
         self.layout.addWidget(self.main_view)
         self.setLayout(self.layout)
 
-
         self.show()
 
     def show_configuration_view(self):
         self.main_view.setCurrentIndex(0)
 
-    def show_error_view(self):
+    def show_error_view(self, serial_number):
+        self.error_view.set_serial_number(serial_number)
         self.main_view.setCurrentIndex(1)
 
     def show_handy_nb_view(self):

@@ -9,14 +9,14 @@ class HandyNbView(QWidget):
     def __init__(self, parent):
         super(HandyNbView, self).__init__(parent)
 
-        self.handy_nb = [None, None, None, None, None, None, None, None, None, None]    #saved handynumbre
+        self.handy_nb = ''    #saved handynumber
 
         self.grid = QGridLayout()
         self.grid.setSpacing(2)
         self.setLayout(self.grid)
 
-        self.nr_edit = QLineEdit()
-        if self.handy_nb == [None, None, None, None, None, None, None, None, None, None]:
+        self.nr_edit = QLineEdit(self)
+        if self.handy_nb == '':
             self.nr_edit.setText('Handynummer eingeben')
         else:
             self.nr_edit.setText(self.handy_nb)
@@ -47,18 +47,18 @@ class HandyNbView(QWidget):
         self.save_bt.clicked.connect(self.save_nb)
         self.grid.addWidget(self.save_bt, 5, 2, 2, 2)
 
+        self.nr_edit.selectAll()
+        self.nr_edit.setFocus()
+
     def clear_nb(self):
-        self.nr_edit.clear()
+        self.nr_edit.backspace()
 
     def enter_character(self):
         character = self.sender().text()
-        old_text = self.nr_edit.text()
-        new_text = old_text + character
-        self.nr_edit.setText(new_text)
+        self.nr_edit.insert(character)
 
     def save_nb(self):
         self.handy_nb = self.nr_edit.text()
-        print(self.handy_nb)
         #self.parent().parent().show_home_view()
 
     def cancel_nb(self):

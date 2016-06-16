@@ -1,16 +1,11 @@
-"""
-comment
-"""
-
 from PyQt5.QtWidgets import QWidget, QPushButton, QLabel
 from PyQt5.QtGui import QFont
+import time
 
 
 class ErrorView(QWidget):
     def __init__(self, parent):
         super(ErrorView, self).__init__(parent)
-
-        self.error_modul_nr = 2346534234        #input argument
 
         font = QFont("Arial", 10)
         font_title = QFont()
@@ -20,7 +15,7 @@ class ErrorView(QWidget):
         self.error_lb.setFont(QFont("bold", 20))
         self.error_lb.move(70, 0)
 
-        self.modul_nr_title_lb = QLabel("Modulnummer: \n" + str(hex(self.error_modul_nr)+"\n09:41 12-05-2016"), self)
+        self.modul_nr_title_lb = QLabel('Modulnummer: \n' + str(hex(0)) + '\n' + time.strftime('%d-%m-%Y %H:%M'), self)
         self.modul_nr_title_lb.move(0, 50)
         self.modul_nr_title_lb.setFont(font)
 
@@ -36,3 +31,8 @@ class ErrorView(QWidget):
         self.ok_bt.clicked.connect(self.parent().show_home_view)
         self.ok_bt.resize(140, 50)
         self.ok_bt.move(150, 160)
+
+    def set_serial_number(self, serial_number):
+        t = time.strftime('%d-%m-%Y %H:%M')
+        self.modul_nr_title_lb.setText('Modulnummer: \n' + str(hex(serial_number)) + '\n' + t)
+        self.parent().parent().history_view.add_new_fault(serial_number, t)

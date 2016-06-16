@@ -18,7 +18,7 @@ panels = Table('panels', metadata,
                Column('voltage', Float),
                Column('stringnumber', Integer),
                Column('timestamp', Integer),
-               Column('flag_watch', Boolean, default=False),
+               Column('deviation', Integer),
                Column('flag_reported', Boolean, default=False)
                )
 
@@ -31,12 +31,37 @@ strings = Table('strings', metadata,
                 Column('stringnumber', Integer),
                 Column('stringcurrent', Integer),
                 Column('timestamp', Integer),
-                Column('flag_watch', Boolean, default=False),
+                Column('deviation', Integer),
                 Column('flag_reported', Boolean, default=False)
                 )
 
 # creates strings table if there isn't a existing one
 strings.create(checkfirst=True)
+
+# defines structure of the strings table
+string1 = Table('string1', metadata,
+                Column('id', Integer, primary_key=True, autoincrement=True),
+                Column('serialnumber', Integer),
+                )
+
+# creates string1 table if there isn't a existing one
+string1.create(checkfirst=True)
+
+string2 = Table('string2', metadata,
+                Column('id', Integer, primary_key=True, autoincrement=True),
+                Column('serialnumber', Integer),
+                )
+
+# creates string1 table if there isn't a existing one
+string2.create(checkfirst=True)
+
+string3 = Table('string3', metadata,
+                Column('id', Integer, primary_key=True, autoincrement=True),
+                Column('serialnumber', Integer),
+                )
+
+# creates string1 table if there isn't a existing one
+string3.create(checkfirst=True)
 
 
 # creates the Panels class for object mapping
@@ -48,10 +73,27 @@ class Panels(object):
 class Strings(object):
     pass
 
-# creates the two mappers
+
+# creates the String1 class for object mapping
+class String1(object):
+    pass
+
+
+# creates the String2 class for object mapping
+class String2(object):
+    pass
+
+
+# creates the String3 class for object mapping
+class String3(object):
+    pass
+
+# creates the five mappers
 panelmapper = mapper(Panels, panels)
 stringmapper = mapper(Strings, strings)
+string1mapper = mapper(String1, string1)
+string2mapper = mapper(String2, string2)
+string3mapper = mapper(String3, string3)
 
 # creates the session
 session = create_session()
-

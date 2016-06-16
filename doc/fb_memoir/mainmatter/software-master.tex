@@ -3,10 +3,10 @@
 \label{sec:software:master}
 % ---------------------------------------------------------------------------- %
 
-Es wird  im Folgenden auf  die Software des \Master~  genauer eingegangen. Die
-verwendeten  Komponenten  werden beschrieben  und  es  wird auf  die  Lizenzen
-ebendieser  Komponenten eingegangen. Anschliessend  werden der  Aufbau unseres
-Software-Stacks und die Funktionsprinzipien dokumentiert.
+Im   Folgenden  werden   die  verwendeten   Komponenten  der   Master-Software
+beschrieben   und    es   wird    auf   die   Lizenzen    dieser   Komponenten
+eingegangen. Anschliessend werden  der Aufbau unseres Software-Stacks  und die
+Funktionsprinzipien dokumentiert.
 
 
 % ---------------------------------------------------------------------------- %
@@ -17,16 +17,15 @@ Software-Stacks und die Funktionsprinzipien dokumentiert.
 Als Betriebssystem kommt Raspbian zum  Einsatz. Raspbian ist eine Variante von
 Debian-Linux mit  einigen Erweiterungen, welche  das System auf  einem \Raspi~
 lauff\"ahig machen. Als  graphische Oberfl\"ache wird LXDE  benutzt, aufbauend
-auf  X11. Die wichtigsten  Komponenten  des gesamten  Software-Stacks sind  in
-Abbildung \ref{fig:softwarestack} dargestellt.
+auf  X11. Die wichtigsten  Komponenten des  Software-Stacks sind  in Abbildung
+\ref{fig:softwarestack} dargestellt.
 
 Die  Funktionalit\"at  unserer  Software  wird  mit  einigen  Python-Libraries
-implementiert. PyQt  wird  benutzt,  um  die  graphische  Benutzeroberfl\"ache
-zu   programmieren,  SQLAlchemy   ist  daf\"ur   dient  als   Datenbanktreiber
-verantwortlich  und \emph{WiringPi  for  Python}  ist daf\"ur  verantwortlich,
-die  Hardware-Schnittstellen  des  \Raspi~   zu  abstrahieren  und  in  Python
-bereitzustellen. Tabelle  \ref{tab:pythonLibs} listet  die Libraries  und ihre
-Aufgaben in einer \"Ubersicht auf.
+implementiert. PyQt wird  benutzt, um  die graphische  Benutzeroberfl\"ache zu
+programmieren, SQLAlchemy  dient als  Datenbanktreiber und  \emph{WiringPi for
+Python} ist  daf\"ur verantwortlich,  die Hardware-Schnittstellen  des \Raspi~
+zu  abstrahieren und  in Python  bereitzustellen. Tabelle \ref{tab:pythonLibs}
+listet die Libraries und ihre Aufgaben in einer \"Ubersicht auf.
 
 \begin{figure}[h!tb]
     \centering
@@ -56,10 +55,10 @@ Aufgaben in einer \"Ubersicht auf.
         \textsc{Library} & \textsc{Version} & \textsc{Zweck} & \textsc{Website} \\
         \midrule
         PyQt & 5 & Erstellen und verwalten der graphischen Bedienelemente & \cite{ref:pyqt} \\
-        [2mm]
+        [5mm]
         \rowcolor{solarized-base2}
         SQLAlchemy & 1.0 & Datenbankabstraktion                           & \cite{ref:sqlalchemy} \\
-        [2mm]
+        [5mm]
         WiringPi for Python & 2 & Abstraktion der Hardware-Schnittstellen & \cite{ref:wiringpi} \\
         \bottomrule
     \end{tabular}
@@ -90,13 +89,13 @@ wichtigsten  drei Lizenz-Bereiche  und ihre  Charakteristiken sind  in Tabelle
         Linux-Kernel &
         GPL &
         Quellcode und \"Anderungen m\"ussen \"offentlich sein. \\
-        [2mm]
+        [3mm]
 
         \rowcolor{solarized-base2}
         Treiber f\"ur Raspberry Pi und Display &
         Restricted &
         Quellcode wird vom Hersteller geheim gehalten \\
-        [2mm]
+        [8mm]
 
         Raspbian &
         DFSG (Sammlung diverser Lizenzen) &
@@ -207,7 +206,7 @@ In  Qt5  gibt  es  das  sogenante  \code{MainWindow},  welches  alle  weiteren
 Code-Teile unter sich b\"undelt. So werden  zum Beispiel auch separate Threads
 wie die Schnittstelle zur UART dar\"uber gesteuert.
 
-Das  GUI  besteht  aus  meheren  Views in  Form  vom  \code{QWidgets},  welche
+Das  GUI  besteht aus  mehreren  Views  in  Form vom  \code{QWidgets},  welche
 mit   einem   \code{QStackedWidget}   gruppiert  und   angezeigt   werden. Das
 \code{QStackedWidget}  erlaubt  es,  in  einem  bestimmten  Viewport  zwischen
 verschiedenen \code{QWidgets} und somit verschiedenen Ansichten zu wechseln.
@@ -220,8 +219,8 @@ angezeigt.
 kontrolliert werden.
 
 \clearpage
-\begin{wrapfigure}{r}{0.45\textwidth}
-    \includegraphics[width=0.45\textwidth]{images/userguide/screen0.jpg}
+\begin{wrapfigure}{r}{0.475\textwidth}
+    \includegraphics[width=0.475\textwidth]{images/userguide/screen0.jpg}
     \caption{Hauptmenu}
     \label{fig:software:gui:screen0}
 \end{wrapfigure}
@@ -239,6 +238,7 @@ Funktionalit\"at  ist  im  Kapitel \emph{\titleref{chap:userguide}}  ab  Seite
     \figcaption[Master: Menu: Einstellungen]{Einstellungen}
     \label{fig:software:gui:screen1}
 \end{minipage}}
+\hspace*{0.04\textwidth}
 \noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
     \includegraphics[width=\textwidth]{images/userguide/screen2.jpg}
     \figcaption[Master: Menu: Einstellungen: Telefonnummer]{Eingabe einer Telefonnummer}
@@ -250,6 +250,7 @@ Funktionalit\"at  ist  im  Kapitel \emph{\titleref{chap:userguide}}  ab  Seite
     \figcaption[Master: Menu: Modulfehler]{Fehler bei einem Modul}
     \label{fig:software:gui:screen3}
 \end{minipage}}
+\hspace*{0.04\textwidth}
 \noindent\adjustbox{valign=t}{\begin{minipage}{0.475\textwidth}
     \includegraphics[width=\textwidth]{images/userguide/screen4.jpg}
     \figcaption[Master: Menu: Einstellungen: Fehlerverlauf]{Fehlerverlauf der Anlage}
@@ -305,31 +306,32 @@ Seriennummern  zu  den  einzelnen  Strings. Dies ist  notwendig,  um  bei  der
 Auswertung  zu wissen,  welche Sensoren  sich  im selben  String befinden  und
 dementsprechend miteinander verglichen  werden m\"ussen. Diese Tables bestehen
 lediglich aus 2  Spalten, eine f\"ur die Seriennummer sowie  eine f\"ur die ID
-des Eintrages, welcher ben\"otigt wird um doppelte Zeilen zu umgehen.
+des  Eintrages, welcher  ben\"otigt wird,  um doppelt  eingetragene Zeilen  zu
+verhindern.
 
 %strings-table:
-Das Table  \code{strings} (Mitte in Abbildung  \ref{fig:database:layout} dient
+Das Table \code{strings} (Mitte  in Abbildung \ref{fig:database:layout}) dient
 der Speicherung  der gemessenen String-Str\"ome. Diese Werte  werden als Paket
 mit einigen  wichtigen zus\"atzlichen Daten gespeichert. Dazu  geh\"oren neben
 dem gemessenen Stromwert noch die  String-Nummer, um zu wissen, welcher String
-gemessen wurde,  ein Zeitstempel, um  nachvollziehen zu k\"onnen, wie  alt die
-Eintr\"age  sind,  ein leeres  Feld,  um  bei  der Auswertung  die  Abweichung
+gemessen worden ist,  ein Zeitstempel, um nachvollziehen zu  k\"onnen, wie alt
+die Eintr\"age  sind, ein leeres  Feld, um  bei der Auswertung  die Abweichung
 zum  Durchschnitt eintragen  zu k\"onnen,  sowie  ein Feld,  welches ein  Flag
 beinhaltet, das  anzeigt, ob  der String bereits  als ausserhalb  der Toleranz
-gemeldet wurde. Zudem wird auch hier  wieder eine Spalte f\"ur die Eintrags-ID
-ben\"otigt.
+gemeldet  worden  ist. Zudem wird  auch  hier  wieder  eine Spalte  f\"ur  die
+Eintrags-ID ben\"otigt.
 
 %panels-table:
 Das  letzte  und  gr\"osste  Table   ist  \code{panels}  (links  in  Abbildung
 \ref{fig:database:layout}),  in  welchem   die  Modulspannungen  abgespeichert
 werden. Auch  hier   wird  dies   wieder  als   Paket  mit   relevanten  Daten
 realisiert. Die  Zeile in  diesem Table  ist grunds\"atzlich  gleich aufgebaut
-wie  jene  des  Strings-Table,  nur   dass  hier  anstelle  des  Stringstromes
-die  Modulspannung  eingetragen,  sowie  ein  zus\"atzliches  Feld  f\"ur  die
-Seriennummer  des  gemessenen  Modul-Sensors verwendet  wird. Dies  wird  hier
-zus\"atzlich ben\"otigt, um die gemessenen Daten in  direktem Zusammenhang mit
-den Seriennummern der Sensoren zu bringen,  was f\"ur die Auswertung der Daten
-zwingend n\"otig ist.
+wie  jene des  Strings-Table, nur  dass  hier anstelle  des String-Stroms  die
+Modulspannung eingetragen sowie ein zus\"atzliches Feld f\"ur die Seriennummer
+des  gemessenen  Modul-Sensors  verwendet wird. Dies  wird  hier  zus\"atzlich
+ben\"otigt,  um  die  gemessenen  Daten   in  direktem  Zusammenhang  mit  den
+Seriennummern  der Sensoren  zu bringen,  was f\"ur  die Auswertung  der Daten
+n\"otig ist.
 
 
 % ---------------------------------------------------------------------------- %
@@ -337,9 +339,9 @@ zwingend n\"otig ist.
 \label{subsec:software:master:implementation}
 % ---------------------------------------------------------------------------- %
 
-Die  Master-Software besteht  aus  5 einzelnen  Python-Files,  auf welche  die
-anfallenden  Aufgaben sinnvoll  verteilt werden. Im  Folgenden wird  auf jedes
-dieser Files etwas genauer eingegangen.
+Die  Master-Software  besteht aus  Python-Files,  auf  welche die  anfallenden
+Aufgaben  verteilt  werden. Im  Folgenden  werden vier  dieser  Files  genauer
+beschrieben.
 
 
 % ---------------------------------------------------------------------------- %
@@ -348,16 +350,15 @@ dieser Files etwas genauer eingegangen.
 % ---------------------------------------------------------------------------- %
 
 Dieses File ist  dazu da, die Datenbank zu erzeugen  und zu verwalten. Mittels
-der  vordefinierten   Library  SQL-Alchemy  wird  zuerst   das  Datenbank-File
-erstellt  und die  einzelnen Tables  gem\"ass unseren  Vorlagen aufgebaut  und
-hinzugef\"ugt. Dabei  wird  vor dem  Erzeugen  der  einzelnen Tabellen  zuerst
-\"uberpr\"uft, ob eine  solche bereits vorhanden ist. Das  stellt sicher, dass
-auch bei  einem Neustart  des Masterger\"ates  die vorhandene  Datenbank nicht
-\"uberschrieben wird. Nachdem  die Datenbank  erstellt worden ist,  wird zudem
-f\"ur jedes Table eine eigene Klasse mit zugeh\"origem Mapper definiert. Diese
-werden  ben\"otigt,  damit   gleichzeitig  ausgel\"oste  Datenbank-Operationen
-sich nicht  gegenseitig blockieren,  sondern nacheinander  abgearbeitet werden
-k\"onnen.
+SQLAlchemy wird  zuerst das Datenbank-File  erstellt und die  einzelnen Tables
+gem\"ass  unseren Vorlagen  aufgebaut  und hinzugef\"ugt. Dabei  wird vor  dem
+Erzeugen der einzelnen  Tabellen zuerst \"uberpr\"uft, ob  eine solche bereits
+vorhanden ist. Das  stellt sicher, dass  auch bei einem Neustart  des \Master~
+die  vorhandene Datenbank  nicht \"uberschrieben  wird. Nachdem die  Datenbank
+erstellt  worden ist,  wird zudem  f\"ur jedes  Table eine  eigene Klasse  mit
+zugeh\"origem  Mapper definiert. Diese  werden ben\"otigt,  damit gleichzeitig
+ausgel\"oste Datenbank-Operationen sich  nicht gegenseitig blockieren, sondern
+nacheinander abgearbeitet werden k\"onnen.
 
 
 {\begin{a3pages}
@@ -369,37 +370,35 @@ k\"onnen.
 % ---------------------------------------------------------------------------- %
 
 
-    Dieses  sehr  umfangreiche  File  hat  den  Zweck,  s\"amtliche  Messwerte
-    abzufragen,  einen   ersten  Teil  der  Auswertung   zu  \"ubernehmen  und
-    schlussendlich  die Eintr\"age  in  der  Datenbank vorzunehmen. F\"ur  die
-    Abfrage  der Messdaten  wird hier  die gesamte  Kommunikation \"uber  \ISC
-    implementiert.  Da dieses File sehr  umfangreich ist, ist der zugeh\"orige
-    Prozess in Abbildung \ref{fig:inputHandler} grafisch dargestellt.
+    Dieses File hat den Zweck,  s\"amtliche Messwerte abzufragen, einen ersten
+    Teil  der Auswertung  zu  \"ubernehmen und  schlussendlich die  Eintr\"age
+    in  der  Datenbank  vorzunehmen. F\"ur  die  Abfrage  der  Messdaten  wird
+    hier  die gesamte  Kommunikation  \"uber \ISC~  implementiert.  Da  dieses
+    File  sehr umfangreich  ist,  ist der  zugeh\"orige  Prozess in  Abbildung
+    \ref{fig:inputHandler} grafisch dargestellt.
 
-    \setlength{\parindent}{\parindentbak} % restore paragraph indentation
-    Der        Hauptablauf        startet        mit        der        Methode
-    \code{stringcurrents\_request}. Diese   ruft   nacheinander  mittels   der
-    implementierten  Methoden  \code{read\_stringcurrents\_i2c} die  aktuellen
-    Werte  der  Stringstr\"ome ab  und  speichert  diese auch  gleich  mittels
-    \code{write\_string\_into\_database}   an  den   richtigen   Ort  in   der
-    Datenbank. Anschliessend   sollen  die   soeben  ausgelesenen   Stromwerte
-    auch  gleich  ausgewertet  werden. Da   dies  hier  kein  grosser  Aufwand
-    darstellt  wird  dies  ebenfalls  im  selben  File  implementiert. Daf\"ur
-    wird  im Hauptablauf  als  n\"achstes  die Methode  \code{string\_compare}
-    ausgef\"uhrt. Diese berechnet  den Durchschnitt der aktuellen  Werte sowie
-    die Abweichungen  der einzelnen Strings  zu diesem. Ist die  Abweichung zu
-    goss,  wird  der  String  dem  Benutzer  gemeldet. Dies  dient  vor  allem
-    dazu,  grobe  Probleme  festzustellen  und diese  relativ  z\"ugig  melden
-    zu  k\"onnen. Ausf\"alle   einzelner  Module   dagegen  werden   vom  File
-    \code{evaluator.py} detektiert.
+    \setlength{\parindent}{\parindentbak} % restore  paragraph indentation Der
+    Hauptablauf startet mit  der Methode \code{stringcurrents\_request}. Diese
+    ruft nacheinander mittels der Methode \code{read\_stringcurrents\_i2c} die
+    aktuellen  Werte der  Stringstr\"ome ab  und speichert  diese auch  gleich
+    mittels  \code{write\_string\_into\_database}  am  richtigen  Ort  in  der
+    Datenbank. Anschliessend  sollen die  soeben ausgelesenen  Stromwerte auch
+    gleich ausgewertet werden. Da dies  keinen grossen Aufwand darstellt, wird
+    dies ebenfalls  im selben File implementiert. Daf\"ur  wird im Hauptablauf
+    als  n\"achstes  die  Methode  \code{string\_compare}  ausgef\"uhrt. Diese
+    berechnet den Durchschnitt der aktuellen  Werte sowie die Abweichungen der
+    einzelnen  Strings  zu  diesem. Ist  die Abweichung  zu  gross,  wird  der
+    String dem  Benutzer gemeldet. Dies dient  vor allem dazu,  grobe Probleme
+    festzustellen und  diese z\"ugig melden zu  k\"onnen. Ausf\"alle einzelner
+    Module dagegen werden vom File \code{evaluator.py} detektiert.
 
     Nach  den   Str\"omen  widmet   sich  das  File   den  Modulspannungen. Im
     Hauptablauf  des  Files  wird  die  Methode  \code{modulevoltage\_request}
     aufgerufen,  welche   in  jedem   String  die   vorhandenen  Seriennummern
     durchgeht  und dabei  f\"ur  jede mittels  \code{read\_modulevoltage\_i2c}
     einen   Request  aussendet. Wird   keine  Antwort   empfangen,  wird   die
-    History   dieser   Seriennummer    \"uberpr\"uft   –   wurde   w\"ahrend
-    24   Stunden   kein   Eintrag   gemacht  wird   das   Modul   als   defekt
+    History   dieser  Seriennummer   \"uberpr\"uft   –   ist  w\"ahrend   24
+    Stunden  kein   Eintrag  gemacht  worden,   wird  das  Modul   als  defekt
     gemeldet. Bekommt  die Software  eine Antwort  auf den  Request, wird  der
     Wert  unter  Verwendung  der  Methode  \code{write\_panel\_into\_database}
     in   die  Datenbank   geschrieben. Zus\"atzlich  wird   \"uberpr\"uft,  ob
@@ -408,15 +407,15 @@ k\"onnen.
     und   per   \code{write\_stringX\_into\_database}  dem   richtigen   Table
     hinzugef\"ugt. Nachdem  alle  Spannungen  abgefragt sind  wird  auch  hier
     bereits die Grundlage f\"ur die Auswertung gelegt. So wird in jedem String
-    der  h\"ochste  Eintrag der  Messreihe  gesucht  und bei  jedem  einzelnen
-    Modul  im  deviation-Feld  die  Abweichung  zu  diesem  Eingetragen. Somit
+    der h\"ochste Eintrag der Messreihe  gesucht und bei jedem einzelnen Modul
+    im  \code{deviation}-Feld  die  Abweichung  zu  diesem  eingetragen. Somit
     wird immer  der aktuelle  Wert mit  dem einer  funktionierenden Solarzelle
     verglichen. Bei einer  funktionierenden Zelle  treten somit  lediglich bei
-    Abschattungen kurzzeitig  grosse Differenzen  auf, welche aber  \"uber den
-    Tag gemittelt  keinen sehr  grossen Einfluss  haben. So kann  gut zwischen
-    tempor\"ar  abgeschatteten  Modulen  welche  aber  eigentlich  einwandfrei
-    funktionieren und defekten Modulen die l\"angerfristig grosse Abweichungen
-    aufzeigen, unterschieden werden.
+    Abschattungen  kurzzeitig  grosse  Differenzen  auf,  welche  aber  \"uber
+    den  Tag  gemittelt  keinen  sehr  grossen  Einfluss  haben. So  kann  gut
+    zwischen tempor\"ar abgeschatteten  Modulen, welche eigentlich einwandfrei
+    funktionieren,   und   defekten   Modulen,  die   l\"angerfristig   grosse
+    Abweichungen aufzeigen, unterschieden werden.
 
     \vspace*{5mm}
 
@@ -443,19 +442,19 @@ k\"onnen.
 
 Der  Evaluator ist  f\"ur die  Auswertung der  Modulspannungen zust\"andig. Er
 wird  einmal  t\"aglich ausgef\"uhrt  und  kontrolliert  die Spannungen  aller
-Module des Systems innerhalb letzten 24 Stunden.
+Module des Systems innerhalb der letzten 24 Stunden.
 
 Daf\"ur  wird zuerst  f\"ur  jeden String  eine Liste  mit  den aktuell  darin
 vorhandenen  Seriennummern  erstellt. Innerhalb  jedes Strings  wird  wiederum
 f\"ur  jedes Modul  eine Liste  mit den  Abweichungen jeder  einzelnen Messung
 w\"ahrend der  letzten 24 Stunden  erstellt. Nun wird \"uber die  gesamte Zeit
-der quadratische  Mittelwert der Abweichungen gezogen. Mit  allen Mittelwerten
-der   Module  innerhalb   eines  Strings   wird  nun   die  Standartabweichung
-berechnet. Liegt ein  Modul ausserhalb  dieser Abweichung  wird es  als defekt
+der quadratische Mittelwert der  Abweichungen gebildet. Aus allen Mittelwerten
+der   Module  innerhalb   eines  Strings   wird  nun   die  Standardabweichung
+berechnet. Liegt ein  Modul ausserhalb dieser  Abweichung, wird es  als defekt
 gemeldet. Dieses Vorgehen  ist zwar relativ kompliziert,  garantiert aber dass
 nur Module  gemeldet werden, welche  \"uber l\"angere Dauer zu  wenig Leistung
-bringen. Dies  erh\"oht die  Zuverl\"assigkeit des  Systems und  reduziert die
-Wahrscheinlichkeit  auf  einen  Fehlalarm   welcher  den  Benutzer  unn\"otige
+bringen. Dies  erh\"oht  die  Zuverl\"assigkeit   des  Systems  und  reduziert
+die  Wahrscheinlichkeit, eines  Fehlalarms,  welcher  dem Benutzer  unn\"otige
 Umst\"ande bereiten w\"urde.
 
 
@@ -465,9 +464,9 @@ Umst\"ande bereiten w\"urde.
 % ---------------------------------------------------------------------------- %
 
 Der  Reporter hat  die Aufgabe,  bei  einem detektierten  Fehler den  Benutzer
-\"uber  diesen  zu informieren. Dies  geschieht  indem  er einerseits  daf\"ur
+\"uber  diesen zu  informieren. Dies  geschieht, indem  er einerseits  daf\"ur
 sorgt,  dass   im  GUI  das  Fehlermeldungs-Display   mit  der  entsprechenden
-Seriennummer angezeigt  wird. Zudem werden die Relaiskontakte  angesprochen um
-einen beliebigen  externen Alarm  auszul\"osen. Und zu  guter Letzt  wird auch
-noch das  GSM-Modul aktiviert um  auf die hinterlegte  Mobiltelefonnummer eine
+Seriennummer  angezeigt wird. Zudem  werden  die Relaiskontakte  angesprochen,
+um  einen beliebigen  externen  Alarm auszul\"osen. Letztlich  wird auch  noch
+das  GSM-Modul  aktiviert,  um  auf die  hinterlegte  Mobiltelefonnummer  eine
 Textnachricht zu senden.

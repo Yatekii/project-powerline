@@ -51,9 +51,9 @@
         Ausg\"ange   sind  im   Bereich  2   untergebracht  (siehe   Abschnitt
         \ref{subsec:hw:master:gpio} ab Seite \pageref{subsec:hw:master:gpio}),
         die  Kommunikation  mit den  Sensoren  erfolgt  durch die  Schaltungen
-        in    Bereich     3    (Abschnitt    \ref{subsec:hw:master:sensorcomm}
-        ab    Seite     \pageref{subsec:hw:master:sensorcomm})    der    Strom
-        wird      mit       den      Komponenten      aus       Bereich      4
+        in   Bereich   3   (Abschnitt   \ref{subsec:hw:master:sensorcomm}   ab
+        Seite   \pageref{subsec:hw:master:sensorcomm}),  die   String-Str\"ome
+        werden      mit      den      Komponenten      aus      Bereich      4
         gemessen    (Abschnitt    \ref{subsec:hw:master:current}   ab    Seite
         \pageref{subsec:hw:master:current})  und  Bereich   5  beinhaltet  die
         GSM-Schaltung    (Abschnitt   \ref{subsec:hw:master:gsm}    ab   Seite
@@ -117,11 +117,11 @@ Form  des Geh\"auses  wird der  Netzanschluss dabei  zuerst auf  das PCB  hin-
 und  anschliessend zum  Netzger\"at  weggef\"uhrt. Das  Netzteil liefert  dann
 \SI{5}{\volt} zur\"uck.
 
-F\"ur   Bauteile,  welche   \SI{3.3}{\volt}  Versorgungsspannung   ben\"otigen
-(GSM-Modem,  \ldots),  ist  eine   Spannungswandlung  mit  einem  Schaltregler
-implementiert   (\code{IC2}   und   zugeh\"orige  Komponenten   in   Abbildung
-\ref{fig:sch:master:supply}). Der Schaltregler  ist das \SI{3.3}{\volt}-Modell
-des LM2596 von \emph{Texas Instruments}.
+F\"ur  Bauteile, welche  \SI{3.3}{\volt} Versorgungsspannung  ben\"otigen, ist
+eine  Spannungswandlung  mit   einem  Schaltregler  implementiert  (\code{IC2}
+und  zugeh\"orige Komponenten  in Abbildung  \ref{fig:sch:master:supply}). Der
+Schaltregler  ist  das  \SI{3.3}{\volt}-Modell   des  LM2596  von  \emph{Texas
+Instruments}.
 
 Hauptverbraucher   auf   der   \SI{3.3}{\volt}-Schiene   ist   das   GSM-Modem
 (siehe     Abschnitt     \ref{subsec:hw:master:gsm}),     welches     gem\"ass
@@ -151,7 +151,7 @@ Chipgeh\"ause  passen. Sie  werden  anhand   der  Empfehlungen  im  Datenblatt
 \end{itemize}
 
 Tabelle  \ref{tab:hw:master:supply:consumption}  listet die  haupts\"achlichen
-Leistungsverbraucher  auf  mit  den  Bedingungen, unter  den  dieser  maximale
+Leistungsverbraucher  auf, mit  den Bedingungen,  unter denen  dieser maximale
 Verbrauch auftreten kann.
 
 \begin{table}[h!tb]
@@ -170,7 +170,7 @@ Verbrauch auftreten kann.
     \end{tabular}
 \end{table}
 
-Anhand  der  Absch\"atzung  des  Leistungsverbrauchs wurde  als  Netzteil  ein
+Anhand  der  Absch\"atzung  des  Leistungsverbrauchs  wird  als  Netzteil  ein
 TXM  025-105  von   \emph{Traco  Power}  ausgew\"ahlt  \cite{ref:farnell:psu}.
 Es   handelt    sich   dabei   um   ein    kompaktes   und   kosteng\"unstiges
 \SI{5}{\volt}-Netzteil, welches  bis zu \SI{5}{\ampere} liefert  und damit die
@@ -195,7 +195,7 @@ GPIO-Blocks  ist  ein Darlington  Transistor  Array  (\code{IC1} in  Abbildung
 kann.
 
 Die  Signale  \code{LED0}  und  \code{LED1} steuern  die  LEDs  \code{D1}  und
-\code{D2}  und  werden  vom  \Raspi~  gesteuert  und  dienen  dem  allgemeinen
+\code{D2},   werden  vom   \Raspi~  gesteuert   und  dienen   dem  allgemeinen
 Debugging. Signal  \code{GSM\_LED0}  respektive  \code{GSM\_LED1}  stehen  dem
 GSM-Modem zur Statusausgabe zur Verf\"ugung.
 
@@ -242,7 +242,7 @@ Flexibilit\"at bei der Wahl der  zu betreibenden Ger\"ate (Alarmlampe, Sirene,
 \begin{figure}[h!t]
     \centering
     \includegraphics[width=0.75\textwidth]{images/superv-sch/supervisor--sch--comms.eps}
-    \caption[\Master: Schema Kommunikation]{Kommunikation zu \Sensor auf \Master}
+    \caption[\Master: Schema Kommunikation]{Kommunikation zu \Sensor~auf \Master}
     \label{fig:sch:master:comms}
 \end{figure}
 
@@ -255,7 +255,7 @@ Seite \pageref{subsec:hw:sensor:transmitter}.
 Auf der rechten Seite in Abbildung \ref{fig:sch:master:comms} ist die Br\"ucke
 \code{U1} abgebildet,  welche zwischen UART und  \ISC~konvertiert. Es wird das
 Modell  SC16IS740 von  NXP Semiconductors  \cite{datasheet:uarti2c} verwendet.
-Der \Sensor  sendet seine Daten  auf der DC-Leitung in  UART-Kodierung. Da der
+Der \Sensor~ sendet seine Daten  auf der DC-Leitung in  UART-Kodierung. Da der
 \Raspi~nicht  gen\"ugend  UART-Eing\"ange  f\"ur alle  ben\"otigten  Leitungen
 besitzt,  werden  die  Daten  im \ISC-Format  in  den  \Raspi~eingespeist. Die
 Br\"ucke  \code{U1} ist  daf\"ur verantwortlich,  zwischen UART  (Anschl\"usse
@@ -265,7 +265,7 @@ Br\"ucke  \code{U1} ist  daf\"ur verantwortlich,  zwischen UART  (Anschl\"usse
 Den Clock erh\"alt die Br\"ucke vom Mikrocontroller des \Raspi~via die Leitung
 \code{MUCLK}.
 
-Wenn  von einem  \Sensor Daten  empfangen werden,  kann die  Br\"ucke mit  dem
+Wenn  von einem  \Sensor~Daten  empfangen werden,  kann die  Br\"ucke mit  dem
 Anschluss \code{IRQ2} einen Interrupt an den \Raspi~senden, welcher darauf die
 Datenverarbeitung startet.
 
@@ -276,12 +276,12 @@ Verdrahtung  siehe Seite
 in Anhang
 \ref{app:chap:schemas}
 
-\fref{fig:sch:master:coupling} zeigt die  Anschl\"usse zur Einkopplung des
-Signals auf die DC-Leitung. Es sind drei Stecker \code{P13} \code{P14} und
-\code{P15}  vorhanden,  durch  welche  der  Strom  geleitet  wird. An  den
-Steckern kann jeweils eine  Einkopplung angeschlossen werden. Dies erlaubt
-Flexibilit\"at bei der  Implementierung der Einkopplung, da  das PCB nicht
-auf eine spezifische Variante beschr\"ankt ist.
+\fref{fig:sch:master:coupling}  zeigt  die  Anschl\"usse zur  Einkopplung  des
+Signals  auf  die  DC-Leitung. Es  sind drei  Stecker  \code{P13},  \code{P14}
+und  \code{P15}  vorhanden,  durch  welche der  Strom  geleitet  wird. An  den
+Steckern  kann jeweils  eine  Einkopplung  angeschlossen werden. Dies  erlaubt
+Flexibilit\"at bei der  Implementierung der Einkopplung, da das  PCB nicht auf
+eine spezifische Variante beschr\"ankt ist.
 
 Die Ausg\"ange des Einkopplungsblocks gehen auf die Strommessung.
 \begin{figure}[h!tb]
@@ -310,15 +310,15 @@ Schaltung   ist   in   Abbildung   \ref{fig:sch:master:current}   dargestellt.
 \code{IC4},  \code{IC5}  und  \code{IC6}  sind  die  Strommessungssensoren. Es
 werden  Hall-Sensoren   der  Modellreihe   ACS725  von   Allegro  Microsystems
 benutzt. Diese k\"onnen bis zu  \SI{10}{\ampere} messen, sind durchschlagsfest
-bis  zu   \SI{2.5}{\kilo\volt}  (Mindestanforderung   \SI{1}{\kilo\volt})  und
-k\"onnen sowohl  mit \SI{3.3}{\volt}  wie auch \SI{5}{\volt}  betrieben werden
-\cite{datasheet:hallic}.
+bis zu  \SI{2.5}{\kilo\volt} (Mindestanforderung  \SI{1}{\kilo\volt}, Spannung
+auf  einer  DC-Leitung)  und  k\"onnen sowohl  mit  \SI{3.3}{\volt}  wie  auch
+\SI{5}{\volt} betrieben werden \cite{datasheet:hallic}.
 
 Sie  geben   auf  den  Leitungen  \code{isense0},   \code{isense1}  respektive
-\code{isense2}  eine   Spannung  aus,   welche  propotional  zum   den  Sensor
+\code{isense2}  eine   Spannung  aus,  welche  proportional   zum  den  Sensor
 durchfliessenden Strom ist. Der vom Modulstrang  kommende Strom geht in in die
 Eing\"ange \code{string\_in\{0,1,2\}} der Sensoren und verl\"asst diese wieder
-durch die Ausg\"ange \code{string\_out\{0,1,2\}}, von wo der weitergeht in den
+durch die Ausg\"ange \code{string\_out\{0,1,2\}}, von  wo er weitergeht in den
 Generatoranschlusskasten.
 
 \code{IC3}   ist    der   A/D-Konverter,   welcher   die    analogen   Signale
@@ -327,8 +327,8 @@ wandelt. Es   kommt   ein   MAX11612   von  Maxim   Integrated   zum   Einsatz
 \cite{datasheet:adc}. Dieser besitzt ein \ISC-Interface, drei Kan\"ale und ist
 mit  dem  Ausgangspegel  der  Hall-Sensoren  kompatibel.   Allerdings  liefert
 er  ein  Ausgangssignal  mit  einem \SI{5}{\volt}-Pegel,  was  nicht  mit  dem
-\Raspi~ kompatibel  ist, dessen  Eing\"ange  mit  einem Pegel  \SI{3.3}{\volt}
-laufen. Deshalb wird zwischen \code{IC3} und  dem \Raspi~noch ein Pegelwandler
+\Raspi~ kompatibel ist, dessen Eing\"ange  mit einem Pegel von \SI{3.3}{\volt}
+laufen. Deshalb wird zwischen \code{IC3}  und dem \Raspi~noch ein Pegelwandler
 der   Serie   NLSX4373  von   ON   Semiconductors   geschaltet,  welcher   das
 \SI{5}{\volt}-Signal des ADC auf  \SI{3.3}{\volt} konvertiert. Er ist speziell
 f\"ur  \ISC-Anwendungen entwickelt  worden  und eignet  sich  somit gut  f\"ur
@@ -351,13 +351,14 @@ Datenblattes \cite{datasheet:hallic}, vor.
     \label{fig:sch:master:gsm}
 \end{figure}
 
-Das GSM-Modem  ist ein  integrierter Baustein,  der alle  n\"otigen Funktionen
-bereitstellt; ein Baustein der SIM900-Serie von Simcom \cite{datasheet:modem}.
-Er ist  zusammen mit seiner Beschaltung  in Abbildung \ref{fig:sch:master:gsm}
-dargestellt. Wie auch  bei der  Strommessung wird  auch hier  ein Pegelwandler
-verwendet, um  das Signal von der  UART-Linie mit \SI{3.3}{\volt} auf  den vom
-GSM-Chip ben\"otigten  Pegel von \SI{2.8}{\volt} (Pin  \code{VDD\_EXT} auf dem
-Chip, verbunden mit \code{Vcc\_B} auf dem Pegelwandler) zu wandeln.
+Das   GSM-Modem   ist   ein   integrierter  Baustein,   der   alle   n\"otigen
+Funktionen  bereitstellt. Es  wird  ein  Modell der  SIM900-Serie  von  Simcom
+\cite{datasheet:modem}  verwendet.  Das  Modem und  seine Beschaltung  sind in
+Abbildung \ref{fig:sch:master:gsm} dargestellt. Wie  auch bei der Strommessung
+wird  hier  ein   Pegelwandler  verwendet,  um   das  Signal   von  der
+UART-Linie mit  \SI{3.3}{\volt} auf  den vom  GSM-Chip ben\"otigten  Pegel von
+\SI{2.8}{\volt} (Pin \code{VDD\_EXT} auf dem Chip, verbunden mit \code{Vcc\_B}
+auf dem Pegelwandler) zu wandeln.
 
 Der  Pin  \code{GSM\_PKEY} dient  zum  Einschalten  des GSM-Modems,  gesteuert
 vom  \Raspi~ via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite
@@ -365,7 +366,7 @@ vom  \Raspi~ via  GPIO  (siehe  Abschnitt  \ref{subsec:hw:master:gpio},  Seite
 
 Via die beiden Pins \code{STATUS}  und \code{NETLIGHT} werden zwei Status-LEDs
 angesteuert (siehe  ebenfalls Abschnitt  \ref{subsec:hw:master:gpio}). Auf der
-rechten Seite des  Schaltungsblocks ist die Antenne und der  Adapter f\"ur die
+rechten Seite des Schaltungsblocks sind die  Antenne und der Adapter f\"ur die
 SIM-Karte zu sehen.
 
 Gem\"ass  Referenzdesign  auf  Seite 9  des  Modem-Guides  \cite{ref:sim900:1}

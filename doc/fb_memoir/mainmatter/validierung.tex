@@ -3,10 +3,8 @@
 \label{chap:validierung}
 % **************************************************************************** %
 
-Im Folgenden  wird dargelegt,  welche Tests  an unserem  System durchgef\"uhrt
-worden  sind, weshalb  die  durchgef\"uhrten Tests  relevant  sind und  welche
-Ergebnisse   erzielt  worden   sind. Der   globale  Projektstatus   betreffend
-Funktionalit\"at wird ebenfalls dargelegt.
+Im Folgenden werden  Messungen unserer Kopplungsspule, des  Modulators und des
+Demodulators sowie eine Evaluation unseres Gesamtsystems pr\"asentiert.
 
 % ---------------------------------------------------------------------------- %
 \section{Kopplungsspule}
@@ -14,7 +12,7 @@ Funktionalit\"at wird ebenfalls dargelegt.
 % ---------------------------------------------------------------------------- %
 
 Eine  Spule  leitet nicht  alle  Frequenzen  gleich gut. Zudem  s\"attigt  ein
-Ferritkern  bei einem  bestimmten Strom. Deswegen  werden Frequenzg\"ange  der
+Ferritkern  ab einem  bestimmten  Strom. Deswegen  werden Frequenzg\"ange  der
 Spule mit dem Ferritkern und  ein Power-Choke Test mit einer Sekund\"arwindung
 gemacht.
 
@@ -39,16 +37,16 @@ rechnen   und   simulieren   zu   k\"onnen   (gr\"une   Kurve   in   Abbildung
     \label{fig:meas:coupling:coil:L}
 \end{figure}
 
-Die  Power-Choke Tests  sind nur  f\"ur die  gew\"ahlte Einlayerspule  genacht
+Die  Power-Choke-Tests sind  nur  f\"ur die  gew\"ahlte Einlayerspule  gemacht
 worden. Daf\"ur  wird durch  den Kern  eine kurzgeschlossene  Prim\"arwicklung
 gef\"uhrt,   welche   dem   Aufbau  des   Endproduktes   entspricht. Wie   man
 Abbildung~\ref{fig:meas:coupling:coil:power_choke:1}  entnehmen kann,  beginnt
-der  Kern  bei ungef\"ahr  \SI{2}{\ampere}  zu  s\"attigen. Die beiden  Kurven
+der  Kern bei  ungef\"ahr  \SI{2}{\ampere}, zu  s\"attigen. Die beiden  Kurven
 basieren   auf  zwei   verschiedenen   Messmethoden  (inkrementelle   Messung,
 blaue  Kurve,  und  Sekantenmessung,  gr\"une  Kurve),  wobei  wir  hier  eher
 der  inkrementellen  Messung Beachtung  schenken,  da  hier der  Kurvenverlauf
-schlechter  ausf\"allt  und  wir  mit  dem  Worst  Case-Szenario  rechnen. Uns
-interessiert hier prim\"ar die  Stromabh\"angigkeit der Induktivit\"at. Das
+schlechter ausf\"allt und  wir mit dem Worst  Case-Szenario planen wollen. Uns
+interessiert  hier prim\"ar  die  Stromabh\"angigkeit der  Induktivit\"at. Das
 Stromver\"altnis im Trafo ist durch Gleichung \ref{eq:trafo} gegeben:
 
 \begin{equation}\label{eq:trafo}
@@ -57,8 +55,8 @@ Stromver\"altnis im Trafo ist durch Gleichung \ref{eq:trafo} gegeben:
 
 Somit  k\"onnen   wir  bei  30   Windungen  auf  der  Prim\"arseite   auf  der
 Sekund\"arseite \SI{60}{\ampere}  f\"uhren, ohne  den Kern  zu s\"attigen. Bei
-den \SI{10}{\ampere}, die  die Stromzufuhr maximal f\"uhrt, ist  dies mehr als
-ausreichend.
+den \SI{10}{\ampere},  die die Stromzufuhr  maximal etwa f\"uhrt  (Strom eines
+Modulstrangs), ist dies mehr als ausreichend.
 
 \begin{figure}[h!tb]
     \centering
@@ -83,12 +81,12 @@ ein  eigentlich  sch\"ones  Signal. Jedoch  gibt es  jeweils  bei  der  Flanke
 \"Uberschwinger. Auch  ist  das  Signal  ziemlich  eckig,  was  nicht  optimal
 ist. Dem kann mit einem Tiefpassfilter entgegengewirkt werden.
 
-Leider produziert der VCO ab und zu auch mysteri\"ose Irregularit\"aten wie in
-Abbildung~\ref{lst:meas:scope:1}  gezeigt. Da der  74HC4640,  zu  dem der  VCO
-geh\"ort, auch sonst nicht so funktionierte wie es dem Datenblatt zu entnehmen
+Leider produziert der  VCO ab und zu auch  mysteri\"ose Irregularit\"aten, wie
+in Abbildung~\ref{lst:meas:scope:1}  gezeigt. Da der 74HC4640, zu  dem der VCO
+geh\"ort, auch sonst nicht so funktioniert, wie es dem Datenblatt zu entnehmen
 ist, k\"onnte es sein, dass diese Irregularit\"aten vom Chip stammen. Sehr gut
-m\"oglich ist aber  auch, dass dort ein anderes Signal  eingekoppelt wird oder
-es auf einen Messfehler zur\"uckzuf\"uhren ist.
+m\"oglich ist aber auch, dass dort  ein anderes Signal eingekoppelt wird, oder
+dass es auf einen Messfehler zur\"uckzuf\"uhren ist.
 
 Die  Oszilloskop-Einstellungen  sind  im  Anhang~\ref{app:scope:settings}  auf
 Seite ~\pageref{app:scope:settings} zu finden.
@@ -173,17 +171,17 @@ mit kompletter Firmware sollte dies einfach m\"oglich sein.
 
 Beim Master sieht  die Lage \"ahnlich aus. Bis auf die  Strommessung sind alle
 Teilkomponenten  erfolgreich getestet. Diese  m\"ussten  jetzt im  Vollbetrieb
-getestet werden, da dies Aufgrund  fehlender Kommunikation der Sensoren bisher
+validiert werden, da dies Aufgrund fehlender Kommunikation der Sensoren bisher
 weggefallen ist.
 
-Softwareseitig  ist der  Master auf  gutem Wege.   Das Auslesen  und Auswerten
-%der  Sensoren   ist  ohne   Powerline-Communication  sondern   \"uber  normale
-der   Sensoren  ist   \"uber   eine  normale   UART-Verbindung  getestet   und
-funktioniert. Das   GUI wird   angesteuert   und  eine   Fehlermeldung   wird
-ausgel\"ost wenn  ein Modul  defekt ist.  Jedoch  fehlt ein  wenig Politur. So
-fehlt   noch   die   Ansteuerungssoftware   f\"ur   das   GSM-Modul. Da   dies
-vollintegriert ist, kann dies angenehm  \"uber TWI gemacht werden und ist ein
-einfacher Task, sobald die restlichen Teilsysteme laufen.  Die Ansteuerung der
-Strommessung ist  entwickelt, aber  noch nicht getestet.   Zu guter  Letzt ist
-eine gute Abrundung wichtig. So muss zum Beispiel noch der Button zum Ein- und
-Ausschalten des Displays angesteuert werden.
+Softwareseitig   ist  der   Master   auf  gutem   Wege.    Das  Auslesen   und
+Auswerten  der  Sensoren  ist  \"uber eine  normale  UART-Verbindung  getestet
+und  funktioniert. Das  GUI wird  angesteuert  und  eine  Fehlermeldung  wird
+ausgel\"ost,  wenn  ein  Modul  defekt   ist.   Jedoch  fehlt  ein  wenig  der
+Feinschliff. So fehlt  noch die  Ansteuerungssoftware f\"ur  das GSM-Modul. Da
+dieses  voll   integriert  ist,  kann   dies  angenehm  \"uber   ein  two-wire
+Interface gemacht werden  und ist ein  einfacher Task, sobald  die restlichen
+Teilsysteme  laufen.  Die  Ansteuerung der  Strommessung ist  entwickelt, aber
+noch nicht getestet.  Zu guter Letzt  ist eine gute Abrundung wichtig. So muss
+zum Beispiel noch der Button zum Ein- und Ausschalten des Displays angesteuert
+werden.

@@ -75,7 +75,7 @@ PV-Zelle  (M5SF-2 von  \emph{JA Solar})  als Grundlage  verwendet, welches  in
 \"Ublicherweise wird  bei PV-Zellen  nur das  Gleichstromverhalten untersucht;
 das Verhalten  unter Wechselstrom interessiert meistens  nicht. Da das Signal,
 welches  in  diesem  Projekt  auf die  DC-Leitung  aufmoduliert  wird,  jedoch
-Wechselstrom ist,  sollte das  Wechselstromverhalten von PV-Zellen  in unseren
+Wechselstrom  ist, muss  das  Wechselstromverhalten von  PV-Zellen in  unseren
 Simulationen ber\"ucksichtigt werden.
 
 Das  Zweidiodenmodell  aus  \cite{pvcell:masmoudi}  wird  deshalb  in  unseren
@@ -94,12 +94,13 @@ Simulationen noch durch eine parallele Kapazit\"at erg\"anzt, wie in Abbildung
     \label{fig:circuit:solarCell}
 \end{figure}
 
+\clearpage
 Die   Gr\"ossenordnung   dieser   Kapazit\"at   kann   stark   variieren   und
 wird   unter  anderem   vom   Diodenmaterial,  der   Diodenspannung  und   der
 Diodentemperatur   beeinflusst. Basierend    auf   \cite{capacitance:hegedus},
 \cite{capacitance:mandal}     und      \cite{capacitance:mauk}     soll     an
-dieser    Stelle   eine    fl\"achennormierte    Kapazit\"at    von   $C'    =
-\SI{20}{\nano\farad\per\centi\meter\squared}$    verwendet   werden. Die    in
+dieser     Stelle    eine     fl\"achennormierte    Kapazit\"at     von    $C'
+=     \SI{20}{\nano\farad\per\centi\meter\squared}$      verwendet. Die     in
 \cite{pvcell:masmoudi}    verwendete    Zelle    hat   eine    Gr\"osse    von
 $\SI{125}{\milli\meter}    \times     \SI{125}{\milli\meter}$    (allf\"allige
 abgeschnittene  Ecken, wie  sie in  Abbildung \ref{fig:pvcell:front}  zu sehen
@@ -140,6 +141,7 @@ die  Ergebnisse  sind  in Abbildung  \ref{fig:circuit:solarCell}  und  Tabelle
     \end{tabular}
 \end{table}
 
+
 % ---------------------------------------------------------------------------- %
 \clearpage
 \section{Modellierung eines PV-Moduls}
@@ -156,7 +158,7 @@ Zellenkonfigurationen aufgelistet.
 Es     wird    ein     PV-Modul     aus    72     in    Serie     angeordneten
 Zellen    gew\"ahlt     und    implementiert. Es    wird     ebenfalls    eine
 Freilaufdiode    parallel    zu     jedem    Modul    geschaltet,    basierend
-auf     den      in     Abbildungen     \ref{fig:simu:iv-curves:array:generic}
+auf    den   in    Abbildungen   \ref{fig:simu:iv-curves:array:generic}    und
 \ref{fig:simu:iv-curves:array:generic:bypass}   gezeigten  Effekten   und  den
 zugeh\"origen Anmerkungen.
 
@@ -179,8 +181,8 @@ mehrere Meter L\"ange  erreichen.  Dieser Effekt wird in  unserem Modell durch
 eine Stromleitung modelliert, die \"uber  alle Zellen geht. In Realit\"at sind
 die Leiter, welche die Zellen miteinander verbinden, ziemlich kurz (angenommen
 die Zellen werden  von Kante zu Kante verbunden), aber  da der Strompfad durch
-die ganze Zelle geht, wird der gesamte Strompfad in underem Modell vereinfacht
-als eine lange Leitung dargestellt.
+die ganze Zelle geht, wird der gesamte Strompfad in unserem Modell vereinfacht
+als eine lange Leitung modelliert.
 
 Zwischen   diesen   parallelen    Leiterbahnen   ergeben   sich   parasit\"are
 Induktivit\"aten, die  im Folgenden  bestimmt und  in unser  Modell integriert
@@ -198,9 +200,10 @@ basieren auf folgenden Annahmen:
         \"Uberhang      am      oberen      und     unteren      Ende      des
         Moduls: \SI{14}{\milli\meter}
     \item
-        Der Abstand zweier Leiterbahnen ist somit \SI{127}{\milli\meter} und
+        Der Abstand  $d$ zweier Leiterbahnen ist  somit \SI{127}{\milli\meter}
+        und
     \item
-        die     L\"ange     einer     Leiterbahn     summiert     sich     auf
+        die    L\"ange    $l$    einer   Leiterbahn    summiert    sich    auf
         \SI{1550}{\milli\meter}.
 \end{itemize}
 
@@ -251,14 +254,14 @@ Werte aus Gleichungen \ref{eq:rosa:a1}, \ref{eq:rosa:a2} und \ref{eq:rosa:a3}.
     A_{\mathrm{i}} & Korrektursummand f\"ur Leiterposition gem\"ass Abbildung \ref{fig:pvmodule:wiring} \\
 \end{conditions}
 
-Somit kann f\"ur  jeder Teil der Leitung in einem  Modul dessen Induktivit\"at
+Somit kann f\"ur  jeden Teil der Leitung in einem  Modul dessen Induktivit\"at
 berechnet  werden. Diese  werden  anschliessend summiert  (Serieschaltung  von
 Induktivit\"aten) und  als Gesamtinduktivit\"at  eines Moduls in  unser Modell
 integriert.
 
 Es   wird  von   einem   Leiterquerschnitt  von   \SI{4}{\milli\meter\squared}
 ausgegangen,  was  einen   Leiterradius  $\rho$  von  \SI{1.128}{\milli\meter}
-ergibt.
+ergibt. Dies ist eine g\"angige Gr\"osse in PV-Installationen.
 
 Die  Induktivit\"aten der  Leiterbahnen  innerhalb des  Moduls k\"onnen  somit
 bestimmt werden:
@@ -426,6 +429,7 @@ dieser Kapazit\"at ist gem\"ass Kuchling \cite{ref:Kuchling:CTwo}:
     \rho             = \SI{1.128}{\milli\meter}      & Radius des Leiters                 \\
 \end{conditions}
 
+\clearpage
 Der Ohm'sche Widerstand der Anschlussleitung errechnet sich zu:
 
 \begin{equation}

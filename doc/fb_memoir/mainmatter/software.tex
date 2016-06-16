@@ -21,20 +21,20 @@ dokumentiert.
     \section{Datenfluss}
     \label{sec:fw:dataFlow}
     % ---------------------------------------------------------------------------- %
-    Abbilung   \ref{fig:dataFlow}  zeigt   den  Ablauf   der  Spannungs-   und
+    Abbildung  \ref{fig:dataFlow}   zeigt  den   Ablauf  der   Spannungs-  und
     Strommessung von den Messsonden bis zur Speicherung der Messergebnisse und
     der zugeh\"origen Metadaten in der Datenbank.
 
-    \setlength{\parindent}{\parindentbak} % restore paragraph indentation
-    Die  Spannung  wird in  jedem  PV-Modul  von  einem Sensor  mittels  eines
-    analog/digital-Konverters   gemessen. Anschliessend  wird   ein  laufender
-    Durchschnittswert  (siehe  dazu  auch Abschnitt  \ref{subs:Sensor},  Seite
+    \setlength{\parindent}{\parindentbak}  %   restore  paragraph  indentation
+    Die   Spannung  wird   in  jedem   PV-Modul  von   einem  Sensor   mittels
+    eines    analog/digital-Konverters   gemessen. Anschliessend    wird   ein
+    laufender  Durchschnittswert  (siehe  Abschnitt  \ref{subs:Sensor},  Seite
     \pageref{subs:Sensor})  zusammen mit  der Serienummer  des Microchips  und
     einer  Checksumme in  ein  Datenpaket gepackt  und  \"uber die  DC-Leitung
     verschickt.
 
-    Die    ON/OFF-Shift   Keying-Schaltung    benutzt    als   Referenz    den
-    Clock   eines   separaten,  spannungsgesteuerten   Oszillators   (englisch
+    Die   ON-OFF    Keying-Schaltung   benutzt   als   Referenz    den   Clock
+    eines     separaten,     spannungsgesteuerten    Oszillators     (englisch
     \emph{voltage-controlled oscillator}, VCO).
 
     Im  \Master~  wird das  Datenpaket  entpackt  und auf  seine  Integrit\"at
@@ -42,7 +42,7 @@ dokumentiert.
     verworfen. Sind  die Daten  intakt  (bzw. wird  keine Diskrepanz  zwischen
     Pr\"ufsumme und  Daten festgestellt),  werden Spannung und  Serienummer im
     zugeh\"origen Table der Datenbank gespeichert. Zur chronologischen Ordnung
-    der Daten wird  noch ein Timestamp abgelegt; damit man  weiss, aus welchem
+    der Daten wird  noch ein Timestamp abgelegt. Damit man  weiss, aus welchem
     Strang das Paket gekommen ist, wird  die Strang-Nummer noch in den Eintrag
     eingef\"ugt.
 

@@ -1,6 +1,10 @@
-update=Dienstag, 10. Mai 2016 'u50' 14:50:43
+update=22/05/2015 07:44:53
 version=1
 last_client=kicad
+[general]
+version=1
+RootSch=
+BoardNm=
 [pcbnew]
 version=1
 LastNetListRead=
@@ -25,7 +29,7 @@ version=1
 NetIExt=net
 [eeschema]
 version=1
-LibDir=../libs/symbols
+LibDir=
 [eeschema/libraries]
 LibName1=power
 LibName2=device
@@ -56,16 +60,3 @@ LibName26=opto
 LibName27=atmel
 LibName28=contrib
 LibName29=valves
-LibName30=pro4
-[general]
-version=1
-[schematic_editor]
-version=1
-PageLayoutDescrFile=
-PlotDirectoryName=
-SubpartIdSeparator=0
-SubpartFirstId=65
-NetFmtName=Pcbnew
-SpiceForceRefPrefix=0
-SpiceUseNetNumbers=0
-LabSize=60

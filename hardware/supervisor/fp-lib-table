@@ -1,0 +1,4 @@
+(fp_lib_table
+  (lib (name gsm)(type KiCad)(uri ${KIPRJMOD}/../libs/modules/gsm.pretty)(options "")(descr ""))
+  (lib (name pro4)(type KiCad)(uri ${KIPRJMOD}/../libs/modules/pro4.pretty)(options "")(descr ""))
+)
